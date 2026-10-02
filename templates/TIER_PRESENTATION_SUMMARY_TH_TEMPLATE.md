@@ -18,7 +18,7 @@
 
 {{2._ผลรวมโมเดล}}
 
-| Model | Mask mAP50-95 | AP50 | AP75 | Precision | Recall | F1 | TP-only IoU | TP-only Dice | Inference ms | Pipeline ms | FPS | Peak VRAM allocated MiB | Parameters |
+| Model | Mask mAP50-95 | AP50 | AP75 | Precision | Recall | F1 | TP-only IoU | TP-only Dice | Inference ms | Pipeline ms | FPS | Peak VRAM allocated (MiB) | Parameters |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 <!-- Add measured rows only, in fixed model order. -->
 
@@ -61,10 +61,6 @@
 ## 7. ข้อควรระวังในการตีความ
 
 {{7._ข้อควรระวังในการตีความ}}
-
-## 8. สรุปสำหรับคุยกับพี่
-
-{{8._สรุปสำหรับคุยกับพี่}}
 
 ## รายละเอียดเต็ม
 

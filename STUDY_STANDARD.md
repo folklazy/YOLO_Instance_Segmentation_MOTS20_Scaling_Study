@@ -50,7 +50,9 @@ Schema and units: DATA_SCHEMA.md and schemas.json. Provenance includes study/sch
 
 ## Reports, rounding and plots
 
-Use exact major section/table ordering in `templates/`. README is navigation; RESULTS_SUMMARY_TH concise Thai result; PRESENTATION_SUMMARY_TH mentor-ready Thai discussion; REPORT compact technical record. Avoid repeating methodology and generic definitions; common method is METHODOLOGY_REFERENCE.md. Full metric guide and final synthesis come later. Display order: YOLO26, YOLO11, YOLOv9 (only largest/second-largest), YOLOv8. Explicitly metric-sorted tables may differ. Machine tier labels: largest, second_largest, medium, small, nano. Human labels: Largest (X/E), Second-largest (L/C), Medium (M), Small (S), Nano (N).
+Per-tier PRESENTATION_SUMMARY_TH.md must remain a neutral, presentation-ready tier summary. Meeting-specific synthesis belongs only in `MEETING_SUMMARY_TH.md`.
+
+Use exact major section/table ordering in `templates/`. README is navigation; RESULTS_SUMMARY_TH concise Thai result; PRESENTATION_SUMMARY_TH neutral, presentation-ready Thai tier summary; REPORT compact technical record. Avoid repeating methodology and generic definitions; common method is METHODOLOGY_REFERENCE.md. Full metric guide and final synthesis come later. Display order: YOLO26, YOLO11, YOLOv9 (only largest/second-largest), YOLOv8. Explicitly metric-sorted tables may differ. Machine tier labels: largest, second_largest, medium, small, nano. Human labels: Largest (X/E), Second-largest (L/C), Medium (M), Small (S), Nano (N).
 
 Markdown AP/P/R/F1/IoU/Dice: 6 decimals; latency/FPS: 3; VRAM MiB: 2; parameters: comma-separated integer; GFLOPs: 3; checkpoint decimal MB: 2. CSV preserves source precision. Tables must be generated/verified from canonical CSV. Include identical Study Navigation. Standard plots under outputs/plots: 01_mask_map50_95.png, 02_ap50_ap75.png, 03_inference_latency.png, 04_pipeline_fps.png, 05_peak_vram.png, 06_accuracy_vs_latency.png. Preserve old plots; regenerate only presentation from saved metrics. Fixed model order/colors, explicit units, no weighted score.
 
