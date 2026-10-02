@@ -34,6 +34,8 @@ CASE_SELECTION.md records sequence/frame/reason and limitations of sampling. -->
 
 <!-- Repeat this case block 3–5 times only with real existing repository images.
 Embed relative Markdown path, e.g. outputs/visualizations/qualitative/case_01_comparison.png.
+Whitelist the exact selected image filenames in .gitignore and commit them with the document.
+Validate Git tracking and actual remote image responses after push; local existence is insufficient.
 Never insert a broken/example image as real evidence. -->
 {{ACTUAL_COMPARISON_IMAGE_EMBED}}
 

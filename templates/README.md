@@ -24,3 +24,8 @@ Only describe observed error categories. Counts require per-frame evidence; no i
 Visuals may interpret mAP/AP75/Recall behavior; latency and VRAM remain benchmark measurements.
 Do not claim significance, architectural causality, final CCTV suitability or a weighted score.
 REPORT may link to PRESENTATION in a short Qualitative Analysis section without duplicating cases.
+
+Publish selected images embedded in the canonical Markdown: whitelist exact comparison filenames
+in the tier's .gitignore and commit them. Keep other generated outputs, predictions and source frames
+ignored. Validate PNG integrity and Git tracking before push, then verify actual raw-image responses
+and matching image blob hashes on GitHub. Checking local paths alone is insufficient.

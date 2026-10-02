@@ -30,10 +30,13 @@ explains actual same-frame prediction behavior, observed failures and cautious i
 Largest, Second-largest and Medium have four diagnostic cases each; pending Small/Nano follow
 the new templates after all models finish. REPORT remains the technical record and links to visual analysis.
 Comparisons use original MOTS20 frames and saved RLE masks without inference or changed measurements.
-Generated images stay local/ignored; small case-selection and evidence manifests remain versionable.
+The selected comparison images embedded in the summaries and their small case-selection/evidence
+manifests are versioned. Other generated images and saved predictions remain local/ignored.
 
 The Stage 0 generators are historical conversion utilities with embedded old documentation designs.
 Do not rerun them to regenerate current summaries, standards, templates or study state.
 Use the current templates and STUDY_STANDARD.md for future tiers.
 Validate the redesign with `.venv/bin/python YOLO_Instance_Segmentation_MOTS20_Scaling_Study/scripts/validate_documentation_redesign.py`
 from workspace root. The existing Stage 0 validator retains historical NOT_RUN assumptions for Medium.
+After publishing, add `--remote-images` to verify GitHub branch heads, image blob hashes and raw-image
+responses for every image embedded in the tier's top-level Markdown documents.

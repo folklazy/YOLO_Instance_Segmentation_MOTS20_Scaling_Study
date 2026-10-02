@@ -83,7 +83,12 @@ Panel order: Original/GT, YOLO26, YOLO11, valid YOLOv9 e/c when applicable, YOLO
 Clear labels and GT IDs should support observations. Store new composites under the owning tier's
 outputs/visualizations/qualitative/case_01_comparison.png through case_05_comparison.png when useful;
 never overwrite existing generated artifacts. Keep CASE_SELECTION.md and small source/evidence manifests
-versionable while images/predictions remain generated ignored artifacts. Do not duplicate source images.
+versionable. Publish the selected comparison images embedded in canonical Markdown as intentionally
+retained analysis evidence: add exact filename exceptions in the owning repository's .gitignore and
+commit them with the document. Other generated images, original frames and predictions remain ignored.
+Do not duplicate source images. Validate Git tracking, PNG integrity, unchanged source hashes and,
+after push, remote commit identity, image blob hashes and actual raw-image HTTP responses. Local file
+existence alone does not establish that an image renders on GitHub.
 
 Use observed failure categories only. FN is unmatched GT under mask IoU policy and may include an
 inaccurate mask; FP is an unmatched prediction, not automatically a nonexistent person. Ignore outputs

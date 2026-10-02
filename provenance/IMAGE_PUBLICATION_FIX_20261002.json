@@ -1,0 +1,235 @@
+{
+  "timestamp": "2026-10-02T11:13:41.355992+00:00",
+  "status": "PASS",
+  "cause": "Canonical Markdown referenced twelve local comparison PNGs excluded by .gitignore and absent from remote repositories (HTTP 404).",
+  "fix": "Exact filename exceptions retain only the twelve selected analysis images; images published byte-for-byte unchanged.",
+  "inference_rerun": false,
+  "measured_values_changed": false,
+  "validation": {
+    "documentation_status": "PASS",
+    "tiers": [
+      {
+        "tier": "Large",
+        "status": "PASS",
+        "cases": 4
+      },
+      {
+        "tier": "Second_Largest",
+        "status": "PASS",
+        "cases": 4
+      },
+      {
+        "tier": "Medium",
+        "status": "PASS",
+        "cases": 4
+      },
+      {
+        "tier": "Small",
+        "status": "NOT_RUN",
+        "cases": 0
+      },
+      {
+        "tier": "Nano",
+        "status": "NOT_RUN",
+        "cases": 0
+      }
+    ],
+    "measurement_files_unchanged": 163,
+    "inference_rerun": false,
+    "measured_values_changed": false,
+    "embedded_images_checked": 20,
+    "remote_images_checked": true,
+    "images": [
+      {
+        "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
+        "image": "outputs/plots/benchmark-20260929T0520Z/ap50_ap75.png",
+        "git_tracked": true,
+        "png_integrity": "PASS",
+        "remote_blob_matches": true,
+        "http_status": 206,
+        "content_type": "image/png"
+      },
+      {
+        "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
+        "image": "outputs/plots/benchmark-20260929T0520Z/fps.png",
+        "git_tracked": true,
+        "png_integrity": "PASS",
+        "remote_blob_matches": true,
+        "http_status": 206,
+        "content_type": "image/png"
+      },
+      {
+        "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
+        "image": "outputs/plots/benchmark-20260929T0520Z/inference_latency.png",
+        "git_tracked": true,
+        "png_integrity": "PASS",
+        "remote_blob_matches": true,
+        "http_status": 206,
+        "content_type": "image/png"
+      },
+      {
+        "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
+        "image": "outputs/plots/benchmark-20260929T0520Z/mask_map.png",
+        "git_tracked": true,
+        "png_integrity": "PASS",
+        "remote_blob_matches": true,
+        "http_status": 206,
+        "content_type": "image/png"
+      },
+      {
+        "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
+        "image": "outputs/plots/benchmark-20260929T0520Z/peak_vram.png",
+        "git_tracked": true,
+        "png_integrity": "PASS",
+        "remote_blob_matches": true,
+        "http_status": 206,
+        "content_type": "image/png"
+      },
+      {
+        "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
+        "image": "outputs/plots/benchmark-20260929T0520Z/precision_recall_f1.png",
+        "git_tracked": true,
+        "png_integrity": "PASS",
+        "remote_blob_matches": true,
+        "http_status": 206,
+        "content_type": "image/png"
+      },
+      {
+        "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
+        "image": "outputs/plots/benchmark-20260929T0520Z/readable/accuracy_vs_latency.png",
+        "git_tracked": true,
+        "png_integrity": "PASS",
+        "remote_blob_matches": true,
+        "http_status": 206,
+        "content_type": "image/png"
+      },
+      {
+        "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
+        "image": "outputs/visualizations/qualitative/case_01_comparison.png",
+        "git_tracked": true,
+        "png_integrity": "PASS",
+        "remote_blob_matches": true,
+        "http_status": 206,
+        "content_type": "image/png"
+      },
+      {
+        "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
+        "image": "outputs/visualizations/qualitative/case_02_comparison.png",
+        "git_tracked": true,
+        "png_integrity": "PASS",
+        "remote_blob_matches": true,
+        "http_status": 206,
+        "content_type": "image/png"
+      },
+      {
+        "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
+        "image": "outputs/visualizations/qualitative/case_03_comparison.png",
+        "git_tracked": true,
+        "png_integrity": "PASS",
+        "remote_blob_matches": true,
+        "http_status": 206,
+        "content_type": "image/png"
+      },
+      {
+        "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
+        "image": "outputs/visualizations/qualitative/case_04_comparison.png",
+        "git_tracked": true,
+        "png_integrity": "PASS",
+        "remote_blob_matches": true,
+        "http_status": 206,
+        "content_type": "image/png"
+      },
+      {
+        "repository": "YOLO_Second_Largest_Seg_MOTS20_Benchmark",
+        "image": "outputs/plots/benchmark-20261001T0352Z/cross_tier_map.png",
+        "git_tracked": true,
+        "png_integrity": "PASS",
+        "remote_blob_matches": true,
+        "http_status": 206,
+        "content_type": "image/png"
+      },
+      {
+        "repository": "YOLO_Second_Largest_Seg_MOTS20_Benchmark",
+        "image": "outputs/visualizations/qualitative/case_01_comparison.png",
+        "git_tracked": true,
+        "png_integrity": "PASS",
+        "remote_blob_matches": true,
+        "http_status": 206,
+        "content_type": "image/png"
+      },
+      {
+        "repository": "YOLO_Second_Largest_Seg_MOTS20_Benchmark",
+        "image": "outputs/visualizations/qualitative/case_02_comparison.png",
+        "git_tracked": true,
+        "png_integrity": "PASS",
+        "remote_blob_matches": true,
+        "http_status": 206,
+        "content_type": "image/png"
+      },
+      {
+        "repository": "YOLO_Second_Largest_Seg_MOTS20_Benchmark",
+        "image": "outputs/visualizations/qualitative/case_03_comparison.png",
+        "git_tracked": true,
+        "png_integrity": "PASS",
+        "remote_blob_matches": true,
+        "http_status": 206,
+        "content_type": "image/png"
+      },
+      {
+        "repository": "YOLO_Second_Largest_Seg_MOTS20_Benchmark",
+        "image": "outputs/visualizations/qualitative/case_04_comparison.png",
+        "git_tracked": true,
+        "png_integrity": "PASS",
+        "remote_blob_matches": true,
+        "http_status": 206,
+        "content_type": "image/png"
+      },
+      {
+        "repository": "YOLO_Medium_Seg_MOTS20_Benchmark",
+        "image": "outputs/visualizations/qualitative/case_01_comparison.png",
+        "git_tracked": true,
+        "png_integrity": "PASS",
+        "remote_blob_matches": true,
+        "http_status": 206,
+        "content_type": "image/png"
+      },
+      {
+        "repository": "YOLO_Medium_Seg_MOTS20_Benchmark",
+        "image": "outputs/visualizations/qualitative/case_02_comparison.png",
+        "git_tracked": true,
+        "png_integrity": "PASS",
+        "remote_blob_matches": true,
+        "http_status": 206,
+        "content_type": "image/png"
+      },
+      {
+        "repository": "YOLO_Medium_Seg_MOTS20_Benchmark",
+        "image": "outputs/visualizations/qualitative/case_03_comparison.png",
+        "git_tracked": true,
+        "png_integrity": "PASS",
+        "remote_blob_matches": true,
+        "http_status": 206,
+        "content_type": "image/png"
+      },
+      {
+        "repository": "YOLO_Medium_Seg_MOTS20_Benchmark",
+        "image": "outputs/visualizations/qualitative/case_04_comparison.png",
+        "git_tracked": true,
+        "png_integrity": "PASS",
+        "remote_blob_matches": true,
+        "http_status": 206,
+        "content_type": "image/png"
+      }
+    ]
+  },
+  "tier_commits": {
+    "YOLO_Large_Seg_MOTS20_Benchmark": "5cdc2eb1216aa33a0cba0c0d13d1b55f8e7eb9cc",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark": "5537a7c6317fa6748c542e424f77a589747c466f",
+    "YOLO_Medium_Seg_MOTS20_Benchmark": "0b9f92f8550b8f45e21abd261fc79a107ab7ee5b"
+  },
+  "rendered_markdown": {
+    "page_http_status": 200,
+    "image_tags_present_per_completed_tier": 4,
+    "completed_tiers_checked": 3
+  }
+}
