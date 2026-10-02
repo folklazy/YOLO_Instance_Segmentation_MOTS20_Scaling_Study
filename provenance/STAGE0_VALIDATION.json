@@ -1,0 +1,53 @@
+{
+  "timestamp": "2026-10-02T05:28:26.549754+00:00",
+  "stage0_status": "PASS_WITH_WARNINGS",
+  "repositories_audited": 6,
+  "format_consistency": "PASS",
+  "canonical_schema_consistency": "PASS",
+  "verified_markdown_numeric_cells": 360,
+  "tiers": {
+    "largest": {
+      "status": "PASS",
+      "result_status": "PASS_WITH_WARNINGS",
+      "models": 4,
+      "source_hashes_verified": 29,
+      "accuracy_and_timing_values_preserved": true,
+      "preflight_values_preserved": true,
+      "inference_rerun": false,
+      "archived_documents_verified": true
+    },
+    "second_largest": {
+      "status": "PASS",
+      "result_status": "PASS_WITH_WARNINGS",
+      "models": 4,
+      "source_hashes_verified": 29,
+      "accuracy_and_timing_values_preserved": true,
+      "preflight_values_preserved": true,
+      "inference_rerun": false,
+      "archived_documents_verified": true
+    },
+    "medium": {
+      "status": "PASS",
+      "result_status": "NOT_RUN",
+      "rows": 0
+    },
+    "small": {
+      "status": "PASS",
+      "result_status": "NOT_RUN",
+      "rows": 0
+    },
+    "nano": {
+      "status": "PASS",
+      "result_status": "NOT_RUN",
+      "rows": 0
+    }
+  },
+  "warnings": [
+    "Historical NNPACK and pycocotools warnings retained. Largest original timing remains excluded.",
+    "Future readiness does not authorize downloads or execution.",
+    "Workspace root README update is local; root is not a Git repository."
+  ],
+  "new_inference_executed": false,
+  "new_checkpoints_downloaded": false,
+  "master_synthesis_created": false
+}

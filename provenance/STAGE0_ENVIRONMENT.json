@@ -1,0 +1,20 @@
+{
+  "python": "3.12.3",
+  "packages": {
+    "ultralytics": "8.4.160",
+    "torch": "2.14.0",
+    "torchvision": "0.29.0",
+    "numpy": "2.5.3",
+    "pycocotools": "2.0.11",
+    "opencv-python": "5.0.0.93",
+    "matplotlib": "3.11.2"
+  },
+  "torch": "2.14.0+cu130",
+  "torchvision": "0.29.0+cu130",
+  "cuda_runtime": "13.0",
+  "cuda_available": true,
+  "CUDA_VISIBLE_DEVICES": null,
+  "gpu": "Tesla T4",
+  "inference_executed": false,
+  "packages_modified": false
+}

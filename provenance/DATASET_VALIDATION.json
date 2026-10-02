@@ -1,0 +1,57 @@
+{
+  "timestamp": "2026-10-02T05:17:42.813706+00:00",
+  "status": "PASS",
+  "frames": 2862,
+  "ordered_image_manifest_sha256": "3bdd87baddcbae32c7ed9ad7ec01bad613d0e0b837b84c4a3fe45eb1dc3b2d78",
+  "baseline_manifest_sha256": "43cd08407a5511877784dfde3d112f37b7db35a855c2bcd4f6ebccd274f91170",
+  "per_image_evidence": "../YOLO_Large_Seg_MOTS20_Benchmark/reports/benchmark-20260929T0520Z/frozen_inputs/manifests/images.json",
+  "all_image_hashes_and_dimensions_match": true,
+  "frame_order_matches": true,
+  "second_largest_same_inputs": true,
+  "sequences": [
+    {
+      "sequence": "MOTS20-02",
+      "frames": 600,
+      "resolution_wh": [
+        1920,
+        1080
+      ],
+      "gt_sha256": "3442c764c43adc9667b025d030e62d54cff9d337ea7893b1fb6c60de296e76d0",
+      "seqinfo_sha256": "b5a02f4e2b7fde7d10a9aea1d80140baedca2efb90f4f36e8b04ff5cdb4212ed",
+      "status": "PASS"
+    },
+    {
+      "sequence": "MOTS20-05",
+      "frames": 837,
+      "resolution_wh": [
+        640,
+        480
+      ],
+      "gt_sha256": "74bc32152484c4012a65a6f6e222e24dfbf3bf536aab91f77c4abaff4a93e2e7",
+      "seqinfo_sha256": "6cbecc3ea8e252e1c7d4d31dbc339d61ff2ed4e695cae5dd3d57c418718db162",
+      "status": "PASS"
+    },
+    {
+      "sequence": "MOTS20-09",
+      "frames": 525,
+      "resolution_wh": [
+        1920,
+        1080
+      ],
+      "gt_sha256": "73c59a3d52469d81084f99c7e2a0c711a99e9fb4152f6aa839fc26e5e03fa383",
+      "seqinfo_sha256": "b811834f5fa65c072a690bb2138dd72b022707d524294896e2f4dc89f1b3bd94",
+      "status": "PASS"
+    },
+    {
+      "sequence": "MOTS20-11",
+      "frames": 900,
+      "resolution_wh": [
+        1920,
+        1080
+      ],
+      "gt_sha256": "aa4a6092a4297025191601a07bba4933d24d9989bd8fb2d01c1f285ad046cb70",
+      "seqinfo_sha256": "c298681f945a78b641662c3ae9afdc80f682fcf6d27596f6e8767d5ae74a09ec",
+      "status": "PASS"
+    }
+  ]
+}

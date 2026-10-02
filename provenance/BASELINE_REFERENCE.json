@@ -1,0 +1,79 @@
+{
+  "study_id": "yolo_instance_segmentation_mots20_scaling",
+  "schema_version": "1.0",
+  "config": {
+    "dataset": "datasets/MOTS/MOTS/train",
+    "sequences": [
+      "MOTS20-02",
+      "MOTS20-05",
+      "MOTS20-09",
+      "MOTS20-11"
+    ],
+    "models": [
+      "yolo26x-seg.pt",
+      "yolo11x-seg.pt",
+      "yolov8x-seg.pt",
+      "yolov9e-seg.pt"
+    ],
+    "device": "0",
+    "batch": 1,
+    "imgsz": 640,
+    "precision": "fp32",
+    "rect": false,
+    "retina_masks": true,
+    "augment": false,
+    "nms": true,
+    "agnostic_nms": false,
+    "nms_iou": 0.7,
+    "ap_confidence_floor": 0.001,
+    "fixed_confidence": 0.25,
+    "matching_iou": 0.5,
+    "ignore_prediction_ioa": 0.5,
+    "max_detections": 1000,
+    "ap_max_dets_candidates": [
+      100,
+      200,
+      300,
+      1000
+    ],
+    "ap_convergence_tolerance": 0.0001,
+    "ap_max_dets": 200,
+    "warmup_iterations": 10,
+    "timing_repeats": 3,
+    "seed": 20260929,
+    "timing_contamination_policy": "any_other_compute_process_or_idle_utilization_above_5_percent"
+  },
+  "implementation_sha256": {
+    "YOLO_Large_Seg_MOTS20_Benchmark/reports/benchmark-20260929T0520Z/frozen_inputs/src/benchmark_adapter.py": "c13177d47f40dc59f83e5d5227d796e67c09d915c8573f169131cee39974260d",
+    "YOLO_Large_Seg_MOTS20_Benchmark/reports/benchmark-20260929T0520Z/frozen_inputs/src/frozen_pilot/yolo_adapter.py": "d739c5477490b805773e1320e744052152dd1acc9e03719fed4a588ed7b2a36f",
+    "YOLO_Large_Seg_MOTS20_Benchmark/reports/benchmark-20260929T0520Z/frozen_inputs/src/frozen_pilot/metrics.py": "3f39f8bed8d62677ea1f6fbdce4415e04ccaede8b0ae0425fd63f78594980721",
+    "YOLO_Large_Seg_MOTS20_Benchmark/reports/benchmark-20260929T0520Z/frozen_inputs/src/frozen_pilot/mots.py": "01e4a750d8ed6bd1d0002a7b906f351ff9d7b59d3f6e31db633cd4b463b0f51d",
+    "YOLO_Large_Seg_MOTS20_Benchmark/reports/benchmark-20260929T0520Z/frozen_inputs/src/benchmark.py": "4c2db4ba2261f3880ce38017f21c5e0ee764d21e2dffc5aebb9310f48fce69dd",
+    "YOLO_Large_Seg_MOTS20_Benchmark/src/repeat_clean_timing.py": "c5e14ebf6836d5987c2103b9f4120db10fa4b8de564ea88e43f986bc6cee71ff",
+    "YOLO_Large_Seg_MOTS20_Benchmark/manifests/framework_source_hashes.json": "8fd3e65cd72c981f8c5524efaacec9bff8a334ee02c8d9e691940a729f242670",
+    "YOLO_Large_Seg_MOTS20_Benchmark/manifests/timing_frames.json": "5e66c48b3fd844dcd7ce9bb770c6f65df37efb2846b4ae05ace49c752eb6f601",
+    "YOLO_Large_Seg_MOTS20_Benchmark/manifests/environment.json": "2ef21e31e4cae7290c6127ed8483173a3c6bf9748c19fa00b5265fbbef546c7d"
+  },
+  "environment": {
+    "python": "3.12.3 (main, Aug 31 2026, 10:18:26) [GCC 13.3.0]",
+    "packages": {
+      "ultralytics": "8.4.160",
+      "torch": "2.14.0",
+      "torchvision": "0.29.0",
+      "numpy": "2.5.3",
+      "pycocotools": "2.0.11",
+      "Pillow": "12.3.0",
+      "opencv-python": "5.0.0.93",
+      "matplotlib": "3.11.2"
+    },
+    "torch_version": "2.14.0+cu130",
+    "torchvision_version": "0.29.0+cu130",
+    "cuda_runtime": "13.0",
+    "gpu": "_CudaDeviceProperties(name='Tesla T4', major=7, minor=5, total_memory=14911MB, multi_processor_count=40, uuid=568de064-e614-a45c-96c3-dbd80b8db026, pci_bus_id=0, pci_device_id=16, pci_domain_id=0, L2_cache_size=4MB)"
+  },
+  "prompt_discrepancies": [],
+  "notes": [
+    "Frozen values match the expected prompt values.",
+    "Presentation order is YOLO26, YOLO11, YOLOv9, YOLOv8; historical execution order remains unchanged."
+  ]
+}
