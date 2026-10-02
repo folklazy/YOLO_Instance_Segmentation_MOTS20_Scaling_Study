@@ -52,50 +52,9 @@ Schema and units: DATA_SCHEMA.md and schemas.json. Provenance includes study/sch
 
 Per-tier PRESENTATION_SUMMARY_TH.md must remain a neutral, presentation-ready tier summary. Meeting-specific synthesis belongs only in `MEETING_SUMMARY_TH.md`.
 
-Use exact major section/table ordering in `templates/`. README is navigation; RESULTS_SUMMARY_TH concise Thai result; PRESENTATION_SUMMARY_TH visual + qualitative + interpretive Thai analysis; REPORT compact technical record. Avoid repeating methodology and generic definitions; common method is METHODOLOGY_REFERENCE.md. Full metric guide and final synthesis come later. Display order: YOLO26, YOLO11, YOLOv9 (only largest/second-largest), YOLOv8. Explicitly metric-sorted tables may differ. Machine tier labels: largest, second_largest, medium, small, nano. Human labels: Largest (X/E), Second-largest (L/C), Medium (M), Small (S), Nano (N).
+Use exact major section/table ordering in `templates/`. README is navigation; RESULTS_SUMMARY_TH concise Thai result; PRESENTATION_SUMMARY_TH neutral, presentation-ready Thai tier summary; REPORT compact technical record. Avoid repeating methodology and generic definitions; common method is METHODOLOGY_REFERENCE.md. Full metric guide and final synthesis come later. Display order: YOLO26, YOLO11, YOLOv9 (only largest/second-largest), YOLOv8. Explicitly metric-sorted tables may differ. Machine tier labels: largest, second_largest, medium, small, nano. Human labels: Largest (X/E), Second-largest (L/C), Medium (M), Small (S), Nano (N).
 
 Markdown AP/P/R/F1/IoU/Dice: 6 decimals; latency/FPS: 3; VRAM MiB: 2; parameters: comma-separated integer; GFLOPs: 3; checkpoint decimal MB: 2. CSV preserves source precision. Tables must be generated/verified from canonical CSV. Include identical Study Navigation. Standard plots under outputs/plots: 01_mask_map50_95.png, 02_ap50_ap75.png, 03_inference_latency.png, 04_pipeline_fps.png, 05_peak_vram.png, 06_accuracy_vs_latency.png. Preserve old plots; regenerate only presentation from saved metrics. Fixed model order/colors, explicit units, no weighted score.
-
-## Documentation roles and qualitative evidence
-
-RESULTS_SUMMARY_TH.md is a compact quantitative result summary. Follow its template:
-5–8 bullets; one canonical results table; six-category winner table; 3–5 directly measured findings;
-short Accuracy vs Speed and Accuracy vs Memory sections; cautions; cross-tier inputs/links.
-No per-model essays, repeated result tables or detailed visual cases.
-
-PRESENTATION_SUMMARY_TH.md answers how predictions differ in actual frames. Follow its template:
-one short overview and small mAP/AP75/Recall context table linked to RESULTS; approximately 3–5
-same-frame cases; Failure Analysis; Near-tie visual check; 3–6 explicit observation/interpretation
-findings; quantitative/qualitative synthesis; priority/candidate/evidence table; limitations and links.
-Every case gives selection reason, actual relative image embed, direct observations, analysis,
-then connection to canonical metrics. No per-model ranking essay or mentor-specific section.
-
-Use only actual MOTS20 benchmark frames, original GT, saved predictions and canonical artifacts.
-Prefer existing comparisons, then reconstruct from saved predictions; if insufficient, report that
-reconstruction requires inference and leave analysis pending. Never rerun inference for docs.
-Shortlist from structured TP/FP/FN/matched-IoU evidence or the frozen visualization manifest;
-inspect a small set, not thousands of frames. Include advantage, shared failure, counterexample/
-detection trade-off and similar-output/near-tie cases where available. Document selection pool,
-sequence, frame, reasons and source hashes; selected cases are diagnostic, not representative sampling.
-
-All tier models use the same original frame, full image region, scale, confidence and ignore policy.
-Panel order: Original/GT, YOLO26, YOLO11, valid YOLOv9 e/c when applicable, YOLOv8.
-Clear labels and GT IDs should support observations. Store new composites under the owning tier's
-outputs/visualizations/qualitative/case_01_comparison.png through case_05_comparison.png when useful;
-never overwrite existing generated artifacts. Keep CASE_SELECTION.md and small source/evidence manifests
-versionable while images/predictions remain generated ignored artifacts. Do not duplicate source images.
-
-Use observed failure categories only. FN is unmatched GT under mask IoU policy and may include an
-inaccurate mask; FP is an unmatched prediction, not automatically a nonexistent person. Ignore outputs
-must not be called false positives. Per-frame counts must match existing canonical records; no new
-dataset-level measurements or changed benchmark values. A selected frame does not prove dataset-wide
-behavior or significance. Do not infer scene conditions/robustness without visible evidence.
-Numerical near ties require a same-frame visual check where practical; system latency/VRAM cannot
-be inferred from mask images. No weighted score or final CCTV superiority.
-
-Analyze completed tiers only after all models and clean timing are validated. Future/incomplete M/S/N
-use empty tables and explicit pending text, never a single-model qualitative comparison.
-REPORT.md remains technical and links to PRESENTATION through a short Qualitative Analysis section.
 
 ## Scientific interpretation
 

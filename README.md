@@ -1,6 +1,6 @@
 # YOLO Instance Segmentation MOTS20 Scaling Study
 
-Stage 0: study setup and historical standardization only. Largest and Second-largest are COMPLETE / PASS_WITH_WARNINGS; Medium, Small and Nano are setup READY / NOT_RUN. The final 17-model synthesis is pending. This repository performs no model inference.
+Stage 0: study setup and historical standardization only. Largest, Second-largest and Medium are COMPLETE / PASS_WITH_WARNINGS; Small and Nano remain READY / NOT_RUN. The final 17-model synthesis is pending. This repository performs no model inference.
 
 ## Control files
 
@@ -22,3 +22,18 @@ After all five tiers are validated and synthesis is explicitly requested, import
 ## Validation and stop
 
 Run `.venv/bin/python YOLO_Instance_Segmentation_MOTS20_Scaling_Study/scripts/validate_stage0.py` from workspace root for read-only interface/source validation. Conversion scripts preserve run artifacts and execute no model inference; they are historical setup utilities, not benchmark launchers. Stage 0 completion does not authorize any next tier. STOP and wait for explicit instruction.
+
+## Documentation roles
+
+RESULTS_SUMMARY_TH.md gives the compact quantitative summary. PRESENTATION_SUMMARY_TH.md
+explains actual same-frame prediction behavior, observed failures and cautious interpretation.
+Largest, Second-largest and Medium have four diagnostic cases each; pending Small/Nano follow
+the new templates after all models finish. REPORT remains the technical record and links to visual analysis.
+Comparisons use original MOTS20 frames and saved RLE masks without inference or changed measurements.
+Generated images stay local/ignored; small case-selection and evidence manifests remain versionable.
+
+The Stage 0 generators are historical conversion utilities with embedded old documentation designs.
+Do not rerun them to regenerate current summaries, standards, templates or study state.
+Use the current templates and STUDY_STANDARD.md for future tiers.
+Validate the redesign with `.venv/bin/python YOLO_Instance_Segmentation_MOTS20_Scaling_Study/scripts/validate_documentation_redesign.py`
+from workspace root. The existing Stage 0 validator retains historical NOT_RUN assumptions for Medium.

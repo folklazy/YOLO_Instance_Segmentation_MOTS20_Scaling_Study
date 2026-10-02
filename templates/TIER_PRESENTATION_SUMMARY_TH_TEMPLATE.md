@@ -1,67 +1,102 @@
-# {{TIER}}
+# {{TIER}} — Visual and Qualitative Analysis
 
-<!-- Template only. Populate from canonical CSV after validation; never invent measurements. -->
+<!-- Purpose: เมื่อดู prediction จริง โมเดลต่างกันอย่างไร?
+Only analyze after all tier models complete and artifacts are validated.
+For NOT_RUN/incomplete tiers, explicitly mark pending, retain empty tables, and
+do not embed placeholder image links or analyze one completed model alone. -->
 
-## สรุปแบบกระชับ
+## 1. ภาพรวมผลการทดลอง
 
-{{สรุปแบบกระชับ}}
+{{ONE_SHORT_PARAGRAPH_WITH_STATUS_AND_LINK_TO_RESULTS_SUMMARY}}
 
-## โมเดลที่ทดสอบ
+| Model | Mask mAP50-95 | AP75 | Recall |
+|---|---|---|---|
+<!-- Context only. Full quantitative summary: RESULTS_SUMMARY_TH.md. -->
 
-{{โมเดลที่ทดสอบ}}
+## การเลือกกรณีและการอ่านภาพ
 
-## 1. ผลลัพธ์หลัก
+{{SELECTION_POOL_AND_REASONS}}
+<!-- Select ~3–5 diagnostic cases from actual benchmark artifacts: advantage,
+shared failure, counterexample/trade-off, similar-output/near-tie where available.
+Shortlist with existing per-frame TP/FP/FN/matched IoU; inspect few candidates.
+First reuse comparisons; otherwise render saved predictions + original/GT.
+Never rerun inference for documentation. If reconstruction unavailable, report it.
+Same frame/full region, scale, confidence and panel order for all tier models:
+Original / GT, YOLO26, YOLO11, valid YOLOv9 e/c for X/E and L/C only, YOLOv8.
+Readable labels; explain ignore handling and FN/FP semantics. Retain source hashes.
+CASE_SELECTION.md records sequence/frame/reason and limitations of sampling. -->
 
-{{1._ผลลัพธ์หลัก}}
+## Case {{N}} — {{SHORT_DIAGNOSTIC_TITLE}}
 
-## 2. ผลรวมโมเดล
+เหตุผลที่เลือก: {{REASON}} · Sequence: {{SEQUENCE}} · Frame: {{FRAME}}
 
-{{2._ผลรวมโมเดล}}
+### ภาพเปรียบเทียบ
 
-| Model | Mask mAP50-95 | AP50 | AP75 | Precision | Recall | F1 | TP-only IoU | TP-only Dice | Inference ms | Pipeline ms | FPS | Peak VRAM allocated (MiB) | Parameters |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-<!-- Add measured rows only, in fixed model order. -->
+<!-- Repeat this case block 3–5 times only with real existing repository images.
+Embed relative Markdown path, e.g. outputs/visualizations/qualitative/case_01_comparison.png.
+Never insert a broken/example image as real evidence. -->
+{{ACTUAL_COMPARISON_IMAGE_EMBED}}
 
-## 3. สรุปผลจากตาราง
+### สิ่งที่เห็นจากภาพ
 
-{{3._สรุปผลจากตาราง}}
+{{DIRECT_OBSERVATIONS_BY_MODEL_AND_REGION_OR_GT_ID}}
 
-## 4. Insight ที่สำคัญ
+### วิเคราะห์
 
-{{4._INSIGHT_ที่สำคัญ}}
+{{INTERPRETATION_OF_BEHAVIOR_AND_ALTERNATIVE_EXPLANATIONS}}
+<!-- A frame illustrates behavior; it cannot establish a dataset-wide effect.
+Mention FN can include masks failing IoU threshold, not just absent detections.
+Do not infer blur/low-light/occlusion severity/camera robustness without evidence. -->
 
-## 5. Trade-off
+### เชื่อมกับผลเชิงตัวเลข
 
-{{5._TRADE-OFF}}
+{{DIRECTIONAL_CONSISTENCY_OR_COUNTEREXAMPLE_TO_CANONICAL_MAP_AP75_RECALL}}
 
-### Accuracy
+## Failure Analysis
 
-{{EVIDENCE_BASED_TEXT}}
+| Failure pattern | Models observed | Visual case | Interpretation |
+|---|---|---|---|
+<!-- Observed categories only; no unsupported frequency/counts. FP means unmatched
+under benchmark policy, not necessarily a nonexistent person. -->
 
-### Speed
+## Near-tie visual check
 
-{{EVIDENCE_BASED_TEXT}}
+{{DESCRIPTIVE_NEAR_TIE_PAIR_AND_SAME_FRAME_COMPARISON_WHERE_PRACTICAL}}
+<!-- No automatic cutoff or statistical superiority. If only timing is close,
+state that segmentation images cannot verify a latency near tie. -->
 
-### Memory / Resource
+## สิ่งที่เรียนรู้จากภาพจริง
 
-{{EVIDENCE_BASED_TEXT}}
+### Observation {{N}}
 
-### ภาพรวม
+{{DIRECT_OBSERVATION}}
 
-{{EVIDENCE_BASED_TEXT}}
+**Interpretation:** {{CAUTIOUS_INTERPRETATION}}
+<!-- Repeat for 3–6 meaningful findings. -->
 
-## 6. ถ้าต้องเลือกจาก Tier นี้
+## เมื่อดูทั้งตัวเลขและภาพร่วมกัน
 
-{{6._ถ้าต้องเลือกจาก_TIER_นี้}}
+{{SYNTHESIS_OF_MAP_RECALL_AP75_AND_VISIBLE_BEHAVIOR}}
+Latency และ VRAM เป็น system-level measurements อ่านจาก benchmark;
+ภาพ segmentation ไม่สามารถอธิบายหรือวัดสองค่านี้ได้
 
-| Priority | Recommended model | Reason |
+## ถ้าพิจารณาทั้งผลเชิงตัวเลขและภาพ
+
+| Priority | Candidate | Evidence |
 |---|---|---|
-<!-- Add measured rows only, in fixed model order. -->
+<!-- Accuracy: quantitative + visual, Speed: clean benchmark latency,
+Low VRAM: memory benchmark, Balanced: explicit trade-off/constraints.
+No weighted score and no final CCTV superiority. -->
 
-## 7. ข้อควรระวังในการตีความ
+## ข้อจำกัด
 
-{{7._ข้อควรระวังในการตีความ}}
+- เฟรมที่เลือกเป็นตัวอย่างเชิงคุณภาพ ไม่แทน dataset-level metrics
+- เลือกทั้งข้อได้เปรียบ ข้อผิดพลาด กรณีสวนอันดับ และผลคล้ายกัน เพื่อลด cherry-picking
+- MOTS20 ไม่ใช่ผลทดสอบ CCTV robustness ขั้นสุดท้าย
+- Qualitative observations และ numerical near ties ไม่ใช่ statistical significance
 
 ## รายละเอียดเต็ม
 
-{{รายละเอียดเต็ม}}
+[Quantitative summary](RESULTS_SUMMARY_TH.md) · [REPORT.md](REPORT.md) ·
+[TIER_RESULTS.csv](metrics/TIER_RESULTS.csv) ·
+[Master Study](https://github.com/folklazy/YOLO_Instance_Segmentation_MOTS20_Scaling_Study)

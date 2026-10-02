@@ -65,9 +65,3 @@
 ## 12. Relation to Full Scaling Study
 
 {{12._RELATION_TO_FULL_SCALING_STUDY}}
-
-## Qualitative Analysis
-
-For completed tiers, see [PRESENTATION_SUMMARY_TH.md](PRESENTATION_SUMMARY_TH.md)
-for same-frame visual evidence and qualitative interpretation. Keep case discussion there.
-For incomplete tiers, state pending; do not analyze a single model alone.
