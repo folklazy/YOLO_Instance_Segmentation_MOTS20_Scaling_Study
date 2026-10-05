@@ -28,8 +28,9 @@ categories=[('Mask mAP50-95','mask_map50_95',max,''),('AP75','ap75',max,''),('Re
             ('VRAM','peak_allocated_vram_mib',min,' MiB')]
 def fmt(k,v):return f"{float(v):.{2 if k=='peak_allocated_vram_mib' else 3 if k in ['inference_ms_mean','pipeline_ms_mean','fps'] else 6}f}"
 
-# Small's latest explicit execution request pins numerical report layouts. It
-# overrides the earlier qualitative design for this tier, not its protocol.
+# Small's benchmark initially pinned numerical layouts. Its quantitative summary
+# retains that profile; the latest presentation update follows the shared visual
+# template. Both documentation profiles preserve the frozen measurement protocol.
 def completed_small():
     d=ROOT/'YOLO_Small_Seg_MOTS20_Benchmark'
     complete=d/'manifests/SMALL_COMPLETE.json'
@@ -47,7 +48,12 @@ def historical_measurement(path,expected):
     transitioned_measurements.add(path)
 
 transitioned_measurements=set()
-def validate_small_user_profile(d,data,r,p):
+def validate_small_completed_artifacts(d,data,r,p):
+    alignment=json.loads((d/'manifests/VISUAL_ALIGNMENT.json').read_text())
+    assert alignment['status']=='PASS' and alignment['active_presentation_profile']=='shared-visual-qualitative'
+    assert alignment['inference_rerun'] is False and alignment['measured_values_changed'] is False
+    for path,h in alignment['measurement_hashes'].items():assert sha(ROOT/path)==h,path
+    for archive in alignment['archives']:assert sha(d/archive['archive'])==archive['sha256']
     setup=json.loads((d/'manifests/SMALL_SETUP.json').read_text())
     assert setup['report_layout_override']=='Explicit latest user headings replace qualitative-layout template for Small only'
     assert completed_small()
@@ -64,13 +70,16 @@ def validate_small_user_profile(d,data,r,p):
     for name in ['README','REPORT','RESULTS_SUMMARY_TH','PRESENTATION_SUMMARY_TH']:
         template=text(d/'configs/report_templates'/f'TIER_{name}_TEMPLATE.md')
         doc=text(d/(name+'.md'))
-        assert re.findall(r'^## .+$',doc,re.M)==re.findall(r'^## .+$',template,re.M),name
+        if name!='PRESENTATION_SUMMARY_TH':
+            assert re.findall(r'^## .+$',doc,re.M)==re.findall(r'^## .+$',template,re.M),name
+        else:
+            assert sha(d/'configs/report_templates/TIER_PRESENTATION_SUMMARY_TH_TEMPLATE.md')==sha(MASTER/'templates/TIER_PRESENTATION_SUMMARY_TH_TEMPLATE.md')
         assert not re.search(r'(?i)mentor|อาจารย์|สรุปสำหรับคุยกับพี่',doc)
-    assert r.startswith('# สรุปผล Small YOLO Instance Segmentation\n') and p.startswith('# Small\n')
+    assert r.startswith('# สรุปผล Small YOLO Instance Segmentation\n') and p.startswith('# Small (S) — Visual and Qualitative Analysis\n')
     assert '## Case ' not in r and '![' not in r
     bullets=r.split('## สรุปใน 1 นาที\n')[1].split('\n## ผลหลัก')[0]
     assert 5<=sum(x.startswith('- ') for x in bullets.splitlines())<=8
-    assert re.findall(r'^### (YOLO.+)$',p,re.M)==[x['model'] for x in data]
+    validate_qualitative(d,data,p)
     review=json.loads((d/'manifests/FINAL_DOCUMENT_REVIEW.json').read_text())
     assert review['status']=='PASS' and review['measurements_changed'] is False and review['inference_run'] is False
     for path,h in review['canonical_metrics_sha256'].items():assert sha(d/path)==h,path
@@ -108,6 +117,41 @@ def validate_small_user_profile(d,data,r,p):
                 expected=f"{int(row[key]):,}" if key=='parameters' else f"{float(row[key]):.{3 if key in ['inference_ms_mean','pipeline_ms_mean','fps','gflops'] else 2 if key in ['peak_allocated_vram_mib','checkpoint_mb'] else 6}f}"
                 assert value==expected,(name,title,value,expected)
 
+def validate_qualitative(d,data,p):
+    assert '## Failure Analysis' in p and '## Near-tie visual check' in p
+    assert '## เมื่อดูทั้งตัวเลขและภาพร่วมกัน' in p
+    assert '## 2. ผลรวมโมเดล' not in p
+    expected=[x if not x.startswith('## Case ') else '## Case' for x in re.findall(r'^## .+$',text(ROOT/'YOLO_Medium_Seg_MOTS20_Benchmark/PRESENTATION_SUMMARY_TH.md'),re.M)]
+    actual=[x if not x.startswith('## Case ') else '## Case' for x in re.findall(r'^## .+$',p,re.M)]
+    assert actual==expected,d.name
+    table=table_after(p,'## 1. ภาพรวมผลการทดลอง')
+    assert len(table)==len(data)+2
+    for actual,source in zip(table[2:],data):
+        assert actual==[source['model']]+[fmt(k,source[k]) for k in ['mask_map50_95','ap75','recall']]
+    assert len(re.findall(r'^## Case [1-4] — ',p,re.M))==4
+    assert p.count('### สิ่งที่เห็นจากภาพ')==p.count('### วิเคราะห์')==p.count('### เชื่อมกับผลเชิงตัวเลข')==4
+    assert p.count('### Observation ')==4 and p.count('**Interpretation:**')==4
+    ev=json.loads((d/'outputs/visualizations/qualitative/CASE_EVIDENCE.json').read_text())
+    assert ev['inference_rerun'] is False and ev['benchmark_values_changed'] is False
+    assert len(ev['cases'])==4
+    pool={(x['sequence'],x['frame']) for x in json.loads((d/'manifests/visualization_frames.json').read_text())}
+    model_order=[x['model'] for x in data]
+    for i,case in enumerate(ev['cases'],1):
+        assert (case['sequence'],case['frame']) in pool
+        assert sha(ROOT/case['image'])==case['image_sha256']
+        gt=(ROOT/case['image']).parent.parent/'gt/gt.txt';assert sha(gt)==case['gt_sha256']
+        image=d/f'outputs/visualizations/qualitative/case_{i:02d}_comparison.png'
+        assert sha(image)==case['comparison_sha256']
+        with Image.open(ROOT/case['image']) as im:height=round(im.height*960/im.width)+60
+        with Image.open(image) as im:assert im.size==(1920,height*(len(data)+1))
+        assert [m['model'] for m in case['models']]==model_order
+        for m,model in zip(case['models'],data):
+            assert sha(ROOT/m['prediction_path'])==m['prediction_sha256']
+            per=next(x for x in rows(d/f"metrics/{ev['run_id']}/per_frame/{model['checkpoint']}.csv")
+                     if x['sequence']==case['sequence'] and int(x['frame'])==case['frame'])
+            for k in ['tp','fp','fn','ignored_predictions']:assert m[k]==int(per[k])
+
+
 manifests=sorted((MASTER/'provenance').glob('DOCUMENTATION_REDESIGN_*.json'))
 assert manifests
 record=json.loads(manifests[-1].read_text())
@@ -135,8 +179,8 @@ for tier in ['Large','Second_Largest','Medium','Small','Nano']:
         for link in re.findall(r'\]\(([^)]+)\)',text(d/doc)):
             if not re.match(r'https?://|#',link):assert (d/link.split('#')[0]).exists(),(tier,doc,link)
     if tier=='Small' and data and completed_small():
-        validate_small_user_profile(d,data,r,p)
-        summary.append({'tier':tier,'status':'PASS','cases':0,'profile':'explicit-user-numerical-layout'})
+        validate_small_completed_artifacts(d,data,r,p)
+        summary.append({'tier':tier,'status':'PASS','cases':4,'profile':'shared-visual-qualitative'})
         continue
     assert '## Failure Analysis' in p and '## Near-tie visual check' in p
     assert '## เมื่อดูทั้งตัวเลขและภาพร่วมกัน' in p
@@ -177,28 +221,7 @@ for tier in ['Large','Second_Largest','Medium','Small','Nano']:
     assert len(winner)==8
     for actual,(title,k,fn,unit) in zip(winner[2:],categories):
         w=fn(data,key=lambda x:float(x[k]));assert actual==[title,w['model'],fmt(k,w[k])+unit]
-    assert len(re.findall(r'^## Case [1-4] — ',p,re.M))==4
-    assert p.count('### สิ่งที่เห็นจากภาพ')==p.count('### วิเคราะห์')==p.count('### เชื่อมกับผลเชิงตัวเลข')==4
-    assert p.count('### Observation ')==4 and p.count('**Interpretation:**')==4
-    ev=json.loads((d/'outputs/visualizations/qualitative/CASE_EVIDENCE.json').read_text())
-    assert ev['inference_rerun'] is False and ev['benchmark_values_changed'] is False
-    assert len(ev['cases'])==4
-    pool={(x['sequence'],x['frame']) for x in json.loads((d/'manifests/visualization_frames.json').read_text())}
-    model_order=[x['model'] for x in data]
-    for i,case in enumerate(ev['cases'],1):
-        assert (case['sequence'],case['frame']) in pool
-        assert sha(ROOT/case['image'])==case['image_sha256']
-        gt=(ROOT/case['image']).parent.parent/'gt/gt.txt';assert sha(gt)==case['gt_sha256']
-        image=d/f'outputs/visualizations/qualitative/case_{i:02d}_comparison.png'
-        assert sha(image)==case['comparison_sha256']
-        with Image.open(ROOT/case['image']) as im:height=round(im.height*960/im.width)+60
-        with Image.open(image) as im:assert im.size==(1920,height*(len(data)+1))
-        assert [m['model'] for m in case['models']]==model_order
-        for m,model in zip(case['models'],data):
-            assert sha(ROOT/m['prediction_path'])==m['prediction_sha256']
-            per=next(x for x in rows(d/f"metrics/{ev['run_id']}/per_frame/{model['checkpoint']}.csv")
-                     if x['sequence']==case['sequence'] and int(x['frame'])==case['frame'])
-            for k in ['tp','fp','fn','ignored_predictions']:assert m[k]==int(per[k])
+    validate_qualitative(d,data,p)
     summary.append({'tier':tier,'status':'PASS','cases':4})
 for name in ['TIER_RESULTS_SUMMARY_TH_TEMPLATE.md','TIER_PRESENTATION_SUMMARY_TH_TEMPLATE.md']:
     template=text(MASTER/'templates'/name)

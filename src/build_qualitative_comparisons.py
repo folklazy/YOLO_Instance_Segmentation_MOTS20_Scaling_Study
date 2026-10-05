@@ -21,7 +21,7 @@ sys.path.insert(0, str(BASE))
 from mots import load_frames
 from metrics import CompactPrediction, fixed_metrics
 
-TIERS = ['Large', 'Second_Largest', 'Medium']
+TIERS = ['Large', 'Second_Largest', 'Medium', 'Small']
 PALETTE = [(50,220,90),(40,170,255),(255,210,50),(220,100,255),(255,140,60),(70,240,220)]
 
 def sha(path):
@@ -51,8 +51,8 @@ def build(tier):
     assert rows and all(int(r['frames'])==2862 and int(r['gt_instances'])==26894 for r in rows)
     run=rows[0]['run_id']
     # Four predefined diagnostic roles from the twelve frozen visualization frames.
-    cases=[('MOTS20-05',419,'additional valid instance'),('MOTS20-09',263,'shared misses and false positives'),
-           ('MOTS20-02',600 if tier=='Large' else 1,'counterexample / detection trade-off'),
+    cases=[('MOTS20-02',300,'additional valid instances') if tier=='Small' else ('MOTS20-05',419,'additional valid instance'),('MOTS20-09',263,'shared misses and false positives'),
+           ('MOTS20-02',600 if tier in ['Large','Small'] else 1,'counterexample / detection trade-off'),
            ('MOTS20-09',1,'similar outputs / near-tie check')]
     out=d/'outputs/visualizations/qualitative'
     out.mkdir(parents=True,exist_ok=True)

@@ -27,10 +27,10 @@ Run `.venv/bin/python YOLO_Instance_Segmentation_MOTS20_Scaling_Study/scripts/va
 
 RESULTS_SUMMARY_TH.md gives the compact quantitative summary. PRESENTATION_SUMMARY_TH.md
 explains actual same-frame prediction behavior, observed failures and cautious interpretation.
-Largest, Second-largest and Medium have four diagnostic cases each. Small follows the numerical
-RESULTS/PRESENTATION headings explicitly requested for its completed benchmark; its pinned layout
-snapshots are in configs/report_templates. Nano remains pending and follows the current qualitative
-templates after all its models finish. REPORT remains the technical record.
+Largest, Second-largest, Medium and Small have four diagnostic cases each. Small now follows
+the shared visual presentation format after the latest user-requested alignment; its benchmark-time
+numerical presentation is archived. Nano remains pending and follows the current templates after
+all its models finish. REPORT remains the technical record and links to visual analysis.
 Comparisons use original MOTS20 frames and saved RLE masks without inference or changed measurements.
 The selected comparison images embedded in the summaries and their small case-selection/evidence
 manifests are versioned. Other generated images and saved predictions remain local/ignored.

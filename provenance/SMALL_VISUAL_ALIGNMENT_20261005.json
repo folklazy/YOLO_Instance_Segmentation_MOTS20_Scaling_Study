@@ -1,0 +1,53 @@
+{
+  "repository": "YOLO_Small_Seg_MOTS20_Benchmark",
+  "request": "Align Small PRESENTATION_SUMMARY_TH.md with other completed tiers",
+  "status": "PASS",
+  "cases": 4,
+  "active_profile": "shared-visual-qualitative",
+  "source_run": "benchmark-20261005T051531Z",
+  "inference_rerun": false,
+  "measured_values_changed": false,
+  "validation_summary": {
+    "documentation_status": "PASS",
+    "tiers": [
+      {
+        "tier": "Large",
+        "status": "PASS",
+        "cases": 4
+      },
+      {
+        "tier": "Second_Largest",
+        "status": "PASS",
+        "cases": 4
+      },
+      {
+        "tier": "Medium",
+        "status": "PASS",
+        "cases": 4
+      },
+      {
+        "tier": "Small",
+        "status": "PASS",
+        "cases": 4,
+        "profile": "shared-visual-qualitative"
+      },
+      {
+        "tier": "Nano",
+        "status": "NOT_RUN",
+        "cases": 0
+      }
+    ],
+    "measurement_files_unchanged": 158,
+    "inference_rerun": false,
+    "existing_measured_values_changed": false,
+    "new_small_benchmark_interfaces": [
+      "YOLO_Small_Seg_MOTS20_Benchmark/metrics/MODEL_COMPLEXITY.csv",
+      "YOLO_Small_Seg_MOTS20_Benchmark/metrics/PER_SEQUENCE_RESULTS.csv",
+      "YOLO_Small_Seg_MOTS20_Benchmark/metrics/PREFLIGHT_MAXDET.csv",
+      "YOLO_Small_Seg_MOTS20_Benchmark/metrics/TIER_RESULTS.csv",
+      "YOLO_Small_Seg_MOTS20_Benchmark/metrics/TIMING_SUMMARY.csv"
+    ],
+    "embedded_images_checked": 24,
+    "remote_images_checked": false
+  }
+}
