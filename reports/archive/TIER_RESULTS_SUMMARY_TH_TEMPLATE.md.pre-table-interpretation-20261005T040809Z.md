@@ -2,7 +2,7 @@
 
 <!-- COMPACT QUANTITATIVE SUMMARY. After COMPLETE + validated canonical CSV only.
 For NOT_RUN, retain headings and empty tables; state pending instead of inventing winners.
-Include concise per-model table interpretation; do not add visual case analysis. -->
+Do not add per-model essays or visual case analysis. -->
 
 ## สรุปใน 1 นาที
 
@@ -16,25 +16,6 @@ pipeline speed winners; lowest allocated VRAM; largest measured trade-off. -->
 | Model | Mask mAP50-95 | AP75 | Recall | Inference ms | Pipeline ms | FPS | Peak VRAM MiB |
 |---|---|---|---|---|---|---|---|
 <!-- One canonical table, fixed family order. AP/Recall 6 decimals; ms/FPS 3; MiB 2. -->
-
-## สรุปผลจากตาราง
-
-<!-- One subsection per valid model in fixed family order (YOLO26, YOLO11,
-YOLOv9 e/c for Largest/Second-largest only, YOLOv8). Use 1–2 short paragraphs:
-measured strengths → actual trade-off → conditional candidate for later evaluation.
-Explain relations across metrics rather than listing each cell or declaring balanced-best.
-AP50/TP-only IoU/Dice outside the compact table must cite canonical CSV / REPORT.
-TP-only quality is conditional on matching and may use different GT subsets per model.
-Recall is fixed-confidence mask-matching coverage, not tracking or detection alone.
-Separate inference from pipeline; tiny gaps are descriptive, not significance.
-For NOT_RUN, list planned model subsections with pending text and no fabricated rankings.
-No visual cases, causal architecture claims, weighted score or final CCTV superiority. -->
-
-### {{MODEL}}
-
-{{MEASURED_STRENGTH_AND_LIMITATION}}
-
-{{RESOURCE_TRADE_OFF_AND_CONDITIONAL_CANDIDATE}}
 
 ## Winner ของแต่ละด้าน
 

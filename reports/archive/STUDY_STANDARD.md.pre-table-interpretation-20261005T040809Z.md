@@ -59,17 +59,9 @@ Markdown AP/P/R/F1/IoU/Dice: 6 decimals; latency/FPS: 3; VRAM MiB: 2; parameters
 ## Documentation roles and qualitative evidence
 
 RESULTS_SUMMARY_TH.md is a compact quantitative result summary. Follow its template:
-5–8 bullets; one canonical results table; per-model table interpretation; six-category winner table; 3–5 directly measured findings;
+5–8 bullets; one canonical results table; six-category winner table; 3–5 directly measured findings;
 short Accuracy vs Speed and Accuracy vs Memory sections; cautions; cross-tier inputs/links.
-Include a concise สรุปผลจากตาราง section after the main table: one subsection per valid model
-in fixed family order, 1–2 short paragraphs explaining measured strengths, limitations, actual
-trade-offs and conditional candidates. Do not merely restate every table cell or assume a balanced
-winner. Cite canonical CSV/REPORT for AP50/TP-only metrics omitted from the compact table;
-TP-only quality is conditional on matching and can use different GT subsets across models.
-Keep tiny gaps descriptive and separate inference from pipeline. NOT_RUN tiers retain planned
-model headings and pending text without fabricated comparisons. No repeated result tables or
-visual cases; PRESENTATION retains the visual/qualitative role. This section implements the user's
-2026-10-05 revision of the earlier prohibition on per-model interpretation.
+No per-model essays, repeated result tables or detailed visual cases.
 
 PRESENTATION_SUMMARY_TH.md answers how predictions differ in actual frames. Follow its template:
 one short overview and small mAP/AP75/Recall context table linked to RESULTS; approximately 3–5

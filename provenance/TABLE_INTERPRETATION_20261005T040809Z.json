@@ -1,0 +1,247 @@
+{
+  "timestamp": "20261005T040809Z",
+  "inference_rerun": false,
+  "measured_values_changed": false,
+  "archives": [
+    {
+      "original": "YOLO_Large_Seg_MOTS20_Benchmark/RESULTS_SUMMARY_TH.md",
+      "archive": "YOLO_Large_Seg_MOTS20_Benchmark/reports/archive/RESULTS_SUMMARY_TH.md.pre-table-interpretation-20261005T040809Z.md",
+      "sha256": "a50c0c5b8ee5f4dd309c439ae99a53d6311b985ef85744a1d395f473a94cdb5f"
+    },
+    {
+      "original": "YOLO_Second_Largest_Seg_MOTS20_Benchmark/RESULTS_SUMMARY_TH.md",
+      "archive": "YOLO_Second_Largest_Seg_MOTS20_Benchmark/reports/archive/RESULTS_SUMMARY_TH.md.pre-table-interpretation-20261005T040809Z.md",
+      "sha256": "e0fbd159c2ceb0a79e04111bb7f8d912c70c3e9caf15d61ec439915eb1e341b1"
+    },
+    {
+      "original": "YOLO_Medium_Seg_MOTS20_Benchmark/RESULTS_SUMMARY_TH.md",
+      "archive": "YOLO_Medium_Seg_MOTS20_Benchmark/reports/archive/RESULTS_SUMMARY_TH.md.pre-table-interpretation-20261005T040809Z.md",
+      "sha256": "d4e44ff3f23e0dc7564199e32aca3cd618ba6bc2d12626c307e16ece8d688e26"
+    },
+    {
+      "original": "YOLO_Small_Seg_MOTS20_Benchmark/RESULTS_SUMMARY_TH.md",
+      "archive": "YOLO_Small_Seg_MOTS20_Benchmark/reports/archive/RESULTS_SUMMARY_TH.md.pre-table-interpretation-20261005T040809Z.md",
+      "sha256": "f45b21640cabb0cbcf24603d534ed33ab85d809a93c2a92cab0b8d9af6eea4ce"
+    },
+    {
+      "original": "YOLO_Nano_Seg_MOTS20_Benchmark/RESULTS_SUMMARY_TH.md",
+      "archive": "YOLO_Nano_Seg_MOTS20_Benchmark/reports/archive/RESULTS_SUMMARY_TH.md.pre-table-interpretation-20261005T040809Z.md",
+      "sha256": "05597a02660195a2e7e4836500215890439b59180cfe02831620df15bca4cb5a"
+    },
+    {
+      "original": "YOLO_Instance_Segmentation_MOTS20_Scaling_Study/templates/TIER_RESULTS_SUMMARY_TH_TEMPLATE.md",
+      "archive": "YOLO_Instance_Segmentation_MOTS20_Scaling_Study/reports/archive/TIER_RESULTS_SUMMARY_TH_TEMPLATE.md.pre-table-interpretation-20261005T040809Z.md",
+      "sha256": "dab74ae73a7787761e51573104ccc51e10160d2cdbd6d39c9936ba920011631f"
+    },
+    {
+      "original": "YOLO_Instance_Segmentation_MOTS20_Scaling_Study/STUDY_STANDARD.md",
+      "archive": "YOLO_Instance_Segmentation_MOTS20_Scaling_Study/reports/archive/STUDY_STANDARD.md.pre-table-interpretation-20261005T040809Z.md",
+      "sha256": "2adad18f54cf60dafa2c26eca2ca5f75a36d41170f7b53a27168c759e0cfe09e"
+    },
+    {
+      "original": "YOLO_Instance_Segmentation_MOTS20_Scaling_Study/templates/README.md",
+      "archive": "YOLO_Instance_Segmentation_MOTS20_Scaling_Study/reports/archive/README.md.pre-table-interpretation-20261005T040809Z.md",
+      "sha256": "864aa79aa00d825228ab3373bc2cdeff17489dfb85f4eabe16d6e8eba297af50"
+    },
+    {
+      "original": "YOLO_Instance_Segmentation_MOTS20_Scaling_Study/scripts/validate_documentation_redesign.py",
+      "archive": "YOLO_Instance_Segmentation_MOTS20_Scaling_Study/reports/archive/validate_documentation_redesign.py.pre-table-interpretation-20261005T040809Z.md",
+      "sha256": "802fca7f6344b19af1d3d2431297869b74e8dba73f38484965eb8b5a6cf217a2"
+    }
+  ],
+  "sources": {
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/TIER_RESULTS.csv": "8d4d273ad11661eea7d5c36788c6a59b2085e481604bc6be4bef6359e1093093",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/TIER_RESULTS.csv": "41d41b139038f3ce6d6c0cd1795be2839c102490bd9b18c7e2aaf936d99d1a01",
+    "YOLO_Medium_Seg_MOTS20_Benchmark/metrics/TIER_RESULTS.csv": "5e354e3d8d6fdef38f96b31dd03acbd7730549e8beac5c58929f128593d29b65",
+    "YOLO_Small_Seg_MOTS20_Benchmark/metrics/TIER_RESULTS.csv": "f614a982c5635d8d940c4f64bf278b8fda62b4392133fd248b89f60f99fd52e3",
+    "YOLO_Nano_Seg_MOTS20_Benchmark/metrics/TIER_RESULTS.csv": "f614a982c5635d8d940c4f64bf278b8fda62b4392133fd248b89f60f99fd52e3"
+  },
+  "numeric_claims": [
+    {
+      "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
+      "model": "YOLO26x-Seg",
+      "field": "recall",
+      "display": "84.63%"
+    },
+    {
+      "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
+      "model": "YOLO26x-Seg",
+      "field": "inference_ms_mean",
+      "display": "72.458"
+    },
+    {
+      "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
+      "model": "YOLO26x-Seg",
+      "field": "pipeline_ms_mean",
+      "display": "109.639"
+    },
+    {
+      "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
+      "model": "YOLO26x-Seg",
+      "field": "peak_allocated_vram_mib",
+      "display": "952.18"
+    },
+    {
+      "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
+      "model": "YOLO11x-Seg",
+      "field": "peak_allocated_vram_mib",
+      "display": "942.48"
+    },
+    {
+      "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
+      "model": "YOLOv9e-Seg",
+      "field": "inference_ms_mean",
+      "display": "65.888"
+    },
+    {
+      "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
+      "model": "YOLOv9e-Seg",
+      "field": "pipeline_ms_mean",
+      "display": "103.376"
+    },
+    {
+      "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
+      "model": "YOLOv9e-Seg",
+      "field": "peak_allocated_vram_mib",
+      "display": "855.41"
+    },
+    {
+      "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
+      "model": "YOLOv8x-Seg",
+      "field": "inference_ms_mean",
+      "display": "67.843"
+    },
+    {
+      "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
+      "model": "YOLOv8x-Seg",
+      "field": "pipeline_ms_mean",
+      "display": "109.441"
+    },
+    {
+      "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
+      "model": "YOLOv8x-Seg",
+      "field": "peak_allocated_vram_mib",
+      "display": "1001.13"
+    },
+    {
+      "repository": "YOLO_Second_Largest_Seg_MOTS20_Benchmark",
+      "model": "YOLO26l-Seg",
+      "field": "recall",
+      "display": "83.44%"
+    },
+    {
+      "repository": "YOLO_Second_Largest_Seg_MOTS20_Benchmark",
+      "model": "YOLO26l-Seg",
+      "field": "inference_ms_mean",
+      "display": "36.266"
+    },
+    {
+      "repository": "YOLO_Second_Largest_Seg_MOTS20_Benchmark",
+      "model": "YOLO26l-Seg",
+      "field": "pipeline_ms_mean",
+      "display": "76.403"
+    },
+    {
+      "repository": "YOLO_Second_Largest_Seg_MOTS20_Benchmark",
+      "model": "YOLO26l-Seg",
+      "field": "peak_allocated_vram_mib",
+      "display": "777.52"
+    },
+    {
+      "repository": "YOLO_Second_Largest_Seg_MOTS20_Benchmark",
+      "model": "YOLO11l-Seg",
+      "field": "inference_ms_mean",
+      "display": "35.387"
+    },
+    {
+      "repository": "YOLO_Second_Largest_Seg_MOTS20_Benchmark",
+      "model": "YOLOv9c-Seg",
+      "field": "inference_ms_mean",
+      "display": "35.293"
+    },
+    {
+      "repository": "YOLO_Second_Largest_Seg_MOTS20_Benchmark",
+      "model": "YOLOv9c-Seg",
+      "field": "pipeline_ms_mean",
+      "display": "76.921"
+    },
+    {
+      "repository": "YOLO_Second_Largest_Seg_MOTS20_Benchmark",
+      "model": "YOLOv9c-Seg",
+      "field": "peak_allocated_vram_mib",
+      "display": "838.49"
+    },
+    {
+      "repository": "YOLO_Second_Largest_Seg_MOTS20_Benchmark",
+      "model": "YOLOv8l-Seg",
+      "field": "inference_ms_mean",
+      "display": "40.090"
+    },
+    {
+      "repository": "YOLO_Second_Largest_Seg_MOTS20_Benchmark",
+      "model": "YOLOv8l-Seg",
+      "field": "pipeline_ms_mean",
+      "display": "83.558"
+    },
+    {
+      "repository": "YOLO_Second_Largest_Seg_MOTS20_Benchmark",
+      "model": "YOLOv8l-Seg",
+      "field": "peak_allocated_vram_mib",
+      "display": "855.27"
+    },
+    {
+      "repository": "YOLO_Medium_Seg_MOTS20_Benchmark",
+      "model": "YOLO26m-Seg",
+      "field": "recall",
+      "display": "81.53%"
+    },
+    {
+      "repository": "YOLO_Medium_Seg_MOTS20_Benchmark",
+      "model": "YOLO26m-Seg",
+      "field": "inference_ms_mean",
+      "display": "32.043"
+    },
+    {
+      "repository": "YOLO_Medium_Seg_MOTS20_Benchmark",
+      "model": "YOLO26m-Seg",
+      "field": "pipeline_ms_mean",
+      "display": "77.309"
+    },
+    {
+      "repository": "YOLO_Medium_Seg_MOTS20_Benchmark",
+      "model": "YOLO26m-Seg",
+      "field": "peak_allocated_vram_mib",
+      "display": "912.16"
+    },
+    {
+      "repository": "YOLO_Medium_Seg_MOTS20_Benchmark",
+      "model": "YOLO11m-Seg",
+      "field": "pipeline_ms_mean",
+      "display": "76.971"
+    },
+    {
+      "repository": "YOLO_Medium_Seg_MOTS20_Benchmark",
+      "model": "YOLO11m-Seg",
+      "field": "peak_allocated_vram_mib",
+      "display": "889.38"
+    },
+    {
+      "repository": "YOLO_Medium_Seg_MOTS20_Benchmark",
+      "model": "YOLOv8m-Seg",
+      "field": "inference_ms_mean",
+      "display": "27.232"
+    },
+    {
+      "repository": "YOLO_Medium_Seg_MOTS20_Benchmark",
+      "model": "YOLOv8m-Seg",
+      "field": "pipeline_ms_mean",
+      "display": "78.112"
+    },
+    {
+      "repository": "YOLO_Medium_Seg_MOTS20_Benchmark",
+      "model": "YOLOv8m-Seg",
+      "field": "peak_allocated_vram_mib",
+      "display": "1018.76"
+    }
+  ]
+}

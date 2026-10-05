@@ -32,19 +32,6 @@ assert manifests
 record=json.loads(manifests[-1].read_text())
 for p,h in record['measurement_hashes_before'].items():assert sha(ROOT/p)==h,p
 for archive in record['archives']:assert sha(ROOT/archive['archive'])==archive['sha256']
-interpretation_manifests=sorted((MASTER/'provenance').glob('TABLE_INTERPRETATION_*.json'))
-assert interpretation_manifests, 'Missing table interpretation provenance'
-interpretation_record=json.loads(interpretation_manifests[-1].read_text())
-for source,h in interpretation_record['sources'].items():assert sha(ROOT/source)==h,source
-for archive in interpretation_record['archives']:assert sha(ROOT/archive['archive'])==archive['sha256']
-for claim in interpretation_record['numeric_claims']:
-    d=ROOT/claim['repository']
-    source=next(x for x in rows(d/'metrics/TIER_RESULTS.csv') if x['model']==claim['model'])
-    field=claim['field']
-    expected=f"{100*float(source[field]):.2f}%" if field=='recall' else fmt(field,source[field])
-    assert claim['display']==expected,claim
-    section=text(d/'RESULTS_SUMMARY_TH.md').split('## สรุปผลจากตาราง\n',1)[1].split('\n## ',1)[0]
-    assert expected in section,(claim,'expected value absent from section')
 summary=[]
 for tier in ['Large','Second_Largest','Medium','Small','Nano']:
     d=ROOT/f'YOLO_{tier}_Seg_MOTS20_Benchmark'
@@ -59,23 +46,6 @@ for tier in ['Large','Second_Largest','Medium','Small','Nano']:
     assert '## แต่ละโมเดลเด่นด้านไหน' not in r
     assert '## 2. ผลรวมโมเดล' not in p
     assert not re.search(r'(?i)mentor|อาจารย์',p)
-    assert r.count('## สรุปผลจากตาราง')==1
-    interpretation=r.split('## สรุปผลจากตาราง\n',1)[1].split('\n## ',1)[0]
-    membership=json.loads((MASTER/'STUDY_STATE.json').read_text())['tiers']
-    tier_key={'Large':'largest','Second_Largest':'second_largest','Medium':'medium','Small':'small','Nano':'nano'}[tier]
-    if data:
-        assert membership[tier_key]['completion_status']=='COMPLETE'
-        assert re.findall(r'^### (.+)$',interpretation,re.M)==[x['model'] for x in data]
-        assert '[canonical CSV](metrics/TIER_RESULTS.csv)' in interpretation
-        assert 'TP-only' in interpretation
-        valid_values={fmt(k,x[k]) for x in data for k in result_fields+['ap50','tp_iou_mean','tp_dice_mean']}
-        valid_values.update(f"{100*float(x['recall']):.2f}%" for x in data)
-        quoted_values=set(re.findall(r'\d+\.\d+(?:%)?',interpretation))
-        assert quoted_values<=valid_values,(tier,'unsupported quoted numbers',quoted_values-valid_values)
-    else:
-        suffix='s' if tier=='Small' else 'n'
-        assert re.findall(r'^### (.+)$',interpretation,re.M)==[x+suffix+'-Seg' for x in ['YOLO26','YOLO11','YOLOv8']]
-        assert 'NOT_RUN' in interpretation
     if not data:
         assert 'NOT_RUN' in r and 'NOT_RUN' in p
         assert '![' not in p and '## Case ' not in p

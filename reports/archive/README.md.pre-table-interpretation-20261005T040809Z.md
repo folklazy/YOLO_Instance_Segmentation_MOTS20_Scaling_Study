@@ -4,10 +4,8 @@ Read STUDY_STANDARD.md and DATA_SCHEMA.md first. README provides navigation;
 REPORT remains the technical research record. The Thai documents have different roles:
 
 - RESULTS_SUMMARY_TH: compact quantitative summary; 5–8 overview bullets, one canonical table,
-  a per-model table interpretation (1–2 short paragraphs on strengths, actual trade-offs and
-  conditional candidates), six-category winners, 3–5 measured findings, concise speed/memory
-  trade-offs and cross-tier inputs. No detailed visual cases or repeated full tables. Cite canonical
-  CSV/REPORT for AP50/TP-only quality outside the compact table and explain the matching limitation.
+  six-category winners, 3–5 measured findings, concise speed/memory trade-offs and cross-tier inputs.
+  No per-model essays or detailed visual cases.
 - PRESENTATION_SUMMARY_TH: visual evidence and qualitative interpretation; one short overview,
   small context table, ~3–5 same-frame cases with observation → analysis → numeric connection,
   observed failures, near-tie check, 3–6 observation/interpretation findings and combined selection.
