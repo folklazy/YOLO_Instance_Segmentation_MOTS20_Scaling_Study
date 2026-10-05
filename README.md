@@ -1,6 +1,6 @@
 # YOLO Instance Segmentation MOTS20 Scaling Study
 
-Stage 0: study setup and historical standardization only. Largest, Second-largest and Medium are COMPLETE / PASS_WITH_WARNINGS; Small and Nano remain READY / NOT_RUN. The final 17-model synthesis is pending. This repository performs no model inference.
+Stage 0: study setup and historical standardization only. Largest, Second-largest, Medium and Small are COMPLETE / PASS_WITH_WARNINGS; Nano remains READY / NOT_RUN. The final 17-model synthesis is pending. This repository performs no model inference.
 
 ## Control files
 
@@ -27,8 +27,10 @@ Run `.venv/bin/python YOLO_Instance_Segmentation_MOTS20_Scaling_Study/scripts/va
 
 RESULTS_SUMMARY_TH.md gives the compact quantitative summary. PRESENTATION_SUMMARY_TH.md
 explains actual same-frame prediction behavior, observed failures and cautious interpretation.
-Largest, Second-largest and Medium have four diagnostic cases each; pending Small/Nano follow
-the new templates after all models finish. REPORT remains the technical record and links to visual analysis.
+Largest, Second-largest and Medium have four diagnostic cases each. Small follows the numerical
+RESULTS/PRESENTATION headings explicitly requested for its completed benchmark; its pinned layout
+snapshots are in configs/report_templates. Nano remains pending and follows the current qualitative
+templates after all its models finish. REPORT remains the technical record.
 Comparisons use original MOTS20 frames and saved RLE masks without inference or changed measurements.
 The selected comparison images embedded in the summaries and their small case-selection/evidence
 manifests are versioned. Other generated images and saved predictions remain local/ignored.
@@ -40,3 +42,9 @@ Validate the redesign with `.venv/bin/python YOLO_Instance_Segmentation_MOTS20_S
 from workspace root. The existing Stage 0 validator retains historical NOT_RUN assumptions for Medium.
 After publishing, add `--remote-images` to verify GitHub branch heads, image blob hashes and raw-image
 responses for every image embedded in the tier's top-level Markdown documents.
+
+Small completed run `benchmark-20261005T051531Z`: three checkpoints × 2,862 frames, AP maxDet200
+convergence PASS, nine clean timing rounds and scientific/document validation PASS. The documentation
+validator permits only formerly empty Small canonical CSV interfaces to receive these newly measured
+results; historical measurements in other tiers remain protected by their recorded hashes.
+Small is complete; STOP. Nano and final cross-tier synthesis require a new user instruction.

@@ -4,7 +4,7 @@
   "stage": "STAGE_0",
   "stage0_status": "PASS_WITH_WARNINGS",
   "stop_gate": "WAITING_FOR_USER_APPROVAL",
-  "last_verified": "2026-10-02T09:05:05.721891+00:00",
+  "last_verified": "2026-10-05T06:39:03.406197+00:00",
   "tiers": {
     "largest": {
       "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
@@ -35,12 +35,12 @@
     },
     "small": {
       "repository": "YOLO_Small_Seg_MOTS20_Benchmark",
-      "completion_status": "READY",
-      "result_status": "NOT_RUN",
-      "canonical_run_id": null,
+      "completion_status": "COMPLETE",
+      "result_status": "PASS_WITH_WARNINGS",
+      "canonical_run_id": "benchmark-20261005T051531Z",
       "standardized": true,
-      "last_verified": "2026-10-02T05:22:22.224075+00:00",
-      "notes": "Setup ready; checkpoint acquisition and per-tier preflight require explicit authorization."
+      "last_verified": "2026-10-05T06:39:03.406184+00:00",
+      "notes": "Small only: 3 models × 2862 frames; AP maxDet200 convergence PASS; 9 clean timing rounds; scientific/document validation PASS. No Nano execution. Explicit user-requested summary layouts."
     },
     "nano": {
       "repository": "YOLO_Nano_Seg_MOTS20_Benchmark",

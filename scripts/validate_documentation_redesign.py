@@ -27,15 +27,96 @@ categories=[('Mask mAP50-95','mask_map50_95',max,''),('AP75','ap75',max,''),('Re
             ('Inference speed','inference_ms_mean',min,' ms'),('Pipeline speed','pipeline_ms_mean',min,' ms'),
             ('VRAM','peak_allocated_vram_mib',min,' MiB')]
 def fmt(k,v):return f"{float(v):.{2 if k=='peak_allocated_vram_mib' else 3 if k in ['inference_ms_mean','pipeline_ms_mean','fps'] else 6}f}"
+
+# Small's latest explicit execution request pins numerical report layouts. It
+# overrides the earlier qualitative design for this tier, not its protocol.
+def completed_small():
+    d=ROOT/'YOLO_Small_Seg_MOTS20_Benchmark'
+    complete=d/'manifests/SMALL_COMPLETE.json'
+    return complete.exists() and json.loads(complete.read_text())['scientific_validation']=='PASS'
+
+def historical_measurement(path,expected):
+    actual=ROOT/path
+    if sha(actual)==expected:return
+    assert path.startswith('YOLO_Small_Seg_MOTS20_Benchmark/metrics/') and completed_small(),path
+    # Only allow an originally empty canonical interface to acquire new results.
+    # Existing measured values in completed tiers remain protected byte for byte.
+    header=actual.read_bytes().splitlines()[0]
+    assert expected in {hashlib.sha256(header+ending).hexdigest() for ending in [b'\n',b'\r\n']},path
+    assert rows(actual),path
+    transitioned_measurements.add(path)
+
+transitioned_measurements=set()
+def validate_small_user_profile(d,data,r,p):
+    setup=json.loads((d/'manifests/SMALL_SETUP.json').read_text())
+    assert setup['report_layout_override']=='Explicit latest user headings replace qualitative-layout template for Small only'
+    assert completed_small()
+    final=json.loads((d/'manifests/final_integrity.json').read_text())
+    assert final['status']=='PASS' and len(final['checks'])==15
+    assert all(x['status']=='PASS' for x in final['checks'])
+    assert final['frames_per_model']==2862 and final['gt_instances']==26894 and final['timing_clean_rounds']==9
+    assert [x['checkpoint'] for x in data]==['yolo26s-seg.pt','yolo11s-seg.pt','yolov8s-seg.pt']
+    assert all(x['frames']=='2862' and x['gt_instances']=='26894' for x in data)
+    record=json.loads((d/'manifests/DOCUMENT_VALIDATION.json').read_text())
+    assert record['status']=='PASS' and record['numeric_table_cells_verified']>0
+    for name,h in record['document_sha256'].items():assert sha(d/name)==h,name
+    for name,h in record['template_sha256'].items():assert sha(d/'configs/report_templates'/name)==h,name
+    for name in ['README','REPORT','RESULTS_SUMMARY_TH','PRESENTATION_SUMMARY_TH']:
+        template=text(d/'configs/report_templates'/f'TIER_{name}_TEMPLATE.md')
+        doc=text(d/(name+'.md'))
+        assert re.findall(r'^## .+$',doc,re.M)==re.findall(r'^## .+$',template,re.M),name
+        assert not re.search(r'(?i)mentor|อาจารย์|สรุปสำหรับคุยกับพี่',doc)
+    assert r.startswith('# สรุปผล Small YOLO Instance Segmentation\n') and p.startswith('# Small\n')
+    assert '## Case ' not in r and '![' not in r
+    bullets=r.split('## สรุปใน 1 นาที\n')[1].split('\n## ผลหลัก')[0]
+    assert 5<=sum(x.startswith('- ') for x in bullets.splitlines())<=8
+    assert re.findall(r'^### (YOLO.+)$',p,re.M)==[x['model'] for x in data]
+    review=json.loads((d/'manifests/FINAL_DOCUMENT_REVIEW.json').read_text())
+    assert review['status']=='PASS' and review['measurements_changed'] is False and review['inference_run'] is False
+    for path,h in review['canonical_metrics_sha256'].items():assert sha(d/path)==h,path
+    for claim in review['numeric_claims']:
+        source=next(x for x in rows(d/claim['source']) if x['model']==claim['model'] and ('stage' not in claim or x['stage']==claim['stage']))
+        value=float(source[claim['field']])*(100 if claim['percent'] else 1)
+        display=f"{value:.{claim['decimals']}f}"+('%' if claim['percent'] else '')
+        assert display==claim['display'],claim
+    # Canonical values are independently compared to their measured sources.
+    std=json.loads((d/'manifests/STANDARDIZATION.json').read_text())
+    for path,h in std['source_artifact_sha256'].items():assert sha(d/path)==h,path
+    run=std['source_run_ids'][0]
+    accuracy={x['model']:x for x in rows(d/f'metrics/{run}/per_model.csv')}
+    timing={x['model']:x for x in rows(d/f'timing/{run}/clean_repetition/summary.csv')}
+    mapping={'mask_map50_95':'map50_95','tp_iou_mean':'matched_iou_mean','tp_dice_mean':'matched_dice_mean'}
+    for row in data:
+        measured=accuracy[row['checkpoint']];timed=timing[row['checkpoint']]
+        for key in ['mask_map50_95','ap50','ap75','precision','recall','f1','tp_iou_mean','tp_dice_mean']:
+            assert row[key]==measured[mapping.get(key,key)],key
+        for key,source in [('inference_ms_mean','inference_ms_mean'),('pipeline_ms_mean','total_ms_mean'),('fps','fps'),('peak_allocated_vram_mib','peak_gpu_allocated_mib')]:
+            assert row[key]==timed[source],key
+    # Verify actual table cells rather than treating a PASS manifest as sufficient.
+    fields={'Mask mAP50-95':'mask_map50_95','AP50':'ap50','AP75':'ap75','Precision':'precision','Recall':'recall','F1':'f1','TP-only IoU':'tp_iou_mean','TP-only Dice':'tp_dice_mean','Inference ms':'inference_ms_mean','Pipeline ms':'pipeline_ms_mean','FPS':'fps','Peak VRAM MiB':'peak_allocated_vram_mib','Peak VRAM allocated (MiB)':'peak_allocated_vram_mib','Params':'parameters','Parameters':'parameters','GFLOPs':'gflops','Checkpoint MB':'checkpoint_mb'}
+    for name in record['document_sha256']:
+        header=None
+        for line in text(d/name).splitlines():
+            if not line.startswith('|'):header=None;continue
+            cells=[v.strip() for v in line.strip('|').split('|')]
+            if 'Model' in cells and any(x in cells for x in ['Mask mAP50-95','Parameters']):header=cells;continue
+            if header is None or all(re.fullmatch('[-:]+',x) for x in cells):continue
+            row=next(x for x in data if x['model']==cells[header.index('Model')])
+            for title,value in zip(header,cells):
+                if title not in fields:continue
+                key=fields[title]
+                expected=f"{int(row[key]):,}" if key=='parameters' else f"{float(row[key]):.{3 if key in ['inference_ms_mean','pipeline_ms_mean','fps','gflops'] else 2 if key in ['peak_allocated_vram_mib','checkpoint_mb'] else 6}f}"
+                assert value==expected,(name,title,value,expected)
+
 manifests=sorted((MASTER/'provenance').glob('DOCUMENTATION_REDESIGN_*.json'))
 assert manifests
 record=json.loads(manifests[-1].read_text())
-for p,h in record['measurement_hashes_before'].items():assert sha(ROOT/p)==h,p
+for p,h in record['measurement_hashes_before'].items():historical_measurement(p,h)
 for archive in record['archives']:assert sha(ROOT/archive['archive'])==archive['sha256']
 interpretation_manifests=sorted((MASTER/'provenance').glob('TABLE_INTERPRETATION_*.json'))
 assert interpretation_manifests, 'Missing table interpretation provenance'
 interpretation_record=json.loads(interpretation_manifests[-1].read_text())
-for source,h in interpretation_record['sources'].items():assert sha(ROOT/source)==h,source
+for source,h in interpretation_record['sources'].items():historical_measurement(source,h)
 for archive in interpretation_record['archives']:assert sha(ROOT/archive['archive'])==archive['sha256']
 for claim in interpretation_record['numeric_claims']:
     d=ROOT/claim['repository']
@@ -53,6 +134,10 @@ for tier in ['Large','Second_Largest','Medium','Small','Nano']:
     for doc in ['RESULTS_SUMMARY_TH.md','PRESENTATION_SUMMARY_TH.md','REPORT.md']:
         for link in re.findall(r'\]\(([^)]+)\)',text(d/doc)):
             if not re.match(r'https?://|#',link):assert (d/link.split('#')[0]).exists(),(tier,doc,link)
+    if tier=='Small' and data and completed_small():
+        validate_small_user_profile(d,data,r,p)
+        summary.append({'tier':tier,'status':'PASS','cases':0,'profile':'explicit-user-numerical-layout'})
+        continue
     assert '## Failure Analysis' in p and '## Near-tie visual check' in p
     assert '## เมื่อดูทั้งตัวเลขและภาพร่วมกัน' in p
     assert '## Case ' not in r and '![' not in r
@@ -168,7 +253,8 @@ for tier in ['Large','Second_Largest','Medium','Small','Nano']:
                 assert response.read(8)==b'\x89PNG\r\n\x1a\n',(url,'not a PNG response')
                 item.update(remote_blob_matches=True,http_status=response.status,content_type='image/png')
         published_images.append(item)
-print(json.dumps({'documentation_status':'PASS','tiers':summary,'measurement_files_unchanged':len(record['measurement_hashes_before']),
-                  'inference_rerun':False,'measured_values_changed':False,
+print(json.dumps({'documentation_status':'PASS','tiers':summary,'measurement_files_unchanged':len(record['measurement_hashes_before'])-len(set(record['measurement_hashes_before']) & transitioned_measurements),
+                  'inference_rerun':False,'existing_measured_values_changed':False,
+                  'new_small_benchmark_interfaces':sorted(transitioned_measurements),
                   'embedded_images_checked':len(published_images),'remote_images_checked':args.remote_images,
                   'images':published_images},ensure_ascii=False,indent=2))

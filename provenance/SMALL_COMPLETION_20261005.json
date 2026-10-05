@@ -1,0 +1,59 @@
+{
+  "small_run": "benchmark-20261005T051531Z",
+  "scientific_validation": "PASS",
+  "documentation_validation": "PASS",
+  "small_profile": "Explicit latest user numerical headings",
+  "results": {
+    "timestamp": "2026-10-05T06:39:03.406787+00:00",
+    "status": "PASS_WITH_WARNINGS",
+    "run_id": "benchmark-20261005T051531Z",
+    "scientific_validation": "PASS",
+    "document_validation": "PASS",
+    "nano_started": false
+  },
+  "validation_summary": {
+    "documentation_status": "PASS",
+    "tiers": [
+      {
+        "tier": "Large",
+        "status": "PASS",
+        "cases": 4
+      },
+      {
+        "tier": "Second_Largest",
+        "status": "PASS",
+        "cases": 4
+      },
+      {
+        "tier": "Medium",
+        "status": "PASS",
+        "cases": 4
+      },
+      {
+        "tier": "Small",
+        "status": "PASS",
+        "cases": 0,
+        "profile": "explicit-user-numerical-layout"
+      },
+      {
+        "tier": "Nano",
+        "status": "NOT_RUN",
+        "cases": 0
+      }
+    ],
+    "measurement_files_unchanged": 158,
+    "inference_rerun": false,
+    "existing_measured_values_changed": false,
+    "new_small_benchmark_interfaces": [
+      "YOLO_Small_Seg_MOTS20_Benchmark/metrics/MODEL_COMPLEXITY.csv",
+      "YOLO_Small_Seg_MOTS20_Benchmark/metrics/PER_SEQUENCE_RESULTS.csv",
+      "YOLO_Small_Seg_MOTS20_Benchmark/metrics/PREFLIGHT_MAXDET.csv",
+      "YOLO_Small_Seg_MOTS20_Benchmark/metrics/TIER_RESULTS.csv",
+      "YOLO_Small_Seg_MOTS20_Benchmark/metrics/TIMING_SUMMARY.csv"
+    ],
+    "embedded_images_checked": 23,
+    "remote_images_checked": false
+  },
+  "nano_status": "READY / NOT_RUN",
+  "stop": "SMALL COMPLETE — WAITING FOR USER APPROVAL"
+}
