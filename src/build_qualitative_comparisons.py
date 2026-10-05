@@ -21,7 +21,7 @@ sys.path.insert(0, str(BASE))
 from mots import load_frames
 from metrics import CompactPrediction, fixed_metrics
 
-TIERS = ['Large', 'Second_Largest', 'Medium', 'Small']
+TIERS = ['Large', 'Second_Largest', 'Medium', 'Small', 'Nano']
 PALETTE = [(50,220,90),(40,170,255),(255,210,50),(220,100,255),(255,140,60),(70,240,220)]
 
 def sha(path):
@@ -54,6 +54,10 @@ def build(tier):
     cases=[('MOTS20-02',300,'additional valid instances') if tier=='Small' else ('MOTS20-05',419,'additional valid instance'),('MOTS20-09',263,'shared misses and false positives'),
            ('MOTS20-02',600 if tier in ['Large','Small'] else 1,'counterexample / detection trade-off'),
            ('MOTS20-09',1,'similar outputs / near-tie check')]
+    if tier=='Nano':
+        selection=json.loads((d/'manifests/qualitative_case_selection.json').read_text())
+        assert len(selection)==4
+        cases=[(x['sequence'],x['frame'],x['reason']) for x in selection]
     out=d/'outputs/visualizations/qualitative'
     out.mkdir(parents=True,exist_ok=True)
     evidence={'tier':tier,'run_id':run,'inference_rerun':False,'benchmark_values_changed':False,

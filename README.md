@@ -1,6 +1,6 @@
 # YOLO Instance Segmentation MOTS20 Scaling Study
 
-Stage 0: study setup and historical standardization only. Largest, Second-largest, Medium and Small are COMPLETE / PASS_WITH_WARNINGS; Nano remains READY / NOT_RUN. The final 17-model synthesis is pending. This repository performs no model inference.
+Stage 0: study setup and historical standardization only. Largest, Second-largest, Medium, Small and Nano are COMPLETE / PASS_WITH_WARNINGS. The final 17-model synthesis is pending. This repository performs no model inference.
 
 ## Control files
 
@@ -27,10 +27,9 @@ Run `.venv/bin/python YOLO_Instance_Segmentation_MOTS20_Scaling_Study/scripts/va
 
 RESULTS_SUMMARY_TH.md gives the compact quantitative summary. PRESENTATION_SUMMARY_TH.md
 explains actual same-frame prediction behavior, observed failures and cautious interpretation.
-Largest, Second-largest, Medium and Small have four diagnostic cases each. Small now follows
+All five tiers have four diagnostic cases each. Small now follows
 the shared visual presentation format after the latest user-requested alignment; its benchmark-time
-numerical presentation is archived. Nano remains pending and follows the current templates after
-all its models finish. REPORT remains the technical record and links to visual analysis.
+numerical presentation is archived. Nano follows the current quantitative/visual templates after all three models finished. REPORT remains the technical record and links to visual analysis.
 Comparisons use original MOTS20 frames and saved RLE masks without inference or changed measurements.
 The selected comparison images embedded in the summaries and their small case-selection/evidence
 manifests are versioned. Other generated images and saved predictions remain local/ignored.
@@ -45,6 +44,6 @@ responses for every image embedded in the tier's top-level Markdown documents.
 
 Small completed run `benchmark-20261005T051531Z`: three checkpoints × 2,862 frames, AP maxDet200
 convergence PASS, nine clean timing rounds and scientific/document validation PASS. The documentation
-validator permits only formerly empty Small canonical CSV interfaces to receive these newly measured
+validator permits only formerly empty Small/Nano canonical CSV interfaces to receive these newly measured
 results; historical measurements in other tiers remain protected by their recorded hashes.
-Small is complete; STOP. Nano and final cross-tier synthesis require a new user instruction.
+Nano completed run `benchmark-20261005T083307Z`: three checkpoints × 2,862 frames, maxDet200 convergence PASS, nine CLEAN timing rounds and scientific/document validation PASS. Four inspected same-frame cases are versioned. All tiers are complete; STOP. Final cross-tier synthesis requires a new user instruction.

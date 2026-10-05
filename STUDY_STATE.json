@@ -4,7 +4,7 @@
   "stage": "STAGE_0",
   "stage0_status": "PASS_WITH_WARNINGS",
   "stop_gate": "WAITING_FOR_USER_APPROVAL",
-  "last_verified": "2026-10-05T06:39:03.406197+00:00",
+  "last_verified": "2026-10-05T10:18:52.467186+00:00",
   "tiers": {
     "largest": {
       "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
@@ -44,12 +44,12 @@
     },
     "nano": {
       "repository": "YOLO_Nano_Seg_MOTS20_Benchmark",
-      "completion_status": "READY",
-      "result_status": "NOT_RUN",
-      "canonical_run_id": null,
+      "completion_status": "COMPLETE",
+      "result_status": "PASS_WITH_WARNINGS",
+      "canonical_run_id": "benchmark-20261005T083307Z",
       "standardized": true,
-      "last_verified": "2026-10-02T05:22:22.224075+00:00",
-      "notes": "Setup ready; checkpoint acquisition and per-tier preflight require explicit authorization."
+      "last_verified": "2026-10-05T10:18:52.467186+00:00",
+      "notes": "Nano only: 3 models × 2862 frames; AP maxDet200 convergence PASS; 9 CLEAN timing rounds; scientific/document validation PASS; four inspected saved-prediction qualitative cases. No final master synthesis."
     },
     "master": {
       "repository": "YOLO_Instance_Segmentation_MOTS20_Scaling_Study",

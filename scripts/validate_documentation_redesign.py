@@ -36,11 +36,19 @@ def completed_small():
     complete=d/'manifests/SMALL_COMPLETE.json'
     return complete.exists() and json.loads(complete.read_text())['scientific_validation']=='PASS'
 
+def completed_nano():
+    d=ROOT/'YOLO_Nano_Seg_MOTS20_Benchmark'
+    complete=d/'manifests/NANO_COMPLETE.json'
+    if not complete.exists():return False
+    status=json.loads(complete.read_text())
+    return status['scientific_validation']=='PASS' and status['document_validation']=='PASS'
+
 def historical_measurement(path,expected):
     actual=ROOT/path
     if sha(actual)==expected:return
-    assert path.startswith('YOLO_Small_Seg_MOTS20_Benchmark/metrics/') and completed_small(),path
-    # Only allow an originally empty canonical interface to acquire new results.
+    assert ((path.startswith('YOLO_Small_Seg_MOTS20_Benchmark/metrics/') and completed_small()) or
+            (path.startswith('YOLO_Nano_Seg_MOTS20_Benchmark/metrics/') and completed_nano())),path
+    # Only allow an originally empty Small/Nano interface to acquire new results.
     # Existing measured values in completed tiers remain protected byte for byte.
     header=actual.read_bytes().splitlines()[0]
     assert expected in {hashlib.sha256(header+ending).hexdigest() for ending in [b'\n',b'\r\n']},path
@@ -197,7 +205,7 @@ for tier in ['Large','Second_Largest','Medium','Small','Nano']:
         assert re.findall(r'^### (.+)$',interpretation,re.M)==[x['model'] for x in data]
         assert '[canonical CSV](metrics/TIER_RESULTS.csv)' in interpretation
         assert 'TP-only' in interpretation
-        valid_values={fmt(k,x[k]) for x in data for k in result_fields+['ap50','tp_iou_mean','tp_dice_mean']}
+        valid_values={fmt(k,x[k]) for x in data for k in result_fields+['ap50','precision','f1','tp_iou_mean','tp_dice_mean']}
         valid_values.update(f"{100*float(x['recall']):.2f}%" for x in data)
         quoted_values=set(re.findall(r'\d+\.\d+(?:%)?',interpretation))
         assert quoted_values<=valid_values,(tier,'unsupported quoted numbers',quoted_values-valid_values)
@@ -278,6 +286,6 @@ for tier in ['Large','Second_Largest','Medium','Small','Nano']:
         published_images.append(item)
 print(json.dumps({'documentation_status':'PASS','tiers':summary,'measurement_files_unchanged':len(record['measurement_hashes_before'])-len(set(record['measurement_hashes_before']) & transitioned_measurements),
                   'inference_rerun':False,'existing_measured_values_changed':False,
-                  'new_small_benchmark_interfaces':sorted(transitioned_measurements),
+                  'new_benchmark_interfaces':sorted(transitioned_measurements),
                   'embedded_images_checked':len(published_images),'remote_images_checked':args.remote_images,
                   'images':published_images},ensure_ascii=False,indent=2))
