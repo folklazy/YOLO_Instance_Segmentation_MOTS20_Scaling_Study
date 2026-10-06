@@ -26,11 +26,3 @@ Dataset, frame order and native dimensions affect workload; preprocessing, input
 | MOTS20-11 | 900 | 1920×1080 | 8,511 | 900 |
 
 Total 2,862 frames and 26,894 Person frame-level instances. The same person in multiple frames contributes multiple annotations. Canonical GT is the bundled sequence gt/gt.txt only. [Dataset compatibility evidence](provenance/DATASET_VALIDATION.json): PASS.
-
-## Master synthesis methodology
-
-The 17-model synthesis imports the five completed canonical tier interfaces. It checks schema identity, expected checkpoint membership, frozen config equality except checkpoint membership, evaluator/preprocessing hashes, ordered dataset identity, GT hashes, frozen timing/preflight lists, environment equality and clean timing coverage. Canonical accuracy/timing cells are compared to their preserved structured sources. Raw predictions, prediction metadata and model weights are not opened, and no model runtime is imported.
-
-Master results retain original numerical strings. Adjacent size deltas use smaller minus larger within each family; relative changes use the larger value as denominator. Pareto analysis uses strict two-objective dominance independently for mAP/inference and mAP/allocated VRAM. Display rounding does not affect membership. The near-tie screen is descriptive, with an absolute mAP threshold of 0.001; no resampling or statistical test is claimed.
-
-All tier measurements share one frozen protocol and Tesla T4 environment, but were collected in separate benchmark sessions. Clean repetitions control contamination without eliminating all session variation. Native-mask postprocessing depends on output workload and image resolution, so smaller checkpoints can have higher pipeline latency or allocated VRAM. This is an interpretation of measured stage trends, not a causal experiment. Pipeline FPS excludes RLE preparation and output writing. See [METRIC_GUIDE_TH.md](METRIC_GUIDE_TH.md) for interpretation and [SOURCE_MANIFEST.json](provenance/SOURCE_MANIFEST.json) for exact provenance.

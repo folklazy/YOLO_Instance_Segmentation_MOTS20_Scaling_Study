@@ -1,10 +1,10 @@
 {
   "study_id": "yolo_instance_segmentation_mots20_scaling",
   "schema_version": "1.0",
-  "stage": "MASTER_SYNTHESIS",
+  "stage": "STAGE_0",
   "stage0_status": "PASS_WITH_WARNINGS",
-  "stop_gate": "17_MODEL_MASTER_STUDY_COMPLETE",
-  "last_verified": "2026-10-06T08:38:41.482006+00:00",
+  "stop_gate": "WAITING_FOR_USER_APPROVAL",
+  "last_verified": "2026-10-05T10:18:52.467186+00:00",
   "tiers": {
     "largest": {
       "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
@@ -53,12 +53,12 @@
     },
     "master": {
       "repository": "YOLO_Instance_Segmentation_MOTS20_Scaling_Study",
-      "completion_status": "COMPLETE",
-      "result_status": "PASS_WITH_WARNINGS",
-      "canonical_run_id": "master-synthesis-20261006T082203",
+      "completion_status": "PENDING",
+      "result_status": "NOT_RUN",
+      "canonical_run_id": null,
       "standardized": true,
-      "last_verified": "2026-10-06T08:38:41.482006+00:00",
-      "notes": "Explicitly authorized 17-model CSV-only synthesis. Five compatible complete tiers; 13 adjacent scaling pairs; strict accuracy/inference and accuracy/VRAM Pareto fronts; complete scientific/document validation. No inference, tier rerun or raw prediction access. STOP."
+      "last_verified": "2026-10-02T05:22:22.224075+00:00",
+      "notes": "Control files complete; final 17-model synthesis not built."
     }
   }
 }

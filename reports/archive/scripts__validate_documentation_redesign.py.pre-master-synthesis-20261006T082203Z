@@ -17,7 +17,6 @@ import numpy as np
 ROOT=Path(__file__).resolve().parents[2]
 MASTER=Path(__file__).resolve().parents[1]
 parser=argparse.ArgumentParser(description=__doc__)
-parser.add_argument('--documents-only',action='store_true',help='Verify docs, CSVs and preserved evidence without opening saved predictions')
 parser.add_argument('--remote-images',action='store_true',help='Check published GitHub heads, image blobs and HTTP responses')
 args=parser.parse_args()
 def sha(p):return hashlib.sha256(p.read_bytes()).hexdigest()
@@ -36,30 +35,10 @@ def fmt(k,v):return f"{float(v):.{2 if k=='peak_allocated_vram_mib' else 3 if k 
 # This manifest cannot authorize a measurement or frozen-protocol change.
 language_manifests=sorted((MASTER/'provenance').glob('DOCUMENT_LANGUAGE_BY_ROLE_*.json'))
 language_record=json.loads(language_manifests[-1].read_text()) if language_manifests else None
-master_source=MASTER/'provenance/SOURCE_MANIFEST.json'
-master_record=json.loads(master_source.read_text()) if master_source.exists() else None
 
 def protected_artifact(path,expected):
     actual=ROOT/path
     if sha(actual)==expected:return
-    # The explicitly authorized Master stage may archive its control documents
-    # and update its own completion state. Tier data never enter this exception.
-    permitted={'README.md','STUDY_STANDARD.md','STUDY_STATE.json','DATA_SCHEMA.md',
-               'METHODOLOGY_REFERENCE.md','DOCUMENTATION_LANGUAGE_POLICY.md',
-               'scripts/validate_documentation_redesign.py'}
-    prefix=MASTER.name+'/'
-    if master_record is not None and path.startswith(prefix) and path[len(prefix):] in permitted:
-        revision=next(x for x in master_record['editorial_revisions'] if x['path']==path)
-        assert sha(actual)==revision['after_sha256'],path
-        assert sha(ROOT/revision['archive'])==revision['before_sha256'],path
-        if expected!=revision['before_sha256']:
-            prior=next(x for x in language_record['documents'] if x['path']==path)
-            assert prior['after_sha256']==revision['before_sha256'],path
-            snapshot=next(x for x in prior['snapshots'] if x['sha256']==expected)
-            assert sha(ROOT/snapshot['path'])==expected,path
-        assert master_record['synthesis_only'] is True
-        assert master_record['inference_rerun'] is False and master_record['measured_values_changed'] is False
-        return
     assert actual.suffix=='.md' and language_record is not None,path
     revision=next(x for x in language_record['documents'] if x['path']==path)
     assert sha(actual)==revision['after_sha256'],path
@@ -78,9 +57,9 @@ def validate_document_language():
     assert language_record['inference_rerun'] is False and language_record['measured_values_changed'] is False
     assert language_record['metrics_recalculated'] is False
     for path,h in language_record['immutable_artifact_sha256'].items():
-        protected_artifact(path,h)
+        assert sha(ROOT/path)==h,('changed protected artifact',path)
     for revision in language_record['documents']:
-        protected_artifact(revision['path'],revision['after_sha256'])
+        assert sha(ROOT/revision['path'])==revision['after_sha256'],revision['path']
         for snapshot in revision['snapshots']:
             assert sha(ROOT/snapshot['path'])==snapshot['sha256'],snapshot['path']
         if revision['before_sha256'] is not None:
@@ -94,10 +73,8 @@ def validate_document_language():
         tracked=subprocess.check_output(['git','-C',str(d),'ls-files','*.md'],text=True).splitlines()
         if d==MASTER:tracked.append('DOCUMENTATION_LANGUAGE_POLICY.md')
         actual.update(str((d/f).relative_to(ROOT)) for f in tracked if not historical(Path(f)))
-    inventory=master_record['active_markdown'] if master_record and 'active_markdown' in master_record else language_record['active_markdown']
-    actual.update(x['path'] for x in inventory if (ROOT/x['path']).is_file() and x['path'].startswith(MASTER.name+'/'))
-    assert actual=={x['path'] for x in inventory},'Active Markdown inventory changed'
-    for item in inventory:
+    assert actual=={x['path'] for x in language_record['active_markdown']},'Active Markdown inventory changed'
+    for item in language_record['active_markdown']:
         content=(ROOT/item['path']).read_text()
         if item['role']=='english_technical':
             assert not re.search('[ก-๙]',content),('Thai prose in English technical document',item['path'])
@@ -280,9 +257,7 @@ def validate_small_completed_artifacts(d,data,r,p):
         assert display==claim['display'],claim
     # Canonical values are independently compared to their measured sources.
     std=json.loads((d/'manifests/STANDARDIZATION.json').read_text())
-    for path,h in std['source_artifact_sha256'].items():
-        if args.documents_only and ('predictions' in Path(path).parts or 'prediction_hashes' in path):continue
-        assert sha(d/path)==h,path
+    for path,h in std['source_artifact_sha256'].items():assert sha(d/path)==h,path
     run=std['source_run_ids'][0]
     accuracy={x['model']:x for x in rows(d/f'metrics/{run}/per_model.csv')}
     timing={x['model']:x for x in rows(d/f'timing/{run}/clean_repetition/summary.csv')}
@@ -523,14 +498,7 @@ for tier in ['Large','Second_Largest','Medium','Small','Nano']:
     for actual,(title,k,fn,unit) in zip(winner[2:],categories):
         w=fn(data,key=lambda x:float(x[k]));assert actual==[title,w['model'],fmt(k,w[k])+unit]
     validate_report(d,data)
-    if args.documents_only:
-        audit=json.loads(active_evidence(d,'case_decision_audit').read_text())
-        assert audit['presentation_sha256']==sha(d/'PRESENTATION_SUMMARY_TH.md')
-        assert audit['focus_evidence_sha256']==sha(active_evidence(d,'focus_evidence'))
-        # Native saved-mask review remains preserved, not rerun by synthesis.
-        assert audit['status']=='PASS_WITH_LIMITATIONS' and audit['cases_inspected']==4
-    else:
-        validate_qualitative(d,data,p)
+    validate_qualitative(d,data,p)
     summary.append({'tier':tier,'status':'PASS','cases':4})
 for name in ['TIER_RESULTS_SUMMARY_TH_TEMPLATE.md','TIER_PRESENTATION_SUMMARY_TH_TEMPLATE.md']:
     template=text(MASTER/'templates'/name)
@@ -585,10 +553,10 @@ for tier in ['Large','Second_Largest','Medium','Small','Nano']:
                 assert response.read(8)==b'\x89PNG\r\n\x1a\n',(url,'not a PNG response')
                 item.update(remote_blob_matches=True,http_status=response.status,content_type='image/png')
         published_images.append(item)
-print(json.dumps({'documentation_status':'PASS','active_markdown_checked':len(master_record['active_markdown'] if master_record and 'active_markdown' in master_record else language_record['active_markdown']),
+print(json.dumps({'documentation_status':'PASS','active_markdown_checked':len(language_record['active_markdown']),
                   'language_policy':'English technical / Thai summaries','report_numeric_table_cells_verified':language_record['report_numeric_table_cells_verified'],
                   'immutable_artifacts_checked':len(language_record['immutable_artifact_sha256']),'tiers':summary,'measurement_files_unchanged':len(record['measurement_hashes_before'])-len(set(record['measurement_hashes_before']) & transitioned_measurements),
-                  'inference_rerun':False,'existing_measured_values_changed':False,'saved_predictions_opened':not args.documents_only,
+                  'inference_rerun':False,'existing_measured_values_changed':False,
                   'new_benchmark_interfaces':sorted(transitioned_measurements),
                   'embedded_images_checked':len(published_images),'remote_images_checked':args.remote_images,
                   'images':published_images},ensure_ascii=False,indent=2))

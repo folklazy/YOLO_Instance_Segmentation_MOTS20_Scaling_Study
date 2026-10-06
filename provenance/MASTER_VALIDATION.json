@@ -1,0 +1,60 @@
+{
+  "status": "PASS_WITH_WARNINGS",
+  "models": 17,
+  "family_counts": {
+    "YOLO26": 5,
+    "YOLO11": 5,
+    "YOLOv9": 2,
+    "YOLOv8": 5
+  },
+  "per_sequence_rows": 68,
+  "scaling_pairs": 13,
+  "scaling_metric_rows": 143,
+  "pareto_latency_models": [
+    "YOLO26x-Seg",
+    "YOLO26l-Seg",
+    "YOLO26m-Seg",
+    "YOLO26s-Seg",
+    "YOLO11s-Seg",
+    "YOLOv8s-Seg",
+    "YOLO26n-Seg",
+    "YOLO11n-Seg",
+    "YOLOv8n-Seg"
+  ],
+  "pareto_vram_models": [
+    "YOLO26x-Seg",
+    "YOLO26l-Seg"
+  ],
+  "inference_rerun": false,
+  "tier_benchmarks_rerun": false,
+  "measured_values_changed": false,
+  "checks": "PASS",
+  "documents": 8,
+  "document_value_claims": 806,
+  "main_table_numeric_cells": 153,
+  "plots": 10,
+  "source_provenance": "PASS",
+  "schema_units": "PASS",
+  "scaling_math": "PASS",
+  "pareto_math": "PASS",
+  "summary_values": "PASS",
+  "language_and_sections": "PASS",
+  "tier_states_unchanged": true,
+  "raw_predictions_opened": false,
+  "no_mentor_specific_section": true,
+  "master_state_checked": true,
+  "timestamp_utc": "2026-10-06T08:38:41.482006+00:00",
+  "unit_tests": "PASS (6 tests)",
+  "tier_document_validation": "PASS (documents-only)",
+  "active_markdown_checked": 67,
+  "source_manifest_sha256": "00e7498800d57b131209897905f46f0b1f8bd8db65bab339eef904d615be6955",
+  "stop_gate": "17_MODEL_MASTER_STUDY_COMPLETE",
+  "warnings": [
+    "All five source tiers retain PASS_WITH_WARNINGS.",
+    "Largest superseded contaminated timing excluded; only clean_repetition sources imported.",
+    "No statistical significance test; correlated video frames.",
+    "E/X and C/L are available size categories, not equal capacities.",
+    "VRAM and pipeline need not scale monotonically with parameter count.",
+    "Raw predictions and prediction metadata were not opened; their declared hashes remain upstream evidence."
+  ]
+}

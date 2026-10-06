@@ -5,7 +5,7 @@ Language is determined by a file's purpose, not by the model tier.
 
 | File role | Language | Applies to |
 |---|---|---|
-| Technical research record | English | REPORT.md, MASTER_RESULTS.md and TIER_REPORT_TEMPLATE.md |
+| Technical research record | English | REPORT.md and TIER_REPORT_TEMPLATE.md |
 | Navigation and technical instructions | English | README.md, EXPERIMENT_PROTOCOL.md, STUDY_STANDARD.md, DATA_SCHEMA.md, METHODOLOGY_REFERENCE.md, supporting configs/metrics/src READMEs and plots/INDEX.md |
 | Active qualitative selection ledger | English | outputs/visualizations/qualitative/selection_v2/CASE_SELECTION.md |
 | Quantitative summary | Thai prose | RESULTS_SUMMARY_TH.md and its template |
@@ -31,7 +31,3 @@ Run scripts/validate_documentation_redesign.py from the workspace as documented 
 It checks the active Markdown inventory, rejects Thai in English technical documents, checks
 shared report headings and numerical tables against canonical CSVs, resolves current evidence
 links, and verifies immutable benchmark artifacts and archived document snapshots.
-
-## Completed Master synthesis
-
-The Master technical report MASTER_RESULTS.md uses English. RESEARCH_INSIGHTS_TH.md, EXECUTIVE_SUMMARY_TH.md, MEETING_SUMMARY_TH.md and METRIC_GUIDE_TH.md use Thai prose, retaining canonical model/metric names. The meeting summary is neutral and reusable. The Master extends the current active-document inventory through SOURCE_MANIFEST.json while preserving the earlier language audit and archived control files.
