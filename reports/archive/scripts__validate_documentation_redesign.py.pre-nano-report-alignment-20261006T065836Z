@@ -31,90 +31,6 @@ categories=[('Mask mAP50-95','mask_map50_95',max,''),('AP75','ap75',max,''),('Re
             ('VRAM','peak_allocated_vram_mib',min,' MiB')]
 def fmt(k,v):return f"{float(v):.{2 if k=='peak_allocated_vram_mib' else 3 if k in ['inference_ms_mean','pipeline_ms_mean','fps'] else 6}f}"
 
-def protected_artifact(path,expected):
-    actual=ROOT/path
-    if sha(actual)==expected:return
-    # A later authorized editorial revision may archive a report. Historical
-    # hashes stay intact; this exception never permits changing measurements.
-    assert path=='YOLO_Nano_Seg_MOTS20_Benchmark/REPORT.md',path
-    d=actual.parent
-    alignment=json.loads((d/'manifests/REPORT_ALIGNMENT.json').read_text())
-    assert alignment['status']=='PASS'
-    assert alignment['report_before_sha256']==expected
-    assert alignment['report_after_sha256']==sha(actual)
-    assert alignment['inference_rerun'] is False and alignment['measured_values_changed'] is False
-    assert alignment['metrics_recalculated'] is False
-    original=next(x for x in alignment['archives'] if x['original']=='REPORT.md')
-    assert sha(d/original['archive'])==original['sha256']==expected
-
-def validate_report(d,data):
-    report=text(d/'REPORT.md')
-    assert re.findall(r'^## .+$',report,re.M)==re.findall(r'^## .+$',text(MASTER/'templates/TIER_REPORT_TEMPLATE.md'),re.M)
-    fields=['mask_map50_95','ap50','ap75','precision','recall','f1','tp_iou_mean','tp_dice_mean',
-            'inference_ms_mean','pipeline_ms_mean','fps','peak_allocated_vram_mib','parameters','gflops','checkpoint_mb']
-    def value(key,row):
-        if key=='parameters':return f"{int(row[key]):,}"
-        if key in ['gflops','checkpoint_mb']:return f"{float(row[key]):.{3 if key=='gflops' else 2}f}"
-        return fmt(key,row[key])
-    overall=table_after(report,'## 4. Overall Results')
-    assert len(overall)==len(data)+2
-    for actual,row in zip(overall[2:],data):assert actual==[row['model']]+[value(k,row) for k in fields]
-    models=table_after(report,'## 2. Models Tested')
-    assert len(models)==len(data)+2
-    for actual,row in zip(models[2:],data):
-        assert actual==[row['family'],row['model']]+[value(k,row) for k in ['parameters','gflops','checkpoint_mb']]
-    expected_winners=[('Highest Mask mAP50-95','mask_map50_95',max),('Highest AP75','ap75',max),
-                      ('Highest Recall','recall',max),('Fastest inference','inference_ms_mean',min),
-                      ('Fastest pipeline','pipeline_ms_mean',min),('Highest FPS','fps',max),
-                      ('Lowest VRAM','peak_allocated_vram_mib',min)]
-    winners=table_after(report,'## 5. Tier Winners')
-    assert len(winners)==9
-    for actual,(title,key,fn) in zip(winners[2:],expected_winners):
-        row=fn(data,key=lambda x:float(x[key]));assert actual==[title,row['model'],value(key,row)]
-    protocol=['Dataset','Evaluator','Preprocessing','Input size','Precision','Thresholds','maxDet','Timing protocol','Environment']
-    assert table_after(report,'## 3. Protocol Compatibility')[2:]==[[x,'PASS'] for x in protocol]
-    if d.name!='YOLO_Nano_Seg_MOTS20_Benchmark':return
-    alignment=json.loads((d/'manifests/REPORT_ALIGNMENT.json').read_text())
-    assert sha(d/'REPORT.md')==alignment['report_after_sha256']
-    assert sha(MASTER/'templates/TIER_REPORT_TEMPLATE.md')==alignment['report_template_sha256']
-    assert alignment['numeric_report_table_cells_verified']==len(data)*19+7==64
-    for archive in alignment['archives']:assert sha(d/archive['archive'])==archive['sha256']
-    for archive in alignment['master_validator_archives']:assert sha(MASTER/archive['archive'])==archive['sha256']
-    for path,h in alignment['unchanged_source_artifact_sha256'].items():assert sha(d/path)==h,path
-    for path,h in alignment['unchanged_workspace_artifact_sha256'].items():assert sha(ROOT/path)==h,path
-    for path,h in alignment['reference_report_sha256'].items():assert sha(ROOT/path)==h,path
-    record=json.loads((d/'manifests/DOCUMENT_VALIDATION.json').read_text())
-    for path,h in record['document_sha256'].items():assert sha(d/path)==h,path
-    for path,h in record['canonical_metrics_sha256'].items():assert sha(d/'metrics'/path)==h,path
-    assert record['report_numeric_table_cells_verified']==64
-    assert report.count('- Models completed: 3/3')==1 and '- Frames: 2,862 per model; Person GT instances: 26,894' in report
-    pointer=json.loads((d/'manifests/QUALITATIVE_SELECTION.json').read_text())
-    assert pointer['case_selection']==alignment['active_case_selection']
-    assert f"[current case selection]({pointer['case_selection']})" in report
-    seq=rows(d/'metrics/PER_SEQUENCE_RESULTS.csv')
-    for claim in alignment['per_sequence_extrema']:
-        subset=[x for x in seq if x['model']==claim['model']]
-        best=max(subset,key=lambda x:float(x['mask_map50_95']));worst=min(subset,key=lambda x:float(x['mask_map50_95']))
-        assert claim['best_sequence']==best['sequence'] and claim['worst_sequence']==worst['sequence']
-        assert claim['best_map']==fmt('mask_map50_95',best['mask_map50_95']) and claim['worst_map']==fmt('mask_map50_95',worst['mask_map50_95'])
-        assert f"{claim['model']}: strongest {claim['best_sequence']} ({claim['best_map']}); weakest {claim['worst_sequence']} ({claim['worst_map']})" in report
-    for claim in alignment['timing_delta_claims']:
-        import itertools
-        a,b=min(itertools.combinations(data,2),key=lambda pair:abs(float(pair[0][claim['field']])-float(pair[1][claim['field']])))
-        assert [a['model'],b['model']]==[claim['left'],claim['right']]
-        assert claim['display']==f"{abs(float(a[claim['field']])-float(b[claim['field']])):.3f}"
-        assert f"{claim['left']} / {claim['right']} ต่าง {claim['display']} ms" in report
-    timing=rows(d/'metrics/TIMING_SUMMARY.csv')
-    for row in data:
-        for stage,label in [('postprocessing',row['model']),('rle_preparation',row['checkpoint'])]:
-            source=next(x for x in timing if x['model']==row['model'] and x['stage']==stage)
-            assert f"{label}: {float(source['mean_ms']):.3f} ms" in report
-    checks=json.loads((d/'manifests/final_integrity.json').read_text())
-    assert checks['status']=='PASS' and len(checks['checks'])==15 and all(x['status']=='PASS' for x in checks['checks'])
-    preflight=rows(d/'metrics/PREFLIGHT_MAXDET.csv')
-    assert all(x['converged']=='False' for x in preflight if x['max_dets']=='100')
-    assert all(x['converged']=='True' for x in preflight if x['max_dets'] in ['200','300','1000'])
-
 def active_evidence(d,key):
     pointer=d/'manifests/QUALITATIVE_SELECTION.json'
     defaults={'case_evidence':'outputs/visualizations/qualitative/CASE_EVIDENCE.json',
@@ -370,7 +286,7 @@ for archive in record['archives']:assert sha(ROOT/archive['archive'])==archive['
 decision_review=MASTER/'provenance/CASE_DECISION_REVIEW_20261006.json'
 if decision_review.exists():
     decision_record=json.loads(decision_review.read_text())
-    for path,h in decision_record['protected_artifacts_sha256'].items():protected_artifact(path,h)
+    for path,h in decision_record['protected_artifacts_sha256'].items():assert sha(ROOT/path)==h,path
     for archive in decision_record['archives']:assert sha(MASTER/archive['archive'])==archive['sha256']
 selection_review=MASTER/'provenance/TIER_CASE_SELECTION_20261006_V2.json'
 if selection_review.exists():
@@ -380,7 +296,7 @@ if selection_review.exists():
     selected_frames={(c['sequence'],c['frame']) for t in selection_record['tiers'] for c in t['cases']}
     assert len(selected_frames)==selection_record['distinct_original_frames']==10
     assert {seq for seq,frame in selected_frames}=={'MOTS20-02','MOTS20-05','MOTS20-09','MOTS20-11'}
-    for path,h in selection_record['protected_artifacts_sha256'].items():protected_artifact(path,h)
+    for path,h in selection_record['protected_artifacts_sha256'].items():assert sha(ROOT/path)==h,path
     for archive in selection_record['archives']:assert sha(MASTER/archive['archive'])==archive['sha256']
     for tier_record in selection_record['tiers']:
         d=ROOT/f"YOLO_{tier_record['tier']}_Seg_MOTS20_Benchmark"
@@ -452,7 +368,6 @@ for tier in ['Large','Second_Largest','Medium','Small','Nano']:
     assert len(winner)==8
     for actual,(title,k,fn,unit) in zip(winner[2:],categories):
         w=fn(data,key=lambda x:float(x[k]));assert actual==[title,w['model'],fmt(k,w[k])+unit]
-    validate_report(d,data)
     validate_qualitative(d,data,p)
     summary.append({'tier':tier,'status':'PASS','cases':4})
 for name in ['TIER_RESULTS_SUMMARY_TH_TEMPLATE.md','TIER_PRESENTATION_SUMMARY_TH_TEMPLATE.md']:
