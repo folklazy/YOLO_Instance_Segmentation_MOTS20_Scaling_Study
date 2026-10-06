@@ -31,19 +31,6 @@ categories=[('Mask mAP50-95','mask_map50_95',max,''),('AP75','ap75',max,''),('Re
             ('VRAM','peak_allocated_vram_mib',min,' MiB')]
 def fmt(k,v):return f"{float(v):.{2 if k=='peak_allocated_vram_mib' else 3 if k in ['inference_ms_mean','pipeline_ms_mean','fps'] else 6}f}"
 
-def active_evidence(d,key):
-    pointer=d/'manifests/QUALITATIVE_SELECTION.json'
-    defaults={'case_evidence':'outputs/visualizations/qualitative/CASE_EVIDENCE.json',
-              'focus_evidence':'outputs/visualizations/qualitative/FOCUS_EVIDENCE.json',
-              'case_decision_audit':'manifests/CASE_DECISION_AUDIT.json'}
-    if not pointer.exists():return d/defaults[key]
-    selection=json.loads(pointer.read_text())
-    assert selection['selection_version']==2
-    assert selection['inference_rerun'] is False and selection['measured_values_changed'] is False
-    target=(d/selection[key]).resolve()
-    assert target.is_relative_to(d.resolve()) and target.exists(),target
-    return target
-
 # Small's original numerical layouts remain archived. Current summaries use
 # the shared quantitative/qualitative templates without changing measurements.
 def completed_small():
@@ -171,7 +158,7 @@ def validate_qualitative(d,data,p):
     assert len(re.findall(r'^## Case [1-4] — ',p,re.M))==4
     assert p.count('### สิ่งที่เห็นจากภาพ')==p.count('### วิเคราะห์')==p.count('### เชื่อมกับผลเชิงตัวเลข')==4
     assert p.count('### Observation ')==4 and p.count('**Interpretation:**')==4
-    ev=json.loads(active_evidence(d,'case_evidence').read_text())
+    ev=json.loads((d/'outputs/visualizations/qualitative/CASE_EVIDENCE.json').read_text())
     assert ev['inference_rerun'] is False and ev['benchmark_values_changed'] is False
     assert len(ev['cases'])==4
     pool={(x['sequence'],x['frame']) for x in json.loads((d/'manifests/visualization_frames.json').read_text())}
@@ -180,7 +167,7 @@ def validate_qualitative(d,data,p):
         assert (case['sequence'],case['frame']) in pool
         assert sha(ROOT/case['image'])==case['image_sha256']
         gt=(ROOT/case['image']).parent.parent/'gt/gt.txt';assert sha(gt)==case['gt_sha256']
-        image=d/case.get('comparison_path',f'outputs/visualizations/qualitative/case_{i:02d}_comparison.png')
+        image=d/f'outputs/visualizations/qualitative/case_{i:02d}_comparison.png'
         assert sha(image)==case['comparison_sha256']
         with Image.open(ROOT/case['image']) as im:height=round(im.height*960/im.width)+60
         with Image.open(image) as im:assert im.size==(1920,height*(len(data)+1))
@@ -199,28 +186,15 @@ def validate_case_decisions(d,data,p,ev):
     from mots import load_frames
     from metrics import CompactPrediction,fixed_metrics
     out=d/'outputs/visualizations/qualitative'
-    audit=json.loads(active_evidence(d,'case_decision_audit').read_text())
-    focus_path=active_evidence(d,'focus_evidence')
-    focus=json.loads(focus_path.read_text())
+    audit=json.loads((d/'manifests/CASE_DECISION_AUDIT.json').read_text())
+    focus=json.loads((out/'FOCUS_EVIDENCE.json').read_text())
     assert audit['status']=='PASS_WITH_LIMITATIONS' and audit['cases_inspected']==4
-    assert audit['pool_frames_rechecked']==12
-    revised=ev.get('selection_version')==2
-    assert audit['selection_replaced'] is revised
-    if revised:
-        assert (ev['cases'][1]['sequence'],ev['cases'][1]['frame'])==('MOTS20-09',263)
-        assert audit['shared_anchor']=={'sequence':'MOTS20-09','frame':263,'case':2}
-        pool=json.loads((d/'manifests/visualization_frames.json').read_text())
-        assert {(x['sequence'],x['frame']) for x in audit['candidate_pool']}=={(x['sequence'],x['frame']) for x in pool}
-        for candidate in audit['candidate_pool']:
-            for model,source in zip(candidate['models'],data):
-                assert model['model']==source['model']
-                measured=next(x for x in rows(d/f"metrics/{ev['run_id']}/per_frame/{source['checkpoint']}.csv") if x['sequence']==candidate['sequence'] and int(x['frame'])==candidate['frame'])
-                for key in ['tp','fp','fn']:assert model[key]==int(measured[key])
+    assert audit['pool_frames_rechecked']==12 and audit['selection_replaced'] is False
     assert audit['inference_rerun'] is False and audit['measured_values_changed'] is False
     assert sha(d/'PRESENTATION_SUMMARY_TH.md')==audit['presentation_sha256']
-    assert sha(focus_path)==audit['focus_evidence_sha256']
+    assert sha(out/'FOCUS_EVIDENCE.json')==audit['focus_evidence_sha256']
     assert focus['inference_rerun'] is False and focus['measured_values_changed'] is False
-    assert focus['original_evidence_sha256']==sha(active_evidence(d,'case_evidence'))
+    assert focus['original_evidence_sha256']==sha(out/'CASE_EVIDENCE.json')
     for archive in audit['archives']:assert sha(d/archive['archive'])==archive['sha256']
     for path,h in audit['canonical_metrics_sha256'].items():assert sha(d/path)==h,path
     assert p.count('### ใช้ประกอบการเลือกอย่างไร')==4
@@ -229,9 +203,9 @@ def validate_case_decisions(d,data,p,ev):
         assert (fc['sequence'],fc['frame'])==(case['sequence'],case['frame'])==(review['sequence'],review['frame'])
         assert fc['comparison_sha256']==case['comparison_sha256']==review['full_comparison_sha256']
         assert fc['image_sha256']==case['image_sha256'] and fc['gt_sha256']==case['gt_sha256']
-        target=d/fc['focus_path'] if revised else out/f'case_{i:02d}_focus.png'
+        target=out/f'case_{i:02d}_focus.png'
         assert sha(target)==fc['focus_sha256']==review['focus_sha256']
-        assert fc['focus_path']==(str(target.relative_to(d)) if revised else target.name)
+        assert fc['focus_path']==target.name
         with Image.open(target) as im:
             assert list(im.size)==fc['focus_size']==[720*len(fc['regions']),482*(len(data)+1)]
             im.verify()
@@ -242,8 +216,8 @@ def validate_case_decisions(d,data,p,ev):
             assert set(region['target_gt_ids'])<={g.object_id for g in frame.persons}
         part=p.split(f'## Case {i} —',1)[1].split('\n## ',1)[0]
         assert review['role'] in part and review['decision_use'] in part and review['limit'] in part
-        assert case.get('comparison_path',f'outputs/visualizations/qualitative/case_{i:02d}_comparison.png') in part
-        assert str(target.relative_to(d)) in part
+        assert f'outputs/visualizations/qualitative/case_{i:02d}_comparison.png' in part
+        assert f'outputs/visualizations/qualitative/case_{i:02d}_focus.png' in part
         assert [x['model'] for x in fc['models']]==[x['model'] for x in data]
         for original,model in zip(case['models'],fc['models']):
             assert model['prediction_sha256']==original['prediction_sha256']
@@ -259,17 +233,16 @@ def validate_case_decisions(d,data,p,ev):
                 candidates=[(j,float(np.count_nonzero(gt & x.mask)/np.count_nonzero(gt | x.mask))) for j,x in enumerate(preds) if x.confidence>=.25]
                 best=max((v for j,v in candidates),default=0.)
                 assert abs(best-diagnostic['best_candidate_iou_at_conf025'])<1e-12
-            if revised or (i==4 and 'case4_fp_diagnostics' in audit):
-                claims=[x for x in audit.get('fp_diagnostics_by_case',audit.get('case4_fp_diagnostics',[])) if x['model']==model['model'] and (not revised or x['case']==i)]
+            if i==4 and 'case4_fp_diagnostics' in audit:
+                claims=[x for x in audit['case4_fp_diagnostics'] if x['model']==model['model']]
                 assert [x['prediction_index'] for x in claims]==fm['fp_indices']
                 for claim in claims:
                     mask=preds[claim['prediction_index']].mask
                     expected=max((float(np.count_nonzero(mask & g.decode())/np.count_nonzero(mask)),g.object_id,float(np.count_nonzero(mask & g.decode())/np.count_nonzero(mask | g.decode()))) for g in frame.persons)
                     assert expected==(claim['prediction_ioa'],claim['best_overlap_gt_id'],claim['mask_iou'])
                     assert claim['gt_already_matched']==any(x['object_id']==claim['best_overlap_gt_id'] for x in fm['matches'])
-                    if revised:assert claim['valid_gt_overlap']==(expected[0]>0)
         ids=sorted({x['gt_id'] for m in fc['models'] for x in m['target_gt']})
-        for gid in ids if revised else ids[:2] if i==4 else ids:
+        for gid in ids[:2] if i==4 else ids:
             values=[]
             for model in fc['models']:
                 g=next(x for x in model['target_gt'] if x['gt_id']==gid)
@@ -288,23 +261,6 @@ if decision_review.exists():
     decision_record=json.loads(decision_review.read_text())
     for path,h in decision_record['protected_artifacts_sha256'].items():assert sha(ROOT/path)==h,path
     for archive in decision_record['archives']:assert sha(MASTER/archive['archive'])==archive['sha256']
-selection_review=MASTER/'provenance/TIER_CASE_SELECTION_20261006_V2.json'
-if selection_review.exists():
-    selection_record=json.loads(selection_review.read_text())
-    assert selection_record['inference_rerun'] is False and selection_record['measured_values_changed'] is False
-    assert selection_record['case_slots']==20 and selection_record['changed_cases']==6
-    selected_frames={(c['sequence'],c['frame']) for t in selection_record['tiers'] for c in t['cases']}
-    assert len(selected_frames)==selection_record['distinct_original_frames']==10
-    assert {seq for seq,frame in selected_frames}=={'MOTS20-02','MOTS20-05','MOTS20-09','MOTS20-11'}
-    for path,h in selection_record['protected_artifacts_sha256'].items():assert sha(ROOT/path)==h,path
-    for archive in selection_record['archives']:assert sha(MASTER/archive['archive'])==archive['sha256']
-    for tier_record in selection_record['tiers']:
-        d=ROOT/f"YOLO_{tier_record['tier']}_Seg_MOTS20_Benchmark"
-        ev=json.loads(active_evidence(d,'case_evidence').read_text())
-        assert sha(active_evidence(d,'case_evidence'))==tier_record['case_evidence_sha256']
-        assert sha(active_evidence(d,'focus_evidence'))==tier_record['focus_evidence_sha256']
-        assert [(x['sequence'],x['frame']) for x in ev['cases']]==[(x['sequence'],x['frame']) for x in tier_record['cases']]
-        for archive in tier_record['archives']:assert sha(d/archive['archive'])==archive['sha256']
 interpretation_manifests=sorted((MASTER/'provenance').glob('TABLE_INTERPRETATION_*.json'))
 assert interpretation_manifests, 'Missing table interpretation provenance'
 interpretation_record=json.loads(interpretation_manifests[-1].read_text())

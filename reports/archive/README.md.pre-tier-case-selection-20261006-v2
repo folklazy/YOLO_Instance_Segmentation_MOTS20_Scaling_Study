@@ -32,11 +32,8 @@ visual templates after the latest user-requested alignment; its benchmark-time n
 are archived. Nano follows the current quantitative/visual templates after all three models finished.
 REPORT remains the technical record and links to visual analysis.
 Comparisons use original MOTS20 frames and saved RLE masks without inference or changed measurements.
-[Current tier-specific case selection](provenance/TIER_CASE_SELECTION_20261006_V2.md)
-uses one shared failure anchor plus three behavior-driven cases per tier (20 slots, 10 original frames).
-Six cases replace weaker/redundant examples; new views use saved masks and include MOTS20-11.
-[Prior case decision review](provenance/CASE_DECISION_REVIEW_20261006.md) remains a historical
-audit of the previous 20 cases and supplementary identical-ROI views.
+[Case decision review](provenance/CASE_DECISION_REVIEW_20261006.md) audits all 20 selected cases,
+adds identical-ROI views and explains which examples distinguish models and which are controls.
 Nano Case 4 was corrected after native GT inspection: its extra masks overlap already matched people.
 The selected comparison images embedded in the summaries and their small case-selection/evidence
 manifests are versioned. Other generated images and saved predictions remain local/ignored.

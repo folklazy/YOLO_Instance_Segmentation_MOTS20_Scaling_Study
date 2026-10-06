@@ -85,13 +85,6 @@ Shortlist from structured TP/FP/FN/matched-IoU evidence or the frozen visualizat
 inspect a small set, not thousands of frames. Include advantage, shared failure, counterexample/
 detection trade-off and similar-output/near-tie cases where available. Document selection pool,
 sequence, frame, reasons and source hashes; selected cases are diagnostic, not representative sampling.
-Use one shared cross-tier anchor plus tier-specific diagnostic cases where useful. Within a case,
-all models must use the same frame; across tiers, do not force an identical case set. Repeated
-diagnostic frames require a stated behavior/decision reason. Replace nondiscriminating controls
-when a better saved-output case exists while retaining similar-coverage and counterexamples.
-Count distinct source frames separately from case slots; shared frames are not independent samples.
-When revising existing evidence, preserve old files and activate the new version through
-manifests/QUALITATIVE_SELECTION.json; keep source hashes, ROI coordinates, selection pool and reasons.
 
 State each case's decision use and evidence limits explicitly: discriminating example, shared failure,
 counterexample/trade-off, or similar-output control. A control need not show a pain point or a winner.

@@ -1,0 +1,411 @@
+{
+  "timestamp": "2026-10-06T06:28:54.885268+00:00",
+  "status": "PASS_WITH_LIMITATIONS",
+  "inference_rerun": false,
+  "measured_values_changed": false,
+  "selection_pool": "12 existing frozen visualization frames per tier, not full-dataset search",
+  "shared_anchor": {
+    "sequence": "MOTS20-09",
+    "frame": 263,
+    "case": 2
+  },
+  "selection_rule": "One shared failure anchor plus three cases chosen for observed tier behavior; diagnostic frames may coincide for explicit reasons",
+  "archives": [
+    {
+      "original": "STUDY_STANDARD.md",
+      "archive": "reports/archive/STUDY_STANDARD.md.pre-tier-case-selection-20261006-v2",
+      "sha256": "1e7e62d94b3fd3a995241ab7fdc6e4c4eab62e51e51bb6cd392c0bca47184770"
+    },
+    {
+      "original": "templates/TIER_PRESENTATION_SUMMARY_TH_TEMPLATE.md",
+      "archive": "reports/archive/templates__TIER_PRESENTATION_SUMMARY_TH_TEMPLATE.md.pre-tier-case-selection-20261006-v2",
+      "sha256": "60184ff214347a5bba14ea5ede1ed81259f2dd382fdaca9074a9d31c74993a88"
+    },
+    {
+      "original": "scripts/validate_documentation_redesign.py",
+      "archive": "reports/archive/scripts__validate_documentation_redesign.py.pre-tier-case-selection-20261006-v2",
+      "sha256": "c5b337fcf912be485d24ec9b32188d5ca48bafa54836381e8f7c36339323ded8"
+    },
+    {
+      "original": "README.md",
+      "archive": "reports/archive/README.md.pre-tier-case-selection-20261006-v2",
+      "sha256": "8fc5e709130fde77196d1315516ecccb93933a3c98a2e73143f67d05dced8401"
+    }
+  ],
+  "protected_artifacts_sha256": {
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/comparison_summary.csv": "5986db7f575ed1ad21097ae51c3945cad7cc19de14fd50f26e12e53a18235d36",
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/MODEL_COMPLEXITY.csv": "f02f14e86b749066d346921dda54836abe9a46ac95eb3f4e53faef2264b26b6e",
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/per_sequence.csv": "062f2cdfd40200d953d4470e751cd2157b80f546edb8bc9e3111e3ce54f6a9e3",
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/PREFLIGHT_MAXDET.csv": "80afa34f4007df195b180ef9984537913ea976d634e4c1f412686d331b13fbc1",
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/preflight_maxdet.csv": "d418bd4c6e1da0b13d465f805c875319e4bacc147e8aad9b2145da5093b1b453",
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/PER_SEQUENCE_RESULTS.csv": "8035f8d778f3b288442936f9010413ef31e3a18feb2b97c3b77608261ac7a6ae",
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/TIMING_SUMMARY.csv": "654f1385efd7ed3715b4a7f745038fb6f2b4db7e73095c20d4be69e743d75e6b",
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/gt_frames.csv": "953d433368f104e5abd2e2e56fa903ebee7213eb5a35ad08ad0436d303e06c08",
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/gt_instances.csv": "7e172467bba7a38831932f840c6c5b25f862bbf70c60144645b9863cc77414f5",
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/per_model.csv": "23a1241af6bb7c53257dc7a9a98f99a03ed9d657f0d2713e5c5bf81bdd057fcc",
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/TIER_RESULTS.csv": "8d4d273ad11661eea7d5c36788c6a59b2085e481604bc6be4bef6359e1093093",
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/protocol_consistency.csv": "601d5e24edaf8f766a0a38218ed9ae051d75074b9dd9477e78957671f01af522",
+    "YOLO_Large_Seg_MOTS20_Benchmark/RESULTS_SUMMARY_TH.md": "d2eca3c5389eef711b4609f5f9f6cdce405e309f2dae6bdacf0135c48585ef56",
+    "YOLO_Large_Seg_MOTS20_Benchmark/REPORT.md": "e2d99188f90d016645cb6339617c8154be45a4c6e839fa4a32aea6c2a70e2eed",
+    "YOLO_Large_Seg_MOTS20_Benchmark/EXPERIMENT_PROTOCOL.md": "465a6e60b371b29f250eeb8bb5ac4c218be20f114e9e42f7979e5d45aca19366",
+    "YOLO_Large_Seg_MOTS20_Benchmark/manifests/STANDARDIZATION.json": "c3aa3578f26def400d1a2ccb0efba572133a88a174f92f5c062bf9cd83a1150e",
+    "YOLO_Large_Seg_MOTS20_Benchmark/manifests/CASE_DECISION_AUDIT.json": "223c87c5418a73715c799313a0846c69a696eab4b3e81e59b1a789079be55a32",
+    "YOLO_Large_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_02_comparison.png": "7cc3590207499d30b62452dd95fa99957005834973c9baceee9a96e4e50ed61f",
+    "YOLO_Large_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_04_focus.png": "c474ab11c89cb83836fc57ecf9471fd8daec5c96554404277b52014d521f78db",
+    "YOLO_Large_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_03_comparison.png": "f9ba49365254ccd5720460c2bc3db44b97316c3d0652b8fe7f8cf8ae0d7fb26e",
+    "YOLO_Large_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_02_focus.png": "3b716dbec0b6895f6d1fc8f73af378cce8ffb7c116d7526ff7da3cba40107a45",
+    "YOLO_Large_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_01_comparison.png": "f85f8208ff88b65b9bf0f44d067827ac5cba065618eab44def6ace63ed06b399",
+    "YOLO_Large_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_01_focus.png": "06b1d2785024fd17a6b74ce1b8ec800e83aaa95d7f2627bc13b54ca729b76297",
+    "YOLO_Large_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_03_focus.png": "6363503009807dbfd8fa05b2853fbdeb845c407d456c4006adb178ffeb7c9496",
+    "YOLO_Large_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_04_comparison.png": "6083973f2bef63ce69a9f5067299169b1f63d62644c0a5049a3191ee303f42e0",
+    "YOLO_Large_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/CASE_EVIDENCE.json": "ba21f41c7f759b91d8f3233cb54756e101d640b7a2189b84d53b5fa11121a797",
+    "YOLO_Large_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/FOCUS_EVIDENCE.json": "394c40c1cdff30f8324716885e5fea97511f96115cb62bdac5bcfcc812a52be0",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/comparison_summary.csv": "768c483db9d70818500d4166b9bde41a4a1fb88da88fc94896507e8bcd0d1022",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/MODEL_COMPLEXITY.csv": "c5cb5074499e5602529bfaf91f784fb46c5880ad372fbe75c9e9a173366e4164",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/per_sequence.csv": "21b4e63c9c2efa825b85926282e9b31d11dfa777c478262253c913c714709806",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/PREFLIGHT_MAXDET.csv": "85b8e0e52152c20dd46d409f384047494fc8d7423159cd316ff1b1381f216142",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/preflight_maxdet.csv": "5b9c045aef70b71fb0ba5c97527aa65a87a0eef56474be375338fdd38e3a26bd",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/PER_SEQUENCE_RESULTS.csv": "55032e238afdc76c1ade8f638512947f40a7bf572f991447745b26eef625b3f5",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/TIMING_SUMMARY.csv": "a376d068508a074992ee8a98b6d6af66d97cb896b26a65f99a472100803ea74b",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/gt_frames.csv": "953d433368f104e5abd2e2e56fa903ebee7213eb5a35ad08ad0436d303e06c08",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/gt_instances.csv": "7e172467bba7a38831932f840c6c5b25f862bbf70c60144645b9863cc77414f5",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/per_model.csv": "75c7fb311a37f7b83e25e0b7721bdd70ebfb2ea37bb5f48d3b8811d8fb479b45",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/TIER_RESULTS.csv": "41d41b139038f3ce6d6c0cd1795be2839c102490bd9b18c7e2aaf936d99d1a01",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/protocol_consistency.csv": "c015b8cb541fbce3f40a3776b88cd44c827c39b3e0a5fe744ddc92e6c5ef5e55",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/RESULTS_SUMMARY_TH.md": "ce6b531d2f6d850a25b7b1aa09b942131fe80466610259ba763234289a178c63",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/REPORT.md": "30c729c9b7aca78782e1706db1490654a46d63585f0f1e7194a4f18763556f0c",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/EXPERIMENT_PROTOCOL.md": "4552a44160fa66ac058756ed55d8b25d750429b52aa529e9441710dfffdd5a45",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/manifests/STANDARDIZATION.json": "8d7fbe351bb5f2f7cf19a86294f12974270346a441e87e791f63bcf209083d55",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/manifests/CASE_DECISION_AUDIT.json": "ac4663688460750e38268588d36b6eb81c3488a76deb2eee673710d738ac5aeb",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_02_comparison.png": "56bfe4696e6ea9e2e1b1bf5e6be2729d6bc6bb0d0f9643e4def03c0928628d99",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_04_focus.png": "7ff33610309981a15223a45e38e6cb01c03b0c78ef3590c67973e9e1a0e22f4a",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_03_comparison.png": "3910f03ee1eb21b77ad095e3566cb6dccc14e01e5875468bd1a5ef5fc8312d06",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_02_focus.png": "043ad4c5dd9914ad4b0de87068710b8994e43626fbea8bccd283ee84cd5f5eeb",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_01_comparison.png": "07753f222abfc6322a54477397ca9fbf94d5b28b0a1903887f396687f478395d",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_01_focus.png": "736d728e21553453a8cec0a3aab8a5d8266ea82dbd5b4553989252a9248d555f",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_03_focus.png": "9990853c4ec4fbe9461f8b3deba4d793a4fa70ecf0e0c537d2917ece5eb5e955",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_04_comparison.png": "69cb1ab54f6dd2bb00777c2a6be0d0f87d45000aa382019519f080054382ffe8",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/CASE_EVIDENCE.json": "d36299812b45de5c6989312dea9812349a0b77bf6e5eea3c4b9bc72552ca4169",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/FOCUS_EVIDENCE.json": "ad49e0ade592eaeafbf59653e7f902d5160eb64db167855ae19b753dfaf77c35",
+    "YOLO_Medium_Seg_MOTS20_Benchmark/metrics/MODEL_COMPLEXITY.csv": "249b94caa328d4f9cd2b45a5ac2ea14f732d4709c8f0d00325bebed1bde8700d",
+    "YOLO_Medium_Seg_MOTS20_Benchmark/metrics/PREFLIGHT_MAXDET.csv": "bc1c6419e8a982aa4aaf7d6e173e00114ed0e783e4acf13eb53e3cefe4f27441",
+    "YOLO_Medium_Seg_MOTS20_Benchmark/metrics/PER_SEQUENCE_RESULTS.csv": "4476ae284a0dc833f3b826ff697ec67f5938b38698391117bf4be195651749a0",
+    "YOLO_Medium_Seg_MOTS20_Benchmark/metrics/TIMING_SUMMARY.csv": "4482a4a491a7ca9733b80b718de7b857bc5e5e7cc4f1804ca296c3678403ba92",
+    "YOLO_Medium_Seg_MOTS20_Benchmark/metrics/gt_frames.csv": "953d433368f104e5abd2e2e56fa903ebee7213eb5a35ad08ad0436d303e06c08",
+    "YOLO_Medium_Seg_MOTS20_Benchmark/metrics/gt_instances.csv": "7e172467bba7a38831932f840c6c5b25f862bbf70c60144645b9863cc77414f5",
+    "YOLO_Medium_Seg_MOTS20_Benchmark/metrics/TIER_RESULTS.csv": "5e354e3d8d6fdef38f96b31dd03acbd7730549e8beac5c58929f128593d29b65",
+    "YOLO_Medium_Seg_MOTS20_Benchmark/RESULTS_SUMMARY_TH.md": "bf2c2956cb6a492b7717c2a166d2c6ced836e6ea5b41ab22bf341a8e06a18834",
+    "YOLO_Medium_Seg_MOTS20_Benchmark/REPORT.md": "189e5316ad2e6ca11ac1025b82fa2067d767153a263d89e99f455e39e311e473",
+    "YOLO_Medium_Seg_MOTS20_Benchmark/EXPERIMENT_PROTOCOL.md": "3d095a8dac90b21e4e5af978e355c2d3f5c45749dfd212446c3ef647be20c5c7",
+    "YOLO_Medium_Seg_MOTS20_Benchmark/manifests/STANDARDIZATION.json": "1e5627b440fcfd7dc33c28d606fdfad31eb7c820dc1484f118c56967494a54ed",
+    "YOLO_Medium_Seg_MOTS20_Benchmark/manifests/CASE_DECISION_AUDIT.json": "3cbe6a4d16ec3d590b0fdf9aec5bfcbf9061c017fad66fb9af3e66deb931cf34",
+    "YOLO_Medium_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_02_comparison.png": "18600f9c96fb1ecfb73aa302bfeab14ceb2c128048337ce866952923ff5c0a0e",
+    "YOLO_Medium_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_04_focus.png": "71dc708fad2642e9ee0d327cbf127631716d90b08af320727fd4fce0a3a16f10",
+    "YOLO_Medium_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_03_comparison.png": "40305ea32b85a6b597eb9abdc1f9ff52f4f2292c1bf3298db641c2af14daeae5",
+    "YOLO_Medium_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_02_focus.png": "fb968e7b9c7b407d55f25c429a913c3cd5ebe1d84392c07c8d13a4bc277e247d",
+    "YOLO_Medium_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_01_comparison.png": "19874b39918d0ea411d325e3e8c60d18c7deddcd133791d9f8e5a505e2fb932c",
+    "YOLO_Medium_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_01_focus.png": "6003907c5f4497c47c322dc879635c9b7be84cc296a24166f8aae673eba46eb3",
+    "YOLO_Medium_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_03_focus.png": "3baa7ed3a0eec7c208a6af62eef71e949de743cc16b4a0d5f8fbe9f19234ab4c",
+    "YOLO_Medium_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_04_comparison.png": "78bf4e5d170c86496ba9bc5a03801428ff12fc3d75b1c11dc97ae0127983595b",
+    "YOLO_Medium_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/CASE_EVIDENCE.json": "e45c2bd54a878da6940e2acb8482b3c49c907c361e5514226192437b8519cc82",
+    "YOLO_Medium_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/FOCUS_EVIDENCE.json": "0ddb4656caeeaa6c4767045c3b658aed92dd9ef13f9204108da67e0ce8aad507",
+    "YOLO_Small_Seg_MOTS20_Benchmark/metrics/MODEL_COMPLEXITY.csv": "296be79fcf600c4430fc112da653b218de2c8c25e7cc092340cbf420507bd24d",
+    "YOLO_Small_Seg_MOTS20_Benchmark/metrics/PREFLIGHT_MAXDET.csv": "53822b1e37685a0e3af248ab6545291d1fe2a0de511f1884ec60495271e4cebb",
+    "YOLO_Small_Seg_MOTS20_Benchmark/metrics/PER_SEQUENCE_RESULTS.csv": "f3f26f2b33a39ae3c8d0e6b8e3ece67dea583e3918fc8ce44d26ba3a7049edc0",
+    "YOLO_Small_Seg_MOTS20_Benchmark/metrics/TIMING_SUMMARY.csv": "8caa06dffcc9a37017a0b82c60f1c03e24d527c1898929e7fbc717309c18f58a",
+    "YOLO_Small_Seg_MOTS20_Benchmark/metrics/gt_frames.csv": "953d433368f104e5abd2e2e56fa903ebee7213eb5a35ad08ad0436d303e06c08",
+    "YOLO_Small_Seg_MOTS20_Benchmark/metrics/gt_instances.csv": "7e172467bba7a38831932f840c6c5b25f862bbf70c60144645b9863cc77414f5",
+    "YOLO_Small_Seg_MOTS20_Benchmark/metrics/TIER_RESULTS.csv": "36ea47db9225ffd91aa77c45313ccb858a7bdb8ad5f442fa62d97afe3ca0d4b5",
+    "YOLO_Small_Seg_MOTS20_Benchmark/RESULTS_SUMMARY_TH.md": "38f4d73442c85e9ceaae874fe82ee000598e84bf9bdaa776007d69451bb07acb",
+    "YOLO_Small_Seg_MOTS20_Benchmark/REPORT.md": "54c723520d0b60bc585ad185c548b151b8a439ab86a6cb4e2f41c66f18597d84",
+    "YOLO_Small_Seg_MOTS20_Benchmark/EXPERIMENT_PROTOCOL.md": "92c50d02bd4209afc6923197f674cbc1149f5a10b6da521fe16224652a0dc5c0",
+    "YOLO_Small_Seg_MOTS20_Benchmark/manifests/STANDARDIZATION.json": "7f7ad80d11887adbb92eaafc61ac3fc6d69b27227dd0cb05c57270b3267f5bc3",
+    "YOLO_Small_Seg_MOTS20_Benchmark/manifests/CASE_DECISION_AUDIT.json": "b04a9a1d7c4785eb1221d64b1f23da796ebf5b859d0e33d3979391621f839083",
+    "YOLO_Small_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_02_comparison.png": "dd961de4277b30c321fe72141ccb2773b0ffc0b6ea18a0b1ef562cec44602027",
+    "YOLO_Small_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_04_focus.png": "f28fa47fc781a8bec8c3bef446a8be07e76b77db19af13a427cb093947ca9524",
+    "YOLO_Small_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_03_comparison.png": "eccba38fc5cc434bd358f8a9d297244aadfa265f53a86ad222ea0d8c089df15a",
+    "YOLO_Small_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_02_focus.png": "a9c94084b26e407289dfd5f94ad2599207fee81264323a9c2006319e8b489788",
+    "YOLO_Small_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_01_comparison.png": "aa5ecfb0c482c388352eb0e3e33647d64e1776b8408c15c95856096ea2d68ae5",
+    "YOLO_Small_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_01_focus.png": "76096354000e82bc3f8d5f58bbf423c22ab00bd1feaa0596f9030fe9bb2e5fc7",
+    "YOLO_Small_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_03_focus.png": "db6737b32184715e222892244932a69e6d578fb7cf6ce6df1bc6dd328c410d4c",
+    "YOLO_Small_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_04_comparison.png": "78d5c695ccf4d8104f1b6965aa073c0bd3985cdbf1dacef2947af65a2431273e",
+    "YOLO_Small_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/CASE_EVIDENCE.json": "304ae3635bcf7b644685bf86e688b54881c5ae9c3f5a493ded72ff0960d0b06d",
+    "YOLO_Small_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/FOCUS_EVIDENCE.json": "f7956a8cd7e021361444b0265e35aaf1cdf4ca9a541e9ef1c29cf49ef01c0c94",
+    "YOLO_Nano_Seg_MOTS20_Benchmark/metrics/MODEL_COMPLEXITY.csv": "e92c637181f3c315df05d27e00aed1d7dfe4c1f63d6c67465c7f3d46620eb6eb",
+    "YOLO_Nano_Seg_MOTS20_Benchmark/metrics/PREFLIGHT_MAXDET.csv": "5621d9406595d238fb3a4e8a583fbd1c66eeac058453728045e108012d6e83b8",
+    "YOLO_Nano_Seg_MOTS20_Benchmark/metrics/PER_SEQUENCE_RESULTS.csv": "c911ae136ecd5b91b06c170fce7348444ec6b8ffa2b61cd675c12b408082249d",
+    "YOLO_Nano_Seg_MOTS20_Benchmark/metrics/TIMING_SUMMARY.csv": "73526e2a145033ce6d008c32f5855414da6a2c7549cdd6ed7a826fcde0de94ec",
+    "YOLO_Nano_Seg_MOTS20_Benchmark/metrics/gt_frames.csv": "953d433368f104e5abd2e2e56fa903ebee7213eb5a35ad08ad0436d303e06c08",
+    "YOLO_Nano_Seg_MOTS20_Benchmark/metrics/gt_instances.csv": "7e172467bba7a38831932f840c6c5b25f862bbf70c60144645b9863cc77414f5",
+    "YOLO_Nano_Seg_MOTS20_Benchmark/metrics/TIER_RESULTS.csv": "a1562e54263b2c8e4e13630d3cf1c6e3f45659e92dc57285cf902b6fe1126787",
+    "YOLO_Nano_Seg_MOTS20_Benchmark/RESULTS_SUMMARY_TH.md": "9efc93b7868c18ca01d8b1241925dfb63e6ac53a1ad43696192dc5db47f90115",
+    "YOLO_Nano_Seg_MOTS20_Benchmark/REPORT.md": "aee4afc6086556917344a9244a26156dcc872f4257f8986f7161b47730fd8820",
+    "YOLO_Nano_Seg_MOTS20_Benchmark/EXPERIMENT_PROTOCOL.md": "2285e4615b32df4a6f902a0da30fcf09aa590ede07d31677c485538c232d9afb",
+    "YOLO_Nano_Seg_MOTS20_Benchmark/manifests/STANDARDIZATION.json": "4eb5f24bde47091009e1ef810358c08ed93cd31d29715b557434da061975a5ba",
+    "YOLO_Nano_Seg_MOTS20_Benchmark/manifests/CASE_DECISION_AUDIT.json": "c67fced7df2025338009a3f6360e702a0a91691e1be8039693b23cf3e6181dfe",
+    "YOLO_Nano_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_02_comparison.png": "34961c96183de473a90d4405bb19b645980688d1aa21004a9974db9dcb1c80ca",
+    "YOLO_Nano_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_04_focus.png": "678d256913dee5e5ef33528b77d4c97dcfa87e3e15472491ddb51babed089a01",
+    "YOLO_Nano_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_03_comparison.png": "0114d91c77e22c47e351e0957d943ffcca0d2da84d34adddc2be5879a6602994",
+    "YOLO_Nano_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_02_focus.png": "e2e1af8f0b6d74578778de29fc8d52b63da16808e72d77235da4e1e45f56cf66",
+    "YOLO_Nano_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_01_comparison.png": "2088b56441bf99dec34b443d17c76d1c437b75291b5c3335e6535cb1a8dbf923",
+    "YOLO_Nano_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_01_focus.png": "67327cae43408794765e1afccd35ce783f597afa6c39cd7a17ced0ba7219fdc6",
+    "YOLO_Nano_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_03_focus.png": "62ec54c09ac5403bdb8b909fe71a0bd5dff9e0edb7c507e8d7e97c5ac43f3d42",
+    "YOLO_Nano_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/case_04_comparison.png": "3f496bdfe2658cebbcf5a70cddc1be5ea2b4dcd267cca18010dfeba82843b77d",
+    "YOLO_Nano_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/CASE_EVIDENCE.json": "5bdecd4c4d5d884d03092a2502ddb2642c2cd7b13cdfa0f02de0b36297a65a17",
+    "YOLO_Nano_Seg_MOTS20_Benchmark/outputs/visualizations/qualitative/FOCUS_EVIDENCE.json": "81887ae63c15287af517dfb9fbd63c5a9b969731269b2be20869ea355f35adac",
+    "YOLO_Instance_Segmentation_MOTS20_Scaling_Study/STUDY_STATE.json": "7e156fd050a038d29fd7cdb1c6a6f5861e32ed0dafc55e60ef1bab1c77c25d2c",
+    "YOLO_Instance_Segmentation_MOTS20_Scaling_Study/DATA_SCHEMA.md": "48b414c78aac8fed1bdda0027c33421745d2fa7724c940fec51fcdc64ffed23b"
+  },
+  "tiers": [
+    {
+      "tier": "Large",
+      "cases": [
+        {
+          "case": 1,
+          "sequence": "MOTS20-09",
+          "frame": 525,
+          "reused": false,
+          "reason": "tier diagnostic: additional GT and fewer unmatched outputs"
+        },
+        {
+          "case": 2,
+          "sequence": "MOTS20-09",
+          "frame": 263,
+          "reused": true,
+          "reason": "shared anchor: common failure"
+        },
+        {
+          "case": 3,
+          "sequence": "MOTS20-02",
+          "frame": 600,
+          "reused": true,
+          "reason": "counterexample and near-tied pair"
+        },
+        {
+          "case": 4,
+          "sequence": "MOTS20-11",
+          "frame": 450,
+          "reused": false,
+          "reason": "near-tied pair: same valid GT, different extra outputs"
+        }
+      ],
+      "changed_cases": [
+        1,
+        4
+      ],
+      "archives": [
+        {
+          "original": "PRESENTATION_SUMMARY_TH.md",
+          "archive": "reports/archive/PRESENTATION_SUMMARY_TH.md.pre-tier-case-selection-20261006-v2",
+          "sha256": "fde79007334b5ccd05f53df3d5f869d18b064776a4b21e85fe3c50c5b1a138a4"
+        }
+      ],
+      "case_evidence_sha256": "2d171f1c766f5fe4e4f1c6bfaae6a7aa1f3c5fd927ad588fb339296eba475b9f",
+      "focus_evidence_sha256": "28d3e9446e1c6fb307f5e5915afc65279e22ace05580010e87755610b3d2063c"
+    },
+    {
+      "tier": "Second_Largest",
+      "cases": [
+        {
+          "case": 1,
+          "sequence": "MOTS20-05",
+          "frame": 419,
+          "reused": true,
+          "reason": "tier diagnostic: small GT recovered by accuracy leader"
+        },
+        {
+          "case": 2,
+          "sequence": "MOTS20-09",
+          "frame": 263,
+          "reused": true,
+          "reason": "shared anchor: common failure"
+        },
+        {
+          "case": 3,
+          "sequence": "MOTS20-02",
+          "frame": 1,
+          "reused": true,
+          "reason": "counterexample: equal counts, different GT and TP/FP trade-off"
+        },
+        {
+          "case": 4,
+          "sequence": "MOTS20-11",
+          "frame": 1,
+          "reused": false,
+          "reason": "nearby-mAP pair: extra matched GT despite lower aggregate Recall"
+        }
+      ],
+      "changed_cases": [
+        4
+      ],
+      "archives": [
+        {
+          "original": "PRESENTATION_SUMMARY_TH.md",
+          "archive": "reports/archive/PRESENTATION_SUMMARY_TH.md.pre-tier-case-selection-20261006-v2",
+          "sha256": "d99a0f3f514fffe573966d6dfb49aa39607fa59936280cfc723a265bf26da381"
+        }
+      ],
+      "case_evidence_sha256": "eacabec55395f574d5751b4ef37fdec9817d229c3b3e99d27f5b9b82a35b2614",
+      "focus_evidence_sha256": "ca013c1a23abde342dcf1aae88acd720dda5991e6a6096210ddbbb8e8794a8a8"
+    },
+    {
+      "tier": "Medium",
+      "cases": [
+        {
+          "case": 1,
+          "sequence": "MOTS20-05",
+          "frame": 419,
+          "reused": true,
+          "reason": "tier diagnostic: small GT and extra output"
+        },
+        {
+          "case": 2,
+          "sequence": "MOTS20-09",
+          "frame": 263,
+          "reused": true,
+          "reason": "shared anchor: common failure"
+        },
+        {
+          "case": 3,
+          "sequence": "MOTS20-02",
+          "frame": 1,
+          "reused": true,
+          "reason": "counterexample: more TP with extra outputs"
+        },
+        {
+          "case": 4,
+          "sequence": "MOTS20-11",
+          "frame": 450,
+          "reused": false,
+          "reason": "control plus error: equal valid GT coverage, different FP"
+        }
+      ],
+      "changed_cases": [
+        4
+      ],
+      "archives": [
+        {
+          "original": "PRESENTATION_SUMMARY_TH.md",
+          "archive": "reports/archive/PRESENTATION_SUMMARY_TH.md.pre-tier-case-selection-20261006-v2",
+          "sha256": "e5a47ecfcbf0304cdc45684ef047131c45a12ab39cb1eaaede430a5b418ad5a8"
+        }
+      ],
+      "case_evidence_sha256": "f187cad33617f25e9c3dc0556f851df0e470b544a610d9de9095673db2ea41d6",
+      "focus_evidence_sha256": "1fc6646be3a17d093b5e58182b1468f3e7ef66d3874d28e8410151330bb13ff2"
+    },
+    {
+      "tier": "Small",
+      "cases": [
+        {
+          "case": 1,
+          "sequence": "MOTS20-02",
+          "frame": 300,
+          "reused": true,
+          "reason": "tier diagnostic: largest TP spread in frozen pool"
+        },
+        {
+          "case": 2,
+          "sequence": "MOTS20-09",
+          "frame": 263,
+          "reused": true,
+          "reason": "shared anchor: common failure"
+        },
+        {
+          "case": 3,
+          "sequence": "MOTS20-02",
+          "frame": 600,
+          "reused": true,
+          "reason": "counterexample and near-tied pair"
+        },
+        {
+          "case": 4,
+          "sequence": "MOTS20-11",
+          "frame": 900,
+          "reused": false,
+          "reason": "near-tied pair: different missed GT and extra outputs"
+        }
+      ],
+      "changed_cases": [
+        4
+      ],
+      "archives": [
+        {
+          "original": "PRESENTATION_SUMMARY_TH.md",
+          "archive": "reports/archive/PRESENTATION_SUMMARY_TH.md.pre-tier-case-selection-20261006-v2",
+          "sha256": "c45e8458005dbad5edf165dc932f300370e316ce8b66c24b81339fa56ea7d62c"
+        },
+        {
+          "original": "configs/report_templates/TIER_PRESENTATION_SUMMARY_TH_TEMPLATE.md",
+          "archive": "reports/archive/configs__report_templates__TIER_PRESENTATION_SUMMARY_TH_TEMPLATE.md.pre-tier-case-selection-20261006-v2",
+          "sha256": "60184ff214347a5bba14ea5ede1ed81259f2dd382fdaca9074a9d31c74993a88"
+        },
+        {
+          "original": "manifests/DOCUMENT_VALIDATION.json",
+          "archive": "reports/archive/manifests__DOCUMENT_VALIDATION.json.pre-tier-case-selection-20261006-v2",
+          "sha256": "ab12f442f4473438336d71b43f072a518f49fa086c19aca1443b6b0895836a98"
+        }
+      ],
+      "case_evidence_sha256": "7900c2c4413d618b4a2bd8c26dc29bab6f73f11d71beb3a9ac551d3ca3a52d2c",
+      "focus_evidence_sha256": "7223011e8776f5543e38ce148db1e64b38c9d0b7bacaa40c1a223a3f09e737e7"
+    },
+    {
+      "tier": "Nano",
+      "cases": [
+        {
+          "case": 1,
+          "sequence": "MOTS20-11",
+          "frame": 1,
+          "reused": false,
+          "reason": "tier diagnostic: equal TP for two models, unequal FP and different GT"
+        },
+        {
+          "case": 2,
+          "sequence": "MOTS20-09",
+          "frame": 263,
+          "reused": true,
+          "reason": "shared anchor: common failure"
+        },
+        {
+          "case": 3,
+          "sequence": "MOTS20-02",
+          "frame": 300,
+          "reused": true,
+          "reason": "trade-off: added valid GT and more unmatched outputs"
+        },
+        {
+          "case": 4,
+          "sequence": "MOTS20-09",
+          "frame": 1,
+          "reused": true,
+          "reason": "similar coverage but extra masks on already matched GT"
+        }
+      ],
+      "changed_cases": [
+        1
+      ],
+      "archives": [
+        {
+          "original": "PRESENTATION_SUMMARY_TH.md",
+          "archive": "reports/archive/PRESENTATION_SUMMARY_TH.md.pre-tier-case-selection-20261006-v2",
+          "sha256": "f5b8b551c5bf6733895bd2e1e5801e23c25a11559e1cf5ac416b30c468bc268f"
+        },
+        {
+          "original": "configs/report_templates/TIER_PRESENTATION_SUMMARY_TH_TEMPLATE.md",
+          "archive": "reports/archive/configs__report_templates__TIER_PRESENTATION_SUMMARY_TH_TEMPLATE.md.pre-tier-case-selection-20261006-v2",
+          "sha256": "60184ff214347a5bba14ea5ede1ed81259f2dd382fdaca9074a9d31c74993a88"
+        },
+        {
+          "original": "manifests/DOCUMENT_VALIDATION.json",
+          "archive": "reports/archive/manifests__DOCUMENT_VALIDATION.json.pre-tier-case-selection-20261006-v2",
+          "sha256": "e59d82a7dc888499764bd2802d21df77a8ac09f5d69c1dd4210d6dca257c7b86"
+        }
+      ],
+      "case_evidence_sha256": "f9a7b2d60c505c8c38a1b58641f4da985d021753055337daf61dd0c7ab419cf1",
+      "focus_evidence_sha256": "a8b74013b681a465a0b48d0bf0628033e5d574309bb56613459e641e4042e9e7"
+    }
+  ],
+  "changed_cases": 6,
+  "distinct_original_frames": 10,
+  "case_slots": 20,
+  "local_documentation_validation": "PASS: 5 completed tiers, native saved-mask matching/FP overlap, canonical tables, source/measurement hashes, 48 tracked PNG embeds"
+}

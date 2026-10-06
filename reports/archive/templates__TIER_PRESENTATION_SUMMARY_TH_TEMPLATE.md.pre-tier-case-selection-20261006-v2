@@ -18,10 +18,6 @@ do not embed placeholder image links or analyze one completed model alone. -->
 {{SELECTION_POOL_AND_REASONS}}
 <!-- Select ~3–5 diagnostic cases from actual benchmark artifacts: advantage,
 shared failure, counterexample/trade-off, similar-output/near-tie where available.
-Use one shared cross-tier anchor plus tier-specific diagnostic cases where useful.
-Do not force the same case set across tiers; justify any diagnostic frame reuse.
-Count distinct source frames separately from case slots; reuse adds no independent evidence.
-Preserve previous artifacts; activate a versioned selection via manifests/QUALITATIVE_SELECTION.json.
 Shortlist with existing per-frame TP/FP/FN/matched IoU; inspect few candidates.
 First reuse comparisons; otherwise render saved predictions + original/GT.
 Never rerun inference for documentation. If reconstruction unavailable, report it.
