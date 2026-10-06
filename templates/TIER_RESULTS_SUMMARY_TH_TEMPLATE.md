@@ -1,34 +1,18 @@
 # สรุปผล {{TIER}} YOLO Instance Segmentation
 
-<!-- COMPACT QUANTITATIVE SUMMARY. After COMPLETE + validated canonical CSV only.
-For NOT_RUN, retain headings and empty tables; state pending instead of inventing winners.
-Include concise per-model table interpretation; do not add visual case analysis. -->
-
 ## สรุปใน 1 นาที
 
-<!-- 5–8 concise bullets: model membership; MOTS20 2,862 frames / 26,894 frame-level
-Person GT instances; pretrained / no fine-tuning; accuracy winner; inference and
-pipeline speed winners; lowest allocated VRAM; largest measured trade-off. -->
+<!-- ใช้ 5–8 ข้อ: สมาชิกโมเดล, 2,862 เฟรม, GT 26,894 รายเฟรม, pretrained ไม่ปรับจูน, ผู้ชนะและข้อแลกเปลี่ยนหลัก -->
 {{OVERVIEW_BULLETS}}
 
 ## ผลลัพธ์หลัก
 
-| Model | Mask mAP50-95 | AP75 | Recall | Inference ms | Pipeline ms | FPS | Peak VRAM MiB |
-|---|---|---|---|---|---|---|---|
-<!-- One canonical table, fixed family order. AP/Recall 6 decimals; ms/FPS 3; MiB 2. -->
+| โมเดล | Mask mAP50-95 | AP75 | Recall | Inference (ms) | Pipeline (ms) | FPS | Peak allocated VRAM (MiB) |
+| --- | --- | --- | --- | --- | --- | --- | --- |
 
 ## สรุปผลจากตาราง
 
-<!-- One subsection per valid model in fixed family order (YOLO26, YOLO11,
-YOLOv9 e/c for Largest/Second-largest only, YOLOv8). Use 1–2 short paragraphs:
-measured strengths → actual trade-off → conditional candidate for later evaluation.
-Explain relations across metrics rather than listing each cell or declaring balanced-best.
-AP50/TP-only IoU/Dice outside the compact table must cite canonical CSV / REPORT.
-TP-only quality is conditional on matching and may use different GT subsets per model.
-Recall is fixed-confidence mask-matching coverage, not tracking or detection alone.
-Separate inference from pipeline; tiny gaps are descriptive, not significance.
-For NOT_RUN, list planned model subsections with pending text and no fabricated rankings.
-No visual cases, causal architecture claims, weighted score or final CCTV superiority. -->
+<!-- หนึ่งหัวข้อย่อยต่อโมเดลเรียงตามตระกูล ใช้ 1–2 ย่อหน้าสั้นอธิบายจุดเด่น ข้อจำกัดข้อแลกเปลี่ยนจริงและตัวเลือกแบบมีเงื่อนไข AP50/TP-only ที่ไม่มีในตารางย่อต้องอ้าง CSV/REPORT; TP-only ใช้คู่ GT คนละชุดได้ ห้ามใส่กรณีภาพหรือคะแนนถ่วงน้ำหนัก -->
 
 ### {{MODEL}}
 
@@ -36,36 +20,36 @@ No visual cases, causal architecture claims, weighted score or final CCTV superi
 
 {{RESOURCE_TRADE_OFF_AND_CONDITIONAL_CANDIDATE}}
 
-## Winner ของแต่ละด้าน
+## ผู้ชนะในแต่ละด้าน
 
-| ด้าน | Model | Result |
-|---|---|---|
-<!-- Six rows: Mask mAP50-95, AP75, Recall, Inference speed, Pipeline speed, VRAM.
-Use explicit units. Winners require complete accuracy and accepted clean timing. -->
+<!-- 6 ด้าน: Mask mAP50-95, AP75, Recall, inference, pipeline, VRAM ใช้หน่วยชัดเจนและผลครบทุกโมเดล -->
+
+| ด้าน | โมเดล | ผลลัพธ์ |
+| --- | --- | --- |
 
 ## สิ่งที่ตัวเลขบอกเรา
 
 {{THREE_TO_FIVE_MEASURED_FINDINGS_INCLUDING_DESCRIPTIVE_NEAR_TIES}}
 
-## Trade-off หลัก
+## ข้อแลกเปลี่ยนหลัก
 
-### Accuracy vs Speed
+### ความแม่นยำกับความเร็ว
 
 {{CANONICAL_ACCURACY_GAP_AND_LATENCY_DIFFERENCE}}
 
-### Accuracy vs Memory
+### ความแม่นยำกับหน่วยความจำ
 
 {{CANONICAL_ACCURACY_GAP_AND_ALLOCATED_VRAM_DIFFERENCE}}
 
 ## ข้อควรระวังในการตีความ
 
-ไม่มีการทดสอบ statistical significance; MOTS20 ไม่ใช่ผลทดสอบ CCTV robustness ขั้นสุดท้าย
-Pipeline ไม่รวม RLE preparation และ disk I/O; VRAM เป็น peak allocated ของ benchmark
+ไม่มีการทดสอบนัยสำคัญทางสถิติ; MOTS20 ไม่ใช่ผลทดสอบความทนทานต่อ CCTV ขั้นสุดท้าย
+Pipeline ไม่รวม RLE preparation และการอ่านเขียนดิสก์; VRAM เป็น peak allocated ของ benchmark
 
 ## ข้อมูลสำหรับนำไปรวมต่อ
 
 {{CROSS_TIER_CANDIDATES_WITHOUT_WEIGHTED_SCORE_OR_FINAL_17_MODEL_CONCLUSION}}
 
 [TIER_RESULTS.csv](metrics/TIER_RESULTS.csv) · [REPORT.md](REPORT.md) ·
-[Visual analysis](PRESENTATION_SUMMARY_TH.md) ·
-[Master Study](https://github.com/folklazy/YOLO_Instance_Segmentation_MOTS20_Scaling_Study)
+[การวิเคราะห์ภาพ](PRESENTATION_SUMMARY_TH.md) ·
+[การศึกษาหลัก](https://github.com/folklazy/YOLO_Instance_Segmentation_MOTS20_Scaling_Study)

@@ -1,6 +1,6 @@
-# Canonical data interface
+# รูปแบบข้อมูลมาตรฐาน
 
-`study_id = yolo_instance_segmentation_mots20_scaling`; `schema_version = 1.0`. UTF-8 CSV, one header, comma delimiter; empty or NA means unavailable, never placeholder zero. Preserve numerical strings from authoritative measurements.
+`study_id = yolo_instance_segmentation_mots20_scaling`; `schema_version = 1.0` ใช้ CSV UTF-8 มี header เดียว คั่นด้วยจุลภาค ค่าว่างหรือ NA หมายถึงไม่มีข้อมูลห้ามใช้ศูนย์แทนค่าที่ขาด เก็บตัวเลขเต็มตามแหล่งวัดเดิม
 
 ## TIER_RESULTS.csv
 
@@ -32,24 +32,23 @@ study_id,schema_version,experiment,tier,family,model,loaded_parameters,fused_par
 study_id,schema_version,experiment,tier,family,model,checkpoint,max_dets,ap50,ap75,map50_95,ignored_detections_at_ap50,ap50_abs_difference_from_1000,ap75_abs_difference_from_1000,map50_95_abs_difference_from_1000,converged
 ```
 
-## Identity, units and missing data
+## ตัวระบุ หน่วย และข้อมูลที่ขาด
 
-experiment is the repository name; tier is largest/second_largest/medium/small/nano. family is YOLO26/YOLO11/YOLOv9/YOLOv8. model is display name (e.g. YOLOv9e-Seg); checkpoint is exact official filename. Display/order membership is in STUDY_STANDARD.md. Model order is fixed, sequences 02/05/09/11, timing stages preprocessing/inference/postprocessing/pipeline/rle_preparation/ultralytics_postprocess_inclusive. Sort preflight caps 100/200/300/1000 within model. Unique keys: tier+model (overall/complexity), tier+model+sequence, tier+model+stage, tier+model+max_dets.
+experiment คือชื่อ repository; ขนาดใช้ largest/second_largest/medium/small/nano; family ใช้ YOLO26/YOLO11/YOLOv9/YOLOv8; model เป็นชื่อแสดงผลและ checkpoint เป็นชื่อไฟล์ทางการ ลำดับโมเดลอยู่ใน STUDY_STANDARD.md; ลำดับภาพ 02/05/09/11; stage เวลาใช้ preprocessing/inference/postprocessing/pipeline/rle_preparation/ultralytics_postprocess_inclusive; preflight เรียง cap 100/200/300/1000
+คีย์ต้องไม่ซ้ำ: ขนาด+model สำหรับผลรวม/complexity; ขนาด+model+sequence สำหรับรายลำดับภาพ; ขนาด+model+stage สำหรับเวลา; ขนาด+model+max_dets สำหรับ preflight
+status ใช้ PASS/PASS_WITH_WARNINGS/FAIL/UNKNOWN/NOT_RUN แยกจากสถานะ completion ใน STUDY_STATE.json แถวมีเฉพาะผลที่เสร็จแล้ว ไฟล์มีแต่ header หมายถึง NOT_RUN; run_id ระบุรอบ accuracy เดิม; source_artifact เป็น path สัมพัทธ์คั่นด้วยอัฒภาคพร้อม hash ใน STANDARDIZATION.json
+AP, Precision, Recall, F1, TP IoU/Dice, confidence และ IoU เป็นสัดส่วน 0–1 ไม่ใช่เปอร์เซ็นต์เฟรมคือจำนวนภาพ; gt_instances คือ Person annotations รายเฟรม; tp/fp/fn และ ignored_predictions ใช้ fixed-confidence การจับคู่
+predictions รายลำดับภาพคือ predictions_at_confidence ก่อนกรอง ignore: predictions = tp+fp+ignored_predictions; gt_instances=tp+fn AP รวมไม่ใช่เฉลี่ย AP รายลำดับภาพ mask_map50_95 อ้าง map50_95 เดิม ส่วน TP-only อ้าง matched_iou_mean/matched_dice_mean ตามตัวแปลงใน scripts/stage0_standardize.py
+เวลาเป็น ms/frame; fps=1000/ค่าเฉลี่ย pipeline ms; peak_allocated_vram_mib เป็น MiB (2^20 bytes) ใช้ allocated peak สูงสุดจากรอบที่ยอมรับและรวมโมเดลที่ resident; checkpoint_mb เป็น MB (10^6 bytes) parameters/loaded_parameters/fused_parameters เป็นจำนวนเต็ม; gflops เป็นค่าประเมินเส้นทาง NMS-forward ที่ imgsz640 ไม่ใช่จำนวน operations ที่วัดจริง; model_load_seconds เป็นค่าเฉลี่ยเวลาโหลดจากรอบสะอาด; imgsz เป็นพิกเซลเข้า network; precision_mode FP32; device CUDA:0 ตามการมองเห็นจริง
+ค่าเฉลี่ย/median/std/P50/P95 คำนวณจาก 300 observations ไม่ใช่เฉลี่ย percentile แต่ละรอบ std ใช้ประชากร; repetitions=3, measured_frames=300 คือ 100 เฟรมทำซ้ำ; CLEAN หมายถึงยอมรับเฉพาะรอบไม่ถูกรบกวน ultralytics_postprocess_inclusive เป็นข้อมูลย่อยเพื่อวิเคราะห์ ห้ามบวกซ้ำใน pipeline RLE วัดแยกและเก็บสถิติเดิมโดยไม่คำนวณแทน
+max_dets ใน preflight เป็น cap ของ AP ไม่ใช่ cap ของโมเดล mask mAP ใช้ชื่อ map50_95 เดิม ความต่างเทียบ cap1000 เป็นค่าสัมบูรณ์ converged ต้อง <0.0001 ทั้ง AP50/AP75/mAP เก็บครบทุก cap
 
-status uses scientific result state PASS/PASS_WITH_WARNINGS/FAIL/UNKNOWN/NOT_RUN. completion is separate in STUDY_STATE.json. Only completed measurements are rows; header-only files mean NOT_RUN. run_id is the preserved accuracy run ID; source_artifact is a semicolon-delimited list of repository-relative authoritative paths, with hashes in STANDARDIZATION.json.
+## ความละเอียด ลำดับ และหลักฐาน
 
-AP, precision, recall, F1, TP IoU/Dice, confidences and IoU thresholds are fractions on 0–1 scale, never percentages. frames counts evaluated images; gt_instances counts Person frame annotations; tp/fp/fn and ignored_predictions use fixed-confidence matching. Per-sequence predictions means predictions_at_confidence before ignore filtering, so predictions = tp+fp+ignored_predictions. gt_instances=tp+fn. Overall AP is pooled, not mean sequence AP. Mask mAP50-95 aliases historical map50_95; TP means alias matched_iou_mean/matched_dice_mean. Source mappings are executable in scripts/stage0_standardize.py.
+CSV เก็บความละเอียดจากต้นทางค่าที่ไม่มีต้องว่าง/NA พร้อมเหตุผลใน provenance Markdown ใช้ AP/P/R/F1/IoU/Dice 6 ตำแหน่ง, เวลา/FPS/GFLOPs 3, VRAM/MB 2 และพารามิเตอร์เป็นจำนวนเต็มคั่นหลักพัน เรียงสมาชิกตามมาตรฐานเว้นแต่ระบุว่าจัดเรียงตาม metric
+ลำดับอำนาจหลักฐาน: ค่าที่วัดและตรึงไว้ > config/protocol ที่ตรึง > ผลตัวชี้วัด > แหล่งเวลา > provenance > REPORT > README ห้ามใช้ README เป็นต้นทางตัวเลข
 
-Latency is ms/frame; fps is 1000/mean pipeline ms. peak_allocated_vram_mib uses binary MiB (2^20 bytes), max accepted round peak including resident model. checkpoint_mb is decimal MB (10^6 bytes); parameters/loaded_parameters/fused_parameters are integer counts; gflops is NMS-forward estimate at imgsz640, not measured operations. model_load_seconds is arithmetic mean across clean rounds. imgsz is network pixels; precision_mode FP32; device CUDA:0 (logical visible device).
+## เงื่อนไขนำเข้าผลรวมในอนาคต
 
-Timing mean/median/std/P50/P95 are across 300 measured observations, not averages of per-round summary percentiles; std is population std. repetitions=3 and measured_frames=300 (100 unique frames repeated); CLEAN means accepted uncontaminated rounds only. `ultralytics_postprocess_inclusive` is a historical diagnostic subset and must not be added to pipeline again. RLE is separate. Preserve source summary strings without recomputing stats.
-
-Preflight max_dets is AP cap; mask mAP field retains historical name map50_95. Difference fields are absolute differences from cap1000; converged uses strict <0.0001 on all three AP fields. Complete sensitivity rows are retained.
-
-## Precision, ordering and evidence
-
-Machine CSV: preserve source precision; missing values empty/NA with reason in provenance. Markdown: AP/P/R/F1/IoU/Dice 6 decimals, latency/FPS 3, VRAM 2, parameters comma integer, GFLOPs 3, checkpoint MB 2. Use fixed membership order everywhere unless explicitly metric-sorted. Frozen structured measurement > frozen config/protocol > final metrics > timing > provenance > REPORT > README. Never use README as primary numeric evidence.
-
-## Future master import contract
-
-Do not generate master outputs during Stage 0. Later require exactly 17 unique approved checkpoints, expected tier membership, complete result coverage, matching study/schema IDs, source hashes, protocol compatibility and explicit synthesis authorization. Reject duplicates, missing/not-run/fail rows and silent schema/unit changes. PASS_WITH_WARNINGS may import with warnings carried forward. Compute tier winners and Pareto fronts without weighted scores; paired scaling deltas within family only. Keep per-sequence AP separate from pooled AP. Record each repository revision, CSV/source hashes and canonical run IDs in provenance/SOURCE_MANIFEST.json. Never infer result rows from templates or checkpoint presence.
+ไม่สร้างผล Master จากการปรับเอกสารนี้ การรวมผลภายหลังต้องได้รับคำสั่งผู้ใช้ มี 17 checkpoint ทางการที่ไม่ซ้ำ สมาชิกครบทุกขนาดและค่าครบ study/schema IDs ตรงกันต้นทาง hashes และโพรโทคอลสอดคล้อง ปฏิเสธแถวซ้ำ ขาด NOT_RUN/FAIL หรือการเปลี่ยน schema/หน่วยโดยไม่แจ้ง
+PASS_WITH_WARNINGS นำเข้าได้เมื่อส่งคำเตือนไปด้วย คำนวณผู้ชนะและ Pareto โดยไม่ใช้คะแนนถ่วงน้ำหนัก ความต่างข้ามขนาดเปรียบเทียบภายในตระกูลเดียวกัน แยก AP รายลำดับภาพจาก pooled AP เก็บ revision, CSV/ต้นทาง hashes และ run IDs ใน provenance/SOURCE_MANIFEST.json ห้ามสรุปว่าผลเสร็จจากโฟลเดอร์ template หรือ checkpoint ที่มีอยู่

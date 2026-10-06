@@ -1,56 +1,33 @@
-# YOLO Instance Segmentation MOTS20 Scaling Study
+# การศึกษา YOLO Instance Segmentation บน MOTS20 ตามขนาดโมเดล
 
-Stage 0: study setup and historical standardization only. Largest, Second-largest, Medium, Small and Nano are COMPLETE / PASS_WITH_WARNINGS. The final 17-model synthesis is pending. This repository performs no model inference.
+Largest, Second-largest, Medium, Small และ Nano เสร็จครบแล้ว สถานะ COMPLETE / PASS_WITH_WARNINGS ผลรวม 17 โมเดลยังรอคำสั่งผู้ใช้ repository นี้ควบคุมมาตรฐานและตรวจหลักฐาน ไม่ทำ inference
 
-## Control files
+## ไฟล์ควบคุมการศึกษา
 
-- [STUDY_STANDARD.md](STUDY_STANDARD.md): reusable execution and STOP rules
-- [STUDY_STATE.json](STUDY_STATE.json): actual completion/result states
-- [DATA_SCHEMA.md](DATA_SCHEMA.md): canonical import interface
-- [METHODOLOGY_REFERENCE.md](METHODOLOGY_REFERENCE.md): shared methodology
-- [templates/](templates/): four report reading levels
-- [provenance/](provenance/): audit, baseline, dataset and validation evidence
+- [STUDY_STANDARD.md](STUDY_STANDARD.md): วิธีทดลอง บทบาทเอกสารและเงื่อนไขหยุด
+- [STUDY_STATE.json](STUDY_STATE.json): สถานะการทดลองจริง แยกจากผลตรวจ
+- [DATA_SCHEMA.md](DATA_SCHEMA.md): คอลัมน์ หน่วยและเงื่อนไขนำเข้าข้อมูล
+- [METHODOLOGY_REFERENCE.md](METHODOLOGY_REFERENCE.md): วิธีทดลองร่วม
+- [templates/](templates/): รูปแบบ README, REPORT, RESULTS และ PRESENTATION
+- [provenance/](provenance/): หลักฐานต้นทาง baseline ข้อมูลและการตรวจเอกสาร
 
-## Study Navigation
+## การนำทางในชุดการศึกษา
 
-[Largest](https://github.com/folklazy/YOLO_Large_Seg_MOTS20_Benchmark) | [Second-largest](https://github.com/folklazy/YOLO_Second_Largest_Seg_MOTS20_Benchmark) | [Medium](https://github.com/folklazy/YOLO_Medium_Seg_MOTS20_Benchmark) | [Small](https://github.com/folklazy/YOLO_Small_Seg_MOTS20_Benchmark) | [Nano](https://github.com/folklazy/YOLO_Nano_Seg_MOTS20_Benchmark) | [Master Study](https://github.com/folklazy/YOLO_Instance_Segmentation_MOTS20_Scaling_Study)
+[Largest (X/E)](https://github.com/folklazy/YOLO_Large_Seg_MOTS20_Benchmark) | [Second-largest (L/C)](https://github.com/folklazy/YOLO_Second_Largest_Seg_MOTS20_Benchmark) | [Medium (M)](https://github.com/folklazy/YOLO_Medium_Seg_MOTS20_Benchmark) | [Small (S)](https://github.com/folklazy/YOLO_Small_Seg_MOTS20_Benchmark) | [Nano (N)](https://github.com/folklazy/YOLO_Nano_Seg_MOTS20_Benchmark) | [การศึกษาหลัก](https://github.com/folklazy/YOLO_Instance_Segmentation_MOTS20_Scaling_Study)
 
-## Later synthesis design
+## บทบาทและภาษาเอกสาร
 
-After all five tiers are validated and synthesis is explicitly requested, import exactly 17 unique checkpoints from canonical tier CSVs. DATA_SCHEMA.md defines rejection gates. Future artifacts: EXECUTIVE_SUMMARY_TH.md, MEETING_SUMMARY_TH.md, RESEARCH_INSIGHTS_TH.md, MASTER_RESULTS.md, METRIC_GUIDE_TH.md; metrics/MASTER_17_MODELS.csv, TIER_WINNERS.csv, SCALING_DELTAS.csv, PARETO_FRONTIER.csv, PARETO_VRAM.csv, PER_SEQUENCE_MASTER.csv; plots/; provenance/SOURCE_MANIFEST.json; scripts/build_master.py. These result files are intentionally absent now. No partial/fake master result exists.
+เอกสารปัจจุบันใช้ภาษาไทยเป็นหลัก คงชื่อโมเดล metric คำสั่ง path ฟิลด์ schema และสถานะเครื่องตามต้นฉบับ README นำทาง; REPORT เก็บผลเทคนิค; RESULTS สรุปตัวเลข; PRESENTATION วิเคราะห์ภาพจริง ไม่ทำสองบทสรุปให้เป็นเนื้อหาซ้ำ
+แต่ละขนาดมี 4 กรณีใช้เฟรมต้นฉบับและ saved RLE โดยไม่ inference เพิ่ม [เหตุผลเลือกกรณีปัจจุบัน](provenance/TIER_CASE_SELECTION_20261006_V2.md) บันทึกหนึ่งกรณีร่วมและสามกรณีตามพฤติกรรมของขนาดรวม 20 ตำแหน่งกรณีจาก 10 เฟรมต้นฉบับข้อมูลภาพซ้ำไม่ใช่ตัวอย่างอิสระเพิ่ม
+[การตรวจกรณีชุดก่อน](provenance/CASE_DECISION_REVIEW_20261006.md) และเอกสารใน archive/provenance เป็นบันทึกย้อนหลัง เก็บภาษาตามต้นฉบับไม่แก้ประวัติเพื่อให้ภาษาเหมือนเอกสารปัจจุบัน Nano กรณี 4 มี mask ส่วนเกินทับ valid GT ที่ได้คู่แล้ว ไม่ใช่คนปลอมในฉากหลัง
 
-## Validation and stop
+## การตรวจและข้อควรระวัง
 
-Run `.venv/bin/python YOLO_Instance_Segmentation_MOTS20_Scaling_Study/scripts/validate_stage0.py` from workspace root for read-only interface/source validation. Conversion scripts preserve run artifacts and execute no model inference; they are historical setup utilities, not benchmark launchers. Stage 0 completion does not authorize any next tier. STOP and wait for explicit instruction.
+จาก workspace root ใช้ `.venv/bin/python YOLO_Instance_Segmentation_MOTS20_Scaling_Study/scripts/validate_documentation_redesign.py` ตรวจรูปแบบ ตาราง หลักฐานภาพและ hash หลัง push ใช้ `--remote-images` เพื่อตรวจ commit/blob/HTTP ของรูปบน GitHub
+ตัวสร้างเอกสารและ validate_stage0.py เดิมเก็บเงื่อนไขย้อนหลัง เช่น NOT_RUN ของ Medium ห้ามรันตัวสร้างเหล่านี้ทับรายงานมาตรฐาน template หรือ study state ปัจจุบัน ใช้ validator ปัจจุบันและมาตรฐานภาษาเมื่อแก้เอกสาร
+Small รอบ `benchmark-20261005T051531Z` และ Nano รอบ `benchmark-20261005T083307Z` มี 3 checkpoint × 2,862 เฟรมผ่าน maxDet200 และ 9 clean timing rounds ต่อขนาดการเพิ่มข้อมูลใน CSV ที่เดิมว่างไม่อนุญาตให้แก้ค่าที่วัดก่อนหน้า
 
-## Documentation roles
+## การรวมผลในอนาคต
 
-RESULTS_SUMMARY_TH.md gives the compact quantitative summary. PRESENTATION_SUMMARY_TH.md
-explains actual same-frame prediction behavior, observed failures and cautious interpretation.
-All five tiers have four diagnostic cases each. Small now follows both shared quantitative and
-visual templates after the latest user-requested alignment; its benchmark-time numerical layouts
-are archived. Nano follows the current quantitative/visual templates after all three models finished.
-REPORT remains the technical record and links to visual analysis.
-Comparisons use original MOTS20 frames and saved RLE masks without inference or changed measurements.
-[Current tier-specific case selection](provenance/TIER_CASE_SELECTION_20261006_V2.md)
-uses one shared failure anchor plus three behavior-driven cases per tier (20 slots, 10 original frames).
-Six cases replace weaker/redundant examples; new views use saved masks and include MOTS20-11.
-[Prior case decision review](provenance/CASE_DECISION_REVIEW_20261006.md) remains a historical
-audit of the previous 20 cases and supplementary identical-ROI views.
-Nano Case 4 was corrected after native GT inspection: its extra masks overlap already matched people.
-The selected comparison images embedded in the summaries and their small case-selection/evidence
-manifests are versioned. Other generated images and saved predictions remain local/ignored.
-
-The Stage 0 generators are historical conversion utilities with embedded old documentation designs.
-Do not rerun them to regenerate current summaries, standards, templates or study state.
-Use the current templates and STUDY_STANDARD.md for future tiers.
-Validate the redesign with `.venv/bin/python YOLO_Instance_Segmentation_MOTS20_Scaling_Study/scripts/validate_documentation_redesign.py`
-from workspace root. The existing Stage 0 validator retains historical NOT_RUN assumptions for Medium.
-After publishing, add `--remote-images` to verify GitHub branch heads, image blob hashes and raw-image
-responses for every image embedded in the tier's top-level Markdown documents.
-
-Small completed run `benchmark-20261005T051531Z`: three checkpoints × 2,862 frames, AP maxDet200
-convergence PASS, nine clean timing rounds and scientific/document validation PASS. The documentation
-validator permits only formerly empty Small/Nano canonical CSV interfaces to receive these newly measured
-results; historical measurements in other tiers remain protected by their recorded hashes.
-Nano completed run `benchmark-20261005T083307Z`: three checkpoints × 2,862 frames, maxDet200 convergence PASS, nine CLEAN timing rounds and scientific/document validation PASS. Four inspected same-frame cases are versioned. All tiers are complete; STOP. Final cross-tier synthesis requires a new user instruction.
+เมื่อได้รับคำสั่งชัดเจนจึงนำเข้า 17 checkpoint ที่ไม่ซ้ำจาก CSV ของห้าขนาดตาม DATA_SCHEMA.md ผลที่วางแผน ได้แก่ EXECUTIVE_SUMMARY_TH.md, MEETING_SUMMARY_TH.md, RESEARCH_INSIGHTS_TH.md, MASTER_RESULTS.md, METRIC_GUIDE_TH.md; ตัวชี้วัด/MASTER_17_MODELS.csv, TIER_WINNERS.csv, SCALING_DELTAS.csv, PARETO_FRONTIER.csv, PARETO_VRAM.csv, PER_SEQUENCE_MASTER.csv; plots และ provenance/SOURCE_MANIFEST.json ตอนนี้ยังไม่สร้างผลเหล่านี้และไม่มีผลรวมบางส่วนที่สมมติขึ้น
+การเสร็จของขนาดหนึ่งหรือการแก้เอกสารไม่อนุญาตให้เริ่ม benchmark หรือการรวมผลใหม่โดยอัตโนมัติ

@@ -1,46 +1,24 @@
-# {{TIER}} — Visual and Qualitative Analysis
-
-<!-- Purpose: เมื่อดู prediction จริง โมเดลต่างกันอย่างไร?
-Only analyze after all tier models complete and artifacts are validated.
-For NOT_RUN/incomplete tiers, explicitly mark pending, retain empty tables, and
-do not embed placeholder image links or analyze one completed model alone. -->
+# {{TIER}} — การวิเคราะห์ภาพและพฤติกรรมเชิงคุณภาพ
 
 ## 1. ภาพรวมผลการทดลอง
 
 {{ONE_SHORT_PARAGRAPH_WITH_STATUS_AND_LINK_TO_RESULTS_SUMMARY}}
 
-| Model | Mask mAP50-95 | AP75 | Recall |
-|---|---|---|---|
-<!-- Context only. Full quantitative summary: RESULTS_SUMMARY_TH.md. -->
+| โมเดล | Mask mAP50-95 | AP75 | Recall |
+| --- | --- | --- | --- |
 
 ## การเลือกกรณีและการอ่านภาพ
 
+<!-- วิเคราะห์เมื่อทุกโมเดลครบแล้วเท่านั้น เลือกประมาณ 3–5 กรณีจากภาพจริง: ข้อได้เปรียบข้อผิดพลาดร่วมกรณีสวนอันดับผลคล้ายกัน/คะแนนใกล้ ใช้กรณีร่วมหนึ่งกรณีและกรณีแยกพฤติกรรมตามขนาดเมื่อมีประโยชน์ เหตุผลภาพซ้ำต้องชัด ไม่ถือว่าเป็นตัวอย่างอิสระเพิ่ม ใช้ภาพเดิมก่อน แล้วจึงสร้างจาก saved RLE; ไม่ inference เพื่อเอกสาร เก็บภาพเต็มพร้อม ROI พิกัดเดียวกันทุกโมเดลและเปิดใช้เวอร์ชันผ่าน QUALITATIVE_SELECTION.json -->
 {{SELECTION_POOL_AND_REASONS}}
-<!-- Select ~3–5 diagnostic cases from actual benchmark artifacts: advantage,
-shared failure, counterexample/trade-off, similar-output/near-tie where available.
-Use one shared cross-tier anchor plus tier-specific diagnostic cases where useful.
-Do not force the same case set across tiers; justify any diagnostic frame reuse.
-Count distinct source frames separately from case slots; reuse adds no independent evidence.
-Preserve previous artifacts; activate a versioned selection via manifests/QUALITATIVE_SELECTION.json.
-Shortlist with existing per-frame TP/FP/FN/matched IoU; inspect few candidates.
-First reuse comparisons; otherwise render saved predictions + original/GT.
-Never rerun inference for documentation. If reconstruction unavailable, report it.
-Same frame/full region, scale, confidence and panel order for all tier models:
-Original / GT, YOLO26, YOLO11, valid YOLOv9 e/c for X/E and L/C only, YOLOv8.
-Readable labels; explain ignore handling and FN/FP semantics. Retain source hashes.
-CASE_SELECTION.md records sequence/frame/reason and limitations of sampling. -->
 
-## Case {{N}} — {{SHORT_DIAGNOSTIC_TITLE}}
+## กรณี {{N}} — {{SHORT_DIAGNOSTIC_TITLE}}
 
-เหตุผลที่เลือก: {{REASON}} · Sequence: {{SEQUENCE}} · Frame: {{FRAME}}
+เหตุผลที่เลือก: {{REASON}} · ลำดับภาพ: {{SEQUENCE}} · เฟรม: {{FRAME}}
 
 ### ภาพเปรียบเทียบ
 
-<!-- Repeat this case block 3–5 times only with real existing repository images.
-Embed relative Markdown path, e.g. outputs/visualizations/qualitative/case_01_comparison.png.
-Whitelist the exact selected image filenames in .gitignore and commit them with the document.
-Validate Git tracking and actual remote image responses after push; local existence is insufficient.
-Never insert a broken/example image as real evidence. -->
+<!-- ทำบล็อกกรณีซ้ำ 3–5 ครั้ง เฉพาะภาพ repository ที่มีจริง ใช้เฟรม/พื้นที่/สัดส่วนภาพ/policy เดียวกัน เรียงต้นฉบับ/GT, YOLO26, YOLO11, YOLOv9 e/c เฉพาะสองขนาดใหญ่, YOLOv8 ตรวจ PNG, Git tracking และการโหลดจริงหลัง push; เพิ่มข้อยกเว้นชื่อไฟล์ที่เลือกใน .gitignore -->
 {{ACTUAL_COMPARISON_IMAGE_EMBED}}
 
 ### สิ่งที่เห็นจากภาพ
@@ -50,9 +28,6 @@ Never insert a broken/example image as real evidence. -->
 ### วิเคราะห์
 
 {{INTERPRETATION_OF_BEHAVIOR_AND_ALTERNATIVE_EXPLANATIONS}}
-<!-- A frame illustrates behavior; it cannot establish a dataset-wide effect.
-Mention FN can include masks failing IoU threshold, not just absent detections.
-Do not infer blur/low-light/occlusion severity/camera robustness without evidence. -->
 
 ### เชื่อมกับผลเชิงตัวเลข
 
@@ -60,62 +35,50 @@ Do not infer blur/low-light/occlusion severity/camera robustness without evidenc
 
 ### ใช้ประกอบการเลือกอย่างไร
 
-**Pain point / บทบาท:** {{DISCRIMINATING_SHARED_FAILURE_TRADE_OFF_OR_CONTROL}}
+**ประเด็นปัญหา / บทบาท:** {{DISCRIMINATING_SHARED_FAILURE_TRADE_OFF_OR_CONTROL}}
 
 **ใช้ประกอบการเลือก:** {{SPECIFIC_PRIORITY_AND_SUPPORTED_MODEL_COMPARISON}}
 
+<!-- FN อาจเป็น mask ที่ไม่ผ่าน IoU; FP อาจทับ GT ที่มีคู่แล้ว ตรวจ saved masks ก่อนเรียกว่าคนปลอมในฉากหลังภาพเดียวไม่ยืนยันความถี่ทั้งชุดข้อมูล/นัยสำคัญ/CCTV; เวลาและ VRAM อ่านจาก benchmark -->
 **ขอบเขตหลักฐาน:** {{WHAT_THIS_CASE_CANNOT_ESTABLISH}}
-<!-- If full-frame details are unreadable, add an identical-ROI saved-mask view
-alongside the retained full comparison. Include coordinates and GT outlines.
-Controls may have no discriminating failure. Optional per-GT IoU is diagnostic,
-not AP or a new dataset metric; a FN may still have a near-threshold mask.
-Check extra-mask overlap with already matched GT before labeling background FP. -->
 
-## Failure Analysis
+## วิเคราะห์ข้อผิดพลาด
 
-| Failure pattern | Models observed | Visual case | Interpretation |
-|---|---|---|---|
-<!-- Observed categories only; no unsupported frequency/counts. FP means unmatched
-under benchmark policy, not necessarily a nonexistent person. -->
+| รูปแบบข้อผิดพลาด | โมเดลที่พบ | กรณีที่พบ | การตีความ |
+| --- | --- | --- | --- |
 
-## Near-tie visual check
+## ตรวจภาพของคู่ที่คะแนนใกล้กัน
 
 {{DESCRIPTIVE_NEAR_TIE_PAIR_AND_SAME_FRAME_COMPARISON_WHERE_PRACTICAL}}
-<!-- No automatic cutoff or statistical superiority. If only timing is close,
-state that segmentation images cannot verify a latency near tie. -->
 
 ## สิ่งที่เรียนรู้จากภาพจริง
 
-### Observation {{N}}
+### ข้อสังเกต {{N}}
 
 {{DIRECT_OBSERVATION}}
 
-**Interpretation:** {{CAUTIOUS_INTERPRETATION}}
-<!-- Repeat for 3–6 meaningful findings. -->
+**การตีความ:** {{CAUTIOUS_INTERPRETATION}}
 
 ## เมื่อดูทั้งตัวเลขและภาพร่วมกัน
 
 {{SYNTHESIS_OF_MAP_RECALL_AP75_AND_VISIBLE_BEHAVIOR}}
-Latency และ VRAM เป็น system-level measurements อ่านจาก benchmark;
+เวลาแฝงและ VRAM เป็นการวัดระดับระบบอ่านจาก benchmark;
 ภาพ segmentation ไม่สามารถอธิบายหรือวัดสองค่านี้ได้
 
 ## ถ้าพิจารณาทั้งผลเชิงตัวเลขและภาพ
 
-| Priority | Candidate | Evidence |
-|---|---|---|
-<!-- Accuracy: quantitative + visual, Speed: clean benchmark latency,
-Low VRAM: memory benchmark, Balanced: explicit trade-off/constraints.
-No weighted score and no final CCTV superiority. -->
+| สิ่งที่ให้ความสำคัญ | โมเดลที่พิจารณา | หลักฐาน |
+| --- | --- | --- |
 
 ## ข้อจำกัด
 
-- เฟรมที่เลือกเป็นตัวอย่างเชิงคุณภาพ ไม่แทน dataset-level metrics
-- เลือกทั้งข้อได้เปรียบ ข้อผิดพลาด กรณีสวนอันดับ และผลคล้ายกัน เพื่อลด cherry-picking
-- MOTS20 ไม่ใช่ผลทดสอบ CCTV robustness ขั้นสุดท้าย
-- Qualitative observations และ numerical near ties ไม่ใช่ statistical significance
+- เฟรมที่เลือกเป็นตัวอย่างเชิงคุณภาพ ไม่แทนตัวชี้วัดระดับชุดข้อมูล
+- เลือกทั้งข้อได้เปรียบข้อผิดพลาดกรณีสวนอันดับและผลคล้ายกัน เพื่อลด cherry-picking
+- MOTS20 ไม่ใช่ผลทดสอบความทนทานต่อ CCTV ขั้นสุดท้าย
+- Qualitative observations และ numerical near ties ไม่ใช่นัยสำคัญทางสถิติ
 
 ## รายละเอียดเต็ม
 
-[Quantitative summary](RESULTS_SUMMARY_TH.md) · [REPORT.md](REPORT.md) ·
+[บทสรุปเชิงตัวเลข](RESULTS_SUMMARY_TH.md) · [REPORT.md](REPORT.md) ·
 [TIER_RESULTS.csv](metrics/TIER_RESULTS.csv) ·
-[Master Study](https://github.com/folklazy/YOLO_Instance_Segmentation_MOTS20_Scaling_Study)
+[การศึกษาหลัก](https://github.com/folklazy/YOLO_Instance_Segmentation_MOTS20_Scaling_Study)

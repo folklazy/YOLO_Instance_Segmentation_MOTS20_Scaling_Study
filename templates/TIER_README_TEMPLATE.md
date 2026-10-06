@@ -1,42 +1,39 @@
-# {{TIER}} YOLO Instance Segmentation Benchmark on MOTS20
+# {{TIER}} การทดสอบ YOLO Instance Segmentation บน MOTS20
 
-<!-- Template only. Populate from canonical CSV after validation; never invent measurements. -->
-
-## Overview
+## ภาพรวม
 
 {{OVERVIEW}}
 
-## Models
+## โมเดลที่ทดสอบ
 
 {{MODELS}}
 
-| Family | Model | Tier |
-|---|---|---|
-<!-- Add measured rows only, in fixed model order. -->
+| ตระกูล | โมเดล | ขนาด |
+| --- | --- | --- |
 
-## Experimental Status
+## สถานะการทดลอง
 
+<!-- แสดง COMPLETE/ผลตรวจ, จำนวนโมเดล/เฟรม/GT และ run ID จากแหล่งมาตรฐานเมื่อยังไม่รันให้ระบุ NOT_RUN -->
 {{EXPERIMENTAL_STATUS}}
 
-## Main Result
+## ผลลัพธ์หลัก
 
 {{MAIN_RESULT}}
 
-| Model | Mask mAP50-95 | Recall | F1 | Inference ms | Pipeline ms | FPS | Peak VRAM MiB |
+| โมเดล | Mask mAP50-95 | Recall | F1 | Inference (ms) | Pipeline (ms) | FPS | Peak allocated VRAM (MiB) |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-<!-- Add measured rows only, in fixed model order. -->
 
-## Reports
+## เอกสารประกอบ
 
 - [PRESENTATION_SUMMARY_TH.md](PRESENTATION_SUMMARY_TH.md)
 - [RESULTS_SUMMARY_TH.md](RESULTS_SUMMARY_TH.md)
 - [REPORT.md](REPORT.md)
 - [EXPERIMENT_PROTOCOL.md](EXPERIMENT_PROTOCOL.md)
 
-## Study Navigation
+## การนำทางในชุดการศึกษา
 
-[Largest](https://github.com/folklazy/YOLO_Large_Seg_MOTS20_Benchmark) | [Second-largest](https://github.com/folklazy/YOLO_Second_Largest_Seg_MOTS20_Benchmark) | [Medium](https://github.com/folklazy/YOLO_Medium_Seg_MOTS20_Benchmark) | [Small](https://github.com/folklazy/YOLO_Small_Seg_MOTS20_Benchmark) | [Nano](https://github.com/folklazy/YOLO_Nano_Seg_MOTS20_Benchmark) | [Master Study](https://github.com/folklazy/YOLO_Instance_Segmentation_MOTS20_Scaling_Study)
+[Largest](https://github.com/folklazy/YOLO_Large_Seg_MOTS20_Benchmark) | [Second-largest](https://github.com/folklazy/YOLO_Second_Largest_Seg_MOTS20_Benchmark) | [Medium](https://github.com/folklazy/YOLO_Medium_Seg_MOTS20_Benchmark) | [Small](https://github.com/folklazy/YOLO_Small_Seg_MOTS20_Benchmark) | [Nano](https://github.com/folklazy/YOLO_Nano_Seg_MOTS20_Benchmark) | [การศึกษาหลัก](https://github.com/folklazy/YOLO_Instance_Segmentation_MOTS20_Scaling_Study)
 
-## Reproducibility
+## หลักฐานสำหรับตรวจสอบซ้ำ
 
-[configs/](configs/) · [metrics/](metrics/) · [manifests/](manifests/)
+[configs/](configs/) · [ตัวชี้วัด/](metrics/) · [manifests/](manifests/)
