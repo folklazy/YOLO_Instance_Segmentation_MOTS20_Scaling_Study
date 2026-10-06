@@ -1,27 +1,33 @@
-# วิธีใช้ template เอกสารแต่ละขนาด
+# How to use tier templates
 
-## หน้าที่ของเอกสาร
+Read STUDY_STANDARD.md and DATA_SCHEMA.md first. README provides navigation;
+REPORT remains the technical research record. The Thai documents have different roles:
 
-อ่าน STUDY_STANDARD.md และ DATA_SCHEMA.md ก่อน ทุกเอกสารปัจจุบันใช้ภาษาไทยเป็นหลัก คงชื่อโมเดล metric คำสั่ง path และฟิลด์ข้อมูลตามต้นฉบับ
+- RESULTS_SUMMARY_TH: compact quantitative summary; 5–8 overview bullets, one canonical table,
+  a per-model table interpretation (1–2 short paragraphs on strengths, actual trade-offs and
+  conditional candidates), six-category winners, 3–5 measured findings, concise speed/memory
+  trade-offs and cross-tier inputs. No detailed visual cases or repeated full tables. Cite canonical
+  CSV/REPORT for AP50/TP-only quality outside the compact table and explain the matching limitation.
+- PRESENTATION_SUMMARY_TH: visual evidence and qualitative interpretation; one short overview,
+  small context table, ~3–5 same-frame cases with observation → analysis → numeric connection,
+  observed failures, near-tie check, 3–6 observation/interpretation findings and combined selection.
+  No long numerical recap, repeated per-model rankings or mentor-specific section.
 
-| ไฟล์ | หน้าที่ | เนื้อหาหลัก |
-|---|---|---|
-| README.md | นำทาง | งานที่ทดสอบ สมาชิกโมเดล สถานะ ตารางย่อ และลิงก์ |
-| REPORT.md | บันทึกเทคนิค | ความสอดคล้องโพรโทคอล ผลครบ ผู้ชนะ ข้อค้นพบรายลำดับภาพ เวลา/VRAM ข้อจำกัด และหลักฐาน |
-| RESULTS_SUMMARY_TH.md | สรุปเชิงตัวเลข | 5–8 ข้อ ตารางเดียว การตีความสั้นรายโมเดล ผู้ชนะ ข้อแลกเปลี่ยนและตัวเลือกไปทดสอบต่อ |
-| PRESENTATION_SUMMARY_TH.md | วิเคราะห์ภาพ | กรณีจริง ข้อสังเกต การตีความ ข้อผิดพลาด คู่คะแนนใกล้ และการใช้หลักฐานประกอบการเลือก |
+For NOT_RUN/incomplete tiers: retain headings and empty tables, mark pending, keep canonical CSVs
+header-only, omit image placeholders. Analyze only after every model in the tier completes.
+M/S/N use YOLO26, YOLO11, YOLOv8; X/E and L/C also use valid YOLOv9 e/c.
+Reuse actual comparisons first, otherwise render saved RLE + original frames; never run inference
+to fill documentation. If evidence cannot be reconstructed, explicitly report the gap.
 
-## กฎร่วม
+Select cases using existing per-frame artifacts and a small visual review, including shared errors,
+counterexamples and similar outputs. Record sequence/frame/selection reason and source hashes.
+Use the same full-frame region, confidence and scale; explain GT IDs, ignore and FN/FP handling.
+Only describe observed error categories. Counts require per-frame evidence; no inferred frequency.
+Visuals may interpret mAP/AP75/Recall behavior; latency and VRAM remain benchmark measurements.
+Do not claim significance, architectural causality, final CCTV suitability or a weighted score.
+REPORT may link to PRESENTATION in a short Qualitative Analysis section without duplicating cases.
 
-เรียง YOLO26, YOLO11, YOLOv9 e/c เฉพาะ Largest/Second-largest, YOLOv8 เมื่อยัง NOT_RUN ใช้หัวข้อ/ตารางว่างและข้อความรอผล ห้ามสร้างผู้ชนะหรือภาพสมมติ วิเคราะห์เมื่อ accuracy และการวัดเวลาครบทุกโมเดลเท่านั้น
-ตารางต้องสร้างหรือตรวจจาก canonical CSV; AP/Recall/IoU/Dice ใช้ 6 ตำแหน่ง, เวลา/FPS/GFLOPs 3, MiB/MB 2 ไม่เปลี่ยนตัวเลข CSV
-
-## การเลือกและเผยแพร่ภาพ
-
-เลือกประมาณ 3–5 กรณีจากผลบันทึกเดิม ให้มีข้อได้เปรียบข้อผิดพลาดร่วมกรณีสวนอันดับและผลคล้ายกัน ใช้เฟรมเดียวกันทุกโมเดลภายในกรณีใช้กรณีร่วมและกรณีเฉพาะขนาดตามประโยชน์ ภาพซ้ำไม่เพิ่มตัวอย่างอิสระ
-ใช้ comparison เดิมก่อน หรือสร้างจาก saved RLE กับเฟรมต้นฉบับโดยไม่ inference เพิ่ม เก็บภาพเต็มคู่กับ ROI พิกัดเดียวกัน แยกข้อสังเกตจากการตีความ ตรวจ GT การจับคู่/FP overlap ก่อนระบุประเภทข้อผิดพลาดไม่อนุมานสภาพแสง/ระดับการบังหรือความทนทาน CCTV จากภาพเดียว
-เก็บต้นทาง hashes และเหตุผลเลือก เปลี่ยนเวอร์ชันผ่าน manifests/QUALITATIVE_SELECTION.json ไม่เขียนทับภาพเก่า เพิ่มข้อยกเว้นไฟล์รูปที่เลือกใน .gitignore และตรวจ Git tracking/PNG/remote HTTP หลัง push
-
-## การตรวจและบันทึกย้อนหลัง
-
-เก็บเอกสารก่อนแก้ใน reports/archive และตรวจด้วย scripts/validate_documentation_redesign.py ของ Master ห้ามรันตัวสร้างรายงานย้อนหลังทับรูปแบบปัจจุบัน บันทึกภาษาเดิมใน archive/provenance/frozen inputs คงเดิม ไม่แก้ค่าที่วัดหรือเริ่มการทดลองใหม่เพื่อเอกสาร
+Publish selected images embedded in the canonical Markdown: whitelist exact comparison filenames
+in the tier's .gitignore and commit them. Keep other generated outputs, predictions and source frames
+ignored. Validate PNG integrity and Git tracking before push, then verify actual raw-image responses
+and matching image blob hashes on GitHub. Checking local paths alone is insufficient.

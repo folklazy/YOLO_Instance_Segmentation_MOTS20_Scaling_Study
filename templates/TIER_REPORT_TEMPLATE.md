@@ -1,69 +1,73 @@
-# {{TIER}} การทดสอบ YOLO Instance Segmentation — MOTS20
+# {{TIER}} YOLO Segmentation Benchmark — MOTS20
 
-## 1. สถานะการทดลอง
+<!-- Template only. Populate from canonical CSV after validation; never invent measurements. -->
+
+## 1. Experiment Status
 
 {{1._EXPERIMENT_STATUS}}
 
-## 2. โมเดลที่ทดสอบ
+## 2. Models Tested
 
 {{2._MODELS_TESTED}}
 
-| ตระกูล | โมเดล | จำนวนพารามิเตอร์ | GFLOPs | Checkpoint (MB) |
+| Family | Model | Parameters | GFLOPs | Checkpoint MB |
 | --- | --- | --- | --- | --- |
+<!-- Add measured rows only, in fixed model order. -->
 
-## 3. ความสอดคล้องกับโพรโทคอล
+## 3. Protocol Compatibility
 
-<!-- ตารางกลาง 9 รายการ: ข้อมูล, ตัวประเมิน, การเตรียมภาพ, ขนาดภาพเข้า, ความละเอียดเชิงตัวเลข, เกณฑ์, maxDet, วิธีวัดเวลา, environment รายการตรวจละเอียดเชื่อมไปยัง manifest -->
 {{3._PROTOCOL_COMPATIBILITY}}
 
-| รายการ | สถานะ |
-| --- | --- |
+| Item | Status |
+|---|---|
+<!-- Add measured rows only, in fixed model order. -->
 
-## 4. ผลลัพธ์รวม
+## 4. Overall Results
 
 {{4._OVERALL_RESULTS}}
 
-| โมเดล | Mask mAP50-95 | AP50 | AP75 | Precision | Recall | F1 | TP-only IoU | TP-only Dice | Inference (ms) | Pipeline (ms) | FPS | Peak allocated VRAM (MiB) | จำนวนพารามิเตอร์ | GFLOPs | Checkpoint (MB) |
+| Model | Mask mAP50-95 | AP50 | AP75 | Precision | Recall | F1 | TP-only IoU | TP-only Dice | Inference ms | Pipeline ms | FPS | Peak VRAM MiB | Params | GFLOPs | Checkpoint MB |
 | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+<!-- Add measured rows only, in fixed model order. -->
 
-## 5. ผู้ชนะในแต่ละด้าน
+## 5. Tier Winners
 
-<!-- 7 แถวตามลำดับ: mAP, AP75, Recall, inference, pipeline, FPS, VRAM ค่าจาก CSV และระบุหน่วย -->
 {{5._TIER_WINNERS}}
 
-| ด้าน | โมเดล | ผลลัพธ์ |
-| --- | --- | --- |
+| Category | Model | Value |
+|---|---|---|
+<!-- Add measured rows only, in fixed model order. -->
 
-## 6. ข้อค้นพบสำคัญ
+## 6. Key Findings
 
 {{6._KEY_FINDINGS}}
 
-## 7. ข้อสังเกตรายลำดับภาพ
+## 7. Per-sequence Observations
 
-<!-- สูงสุด/ต่ำสุดรายโมเดลจาก PER_SEQUENCE_RESULTS พร้อมลำดับที่ต่างจาก pooled AP ไม่คัดลอกทุก cell มาเล่าซ้ำ -->
 {{7._PER-SEQUENCE_OBSERVATIONS}}
 
-## 8. ประสิทธิภาพและการใช้ทรัพยากร
+## 8. Efficiency and Resource Observations
 
 {{8._EFFICIENCY_AND_RESOURCE_OBSERVATIONS}}
 
-## 9. คำเตือนและข้อสังเกตผิดปกติ
+## 9. Warnings and Anomalies
 
 {{9._WARNINGS_AND_ANOMALIES}}
 
-## 10. ข้อจำกัด
+## 10. Limitations
 
 {{10._LIMITATIONS}}
 
-## 11. หลักฐานสำหรับตรวจสอบซ้ำ
+## 11. Reproducibility and Source Artifacts
 
 {{11._REPRODUCIBILITY_AND_SOURCE_ARTIFACTS}}
 
-## 12. ความเชื่อมโยงกับการศึกษาทุกขนาด
+## 12. Relation to Full Scaling Study
 
 {{12._RELATION_TO_FULL_SCALING_STUDY}}
 
-## การวิเคราะห์เชิงคุณภาพ
+## Qualitative Analysis
 
-เมื่อทุกโมเดลครบ ให้เชื่อมไปยัง [PRESENTATION_SUMMARY_TH.md](PRESENTATION_SUMMARY_TH.md)
-และกรณี selection เวอร์ชันปัจจุบัน เก็บการอภิปรายภาพไว้ที่นั่น เมื่อไม่ครบให้ระบุว่ารอผล
+For completed tiers, see [PRESENTATION_SUMMARY_TH.md](PRESENTATION_SUMMARY_TH.md)
+for same-frame visual evidence and qualitative interpretation. Keep case discussion there.
+For incomplete tiers, state pending; do not analyze a single model alone.

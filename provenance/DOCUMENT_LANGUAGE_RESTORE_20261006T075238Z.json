@@ -1,0 +1,140 @@
+{
+  "timestamp": "20261006T075238Z",
+  "reason": "User requested the previous documentation language and format",
+  "inference_rerun": false,
+  "measured_values_changed": false,
+  "restored_repositories": [
+    {
+      "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
+      "language_commit": "3269fa1f82a0a2b47f32a2804bad3d29cf3636b7",
+      "restored_source_commit": "f23d86589f4b9d88a51578acccc94d50f2add455",
+      "restored_files": [
+        "EXPERIMENT_PROTOCOL.md",
+        "PRESENTATION_SUMMARY_TH.md",
+        "README.md",
+        "REPORT.md",
+        "RESULTS_SUMMARY_TH.md",
+        "outputs/plots/INDEX.md",
+        "outputs/visualizations/qualitative/selection_v2/CASE_SELECTION.md"
+      ]
+    },
+    {
+      "repository": "YOLO_Second_Largest_Seg_MOTS20_Benchmark",
+      "language_commit": "0a714734a1e061ea0cba172312fea9b92b1a11b1",
+      "restored_source_commit": "26ea3b2086d5155c8927b5bc6879a51f6f9bb71b",
+      "restored_files": [
+        "EXPERIMENT_PROTOCOL.md",
+        "PRESENTATION_SUMMARY_TH.md",
+        "README.md",
+        "REPORT.md",
+        "RESULTS_SUMMARY_TH.md",
+        "outputs/plots/INDEX.md",
+        "outputs/visualizations/qualitative/selection_v2/CASE_SELECTION.md"
+      ]
+    },
+    {
+      "repository": "YOLO_Medium_Seg_MOTS20_Benchmark",
+      "language_commit": "51b9f09270301c6236dc71ada71aa4a3f6e14472",
+      "restored_source_commit": "43ca000f80216464448154d35b37b15c429da709",
+      "restored_files": [
+        "EXPERIMENT_PROTOCOL.md",
+        "PRESENTATION_SUMMARY_TH.md",
+        "README.md",
+        "REPORT.md",
+        "RESULTS_SUMMARY_TH.md",
+        "configs/README.md",
+        "metrics/README.md",
+        "outputs/plots/INDEX.md",
+        "outputs/visualizations/qualitative/selection_v2/CASE_SELECTION.md",
+        "src/README.md"
+      ]
+    },
+    {
+      "repository": "YOLO_Small_Seg_MOTS20_Benchmark",
+      "language_commit": "377ab1fae5c8e3409c275c0f49c90da9f5617304",
+      "restored_source_commit": "dabf6e13f29c6c4c098f6544cc816efe1eb87bd6",
+      "restored_files": [
+        "EXPERIMENT_PROTOCOL.md",
+        "PRESENTATION_SUMMARY_TH.md",
+        "README.md",
+        "REPORT.md",
+        "RESULTS_SUMMARY_TH.md",
+        "configs/README.md",
+        "configs/report_templates/TIER_PRESENTATION_SUMMARY_TH_TEMPLATE.md",
+        "configs/report_templates/TIER_README_TEMPLATE.md",
+        "configs/report_templates/TIER_REPORT_TEMPLATE.md",
+        "configs/report_templates/TIER_RESULTS_SUMMARY_TH_TEMPLATE.md",
+        "manifests/DOCUMENT_VALIDATION.json",
+        "metrics/README.md",
+        "outputs/plots/INDEX.md",
+        "outputs/visualizations/qualitative/selection_v2/CASE_SELECTION.md",
+        "src/README.md"
+      ]
+    },
+    {
+      "repository": "YOLO_Nano_Seg_MOTS20_Benchmark",
+      "language_commit": "a098444ad19dfd69777b5bfac4f0a9ed00d1d429",
+      "restored_source_commit": "c77ade7e02cf949d37d274a35b4f7948de7538cd",
+      "restored_files": [
+        "EXPERIMENT_PROTOCOL.md",
+        "PRESENTATION_SUMMARY_TH.md",
+        "README.md",
+        "REPORT.md",
+        "RESULTS_SUMMARY_TH.md",
+        "configs/README.md",
+        "configs/report_templates/TIER_PRESENTATION_SUMMARY_TH_TEMPLATE.md",
+        "configs/report_templates/TIER_README_TEMPLATE.md",
+        "configs/report_templates/TIER_REPORT_TEMPLATE.md",
+        "configs/report_templates/TIER_RESULTS_SUMMARY_TH_TEMPLATE.md",
+        "manifests/DOCUMENT_VALIDATION.json",
+        "metrics/README.md",
+        "outputs/plots/INDEX.md",
+        "outputs/visualizations/qualitative/selection_v2/CASE_SELECTION.md",
+        "src/README.md"
+      ]
+    },
+    {
+      "repository": "YOLO_Instance_Segmentation_MOTS20_Scaling_Study",
+      "language_commit": "8fe91163024d459cb4e50e4b206f892e86e9f46f",
+      "restored_source_commit": "b492816e5ff832644afb687799822965605b22f8",
+      "restored_files": [
+        "DATA_SCHEMA.md",
+        "METHODOLOGY_REFERENCE.md",
+        "README.md",
+        "STUDY_STANDARD.md",
+        "scripts/validate_documentation_redesign.py",
+        "templates/README.md",
+        "templates/TIER_PRESENTATION_SUMMARY_TH_TEMPLATE.md",
+        "templates/TIER_README_TEMPLATE.md",
+        "templates/TIER_REPORT_TEMPLATE.md",
+        "templates/TIER_RESULTS_SUMMARY_TH_TEMPLATE.md"
+      ]
+    }
+  ],
+  "superseded_language_files": [
+    {
+      "original": "DOCUMENT_LANGUAGE_STANDARD.md",
+      "archive": "reports/archive/DOCUMENT_LANGUAGE_STANDARD.md.superseded-on-language-restore-20261006T075238Z",
+      "sha256": "3949d9fc15ff89b48cba32922d5474b12ac568ae3800467f903640c1ec70d771"
+    },
+    {
+      "original": "DOCUMENT_STYLE.json",
+      "archive": "reports/archive/DOCUMENT_STYLE.json.superseded-on-language-restore-20261006T075238Z",
+      "sha256": "a4c1135756f3fe037a606aa470e5c3eaaeadb98d3d3444df2c20b5727a55e03e"
+    },
+    {
+      "original": "src/documentation_language.py",
+      "archive": "reports/archive/src__documentation_language.py.superseded-on-language-restore-20261006T075238Z",
+      "sha256": "f710d317d2a801eb26e0fe80cf96519741fe0486848d8a02fdd07141edf49238"
+    }
+  ],
+  "status": "PASS",
+  "validation": {
+    "documentation": "PASS",
+    "tiers": 5,
+    "embedded_images_checked": 48,
+    "restored_files_match_previous_revision": true,
+    "inference_rerun": false,
+    "measured_values_changed": false
+  }
+}
