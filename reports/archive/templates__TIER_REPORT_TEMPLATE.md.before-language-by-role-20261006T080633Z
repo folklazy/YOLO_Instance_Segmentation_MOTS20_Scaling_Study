@@ -1,6 +1,6 @@
 # {{TIER}} YOLO Segmentation Benchmark — MOTS20
 
-<!-- Template only. Write all headings and prose in English, including findings, timing notes and limitations. Populate from canonical CSV after validation; never invent measurements. Keep the shared headings and table schema. -->
+<!-- Template only. Populate from canonical CSV after validation; never invent measurements. -->
 
 ## 1. Experiment Status
 
@@ -20,7 +20,7 @@
 
 | Item | Status |
 |---|---|
-<!-- Use the nine shared compatibility rows: Dataset, Evaluator, Preprocessing, Input size, Precision, Thresholds, maxDet, Timing protocol, Environment. Link detailed scientific integrity checks separately. -->
+<!-- Add measured rows only, in fixed model order. -->
 
 ## 4. Overall Results
 
@@ -34,8 +34,6 @@
 
 {{5._TIER_WINNERS}}
 
-<!-- Seven ordered categories: Highest Mask mAP50-95, Highest AP75, Highest Recall, Fastest inference, Fastest pipeline, Highest FPS, Lowest VRAM. State ms/frame, pipeline-derived FPS and peak allocated MiB. -->
-
 | Category | Model | Value |
 |---|---|---|
 <!-- Add measured rows only, in fixed model order. -->
@@ -43,8 +41,6 @@
 ## 6. Key Findings
 
 {{6._KEY_FINDINGS}}
-
-<!-- Distinguish measured observations from interpretation. Describe near ties without implying statistical significance. -->
 
 ## 7. Per-sequence Observations
 
@@ -61,8 +57,6 @@
 ## 10. Limitations
 
 {{10._LIMITATIONS}}
-
-<!-- Explain frame-level GT, conditional TP-only quality, correlated frames, qualitative sampling and untested significance/robustness. Preserve applicable capacity caveats. -->
 
 ## 11. Reproducibility and Source Artifacts
 

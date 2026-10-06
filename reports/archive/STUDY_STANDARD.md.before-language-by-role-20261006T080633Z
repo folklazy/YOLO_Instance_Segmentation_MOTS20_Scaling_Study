@@ -61,7 +61,7 @@ Markdown AP/P/R/F1/IoU/Dice: 6 decimals; latency/FPS: 3; VRAM MiB: 2; parameters
 RESULTS_SUMMARY_TH.md is a compact quantitative result summary. Follow its template:
 5–8 bullets; one canonical results table; per-model table interpretation; six-category winner table; 3–5 directly measured findings;
 short Accuracy vs Speed and Accuracy vs Memory sections; cautions; cross-tier inputs/links.
-Include a concise per-model table interpretation section after the main table: one subsection per valid model
+Include a concise สรุปผลจากตาราง section after the main table: one subsection per valid model
 in fixed family order, 1–2 short paragraphs explaining measured strengths, limitations, actual
 trade-offs and conditional candidates. Do not merely restate every table cell or assume a balanced
 winner. Cite canonical CSV/REPORT for AP50/TP-only metrics omitted from the compact table;
@@ -140,7 +140,3 @@ For an explicitly authorized future tier: verify environment/imports/GPU without
 ## STOP gate
 
 Stage 0 authorizes setup and historical conversion only: no M/S/N downloads, preflight, inference, accuracy or speed benchmark; no final Master synthesis. Execute one tier per explicit request. Completion/readiness NEVER authorizes the next tier. After Stage 0 STOP and wait for explicit user instruction. Master later imports validated canonical results and performs no inference.
-
-## Documentation language
-
-Follow [DOCUMENTATION_LANGUAGE_POLICY.md](DOCUMENTATION_LANGUAGE_POLICY.md): English technical records and navigation, Thai prose in the two _TH summaries. Use the same language roles and section structure for every tier. Historical and frozen records retain their original language. This editorial rule changes no benchmark settings.

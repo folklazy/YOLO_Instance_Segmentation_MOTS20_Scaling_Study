@@ -54,5 +54,3 @@ convergence PASS, nine clean timing rounds and scientific/document validation PA
 validator permits only formerly empty Small/Nano canonical CSV interfaces to receive these newly measured
 results; historical measurements in other tiers remain protected by their recorded hashes.
 Nano completed run `benchmark-20261005T083307Z`: three checkpoints × 2,862 frames, maxDet200 convergence PASS, nine CLEAN timing rounds and scientific/document validation PASS. Four inspected same-frame cases are versioned. All tiers are complete; STOP. Final cross-tier synthesis requires a new user instruction.
-
-Language follows [DOCUMENTATION_LANGUAGE_POLICY.md](DOCUMENTATION_LANGUAGE_POLICY.md): English technical records and navigation, with Thai quantitative and visual summaries. Historical and frozen records retain their original language.

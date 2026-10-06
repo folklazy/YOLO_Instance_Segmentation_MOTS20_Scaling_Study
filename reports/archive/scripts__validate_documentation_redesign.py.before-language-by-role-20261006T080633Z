@@ -31,65 +31,24 @@ categories=[('Mask mAP50-95','mask_map50_95',max,''),('AP75','ap75',max,''),('Re
             ('VRAM','peak_allocated_vram_mib',min,' MiB')]
 def fmt(k,v):return f"{float(v):.{2 if k=='peak_allocated_vram_mib' else 3 if k in ['inference_ms_mean','pipeline_ms_mean','fps'] else 6}f}"
 
-# Editorial revisions preserve historical hashes through exact archived snapshots.
-# This manifest cannot authorize a measurement or frozen-protocol change.
-language_manifests=sorted((MASTER/'provenance').glob('DOCUMENT_LANGUAGE_BY_ROLE_*.json'))
-language_record=json.loads(language_manifests[-1].read_text()) if language_manifests else None
-
 def protected_artifact(path,expected):
     actual=ROOT/path
     if sha(actual)==expected:return
-    assert actual.suffix=='.md' and language_record is not None,path
-    revision=next(x for x in language_record['documents'] if x['path']==path)
-    assert sha(actual)==revision['after_sha256'],path
-    snapshot=next(x for x in revision['snapshots'] if x['sha256']==expected)
-    assert sha(ROOT/snapshot['path'])==expected,path
-    assert language_record['inference_rerun'] is False
-    assert language_record['measured_values_changed'] is False
-    assert language_record['metrics_recalculated'] is False
-
-def historical_document(actual,expected):
-    protected_artifact(str(actual.relative_to(ROOT)),expected)
-
-def validate_document_language():
-    assert language_record is not None,'Missing language-by-role provenance'
-    assert language_record['status'] in ['PENDING_VALIDATION','PASS']
-    assert language_record['inference_rerun'] is False and language_record['measured_values_changed'] is False
-    assert language_record['metrics_recalculated'] is False
-    for path,h in language_record['immutable_artifact_sha256'].items():
-        assert sha(ROOT/path)==h,('changed protected artifact',path)
-    for revision in language_record['documents']:
-        assert sha(ROOT/revision['path'])==revision['after_sha256'],revision['path']
-        for snapshot in revision['snapshots']:
-            assert sha(ROOT/snapshot['path'])==snapshot['sha256'],snapshot['path']
-        if revision['before_sha256'] is not None:
-            assert any(x['sha256']==revision['before_sha256'] for x in revision['snapshots'])
-    def historical(path):
-        return (any(x in path.parts for x in ['archive','frozen_inputs','frozen_pilot']) or
-                str(path).startswith(('reports/benchmark-','provenance/')) or
-                str(path) in ['BENCHMARK_INSIGHTS_TH.md','outputs/visualizations/qualitative/CASE_SELECTION.md'])
-    actual=set()
-    for d in [ROOT/f'YOLO_{t}_Seg_MOTS20_Benchmark' for t in ['Large','Second_Largest','Medium','Small','Nano']]+[MASTER]:
-        tracked=subprocess.check_output(['git','-C',str(d),'ls-files','*.md'],text=True).splitlines()
-        if d==MASTER:tracked.append('DOCUMENTATION_LANGUAGE_POLICY.md')
-        actual.update(str((d/f).relative_to(ROOT)) for f in tracked if not historical(Path(f)))
-    assert actual=={x['path'] for x in language_record['active_markdown']},'Active Markdown inventory changed'
-    for item in language_record['active_markdown']:
-        content=(ROOT/item['path']).read_text()
-        if item['role']=='english_technical':
-            assert not re.search('[ก-๙]',content),('Thai prose in English technical document',item['path'])
-        else:
-            assert item['role']=='thai_summary' and '_TH' in Path(item['path']).name
-            assert re.search('[ก-๙]',text(ROOT/item['path'])),('Missing Thai summary prose',item['path'])
-    assert language_record['reports']==5
-    assert language_record['report_numeric_table_cells_verified']==17*18+5*7
-
+    # A later authorized editorial revision may archive a report. Historical
+    # hashes stay intact; this exception never permits changing measurements.
+    assert path=='YOLO_Nano_Seg_MOTS20_Benchmark/REPORT.md',path
+    d=actual.parent
+    alignment=json.loads((d/'manifests/REPORT_ALIGNMENT.json').read_text())
+    assert alignment['status']=='PASS'
+    assert alignment['report_before_sha256']==expected
+    assert alignment['report_after_sha256']==sha(actual)
+    assert alignment['inference_rerun'] is False and alignment['measured_values_changed'] is False
+    assert alignment['metrics_recalculated'] is False
+    original=next(x for x in alignment['archives'] if x['original']=='REPORT.md')
+    assert sha(d/original['archive'])==original['sha256']==expected
 
 def validate_report(d,data):
     report=text(d/'REPORT.md')
-    assert not re.search('[ก-๙]',report),'REPORT must use English technical prose'
-    pointer=json.loads((d/'manifests/QUALITATIVE_SELECTION.json').read_text())
-    assert f"[current case selection]({pointer['case_selection']})" in report
     assert re.findall(r'^## .+$',report,re.M)==re.findall(r'^## .+$',text(MASTER/'templates/TIER_REPORT_TEMPLATE.md'),re.M)
     fields=['mask_map50_95','ap50','ap75','precision','recall','f1','tp_iou_mean','tp_dice_mean',
             'inference_ms_mean','pipeline_ms_mean','fps','peak_allocated_vram_mib','parameters','gflops','checkpoint_mb']
@@ -116,20 +75,18 @@ def validate_report(d,data):
     assert table_after(report,'## 3. Protocol Compatibility')[2:]==[[x,'PASS'] for x in protocol]
     if d.name!='YOLO_Nano_Seg_MOTS20_Benchmark':return
     alignment=json.loads((d/'manifests/REPORT_ALIGNMENT.json').read_text())
-    historical_document(d/'REPORT.md',alignment['report_after_sha256'])
-    historical_document(MASTER/'templates/TIER_REPORT_TEMPLATE.md',alignment['report_template_sha256'])
-    # Retain the previous audit's historical counter; current audits count
-    # the 15 overall + 3 complexity numeric cells per model, plus 7 winners.
+    assert sha(d/'REPORT.md')==alignment['report_after_sha256']
+    assert sha(MASTER/'templates/TIER_REPORT_TEMPLATE.md')==alignment['report_template_sha256']
     assert alignment['numeric_report_table_cells_verified']==len(data)*19+7==64
     for archive in alignment['archives']:assert sha(d/archive['archive'])==archive['sha256']
     for archive in alignment['master_validator_archives']:assert sha(MASTER/archive['archive'])==archive['sha256']
     for path,h in alignment['unchanged_source_artifact_sha256'].items():assert sha(d/path)==h,path
-    for path,h in alignment['unchanged_workspace_artifact_sha256'].items():protected_artifact(path,h)
-    for path,h in alignment['reference_report_sha256'].items():protected_artifact(path,h)
+    for path,h in alignment['unchanged_workspace_artifact_sha256'].items():assert sha(ROOT/path)==h,path
+    for path,h in alignment['reference_report_sha256'].items():assert sha(ROOT/path)==h,path
     record=json.loads((d/'manifests/DOCUMENT_VALIDATION.json').read_text())
     for path,h in record['document_sha256'].items():assert sha(d/path)==h,path
     for path,h in record['canonical_metrics_sha256'].items():assert sha(d/'metrics'/path)==h,path
-    assert record['report_numeric_table_cells_verified']==len(data)*18+7
+    assert record['report_numeric_table_cells_verified']==64
     assert report.count('- Models completed: 3/3')==1 and '- Frames: 2,862 per model; Person GT instances: 26,894' in report
     pointer=json.loads((d/'manifests/QUALITATIVE_SELECTION.json').read_text())
     assert pointer['case_selection']==alignment['active_case_selection']
@@ -146,7 +103,7 @@ def validate_report(d,data):
         a,b=min(itertools.combinations(data,2),key=lambda pair:abs(float(pair[0][claim['field']])-float(pair[1][claim['field']])))
         assert [a['model'],b['model']]==[claim['left'],claim['right']]
         assert claim['display']==f"{abs(float(a[claim['field']])-float(b[claim['field']])):.3f}"
-        assert f"{claim['left']} / {claim['right']} differ by {claim['display']} ms" in report
+        assert f"{claim['left']} / {claim['right']} ต่าง {claim['display']} ms" in report
     timing=rows(d/'metrics/TIMING_SUMMARY.csv')
     for row in data:
         for stage,label in [('postprocessing',row['model']),('rle_preparation',row['checkpoint'])]:
@@ -405,8 +362,6 @@ def validate_case_decisions(d,data,p,ev):
             assert '| '+str(gid)+' | '+' | '.join(values)+' |' in part
 
 
-validate_document_language()
-
 manifests=sorted((MASTER/'provenance').glob('DOCUMENTATION_REDESIGN_*.json'))
 assert manifests
 record=json.loads(manifests[-1].read_text())
@@ -553,9 +508,7 @@ for tier in ['Large','Second_Largest','Medium','Small','Nano']:
                 assert response.read(8)==b'\x89PNG\r\n\x1a\n',(url,'not a PNG response')
                 item.update(remote_blob_matches=True,http_status=response.status,content_type='image/png')
         published_images.append(item)
-print(json.dumps({'documentation_status':'PASS','active_markdown_checked':len(language_record['active_markdown']),
-                  'language_policy':'English technical / Thai summaries','report_numeric_table_cells_verified':language_record['report_numeric_table_cells_verified'],
-                  'immutable_artifacts_checked':len(language_record['immutable_artifact_sha256']),'tiers':summary,'measurement_files_unchanged':len(record['measurement_hashes_before'])-len(set(record['measurement_hashes_before']) & transitioned_measurements),
+print(json.dumps({'documentation_status':'PASS','tiers':summary,'measurement_files_unchanged':len(record['measurement_hashes_before'])-len(set(record['measurement_hashes_before']) & transitioned_measurements),
                   'inference_rerun':False,'existing_measured_values_changed':False,
                   'new_benchmark_interfaces':sorted(transitioned_measurements),
                   'embedded_images_checked':len(published_images),'remote_images_checked':args.remote_images,
