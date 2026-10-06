@@ -28,9 +28,8 @@ categories=[('Mask mAP50-95','mask_map50_95',max,''),('AP75','ap75',max,''),('Re
             ('VRAM','peak_allocated_vram_mib',min,' MiB')]
 def fmt(k,v):return f"{float(v):.{2 if k=='peak_allocated_vram_mib' else 3 if k in ['inference_ms_mean','pipeline_ms_mean','fps'] else 6}f}"
 
-# Small's benchmark initially pinned numerical layouts. Its quantitative summary
-# retains that profile; the latest presentation update follows the shared visual
-# template. Both documentation profiles preserve the frozen measurement protocol.
+# Small's original numerical layouts remain archived. Current summaries use
+# the shared quantitative/qualitative templates without changing measurements.
 def completed_small():
     d=ROOT/'YOLO_Small_Seg_MOTS20_Benchmark'
     complete=d/'manifests/SMALL_COMPLETE.json'
@@ -62,6 +61,24 @@ def validate_small_completed_artifacts(d,data,r,p):
     assert alignment['inference_rerun'] is False and alignment['measured_values_changed'] is False
     for path,h in alignment['measurement_hashes'].items():assert sha(ROOT/path)==h,path
     for archive in alignment['archives']:assert sha(d/archive['archive'])==archive['sha256']
+    quantitative=json.loads((d/'manifests/QUANTITATIVE_ALIGNMENT.json').read_text())
+    assert quantitative['status']=='PASS' and quantitative['active_results_profile']=='shared-compact-quantitative'
+    assert quantitative['inference_rerun'] is False and quantitative['measured_values_changed'] is False
+    assert quantitative['presentation_changed'] is False
+    # Document snapshots describe this edit; later authorized editorial changes
+    # may update them. Measured CSVs and the frozen protocol stay immutable.
+    for path,h in quantitative['unchanged_artifact_sha256'].items():
+        if '/metrics/' in path or path.endswith(('EXPERIMENT_PROTOCOL.md','STANDARDIZATION.json')):
+            assert sha(ROOT/path)==h,path
+    for archive in quantitative['archives']:assert sha(d/archive['archive'])==archive['sha256']
+    assert sha(d/'RESULTS_SUMMARY_TH.md')==quantitative['results_sha256']
+    assert sha(d/'configs/report_templates/TIER_RESULTS_SUMMARY_TH_TEMPLATE.md')==quantitative['template_sha256']
+    assert quantitative['template_sha256']==sha(MASTER/'templates/TIER_RESULTS_SUMMARY_TH_TEMPLATE.md')
+    for claim in quantitative['delta_claims']:
+        left=next(x for x in data if x['model']==claim['left_model'])
+        right=next(x for x in data if x['model']==claim['right_model'])
+        expected=f"{float(left[claim['field']])-float(right[claim['field']]):.{claim['decimals']}f}"
+        assert expected==claim['display'] and expected in r,claim
     setup=json.loads((d/'manifests/SMALL_SETUP.json').read_text())
     assert setup['report_layout_override']=='Explicit latest user headings replace qualitative-layout template for Small only'
     assert completed_small()
@@ -85,7 +102,7 @@ def validate_small_completed_artifacts(d,data,r,p):
         assert not re.search(r'(?i)mentor|อาจารย์|สรุปสำหรับคุยกับพี่',doc)
     assert r.startswith('# สรุปผล Small YOLO Instance Segmentation\n') and p.startswith('# Small (S) — Visual and Qualitative Analysis\n')
     assert '## Case ' not in r and '![' not in r
-    bullets=r.split('## สรุปใน 1 นาที\n')[1].split('\n## ผลหลัก')[0]
+    bullets=r.split('## สรุปใน 1 นาที\n')[1].split('\n## ผลลัพธ์หลัก')[0]
     assert 5<=sum(x.startswith('- ') for x in bullets.splitlines())<=8
     validate_qualitative(d,data,p)
     review=json.loads((d/'manifests/FINAL_DOCUMENT_REVIEW.json').read_text())
@@ -188,8 +205,7 @@ for tier in ['Large','Second_Largest','Medium','Small','Nano']:
             if not re.match(r'https?://|#',link):assert (d/link.split('#')[0]).exists(),(tier,doc,link)
     if tier=='Small' and data and completed_small():
         validate_small_completed_artifacts(d,data,r,p)
-        summary.append({'tier':tier,'status':'PASS','cases':4,'profile':'shared-visual-qualitative'})
-        continue
+    assert re.findall(r'^## .+$',r,re.M)==re.findall(r'^## .+$',text(MASTER/'templates/TIER_RESULTS_SUMMARY_TH_TEMPLATE.md'),re.M),(tier,'quantitative heading order')
     assert '## Failure Analysis' in p and '## Near-tie visual check' in p
     assert '## เมื่อดูทั้งตัวเลขและภาพร่วมกัน' in p
     assert '## Case ' not in r and '![' not in r
