@@ -3,6 +3,8 @@ from pathlib import Path
 import csv
 import hashlib
 import json
+import gzip
+import sys
 import re
 import argparse
 import os
@@ -10,6 +12,7 @@ import subprocess
 import urllib.request
 from urllib.parse import quote
 from PIL import Image
+import numpy as np
 
 ROOT=Path(__file__).resolve().parents[2]
 MASTER=Path(__file__).resolve().parents[1]
@@ -104,7 +107,6 @@ def validate_small_completed_artifacts(d,data,r,p):
     assert '## Case ' not in r and '![' not in r
     bullets=r.split('## สรุปใน 1 นาที\n')[1].split('\n## ผลลัพธ์หลัก')[0]
     assert 5<=sum(x.startswith('- ') for x in bullets.splitlines())<=8
-    validate_qualitative(d,data,p)
     review=json.loads((d/'manifests/FINAL_DOCUMENT_REVIEW.json').read_text())
     assert review['status']=='PASS' and review['measurements_changed'] is False and review['inference_run'] is False
     for path,h in review['canonical_metrics_sha256'].items():assert sha(d/path)==h,path
@@ -175,6 +177,78 @@ def validate_qualitative(d,data,p):
             per=next(x for x in rows(d/f"metrics/{ev['run_id']}/per_frame/{model['checkpoint']}.csv")
                      if x['sequence']==case['sequence'] and int(x['frame'])==case['frame'])
             for k in ['tp','fp','fn','ignored_predictions']:assert m[k]==int(per[k])
+    if (d/'manifests/CASE_DECISION_AUDIT.json').exists():
+        validate_case_decisions(d,data,p,ev)
+
+def validate_case_decisions(d,data,p,ev):
+    # Saved masks only; independent recalculation of the selected GT diagnostics.
+    sys.path.insert(0,str(ROOT/'YOLO_Large_Seg_MOTS20_Benchmark/src/frozen_pilot'))
+    from mots import load_frames
+    from metrics import CompactPrediction,fixed_metrics
+    out=d/'outputs/visualizations/qualitative'
+    audit=json.loads((d/'manifests/CASE_DECISION_AUDIT.json').read_text())
+    focus=json.loads((out/'FOCUS_EVIDENCE.json').read_text())
+    assert audit['status']=='PASS_WITH_LIMITATIONS' and audit['cases_inspected']==4
+    assert audit['pool_frames_rechecked']==12 and audit['selection_replaced'] is False
+    assert audit['inference_rerun'] is False and audit['measured_values_changed'] is False
+    assert sha(d/'PRESENTATION_SUMMARY_TH.md')==audit['presentation_sha256']
+    assert sha(out/'FOCUS_EVIDENCE.json')==audit['focus_evidence_sha256']
+    assert focus['inference_rerun'] is False and focus['measured_values_changed'] is False
+    assert focus['original_evidence_sha256']==sha(out/'CASE_EVIDENCE.json')
+    for archive in audit['archives']:assert sha(d/archive['archive'])==archive['sha256']
+    for path,h in audit['canonical_metrics_sha256'].items():assert sha(d/path)==h,path
+    assert p.count('### ใช้ประกอบการเลือกอย่างไร')==4
+    assert len(focus['cases'])==len(audit['cases'])==4
+    for i,(case,fc,review) in enumerate(zip(ev['cases'],focus['cases'],audit['cases']),1):
+        assert (fc['sequence'],fc['frame'])==(case['sequence'],case['frame'])==(review['sequence'],review['frame'])
+        assert fc['comparison_sha256']==case['comparison_sha256']==review['full_comparison_sha256']
+        assert fc['image_sha256']==case['image_sha256'] and fc['gt_sha256']==case['gt_sha256']
+        target=out/f'case_{i:02d}_focus.png'
+        assert sha(target)==fc['focus_sha256']==review['focus_sha256']
+        assert fc['focus_path']==target.name
+        with Image.open(target) as im:
+            assert list(im.size)==fc['focus_size']==[720*len(fc['regions']),482*(len(data)+1)]
+            im.verify()
+        frame=load_frames(ROOT/'datasets/MOTS/MOTS/train',case['sequence'],[case['frame']])[0]
+        for region in fc['regions']:
+            x0,y0,x1,y1=region['xyxy']
+            assert 0<=x0<x1<=frame.width and 0<=y0<y1<=frame.height
+            assert set(region['target_gt_ids'])<={g.object_id for g in frame.persons}
+        part=p.split(f'## Case {i} —',1)[1].split('\n## ',1)[0]
+        assert review['role'] in part and review['decision_use'] in part and review['limit'] in part
+        assert f'outputs/visualizations/qualitative/case_{i:02d}_comparison.png' in part
+        assert f'outputs/visualizations/qualitative/case_{i:02d}_focus.png' in part
+        assert [x['model'] for x in fc['models']]==[x['model'] for x in data]
+        for original,model in zip(case['models'],fc['models']):
+            assert model['prediction_sha256']==original['prediction_sha256']
+            saved=json.loads(gzip.decompress((ROOT/original['prediction_path']).read_bytes()))
+            preds=[CompactPrediction(x['confidence'],x['class'],x['bbox_xyxy'],{'size':x['rle']['size'],'counts':x['rle']['counts'].encode('ascii')}) for x in saved['predictions']]
+            fm=fixed_metrics(frame,preds,.25,.5,.5)
+            assert model['full_frame_counts']=={k:fm[k] for k in ['tp','fp','fn','ignored_predictions']}
+            for diagnostic in model['target_gt']:
+                gt=next(g.decode() for g in frame.persons if g.object_id==diagnostic['gt_id'])
+                match=next((x for x in fm['matches'] if x['object_id']==diagnostic['gt_id']),None)
+                assert diagnostic['matched']==bool(match)
+                assert diagnostic['matched_iou']==(match['iou'] if match else None)
+                candidates=[(j,float(np.count_nonzero(gt & x.mask)/np.count_nonzero(gt | x.mask))) for j,x in enumerate(preds) if x.confidence>=.25]
+                best=max((v for j,v in candidates),default=0.)
+                assert abs(best-diagnostic['best_candidate_iou_at_conf025'])<1e-12
+            if i==4 and 'case4_fp_diagnostics' in audit:
+                claims=[x for x in audit['case4_fp_diagnostics'] if x['model']==model['model']]
+                assert [x['prediction_index'] for x in claims]==fm['fp_indices']
+                for claim in claims:
+                    mask=preds[claim['prediction_index']].mask
+                    expected=max((float(np.count_nonzero(mask & g.decode())/np.count_nonzero(mask)),g.object_id,float(np.count_nonzero(mask & g.decode())/np.count_nonzero(mask | g.decode()))) for g in frame.persons)
+                    assert expected==(claim['prediction_ioa'],claim['best_overlap_gt_id'],claim['mask_iou'])
+                    assert claim['gt_already_matched']==any(x['object_id']==claim['best_overlap_gt_id'] for x in fm['matches'])
+        ids=sorted({x['gt_id'] for m in fc['models'] for x in m['target_gt']})
+        for gid in ids[:2] if i==4 else ids:
+            values=[]
+            for model in fc['models']:
+                g=next(x for x in model['target_gt'] if x['gt_id']==gid)
+                v=g['matched_iou'] if g['matched'] else g['best_candidate_iou_at_conf025']
+                values.append(('TP IoU ' if g['matched'] else 'FN; best IoU ')+f'{v:.3f}')
+            assert '| '+str(gid)+' | '+' | '.join(values)+' |' in part
 
 
 manifests=sorted((MASTER/'provenance').glob('DOCUMENTATION_REDESIGN_*.json'))
@@ -182,6 +256,11 @@ assert manifests
 record=json.loads(manifests[-1].read_text())
 for p,h in record['measurement_hashes_before'].items():historical_measurement(p,h)
 for archive in record['archives']:assert sha(ROOT/archive['archive'])==archive['sha256']
+decision_review=MASTER/'provenance/CASE_DECISION_REVIEW_20261006.json'
+if decision_review.exists():
+    decision_record=json.loads(decision_review.read_text())
+    for path,h in decision_record['protected_artifacts_sha256'].items():assert sha(ROOT/path)==h,path
+    for archive in decision_record['archives']:assert sha(MASTER/archive['archive'])==archive['sha256']
 interpretation_manifests=sorted((MASTER/'provenance').glob('TABLE_INTERPRETATION_*.json'))
 assert interpretation_manifests, 'Missing table interpretation provenance'
 interpretation_record=json.loads(interpretation_manifests[-1].read_text())

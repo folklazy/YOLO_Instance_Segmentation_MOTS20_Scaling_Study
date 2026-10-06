@@ -86,16 +86,6 @@ inspect a small set, not thousands of frames. Include advantage, shared failure,
 detection trade-off and similar-output/near-tie cases where available. Document selection pool,
 sequence, frame, reasons and source hashes; selected cases are diagnostic, not representative sampling.
 
-State each case's decision use and evidence limits explicitly: discriminating example, shared failure,
-counterexample/trade-off, or similar-output control. A control need not show a pain point or a winner.
-If small GT regions are unreadable, add a supplementary ROI from original frames and saved masks,
-with identical coordinates/scale for every model and the full comparison retained visibly. Document
-ROI coordinates and source hashes; enlargement does not add source detail. Where needed, inspect
-individual-GT matching or candidate IoU to distinguish a missing mask from a below-threshold mask.
-Label these diagnostics separately from canonical dataset metrics; never change the evaluator or
-counts to make a visual result more persuasive. Explicitly verify whether extra masks overlap valid
-GT already assigned a match before calling them background false positives.
-
 All tier models use the same original frame, full image region, scale, confidence and ignore policy.
 Panel order: Original/GT, YOLO26, YOLO11, valid YOLOv9 e/c when applicable, YOLOv8.
 Clear labels and GT IDs should support observations. Store new composites under the owning tier's

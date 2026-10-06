@@ -54,19 +54,6 @@ Do not infer blur/low-light/occlusion severity/camera robustness without evidenc
 
 {{DIRECTIONAL_CONSISTENCY_OR_COUNTEREXAMPLE_TO_CANONICAL_MAP_AP75_RECALL}}
 
-### ใช้ประกอบการเลือกอย่างไร
-
-**Pain point / บทบาท:** {{DISCRIMINATING_SHARED_FAILURE_TRADE_OFF_OR_CONTROL}}
-
-**ใช้ประกอบการเลือก:** {{SPECIFIC_PRIORITY_AND_SUPPORTED_MODEL_COMPARISON}}
-
-**ขอบเขตหลักฐาน:** {{WHAT_THIS_CASE_CANNOT_ESTABLISH}}
-<!-- If full-frame details are unreadable, add an identical-ROI saved-mask view
-alongside the retained full comparison. Include coordinates and GT outlines.
-Controls may have no discriminating failure. Optional per-GT IoU is diagnostic,
-not AP or a new dataset metric; a FN may still have a near-threshold mask.
-Check extra-mask overlap with already matched GT before labeling background FP. -->
-
 ## Failure Analysis
 
 | Failure pattern | Models observed | Visual case | Interpretation |

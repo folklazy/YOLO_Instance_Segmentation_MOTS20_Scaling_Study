@@ -32,6 +32,9 @@ visual templates after the latest user-requested alignment; its benchmark-time n
 are archived. Nano follows the current quantitative/visual templates after all three models finished.
 REPORT remains the technical record and links to visual analysis.
 Comparisons use original MOTS20 frames and saved RLE masks without inference or changed measurements.
+[Case decision review](provenance/CASE_DECISION_REVIEW_20261006.md) audits all 20 selected cases,
+adds identical-ROI views and explains which examples distinguish models and which are controls.
+Nano Case 4 was corrected after native GT inspection: its extra masks overlap already matched people.
 The selected comparison images embedded in the summaries and their small case-selection/evidence
 manifests are versioned. Other generated images and saved predictions remain local/ignored.
 
