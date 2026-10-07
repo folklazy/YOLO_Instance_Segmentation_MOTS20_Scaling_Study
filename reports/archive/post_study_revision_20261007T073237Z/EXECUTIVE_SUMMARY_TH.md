@@ -41,8 +41,3 @@
 Pipeline/FPS ไม่รวม decode, RLE preparation และเขียนผล หน่วย VRAM เป็น allocator peak ไม่ใช่ GPU memory ทั้งหมด ขั้นต่อไปควรกำหนด robustness dataset และ deployment pipeline ให้ตรงงานจริง แล้วประเมิน candidates ด้วยเกณฑ์ที่อนุมัติแยกต่างหาก ขั้นนี้ไม่เริ่ม benchmark ใหม่
 
 [ผลเต็ม](MASTER_RESULTS.md) · [Research insights](RESEARCH_INSIGHTS_TH.md) · [ข้อมูลหลัก](metrics/MASTER_17_MODELS.csv)
-
-
-## ข้อมูลเสริมจาก post-study analysis
-
-Accuracy–pipeline Pareto เหลือ YOLO26x/YOLO26l โดย l เป็น candidate efficiency point ภายใต้ objectives ที่วัด Postprocessing มากกว่าครึ่ง pipeline ใน 12 จาก 17 โมเดล จึงไม่ใช้ forward latency แทน throughput; RLE ยังแยกจาก pipeline FPS รายงาน [ภาพ x/l](YOLO26X_VS_YOLO26L_VISUAL_TH.md) เก็บทั้งข้อได้เปรียบและ counterexamples ส่วน [Research Insights](RESEARCH_INSIGHTS_TH.md) อธิบาย sequence sensitivity และ near-tie resource trade-offs ตัวเลข benchmark เดิมไม่เปลี่ยนและยังไม่เริ่มการทดลองใหม่

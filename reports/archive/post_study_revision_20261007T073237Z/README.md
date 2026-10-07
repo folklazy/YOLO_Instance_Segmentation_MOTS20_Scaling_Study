@@ -41,7 +41,7 @@
 - [SOURCE_MANIFEST.json](provenance/SOURCE_MANIFEST.json): exact source revisions, run IDs, SHA256, compatibility evidence and editorial archives.
 - [MASTER_VALIDATION.json](provenance/MASTER_VALIDATION.json): final scientific/document checks.
 
-## Original ten Master plots
+## Ten Master plots
 
 - [01_master_map_by_model.png](plots/01_master_map_by_model.png)
 - [02_family_accuracy_scaling.png](plots/02_family_accuracy_scaling.png)
@@ -54,28 +54,6 @@
 - [09_pareto_accuracy_latency.png](plots/09_pareto_accuracy_latency.png)
 - [10_adjacent_scaling_delta.png](plots/10_adjacent_scaling_delta.png)
 
-## Visual Research Analyses
-
-- [YOLO26x versus YOLO26l](YOLO26X_VS_YOLO26L_VISUAL_TH.md): detailed saved-prediction same-frame evidence for the x-to-l trade-off.
-- [YOLO26 scaling ladder](YOLO26_SCALING_VISUAL_TH.md): x/l/m/s/n diagnostic comparisons, including a control and common failure.
-- [Near-tied 26s / 11x / v9e](NEAR_TIE_26S_11X_V9E_VISUAL_TH.md): same-frame coverage and extra-output differences despite near-equal aggregate mAP.
-- [Largest (X/E) full qualitative research report](https://github.com/folklazy/YOLO_Large_Seg_MOTS20_Benchmark/blob/main/PRESENTATION_SUMMARY_TH.md)
-- [Second-largest (L/C) full qualitative research report](https://github.com/folklazy/YOLO_Second_Largest_Seg_MOTS20_Benchmark/blob/main/PRESENTATION_SUMMARY_TH.md)
-- [Medium full qualitative research report](https://github.com/folklazy/YOLO_Medium_Seg_MOTS20_Benchmark/blob/main/PRESENTATION_SUMMARY_TH.md)
-- [Small full qualitative research report](https://github.com/folklazy/YOLO_Small_Seg_MOTS20_Benchmark/blob/main/PRESENTATION_SUMMARY_TH.md)
-- [Nano full qualitative research report](https://github.com/folklazy/YOLO_Nano_Seg_MOTS20_Benchmark/blob/main/PRESENTATION_SUMMARY_TH.md)
-
-## Post-study derived analyses
-
-Derived from existing canonical results; no inference or timing rerun. Original measured CSVs, synthesis provenance and ten plots remain unchanged.
-
-- [Pipeline Pareto](metrics/PARETO_PIPELINE.csv): all models with membership flags; [scatter](plots/11_accuracy_vs_pipeline.png), [frontier](plots/12_pareto_accuracy_pipeline.png).
-- [Timing composition](metrics/TIMING_COMPOSITION.csv): original stage means and derived shares; [stacked plot](plots/13_timing_stage_composition.png).
-- [Per-sequence scaling](metrics/PER_SEQUENCE_SCALING_ANALYSIS.csv): source values, ranks and family deltas; [heatmap](plots/14_per_sequence_map_heatmap.png).
-- [Near-tie resource deltas](metrics/NEAR_TIE_RESOURCE_DELTAS.csv): explicit B-minus-A direction, absolute and relative costs.
-- [Derived data interface](POST_STUDY_DATA_SCHEMA.md): fields, units, ranks and direction conventions.
-- [Revision provenance](provenance/POST_STUDY_REVISION.json) and [revision validation](provenance/POST_STUDY_VALIDATION.json): archives, protected hashes and checks.
-
 ## Reproduce and validate
 
 Run from the workspace root with the existing environment; no packages need to change:
@@ -84,17 +62,16 @@ Run from the workspace root with the existing environment; no packages need to c
 .venv/bin/python -B YOLO_Instance_Segmentation_MOTS20_Scaling_Study/scripts/build_master.py --check-inputs
 .venv/bin/python -B YOLO_Instance_Segmentation_MOTS20_Scaling_Study/scripts/build_master.py --validate
 .venv/bin/python -B YOLO_Instance_Segmentation_MOTS20_Scaling_Study/scripts/validate_master.py
-.venv/bin/python -B YOLO_Instance_Segmentation_MOTS20_Scaling_Study/scripts/validate_post_study.py
 .venv/bin/python -B -m unittest discover -s YOLO_Instance_Segmentation_MOTS20_Scaling_Study/tests -v
 ```
 
-The original synthesis used scripts/build_master.py, scripts/plot_master.py and scripts/report_master.py. Preserve its existing outputs. Post-study analysis/report generation uses scripts/post_study_analysis.py and scripts/report_post_study.py; do not use the original report generator to replace the revised layout. Different existing outputs are never silently overwritten; archive them before a newly authorized rebuild. Calculations preserve source strings and use Decimal for scaling. The manifest records source revisions and builder hashes. None of these synthesis scripts import a model runtime or open raw predictions.
+The initial build uses scripts/build_master.py, plots use scripts/plot_master.py, and documents use scripts/report_master.py. Different existing outputs are never silently overwritten; archive them before a newly authorized rebuild. Calculations preserve source strings and use Decimal for scaling. The manifest records source revisions and builder hashes. None of these synthesis scripts import a model runtime or open raw predictions.
 
 ## Interpretation and retained evidence
 
 Separate measured observations from interpretation. Near ties are descriptive; no significance test is claimed. Pipeline FPS excludes RLE and output writing. Size reduction can lower forward time while raising pipeline latency or allocated VRAM. Pareto fronts are separate two-objective analyses, without a weighted winner. Results identify candidates for later CCTV robustness evaluation, not deployment readiness or final CCTV superiority.
 
-Tier RESULTS summaries are compact numerical quick summaries; PRESENTATION documents remain full visual qualitative research reports. The [current diagnostic case-selection audit](provenance/TIER_CASE_SELECTION_20261006_V2.md) remains unchanged; the original CSV-only synthesis did not inspect raw predictions. The separately authorized post-study visual extension reads only selected saved artifacts, as declared in revision provenance. Shared diagnostic frames are not independent samples.
+Existing tier quantitative summaries and visual qualitative analyses retain their distinct roles. The [current diagnostic case-selection audit](provenance/TIER_CASE_SELECTION_20261006_V2.md) remains unchanged; this synthesis does not reselect frames or inspect raw predictions. Shared diagnostic frames are not independent samples.
 
 [STUDY_STANDARD.md](STUDY_STANDARD.md), [STUDY_STATE.json](STUDY_STATE.json), [language policy](DOCUMENTATION_LANGUAGE_POLICY.md), [templates/](templates/) and frozen provenance remain available. Historical Stage 0 conversion/validation utilities retain their original assumptions; do not use them to regenerate current results or state. The previous read-only tier documentation validator remains supported after the authorized Master editorial transition.
 

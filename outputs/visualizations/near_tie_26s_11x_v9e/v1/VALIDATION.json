@@ -1,0 +1,11 @@
+{
+  "status": "PASS_WITH_LIMITATIONS",
+  "saved_predictions_only": true,
+  "inference_rerun": false,
+  "same_frame_and_identical_roi": "PASS",
+  "original_and_saved_artifact_sha256": "PASS",
+  "canonical_per_frame_counts": "PASS",
+  "selected_saved_masks_rechecked": 12,
+  "full_and_roi_images_visually_inspected": 8,
+  "limitations": "Diagnostic selection, not representative or independent sampling; no significance test"
+}

@@ -2,7 +2,7 @@
 
 <!-- COMPACT QUANTITATIVE SUMMARY. After COMPLETE + validated canonical CSV only.
 For NOT_RUN, retain headings and empty tables; state pending instead of inventing winners.
-Use compact model-role rows; no repeated per-model essays or visual case analysis. -->
+Include concise per-model table interpretation; do not add visual case analysis. -->
 
 ## สรุปใน 1 นาที
 
@@ -17,6 +17,25 @@ pipeline speed winners; lowest allocated VRAM; largest measured trade-off. -->
 |---|---|---|---|---|---|---|---|
 <!-- One canonical table, fixed family order. AP/Recall 6 decimals; ms/FPS 3; MiB 2. -->
 
+## สรุปผลจากตาราง
+
+<!-- One subsection per valid model in fixed family order (YOLO26, YOLO11,
+YOLOv9 e/c for Largest/Second-largest only, YOLOv8). Use 1–2 short paragraphs:
+measured strengths → actual trade-off → conditional candidate for later evaluation.
+Explain relations across metrics rather than listing each cell or declaring balanced-best.
+AP50/TP-only IoU/Dice outside the compact table must cite canonical CSV / REPORT.
+TP-only quality is conditional on matching and may use different GT subsets per model.
+Recall is fixed-confidence mask-matching coverage, not tracking or detection alone.
+Separate inference from pipeline; tiny gaps are descriptive, not significance.
+For NOT_RUN, list planned model subsections with pending text and no fabricated rankings.
+No visual cases, causal architecture claims, weighted score or final CCTV superiority. -->
+
+### {{MODEL}}
+
+{{MEASURED_STRENGTH_AND_LIMITATION}}
+
+{{RESOURCE_TRADE_OFF_AND_CONDITIONAL_CANDIDATE}}
+
 ## Winner ของแต่ละด้าน
 
 | ด้าน | Model | Result |
@@ -27,15 +46,6 @@ Use explicit units. Winners require complete accuracy and accepted clean timing.
 ## สิ่งที่ตัวเลขบอกเรา
 
 {{THREE_TO_FIVE_MEASURED_FINDINGS_INCLUDING_DESCRIPTIVE_NEAR_TIES}}
-
-## บทบาทของแต่ละโมเดล
-
-| Model | จุดเด่น | สิ่งที่แลก | เหมาะพิจารณาเมื่อ |
-|---|---|---|---|
-<!-- One concise row per model in fixed family order. Relate measured strengths
-and limitations to explicit constraints. No universal balanced winner, causal
-architecture claim, weighted score or CCTV superiority. For NOT_RUN use pending.
-TP-only quality is conditional; Recall is mask matching, not box Recall. -->
 
 ## Trade-off หลัก
 
@@ -52,7 +62,9 @@ TP-only quality is conditional; Recall is mask matching, not box Recall. -->
 ไม่มีการทดสอบ statistical significance; MOTS20 ไม่ใช่ผลทดสอบ CCTV robustness ขั้นสุดท้าย
 Pipeline ไม่รวม RLE preparation และ disk I/O; VRAM เป็น peak allocated ของ benchmark
 
-## รายละเอียดเพิ่มเติม
+## ข้อมูลสำหรับนำไปรวมต่อ
+
+{{CROSS_TIER_CANDIDATES_WITHOUT_WEIGHTED_SCORE_OR_FINAL_17_MODEL_CONCLUSION}}
 
 [TIER_RESULTS.csv](metrics/TIER_RESULTS.csv) · [REPORT.md](REPORT.md) ·
 [Visual analysis](PRESENTATION_SUMMARY_TH.md) ·

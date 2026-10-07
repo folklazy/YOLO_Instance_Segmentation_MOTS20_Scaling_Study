@@ -1,185 +1,131 @@
-# สรุปภาพรวม YOLO Instance Segmentation Model Scaling
+# Research Insights — YOLO Instance Segmentation Scaling on MOTS20
 
 ## สรุปใน 1 นาที
 
-- ทดสอบ pretrained segmentation 17 โมเดล ครบ 5 tiers บน MOTS20 2,862 เฟรม และ Person GT 26,894 instances โดยไม่มี fine-tuning
-- YOLO26 นำ Mask mAP50-95 และ AP75 ทุก tier; YOLO26x ได้ mAP สูงสุด 0.603730
-- YOLOv8n inference เร็วสุด 9.045 ms แต่ pipeline ไม่เร็วสุด
-- YOLO26l pipeline เร็วสุด 76.403 ms, FPS สูงสุด 13.089 และ VRAM ต่ำสุด 777.52 MiB
-- การลดขนาดทั้ง 13 คู่ทำให้ forward เร็วขึ้น แต่ pipeline เพิ่มใน 8 คู่ และ VRAM เพิ่มใน 7 คู่
-- s → n เป็นช่วงที่ mAP ตกมากที่สุดภายใน YOLO26/YOLO11/YOLOv8; ต้องกำหนด accuracy budget ก่อนเลือก
-- มี near ties ทั้งใน tier เดียวกันและข้าม tier; ยังไม่มีการทดสอบ statistical significance หรือ CCTV robustness
+- YOLO26 นำ pooled mAP/AP75 ทั้งห้า tiers และนำ sequence mAP ครบ 20 tier × sequence comparisons; เป็นผลของ checkpoints ที่วัด ไม่ใช่ข้อพิสูจน์สาเหตุจาก architecture
+- YOLO26x → l ลด mAP -1.749 percentage points แลก inference -49.95% และ pipeline -30.31%
+- Accuracy–pipeline Pareto เหลือ x/l; objective นี้ให้ข้อสรุปต่างจาก accuracy–inference ที่มีเก้า candidates
+- Postprocessing มากกว่าครึ่ง pipeline ใน 12 จาก 17 โมเดล; forward ที่เร็วขึ้นไม่รับประกัน throughput ที่สูงขึ้น
+- YOLO26s/YOLO11x/YOLOv9e มี aggregate mAP ใกล้กันมาก แต่ resource และ Recall ต่างกัน
+- Ranking ของรุ่นรองเปลี่ยนบาง sequence; ทุกตระกูลมี endpoint accuracy drop มากสุดใน MOTS20-02 แต่ยังไม่ระบุสาเหตุจากฉาก
+- s → n เป็น adjacent mAP drop ที่มากสุดในทั้ง YOLO26/YOLO11/YOLOv8 ขณะที่ pipeline และ memory ไม่ได้ดีขึ้นเสมอ
 
-## 1. ภาพรวมการทดลอง
+## 1. YOLO26 นำ accuracy อย่างสม่ำเสมอแค่ไหน
 
-รวม canonical CSV ของ Largest, Second-largest, Medium, Small และ Nano ภายใต้ config, evaluator, GT, preprocessing และวิธีจับเวลาเดียวกัน ใช้ FP32, imgsz640, batch1, Tesla T4 และเฉพาะ clean timing 3 รอบต่อโมเดล ขั้น Master ไม่เปิด raw predictions และไม่รัน inference ซ้ำ ตัวเลขเต็มอยู่ใน [MASTER_RESULTS.md](MASTER_RESULTS.md) และ [CSV](metrics/MASTER_17_MODELS.csv); วิธีทดลองอยู่ใน [methodology](METHODOLOGY_REFERENCE.md)
+**Observation:** YOLO26 นำ mAP/AP75 รวมทั้งห้า tiers และมี mAP สูงสุดในทุก tier × sequence รวม 20 comparisons YOLO26x มี pooled mAP 0.603730 แต่ Recall winner ใน Nano เป็น YOLOv8n ไม่ใช่ YOLO26n
 
-## 2. Winner ของแต่ละ Tier
+**Interpretation:** หลักฐานสอดคล้องกันทั้ง pooled และ per-sequence accuracy ภายใต้ protocol นี้ แต่การแบ่ง tier ไม่ทำให้ parameters หรือ pretraining เท่ากัน จึงไม่แยกผลของ architecture ออกจาก capacity/checkpoint/training เดิม และไม่รับรองว่าตัวนำจะเก็บ GT เพิ่มทุกเฟรม
 
-| Tier | mAP | AP75 | Recall | Inference | Pipeline / FPS | VRAM |
-| --- | --- | --- | --- | --- | --- | --- |
-| Largest (X/E) | YOLO26x-Seg (0.603730) | YOLO26x-Seg (0.664426) | YOLO26x-Seg (0.846285) | YOLOv9e-Seg (65.888) | YOLOv9e-Seg (103.376) | YOLOv9e-Seg (855.41) |
-| Second-largest (L/C) | YOLO26l-Seg (0.586237) | YOLO26l-Seg (0.643537) | YOLO26l-Seg (0.834387) | YOLOv9c-Seg (35.293) | YOLO26l-Seg (76.403) | YOLO26l-Seg (777.52) |
-| Medium (M) | YOLO26m-Seg (0.574222) | YOLO26m-Seg (0.629038) | YOLO26m-Seg (0.815312) | YOLOv8m-Seg (27.232) | YOLO11m-Seg (76.971) | YOLO11m-Seg (889.38) |
-| Small (S) | YOLO26s-Seg (0.536640) | YOLO26s-Seg (0.586796) | YOLO26s-Seg (0.789581) | YOLOv8s-Seg (15.220) | YOLO26s-Seg (78.828) | YOLO26s-Seg (872.67) |
-| Nano (N) | YOLO26n-Seg (0.472698) | YOLO26n-Seg (0.506766) | YOLOv8n-Seg (0.696921) | YOLOv8n-Seg (9.045) | YOLO26n-Seg (82.390) | YOLO11n-Seg (1030.00) |
+## 2. จุดลดต้นทุนที่เด่น: YOLO26x → YOLO26l
 
-ค่าด้าน accuracy เป็น fraction; เวลาเป็น ms/frame และ VRAM เป็น peak allocated MiB ผู้ชนะ pipeline กับ FPS ตรงกันเพราะ FPS คำนวณจาก pipeline mean
+| ด้าน | การเปลี่ยน l − x |
+|---|---:|
+| Mask mAP50-95 | -1.749 percentage points |
+| Recall | -1.190 percentage points |
+| Inference | -49.95% |
+| Pipeline | -30.31% |
+| Peak allocated VRAM | -18.34% |
+| Parameters | -55.42% |
 
-## 3. ภาพรวมทั้ง 17 Models
+**Observation:** l มี mAP อันดับสอง และ pipeline/allocated VRAM ต่ำสุดทั้งชุด Accuracy–pipeline และ accuracy–VRAM Pareto ต่างเหลือเพียง YOLO26x/YOLO26l
 
-| Model | Tier | Mask mAP50-95 | AP75 | Recall | Inference ms | Pipeline ms | FPS | VRAM MiB |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| YOLO26x-Seg | Largest (X/E) | 0.603730 | 0.664426 | 0.846285 | 72.458 | 109.639 | 9.121 | 952.18 |
-| YOLO11x-Seg | Largest (X/E) | 0.536674 | 0.575845 | 0.822228 | 69.406 | 105.885 | 9.444 | 942.48 |
-| YOLOv9e-Seg | Largest (X/E) | 0.536642 | 0.572100 | 0.826578 | 65.888 | 103.376 | 9.673 | 855.41 |
-| YOLOv8x-Seg | Largest (X/E) | 0.524758 | 0.560452 | 0.814271 | 67.843 | 109.441 | 9.137 | 1001.13 |
-| YOLO26l-Seg | Second-largest (L/C) | 0.586237 | 0.643537 | 0.834387 | 36.266 | 76.403 | 13.089 | 777.52 |
-| YOLO11l-Seg | Second-largest (L/C) | 0.528228 | 0.565728 | 0.809772 | 35.387 | 76.810 | 13.019 | 794.47 |
-| YOLOv9c-Seg | Second-largest (L/C) | 0.517646 | 0.559180 | 0.802930 | 35.293 | 76.921 | 13.000 | 838.49 |
-| YOLOv8l-Seg | Second-largest (L/C) | 0.520145 | 0.558149 | 0.809400 | 40.090 | 83.558 | 11.968 | 855.27 |
-| YOLO26m-Seg | Medium (M) | 0.574222 | 0.629038 | 0.815312 | 32.043 | 77.309 | 12.935 | 912.16 |
-| YOLO11m-Seg | Medium (M) | 0.518307 | 0.557205 | 0.805049 | 30.574 | 76.971 | 12.992 | 889.38 |
-| YOLOv8m-Seg | Medium (M) | 0.506971 | 0.542131 | 0.793857 | 27.232 | 78.112 | 12.802 | 1018.76 |
-| YOLO26s-Seg | Small (S) | 0.536640 | 0.586796 | 0.789581 | 17.308 | 78.828 | 12.686 | 872.67 |
-| YOLO11s-Seg | Small (S) | 0.483269 | 0.513823 | 0.764148 | 15.693 | 88.836 | 11.257 | 1007.50 |
-| YOLOv8s-Seg | Small (S) | 0.482763 | 0.506411 | 0.767309 | 15.220 | 92.173 | 10.849 | 1139.01 |
-| YOLO26n-Seg | Nano (N) | 0.472698 | 0.506766 | 0.687068 | 13.042 | 82.390 | 12.137 | 1043.13 |
-| YOLO11n-Seg | Nano (N) | 0.431929 | 0.450826 | 0.693798 | 11.745 | 97.441 | 10.263 | 1030.00 |
-| YOLOv8n-Seg | Nano (N) | 0.423062 | 0.439115 | 0.696921 | 9.045 | 95.683 | 10.451 | 1117.09 |
+**Interpretation:** x → l เป็น candidate efficiency point หรือ descriptive knee ภายใต้ objectives ที่วัด ไม่ใช่ universal sweet spot เพราะบางงานให้ความสำคัญกับ forward latency หรือ checkpoint size มากกว่า
 
-![ภาพรวมความแม่นยำ](plots/01_master_map_by_model.png)
+อ่าน [รายงานภาพ x/l แบบละเอียด](YOLO26X_VS_YOLO26L_VISUAL_TH.md): same-frame saved predictions แสดงทั้ง coverage advantage, mask overlap ต่างกัน, l counterexample และ common failure โดยไม่อ้างว่า x ดีกว่าทุกคนในทุกเฟรม
 
-หน่วยและตัวเลขเพิ่มเติม เช่น AP50, Precision, F1, TP-only quality และ GFLOPs อยู่ใน CSV หลัก ไม่ใช้คะแนนถ่วงน้ำหนักรวมหลายด้าน
+## 3. ทำไม model เล็กลงแต่ pipeline ไม่เร็วขึ้นเสมอ
 
-## 4. YOLO26 Scaling
+![Timing stage composition](plots/13_timing_stage_composition.png)
 
-| Larger → smaller | ΔmAP pp | ΔInference % | ΔPipeline % | ΔVRAM % | ΔParameters % |
-| --- | --- | --- | --- | --- | --- |
-| YOLO26x-Seg → YOLO26l-Seg | -1.749 | -49.95 | -30.31 | -18.34 | -55.42 |
-| YOLO26l-Seg → YOLO26m-Seg | -1.201 | -11.64 | +1.19 | +17.32 | -13.97 |
-| YOLO26m-Seg → YOLO26s-Seg | -3.758 | -45.98 | +1.96 | -4.33 | -57.56 |
-| YOLO26s-Seg → YOLO26n-Seg | -6.394 | -24.65 | +4.52 | +19.53 | -72.83 |
+**Observation:** YOLO26x มี inference share 66.09% และ postprocess share 32.35% ส่วน YOLO26n มี postprocess share 82.08% และ YOLOv8n 88.74% ของ pipeline Preprocess + inference + postprocess ตรงกับ pipeline ภายใน tolerance 1e-10 ms จากความละเอียดตัวเลขต้นทาง
 
-**Observation:** ตารางแสดงค่าที่เปลี่ยนเมื่อขยับไป checkpoint ที่เล็กกว่า โดย ΔmAP เป็น percentage points และคอลัมน์ % ใช้ค่ารุ่นใหญ่เป็นฐาน
+**Interpretation:** ใน native-mask pipeline นี้ งานหลัง forward เป็นข้อจำกัดสำคัญเมื่อ checkpoint เล็กลง Stage trends สอดคล้องกับข้อจำกัดดังกล่าว แต่ยังไม่พิสูจน์ว่าขนาดโมเดลหรือ architecture ทำให้ postprocessing ช้าลงโดยตรง และไม่รับรองพฤติกรรมเดียวกันใน deployment pipeline อื่น
 
-**Interpretation:** YOLO26x → l แลก accuracy ค่อนข้างน้อยกับ inference ที่ลดประมาณครึ่งหนึ่ง ขณะที่ l → m ทำให้ forward สั้นลง แต่ pipeline และ VRAM สูงขึ้นตามค่าที่วัด ส่วน m → s เหมาะพิจารณาเมื่อ forward budget สำคัญและยอมรับ mAP ที่ลดลงได้
+RLE preparation ถูกวัดแยก ไม่รวมใน pipeline FPS ส่วน ultralytics_postprocess_inclusive เป็น diagnostic subset ไม่บวกซ้ำ ดู [TIMING_COMPOSITION.csv](metrics/TIMING_COMPOSITION.csv)
 
-## 5. YOLO11 Scaling
+## 4. Accuracy ใกล้กันมาก แต่ computational cost ต่างกันมาก
 
-| Larger → smaller | ΔmAP pp | ΔInference % | ΔPipeline % | ΔVRAM % | ΔParameters % |
-| --- | --- | --- | --- | --- | --- |
-| YOLO11x-Seg → YOLO11l-Seg | -0.845 | -49.01 | -27.46 | -15.70 | -55.46 |
-| YOLO11l-Seg → YOLO11m-Seg | -0.992 | -13.60 | +0.21 | +11.95 | -18.99 |
-| YOLO11m-Seg → YOLO11s-Seg | -3.504 | -48.67 | +15.41 | +13.28 | -54.89 |
-| YOLO11s-Seg → YOLO11n-Seg | -5.134 | -25.16 | +9.69 | +2.23 | -71.55 |
+| Model | Mask mAP50-95 | Recall | Inference ms | Pipeline ms | VRAM MiB | Checkpoint MB |
+|---|---:|---:|---:|---:|---:|---:|
+| YOLO26s-Seg | 0.536640 | 0.789581 | 17.308 | 78.828 | 872.67 | 23.47 |
+| YOLO11x-Seg | 0.536674 | 0.822228 | 69.406 | 105.885 | 942.48 | 125.09 |
+| YOLOv9e-Seg | 0.536642 | 0.826578 | 65.888 | 103.376 | 855.41 | 122.21 |
 
-**Observation:** ตารางแสดงค่าที่เปลี่ยนเมื่อขยับไป checkpoint ที่เล็กกว่า โดย ΔmAP เป็น percentage points และคอลัมน์ % ใช้ค่ารุ่นใหญ่เป็นฐาน
+**Observation:** YOLO26s − YOLO11x มี absolute mAP gap เพียง 0.003391 percentage points แต่ inference -75.06%, pipeline -25.55% และ parameters -81.48% ส่วน YOLO26s − YOLOv9e ใช้ allocated VRAM เพิ่ม +2.02%
 
-**Interpretation:** x → l ลด forward มากโดย mAP ลดน้อยกว่าช่วง m → s และ s → n หลัง l ลงมา pipeline และ VRAM เพิ่มทุกขั้น แม้ parameters ลดลง จึงไม่ควรใช้ชื่อขนาดแทนผลของระบบ
+**Interpretation:** Aggregate mAP is descriptively near-equal under this benchmark แต่ resource requirements ต่างกันมาก และ YOLO26s มี Recall ต่ำกว่าสองรุ่นใหญ่ จึงไม่ใช่ equivalence หรือหลักฐาน architecture superiority
 
-## 6. YOLOv8 Scaling
+คู่ YOLOv9c/YOLO11m มี mAP ใกล้กันและ pipeline delta เพียง +0.051 ms ส่วน YOLO11s/YOLOv8s มี near-tied mAP แต่ YOLOv8s forward เร็วกว่า ขณะที่ pipeline และ VRAM สูงกว่า ดูทุกคู่และทิศทาง B − A ใน [NEAR_TIE_RESOURCE_DELTAS.csv](metrics/NEAR_TIE_RESOURCE_DELTAS.csv)
 
-| Larger → smaller | ΔmAP pp | ΔInference % | ΔPipeline % | ΔVRAM % | ΔParameters % |
-| --- | --- | --- | --- | --- | --- |
-| YOLOv8x-Seg → YOLOv8l-Seg | -0.461 | -40.91 | -23.65 | -14.57 | -35.96 |
-| YOLOv8l-Seg → YOLOv8m-Seg | -1.317 | -32.07 | -6.52 | +19.12 | -40.68 |
-| YOLOv8m-Seg → YOLOv8s-Seg | -2.421 | -44.11 | +18.00 | +11.80 | -56.68 |
-| YOLOv8s-Seg → YOLOv8n-Seg | -5.970 | -40.57 | +3.81 | -1.92 | -71.15 |
+## 5. Sequence sensitivity และความสม่ำเสมอของ ranking
 
-**Observation:** ตารางแสดงค่าที่เปลี่ยนเมื่อขยับไป checkpoint ที่เล็กกว่า โดย ΔmAP เป็น percentage points และคอลัมน์ % ใช้ค่ารุ่นใหญ่เป็นฐาน
+![Per-sequence mAP heatmap](plots/14_per_sequence_map_heatmap.png)
 
-**Interpretation:** x → l สูญเสีย mAP น้อยที่สุดใน 13 คู่ แต่ไม่ใช่ accuracy leader ของ tier; l → m ลดทั้ง inference และ pipeline ส่วน m → s และ s → n ทำให้ forward เร็วขึ้นแต่ pipeline ช้าลง
+**Observation:** YOLO26 นำ mAP ทุก tier × sequence แต่ ranking ของรุ่นรองเปลี่ยน: YOLOv9e สูงกว่า YOLO11x ใน 02, YOLOv9c สูงกว่า YOLOv8l ใน 09 และ YOLOv8s สูงกว่า YOLO11s ใน 02/11 เทียบกับ pooled ordering MOTS20-02 มี measured mAP ต่ำสุดของแต่ละโมเดลครบทั้ง 17 ตัว
 
-## 7. YOLOv9 Scaling
+เมื่อดู endpoint x → n, YOLO26 เสีย mAP ใน 02 ประมาณ 15.057 pp เทียบกับ 11 ประมาณ 11.480 pp; YOLO11/YOLOv8 ก็เสียมากสุดใน 02 และน้อยสุดใน 11 ส่วน YOLOv9 e → c เสียมากสุดใน 02 และน้อยสุดใน 09
 
-| Larger → smaller | ΔmAP pp | ΔInference % | ΔPipeline % | ΔVRAM % | ΔParameters % |
-| --- | --- | --- | --- | --- | --- |
-| YOLOv9e-Seg → YOLOv9c-Seg | -1.900 | -46.43 | -25.59 | -1.98 | -53.90 |
+**Interpretation:** Sequence sensitivity ไม่เหมือนกัน และ aggregate ranking ไม่แทน ranking ทุก sequence ยังไม่มีหลักฐานให้ระบุว่าเกิดจาก blur, low light, camera angle หรือ occlusion severity AP รวมเป็น pooled AP ไม่ใช่ค่าเฉลี่ย AP ของสี่ sequences ดู [PER_SEQUENCE_SCALING_ANALYSIS.csv](metrics/PER_SEQUENCE_SCALING_ANALYSIS.csv)
 
-**Observation:** ตารางแสดงค่าที่เปลี่ยนเมื่อขยับไป checkpoint ที่เล็กกว่า โดย ΔmAP เป็น percentage points และคอลัมน์ % ใช้ค่ารุ่นใหญ่เป็นฐาน
+## 6. Scaling cliff เมื่อ s → n
 
-**Interpretation:** มีเพียง e และ c ที่เป็น segmentation checkpoints ที่ถูกต้องในชุดนี้ e → c ลดเวลาและ parameters มาก แต่ VRAM ลดเพียงเล็กน้อย จึงห้ามเติมรุ่น m/s/n หรือเปรียบชื่อ e/c ว่า capacity เท่ากับ x/l
+| Family | Δ mAP (pp) | Δ inference (%) | Δ pipeline (%) | Δ VRAM (%) |
+|---|---:|---:|---:|---:|
+| YOLO26 | -6.394 | -24.65 | +4.52 | +19.53 |
+| YOLO11 | -5.134 | -25.16 | +9.69 | +2.23 |
+| YOLOv8 | -5.970 | -40.57 | +3.81 | -1.92 |
 
-## 8. เทียบ Generation ใน Tier เดียวกัน
+**Observation:** s → n เป็น adjacent mAP drop มากสุดของทั้งสามตระกูล Forward ลดลง แต่ pipeline เพิ่มทั้งสาม ส่วน VRAM เพิ่มใน YOLO26/YOLO11 และลดใน YOLOv8
 
-**Observation:** YOLO26 มี mAP/AP75 สูงสุดทั้งห้า tier แต่ Recall ใน Nano สูงสุดเป็น YOLOv8n การแบ่ง tier ควบคุมกลุ่มขนาดที่มีให้ใช้ ไม่ได้ทำให้จำนวน parameters หรือ pretraining เท่ากัน
+**Interpretation:** Nano เป็น candidate เมื่อ forward/ขนาด checkpoint เป็นข้อจำกัดเฉพาะ ไม่เลือกจากชื่อขนาดเพียงอย่างเดียว และไม่เรียกการลดขนาดนี้ว่าคุ้มทุก objective
 
-**Interpretation:** ใช้ผลเพื่อเลือก checkpoint ในเงื่อนไขนี้ได้ แต่ยังสรุปสาเหตุว่า architecture รุ่นใหม่ดีกว่าเสมอไม่ได้ รวมทั้งไม่ควรเรียกทุกมิติของ Nano ว่า YOLO26 ชนะ
+## 7. สิ่งที่ภาพจริงบอก แต่ aggregate metric ไม่บอก
 
-## 9. Accuracy vs Speed
+**Observation:** รายงาน tier พบทั้ง TP เท่ากันแต่ match GT คนละชุด, extra masks บน GT ที่มีคู่แล้ว, common FN และกรณีที่ accuracy leader ไม่ได้ match มากสุด รายงาน x/l ยังแยก candidate confidence ต่ำกว่า threshold ออกจาก mask overlap ที่ไม่ผ่านเกณฑ์
 
-Pareto ด้าน mAP–inference มี YOLO26x-Seg, YOLO26l-Seg, YOLO26m-Seg, YOLO26s-Seg, YOLO11s-Seg, YOLOv8s-Seg, YOLO26n-Seg, YOLO11n-Seg, YOLOv8n-Seg
+**Interpretation:** FP คือ unmatched prediction ตาม policy ไม่ใช่คนที่ไม่มีจริงโดยอัตโนมัติ FN คือ unmatched GT และอาจมี mask อยู่แล้ว Selected frames เป็น diagnostic ไม่ใช่ representative sample หรือหลักฐาน statistical equivalence
 
-![ความแม่นยำกับ inference](plots/07_accuracy_vs_inference.png)
+- [Largest (X/E) qualitative research](https://github.com/folklazy/YOLO_Large_Seg_MOTS20_Benchmark/blob/main/PRESENTATION_SUMMARY_TH.md)
+- [Second-largest (L/C) qualitative research](https://github.com/folklazy/YOLO_Second_Largest_Seg_MOTS20_Benchmark/blob/main/PRESENTATION_SUMMARY_TH.md)
+- [Medium qualitative research](https://github.com/folklazy/YOLO_Medium_Seg_MOTS20_Benchmark/blob/main/PRESENTATION_SUMMARY_TH.md)
+- [Small qualitative research](https://github.com/folklazy/YOLO_Small_Seg_MOTS20_Benchmark/blob/main/PRESENTATION_SUMMARY_TH.md)
+- [Nano qualitative research](https://github.com/folklazy/YOLO_Nano_Seg_MOTS20_Benchmark/blob/main/PRESENTATION_SUMMARY_TH.md)
 
-**Observation:** โมเดลบนเส้น Pareto มีข้อแลกเปลี่ยนต่างกัน; forward เร็วสุดกับ pipeline เร็วสุดเป็นคนละโมเดล
+- [YOLO26x → l detailed visual comparison](YOLO26X_VS_YOLO26L_VISUAL_TH.md)
+- [YOLO26 scaling ladder](YOLO26_SCALING_VISUAL_TH.md)
+- [26s / 11x / v9e near-tie visual comparison](NEAR_TIE_26S_11X_V9E_VISUAL_TH.md)
 
-**Interpretation:** ต้องระบุว่าต้องการลดเวลา forward หรือ pipeline ก่อน การเลือกจาก FPS ต้องยอมรับว่าค่านี้ยังไม่รวม decode/RLE/เขียนไฟล์
+## 8. Accuracy vs Inference vs Pipeline vs Memory
 
-## 10. Accuracy vs VRAM
+**Observation:** Accuracy–inference Pareto มีเก้าโมเดล ส่วน accuracy–pipeline และ accuracy–allocated VRAM มีสองโมเดลคือ YOLO26x/YOLO26l
 
-Pareto ด้าน mAP–VRAM เหลือ YOLO26x และ YOLO26l โดย YOLO26l ใช้ VRAM ต่ำสุดในทั้ง 17 โมเดล
+**Interpretation:** การเลือก objective เปลี่ยน candidate set งาน forward-budget อาจเลือก Small/Nano ได้ ขณะที่ native-mask pipeline-budget ให้น้ำหนัก l มากขึ้น ภาพ segmentation วัด latency/VRAM ไม่ได้ และไม่มี weighted overall score
 
-![ความแม่นยำกับ VRAM](plots/08_accuracy_vs_vram.png)
+[Inference Pareto](metrics/PARETO_FRONTIER.csv) · [Pipeline Pareto](metrics/PARETO_PIPELINE.csv) · [VRAM Pareto](metrics/PARETO_VRAM.csv)
 
-**Interpretation:** แม้โมเดลเล็กบางรุ่นจะอยู่บน Pareto ของ inference แต่ไม่ได้อยู่บน Pareto ของ allocated VRAM เพราะ peak memory ที่วัดขึ้นกับ runtime workload ด้วย ผลนี้ไม่ใช่ข้อพิสูจน์เชิงสาเหตุของการจัดสรรหน่วยความจำ
+## 9. Candidate ตามข้อจำกัด
 
-## 11. จุดที่ลดขนาดแล้วคุ้ม
+| Priority | Candidate | หลักฐานและข้อแลกเปลี่ยน |
+|---|---|---|
+| Accuracy | YOLO26x-Seg | นำ pooled mAP/AP75/Recall แต่มี counterexamples ในภาพจริง |
+| Whole-pipeline efficiency | YOLO26l-Seg | Pipeline mean ต่ำสุดและ mAP อันดับสอง; อยู่บน pipeline Pareto |
+| Forward latency | YOLOv8n-Seg | Inference ต่ำสุด แต่ pipeline ไม่เร็วสุด |
+| Memory | YOLO26l-Seg | Peak allocated VRAM ต่ำสุดใน benchmark; ไม่ใช่ total deployment memory |
+| Small-model accuracy | YOLO26s-Seg | นำ Small mAP; mAP ใกล้ 11x/v9e แต่ Recall ต่ำกว่า |
+| Later CCTV robustness evaluation | YOLO26x / YOLO26l / YOLO26s | Candidates ตามข้อจำกัด ยังไม่ยืนยัน CCTV superiority |
 
-คำว่า “คุ้ม” ต่อไปนี้เป็นการตีความตามข้อจำกัด ไม่มีคะแนนรวม: x → l ของ YOLO26/YOLO11/YOLOv8 และ e → c ของ YOLOv9 ลด inference มากโดย mAP ลดไม่เกิน 2 pp ในค่าที่วัด หากยอมรับ accuracy loss ได้ ส่วน YOLO26l เด่นเมื่อให้น้ำหนัก pipeline/VRAM เพราะนำสองด้านนี้ทั้งชุด
+## 10. สิ่งที่ผลนี้ยังบอกไม่ได้
 
-YOLO26x → l: ΔmAP -1.749 pp, Δinference -49.95%, ΔVRAM -18.34% รุ่น Small อย่าง YOLO26s เป็นอีกตัวเลือกสำหรับ forward ที่สั้นลง แต่ไม่ใช่ global pipeline/VRAM winner
+- Architecture causality: capacity, checkpoint และ pretraining ต่างกัน
+- Statistical significance หรือ equivalence: ยังไม่มี valid test และเฟรมวิดีโอสัมพันธ์กัน
+- CCTV robustness, deployment readiness หรือ robustness ต่อ blur/low-light/มุมกล้อง/ระดับ occlusion
+- Tracking performance: การศึกษานี้เป็น frame-level instance segmentation
+- Total deployment GPU memory: วัด peak allocated ภายใต้ benchmark นี้
+- End-to-end saved-mask FPS: pipeline ไม่รวม decode, RLE และการเขียนผล
+- ความถี่ failure จาก selected cases: ภาพเชิงคุณภาพไม่แทน dataset-level metrics
 
-## 12. จุดที่ Accuracy ตกชัด
+## 11. ขั้นตอนถัดไป
 
-**Observation:** s → n ลด mAP -6.394 pp ใน YOLO26, -5.134 pp ใน YOLO11 และ -5.970 pp ใน YOLOv8 ซึ่งเป็น adjacent drop มากที่สุดภายในแต่ละ family
+แยก future robustness/deployment study ออกจากผล MOTS20 ปัจจุบัน หากต้องการ human parsing ให้กำหนด output labels, crop policy และวิธีประเมินผลทั้งระบบก่อน โดยยังถือเป็นแผน ไม่ใช่ผลทดลองที่เสร็จแล้ว เอกสารรอบนี้ไม่เริ่ม inference หรือ experiment ใหม่
 
-**Interpretation:** การลดรุ่นขั้นสุดท้ายควรเทียบกับค่าความแม่นยำขั้นต่ำที่งานยอมรับได้ คำว่า “ตกชัด” หมายถึงช่องว่างเชิงพรรณนาในค่าที่วัด ไม่ใช่ statistical significance
-
-## 13. Near Ties
-
-ใช้เกณฑ์เชิงพรรณนา |ΔmAP| ≤0.001 หรือ 0.1 pp เพื่อคัดคู่ที่ควรอ่านอย่างระมัดระวัง ไม่ใช่การทดสอบ equivalence
-
-| Model A | Model B | Absolute mAP gap |
-| --- | --- | --- |
-| YOLO11x-Seg | YOLOv9e-Seg | 0.000031903 |
-| YOLO11x-Seg | YOLO26s-Seg | 0.000033907 |
-| YOLOv9e-Seg | YOLO26s-Seg | 0.000002005 |
-| YOLOv9c-Seg | YOLO11m-Seg | 0.000660396 |
-| YOLO11s-Seg | YOLOv8s-Seg | 0.000505355 |
-
-YOLO26s ใกล้ YOLO11x/YOLOv9e มากใน mAP แต่ capacity, latency และ error behavior อาจต่างกัน คู่ข้าม tier ยังไม่ได้ตรวจภาพใหม่ใน Master; ใช้ภาพใน tier เป็นหลักฐานเฉพาะของคู่ที่มีอยู่เท่านั้น
-
-## 14. สิ่งผิดปกติ
-
-- pipeline เพิ่มใน 8/13 ขั้นที่ลดขนาด และ allocated VRAM เพิ่มใน 7/13 ขั้น ทั้งที่ parameters ลดทุกขั้น
-- YOLO26l มี pipeline และ VRAM ดีกว่ารุ่นเล็กกว่าทั้งหมดในค่าที่วัด; ความต่างเวลาเล็กน้อยไม่ได้ผ่าน significance test
-- YOLO26n ชนะ mAP/AP75 แต่ Recall ต่ำสุดใน Nano; สะท้อนว่าความแม่น mask กับความครบถ้วนตาม fixed threshold เป็นคนละเรื่อง
-- postprocessing และ RLE preparation เป็นคนละ stage; RLE ไม่ได้รวมใน FPS และห้ามนำ diagnostic postprocess มาบวกซ้ำ
-
-## 15. ถ้าต้องเลือกโมเดลตามโจทย์
-
-| Priority | Candidate | หลักฐานและเงื่อนไข |
-| --- | --- | --- |
-| Accuracy | YOLO26x-Seg | mAP 0.603730; inference 72.458 ms |
-| Pipeline / Low VRAM | YOLO26l-Seg | pipeline 76.403 ms; VRAM 777.52 MiB; mAP 0.586237 |
-| ลดเวลาของ forward โดยยังรักษา mAP | YOLO26s-Seg | inference 17.308 ms; mAP 0.536640; อยู่บน Pareto ด้าน inference |
-| Nano ที่เน้น mask accuracy | YOLO26n-Seg | mAP 0.472698; Recall 0.687068 ต่ำสุดใน Nano |
-| Inference ต่ำสุด | YOLOv8n-Seg | inference 9.045 ms; mAP 0.423062; pipeline ไม่เร็วสุด |
-
-ทั้งหมดเป็น candidate for later CCTV robustness evaluation โดยมีเงื่อนไขต่างกัน ไม่ใช่คำแนะนำ deployment ขั้นสุดท้าย
-
-## 16. สิ่งที่ผลนี้บอกได้
-
-อันดับและข้อแลกเปลี่ยนของ pretrained checkpoints บน Person masks ใน MOTS20 ภายใต้ protocol เดียวกัน รวมถึงการเปลี่ยนเชิงพรรณนาเมื่อขนาดเล็กลง และชุด nondominated candidates ภายใต้วัตถุประสงค์ที่ระบุ
-
-## 17. สิ่งที่ผลนี้ยังบอกไม่ได้
-
-ความเป็นเหตุจาก architecture, statistical significance, ความเท่ากันของ error patterns, MOTS tracking, ความทนต่อ blur/low light/มุมกล้อง/ระดับ occlusion หรือความพร้อมใช้ CCTV จริง GT เป็น instance รายเฟรม ภาพวิดีโอสัมพันธ์กัน และ TP-only quality ใช้เฉพาะ instances ที่ match ได้
-
-## 18. ขั้นตอนถัดไป
-
-กำหนดชุดข้อมูลและเกณฑ์ CCTV robustness แยกต่างหาก เลือก candidate ตาม accuracy/forward/pipeline/memory budget และวัด deployment pipeline ที่รวมขั้นตอนที่ใช้งานจริง งาน Master นี้หยุดที่ผลสังเคราะห์ ไม่เริ่มการทดลองใหม่
-
-[Executive summary](EXECUTIVE_SUMMARY_TH.md) · [Meeting summary](MEETING_SUMMARY_TH.md) · [Metric guide](METRIC_GUIDE_TH.md) · [Source provenance](provenance/SOURCE_MANIFEST.json)
+[Technical source of truth](MASTER_RESULTS.md) · [Derived analysis provenance](provenance/POST_STUDY_ANALYSIS.json) · [Revision provenance](provenance/POST_STUDY_REVISION.json)

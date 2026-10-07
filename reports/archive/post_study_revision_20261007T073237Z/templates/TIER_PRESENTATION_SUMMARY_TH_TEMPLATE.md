@@ -1,8 +1,6 @@
 # {{TIER}} — Visual and Qualitative Analysis
 
-<!-- FROZEN ROLE: full visual + qualitative + interpretive research report.
-Length alone is not a reason to remove scientific depth or evidence.
-Purpose: เมื่อดู prediction จริง โมเดลต่างกันอย่างไร?
+<!-- Purpose: เมื่อดู prediction จริง โมเดลต่างกันอย่างไร?
 Only analyze after all tier models complete and artifacts are validated.
 For NOT_RUN/incomplete tiers, explicitly mark pending, retain empty tables, and
 do not embed placeholder image links or analyze one completed model alone. -->
@@ -15,12 +13,9 @@ do not embed placeholder image links or analyze one completed model alone. -->
 |---|---|---|---|
 <!-- Context only. Full quantitative summary: RESULTS_SUMMARY_TH.md. -->
 
-## 2. วิธีอ่านหลักฐานภาพ
+## การเลือกกรณีและการอ่านภาพ
 
-{{READING_POLICY_ONCE_AND_SHORT_SELECTION_CONTEXT}}
-<!-- Explain confidence, matching IoU, TP/FP/FN, ignore behavior, same-frame/full-frame/ROI
-policy and diagnostic-not-representative sampling ONCE here. Link candidate pools,
-source hashes, replaced-case history and ROI validation to evidence ledgers. -->
+{{SELECTION_POOL_AND_REASONS}}
 <!-- Select ~3–5 diagnostic cases from actual benchmark artifacts: advantage,
 shared failure, counterexample/trade-off, similar-output/near-tie where available.
 Use one shared cross-tier anchor plus tier-specific diagnostic cases where useful.
@@ -48,11 +43,6 @@ Validate Git tracking and actual remote image responses after push; local existe
 Never insert a broken/example image as real evidence. -->
 {{ACTUAL_COMPARISON_IMAGE_EMBED}}
 
-### ภาพขยาย
-
-{{ACTUAL_IDENTICAL_ROI_IMAGE_EMBED_WHERE_USEFUL}}
-<!-- Keep the full-frame image above; a crop supplements it and never hides errors. -->
-
 ### สิ่งที่เห็นจากภาพ
 
 {{DIRECT_OBSERVATIONS_BY_MODEL_AND_REGION_OR_GT_ID}}
@@ -74,9 +64,7 @@ Do not infer blur/low-light/occlusion severity/camera robustness without evidenc
 
 **ใช้ประกอบการเลือก:** {{SPECIFIC_PRIORITY_AND_SUPPORTED_MODEL_COMPARISON}}
 
-### ขอบเขตของหลักฐาน
-
-{{WHAT_THIS_CASE_CANNOT_ESTABLISH}}
+**ขอบเขตหลักฐาน:** {{WHAT_THIS_CASE_CANNOT_ESTABLISH}}
 <!-- If full-frame details are unreadable, add an identical-ROI saved-mask view
 alongside the retained full comparison. Include coordinates and GT outlines.
 Controls may have no discriminating failure. Optional per-GT IoU is diagnostic,
@@ -129,5 +117,5 @@ No weighted score and no final CCTV superiority. -->
 ## รายละเอียดเต็ม
 
 [Quantitative summary](RESULTS_SUMMARY_TH.md) · [REPORT.md](REPORT.md) ·
-[TIER_RESULTS.csv](metrics/TIER_RESULTS.csv) · {{ACTIVE_CASE_SELECTION_AND_EVIDENCE_LINKS}} ·
+[TIER_RESULTS.csv](metrics/TIER_RESULTS.csv) ·
 [Master Study](https://github.com/folklazy/YOLO_Instance_Segmentation_MOTS20_Scaling_Study)

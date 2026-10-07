@@ -1,14 +1,5 @@
 """Read-only checks for documentation, same-frame evidence, and unchanged metrics."""
 from pathlib import Path
-import sys
-# Preserve the original validator in the timestamped editorial archive. The final
-# authorized layout uses an independently validated compact role table; archived
-# per-model essays are historical evidence rather than active layout requirements.
-if __name__ == '__main__' and (Path(__file__).resolve().parents[1]/'provenance/POST_STUDY_REVISION.json').exists():
-    from validate_post_study import main as post_study_main
-    post_study_main()
-    sys.exit(0)
-from pathlib import Path
 import csv
 import hashlib
 import json

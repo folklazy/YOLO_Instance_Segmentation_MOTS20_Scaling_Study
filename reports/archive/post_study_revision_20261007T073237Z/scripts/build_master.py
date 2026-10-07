@@ -367,41 +367,8 @@ def main():
         write_new(args.output_dir / 'provenance/SOURCE_MANIFEST.json', (json.dumps(manifest, ensure_ascii=False, indent=2) + '\n').encode())
     validation = validate_outputs(inputs, args.output_dir)
     manifest = load_json(args.output_dir / 'provenance/SOURCE_MANIFEST.json')
-    revision_path = args.output_dir / 'provenance/POST_STUDY_REVISION.json'
-    if args.validate and revision_path.exists():
-        revision = load_json(revision_path)
-        for key in ['measured_values_changed', 'inference_rerun', 'tier_benchmarks_rerun', 'canonical_measured_csv_changed']:
-            require(revision[key] is False, 'Invalid post-study scientific invariant')
-        for rel, expected in revision['protected_sha256'].items():
-            require(sha(args.workspace / rel) == expected, f'Protected source changed: {rel}')
-        # Original source revisions remain immutable provenance. New tier HEADs
-        # may differ only through the explicitly archived editorial file set.
-        normalized = []
-        for source, old in zip(inputs['sources'], manifest['source_tiers']):
-            repository = source['repository']
-            require(revision['repositories'][repository]['revision'] == old['revision'], 'Unrecorded original source revision')
-            changes = subprocess.check_output(['git', '-C', str(args.workspace / repository),
-                'diff', '--name-only', old['revision'], source['revision']], text=True).splitlines()
-            allowed = {'provenance/POST_STUDY_REVISION.json'}
-            for edit in revision['editorial_revisions']:
-                for field in ['original_path', 'archived_path']:
-                    if edit[field].startswith(repository + '/'):
-                        allowed.add(edit[field][len(repository) + 1:])
-            require(set(changes) <= allowed, f'Non-editorial source commit: {repository}')
-            normalized.append(dict(source, revision=old['revision']))
-        require(normalized == manifest['source_tiers'], 'Scientific source provenance mismatch')
-        for rel, expected in manifest['control_sha256'].items():
-            if inputs['controls'][rel] == expected:
-                continue
-            edit = next(e for e in revision['editorial_revisions'] if e['original_path'] == args.output_dir.name + '/' + rel)
-            require(edit['sha256_before'] == expected and sha(args.workspace / edit['archived_path']) == expected, 'Control archive mismatch')
-            require(inputs['controls'][rel] == edit['sha256_after'], 'Unrecorded current control')
-        builder_edit = next(e for e in revision['editorial_revisions'] if e['original_path'] == args.output_dir.name + '/scripts/build_master.py')
-        require(sha(args.workspace / builder_edit['archived_path']) == manifest['builder_sha256'], 'Original builder snapshot mismatch')
-        require(sha(Path(__file__)) == builder_edit['sha256_after'], 'Current builder provenance mismatch')
-    else:
-        require(manifest['source_tiers'] == inputs['sources'] and manifest['control_sha256'] == inputs['controls'], 'Source provenance mismatch')
-        require(manifest['builder_sha256'] == sha(Path(__file__)), 'Builder provenance mismatch')
+    require(manifest['source_tiers'] == inputs['sources'] and manifest['control_sha256'] == inputs['controls'], 'Source provenance mismatch')
+    require(manifest['builder_sha256'] == sha(Path(__file__)), 'Builder provenance mismatch')
     require(manifest['synthesis_only'] is True and manifest['inference_rerun'] is False and manifest['measured_values_changed'] is False, 'Invalid synthesis provenance')
     require(manifest['artifact_sha256'] == {f'metrics/{name}': sha(args.output_dir / 'metrics' / name) for name in products(inputs)}, 'Output provenance mismatch')
     print('[MASTER] ' + ('validation' if args.validate else 'synthesis') + ': PASS (17 models; 13 scaling pairs; 68 sequence rows)')

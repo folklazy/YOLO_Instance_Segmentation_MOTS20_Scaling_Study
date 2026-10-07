@@ -1,0 +1,763 @@
+{
+  "scope": "Diagnostic qualitative analysis from existing saved predictions only",
+  "timestamp_utc": "2026-10-07T07:40:20.412504+00:00",
+  "generator_sha256": "d108a1823fa8c0c56fcb8584a40843b6be9e8cacd6905691bede38cb5fa633b5",
+  "saved_predictions_only": true,
+  "inference_rerun": false,
+  "benchmark_values_changed": false,
+  "confidence": 0.25,
+  "matching_iou": 0.5,
+  "ignore_prediction_ioa": 0.5,
+  "selection_pool": "Existing diagnostic frame pool and canonical per-frame rows; balanced control, differences and common failures. Not representative or full-dataset extrema.",
+  "sources": [
+    {
+      "model": "YOLO26s-Seg",
+      "checkpoint": "yolo26s-seg.pt",
+      "per_frame_path": "YOLO_Small_Seg_MOTS20_Benchmark/metrics/benchmark-20261005T051531Z/per_frame/yolo26s-seg.pt.csv",
+      "per_frame_sha256": "cb742f81fa984cf337bc7bb634655d5629bd92ad9f1d8048aab7dc424be69f86"
+    },
+    {
+      "model": "YOLO11x-Seg",
+      "checkpoint": "yolo11x-seg.pt",
+      "per_frame_path": "YOLO_Large_Seg_MOTS20_Benchmark/metrics/benchmark-20260929T0520Z/per_frame/yolo11x-seg.pt.csv",
+      "per_frame_sha256": "e355937401c37309c10cdddb3312bf7157a5e3c6b86227f393671bd7f45d5eb0"
+    },
+    {
+      "model": "YOLOv9e-Seg",
+      "checkpoint": "yolov9e-seg.pt",
+      "per_frame_path": "YOLO_Large_Seg_MOTS20_Benchmark/metrics/benchmark-20260929T0520Z/per_frame/yolov9e-seg.pt.csv",
+      "per_frame_sha256": "d1e289f979733ec44503062d768a55ad153df9bccf95fefd10e48abc4e381d94"
+    }
+  ],
+  "cases": [
+    {
+      "case": 1,
+      "sequence": "MOTS20-09",
+      "frame": 1,
+      "selection_reason": "same coverage control",
+      "image_path": "datasets/MOTS/MOTS/train/MOTS20-09/img1/000001.jpg",
+      "image_sha256": "e4b1c40c44d53489f191e1099156ad57d3963d8c434615750fba0065a8a572af",
+      "gt_path": "datasets/MOTS/MOTS/train/MOTS20-09/gt/gt.txt",
+      "gt_sha256": "73c59a3d52469d81084f99c7e2a0c711a99e9fb4152f6aa839fc26e5e03fa383",
+      "roi_xyxy": [
+        1306,
+        314,
+        1920,
+        806
+      ],
+      "gt_ids": [
+        2019
+      ],
+      "models": [
+        {
+          "model": "YOLO26s-Seg",
+          "prediction_path": "YOLO_Small_Seg_MOTS20_Benchmark/predictions/benchmark-20261005T051531Z/accuracy/yolo26s-seg/predictions/MOTS20-09_000001.json.gz",
+          "prediction_sha256": "95387f905af7e92a69c367168789765523f8f618de458bae30723b039c83e257",
+          "counts": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "ignored_predictions": 2
+          },
+          "matched_gt_ids": [
+            2019,
+            2023,
+            2001,
+            2022,
+            2020,
+            2021
+          ],
+          "fn_gt_ids": [],
+          "targets": [
+            {
+              "gt_id": 2019,
+              "matched": true,
+              "matched_iou": 0.8774747378757642,
+              "best_at_conf025": {
+                "iou": 0.8774747378757642,
+                "prediction_index": 0,
+                "confidence": 0.8753240704536438
+              }
+            }
+          ],
+          "fp_overlap_diagnostics": []
+        },
+        {
+          "model": "YOLO11x-Seg",
+          "prediction_path": "YOLO_Large_Seg_MOTS20_Benchmark/predictions/benchmark-20260929T0520Z/accuracy/yolo11x-seg/predictions/MOTS20-09_000001.json.gz",
+          "prediction_sha256": "869dc277340d6bdf2968a7fac85038e11d0f149a9b328fa0b81e00ae077cc813",
+          "counts": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "ignored_predictions": 3
+          },
+          "matched_gt_ids": [
+            2019,
+            2023,
+            2022,
+            2021,
+            2001,
+            2020
+          ],
+          "fn_gt_ids": [],
+          "targets": [
+            {
+              "gt_id": 2019,
+              "matched": true,
+              "matched_iou": 0.8645704764255739,
+              "best_at_conf025": {
+                "iou": 0.8645704764255739,
+                "prediction_index": 0,
+                "confidence": 0.8930869102478027
+              }
+            }
+          ],
+          "fp_overlap_diagnostics": []
+        },
+        {
+          "model": "YOLOv9e-Seg",
+          "prediction_path": "YOLO_Large_Seg_MOTS20_Benchmark/predictions/benchmark-20260929T0520Z/accuracy/yolov9e-seg/predictions/MOTS20-09_000001.json.gz",
+          "prediction_sha256": "974243da6bc36dae32d1dc77b0376f68612be68df758b75d3fe50a5a2188583c",
+          "counts": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "ignored_predictions": 3
+          },
+          "matched_gt_ids": [
+            2019,
+            2023,
+            2022,
+            2001,
+            2021,
+            2020
+          ],
+          "fn_gt_ids": [],
+          "targets": [
+            {
+              "gt_id": 2019,
+              "matched": true,
+              "matched_iou": 0.8626698984444513,
+              "best_at_conf025": {
+                "iou": 0.8626698984444513,
+                "prediction_index": 0,
+                "confidence": 0.8758355379104614
+              }
+            }
+          ],
+          "fp_overlap_diagnostics": []
+        }
+      ],
+      "comparison_path": "outputs/visualizations/near_tie_26s_11x_v9e/v1/case_01_comparison.png",
+      "comparison_sha256": "ea1249b68ddcf63c1ff6e6a039b9fc767dd6cb80b7c05fd26915f88c60c67bcc",
+      "focus_path": "outputs/visualizations/near_tie_26s_11x_v9e/v1/case_01_focus.png",
+      "focus_sha256": "e5b4dbec26359eafc697110e4f35a43b689b911f4b133f8860eda13b6e07def2"
+    },
+    {
+      "case": 2,
+      "sequence": "MOTS20-09",
+      "frame": 525,
+      "selection_reason": "different GT coverage despite near-equal pooled mAP",
+      "image_path": "datasets/MOTS/MOTS/train/MOTS20-09/img1/000525.jpg",
+      "image_sha256": "38ba82bdba8518919ee8d6c22872a1710e16b4e43387ebf409adea93f686ebf1",
+      "gt_path": "datasets/MOTS/MOTS/train/MOTS20-09/gt/gt.txt",
+      "gt_sha256": "73c59a3d52469d81084f99c7e2a0c711a99e9fb4152f6aa839fc26e5e03fa383",
+      "roi_xyxy": [
+        247,
+        110,
+        1920,
+        1039
+      ],
+      "gt_ids": [
+        2003,
+        2004
+      ],
+      "models": [
+        {
+          "model": "YOLO26s-Seg",
+          "prediction_path": "YOLO_Small_Seg_MOTS20_Benchmark/predictions/benchmark-20261005T051531Z/accuracy/yolo26s-seg/predictions/MOTS20-09_000525.json.gz",
+          "prediction_sha256": "6496dfecef37d812baef61a4b9d5ef838df3aa555b568501bf1324ac29ce8d19",
+          "counts": {
+            "tp": 5,
+            "fp": 2,
+            "fn": 5,
+            "ignored_predictions": 3
+          },
+          "matched_gt_ids": [
+            2005,
+            2006,
+            2015,
+            2024,
+            2014
+          ],
+          "fn_gt_ids": [
+            2003,
+            2004,
+            2009,
+            2011,
+            2017
+          ],
+          "targets": [
+            {
+              "gt_id": 2003,
+              "matched": false,
+              "matched_iou": null,
+              "best_at_conf025": {
+                "iou": 0.3498441288534811,
+                "prediction_index": 7,
+                "confidence": 0.5577093362808228
+              },
+              "best_among_all_saved_predictions": {
+                "iou": 0.37746847489888175,
+                "prediction_index": 52,
+                "confidence": 0.005112761165946722
+              }
+            },
+            {
+              "gt_id": 2004,
+              "matched": false,
+              "matched_iou": null,
+              "best_at_conf025": {
+                "iou": 0.06902452937820878,
+                "prediction_index": 0,
+                "confidence": 0.9178134202957153
+              },
+              "best_among_all_saved_predictions": {
+                "iou": 0.44980251676311195,
+                "prediction_index": 51,
+                "confidence": 0.005698648281395435
+              }
+            }
+          ],
+          "fp_overlap_diagnostics": [
+            {
+              "prediction_index": 1,
+              "best_valid_gt_id": 2009,
+              "iou": 0.48747791748934843,
+              "gt_already_matched": false
+            },
+            {
+              "prediction_index": 7,
+              "best_valid_gt_id": 2003,
+              "iou": 0.3498441288534811,
+              "gt_already_matched": false
+            }
+          ]
+        },
+        {
+          "model": "YOLO11x-Seg",
+          "prediction_path": "YOLO_Large_Seg_MOTS20_Benchmark/predictions/benchmark-20260929T0520Z/accuracy/yolo11x-seg/predictions/MOTS20-09_000525.json.gz",
+          "prediction_sha256": "0083a12b466e99385fc78d2702ca1f3ee702195b03f010f4e81cc777b6858490",
+          "counts": {
+            "tp": 6,
+            "fp": 1,
+            "fn": 4,
+            "ignored_predictions": 1
+          },
+          "matched_gt_ids": [
+            2005,
+            2009,
+            2006,
+            2015,
+            2024,
+            2014
+          ],
+          "fn_gt_ids": [
+            2003,
+            2004,
+            2011,
+            2017
+          ],
+          "targets": [
+            {
+              "gt_id": 2003,
+              "matched": false,
+              "matched_iou": null,
+              "best_at_conf025": {
+                "iou": 0.34239932532152645,
+                "prediction_index": 5,
+                "confidence": 0.7688169479370117
+              },
+              "best_among_all_saved_predictions": {
+                "iou": 0.34239932532152645,
+                "prediction_index": 5,
+                "confidence": 0.7688169479370117
+              }
+            },
+            {
+              "gt_id": 2004,
+              "matched": false,
+              "matched_iou": null,
+              "best_at_conf025": {
+                "iou": 0.028859715742649453,
+                "prediction_index": 0,
+                "confidence": 0.9411439299583435
+              },
+              "best_among_all_saved_predictions": {
+                "iou": 0.5638817111685329,
+                "prediction_index": 8,
+                "confidence": 0.21652960777282715
+              }
+            }
+          ],
+          "fp_overlap_diagnostics": [
+            {
+              "prediction_index": 5,
+              "best_valid_gt_id": 2003,
+              "iou": 0.34239932532152645,
+              "gt_already_matched": false
+            }
+          ]
+        },
+        {
+          "model": "YOLOv9e-Seg",
+          "prediction_path": "YOLO_Large_Seg_MOTS20_Benchmark/predictions/benchmark-20260929T0520Z/accuracy/yolov9e-seg/predictions/MOTS20-09_000525.json.gz",
+          "prediction_sha256": "423883ab4423b271f0f068f1fbfeecb24ccf95556c6bf6ce5b07acf27d65a4ef",
+          "counts": {
+            "tp": 7,
+            "fp": 1,
+            "fn": 3,
+            "ignored_predictions": 2
+          },
+          "matched_gt_ids": [
+            2005,
+            2006,
+            2024,
+            2015,
+            2009,
+            2014,
+            2004
+          ],
+          "fn_gt_ids": [
+            2003,
+            2011,
+            2017
+          ],
+          "targets": [
+            {
+              "gt_id": 2003,
+              "matched": false,
+              "matched_iou": null,
+              "best_at_conf025": {
+                "iou": 0.4372062663185379,
+                "prediction_index": 7,
+                "confidence": 0.5671871304512024
+              },
+              "best_among_all_saved_predictions": {
+                "iou": 0.4372062663185379,
+                "prediction_index": 7,
+                "confidence": 0.5671871304512024
+              }
+            },
+            {
+              "gt_id": 2004,
+              "matched": true,
+              "matched_iou": 0.6100162601626016,
+              "best_at_conf025": {
+                "iou": 0.6100162601626016,
+                "prediction_index": 9,
+                "confidence": 0.2540886700153351
+              }
+            }
+          ],
+          "fp_overlap_diagnostics": [
+            {
+              "prediction_index": 7,
+              "best_valid_gt_id": 2003,
+              "iou": 0.4372062663185379,
+              "gt_already_matched": false
+            }
+          ]
+        }
+      ],
+      "comparison_path": "outputs/visualizations/near_tie_26s_11x_v9e/v1/case_02_comparison.png",
+      "comparison_sha256": "94eb7b4e32a3bd79ba0f550330810b7e1e0854933195297de65134768919b524",
+      "focus_path": "outputs/visualizations/near_tie_26s_11x_v9e/v1/case_02_focus.png",
+      "focus_sha256": "eacbae9fb9087bb147c8cf6400f6e9251d05766faccea730606703e4ea2ca0e5"
+    },
+    {
+      "case": 3,
+      "sequence": "MOTS20-11",
+      "frame": 450,
+      "selection_reason": "same coverage and differing extra masks",
+      "image_path": "datasets/MOTS/MOTS/train/MOTS20-11/img1/000450.jpg",
+      "image_sha256": "8620838d2e2e002a482a42abcd64d1a48d8994f643af0525827fb3488fe8fea5",
+      "gt_path": "datasets/MOTS/MOTS/train/MOTS20-11/gt/gt.txt",
+      "gt_sha256": "aa4a6092a4297025191601a07bba4933d24d9989bd8fb2d01c1f285ad046cb70",
+      "roi_xyxy": [
+        474,
+        201,
+        967,
+        595
+      ],
+      "gt_ids": [
+        2010
+      ],
+      "models": [
+        {
+          "model": "YOLO26s-Seg",
+          "prediction_path": "YOLO_Small_Seg_MOTS20_Benchmark/predictions/benchmark-20261005T051531Z/accuracy/yolo26s-seg/predictions/MOTS20-11_000450.json.gz",
+          "prediction_sha256": "f85d15f5060cd44a935492f8683987f62cf2b724e008c3c0fcd1608365aff36f",
+          "counts": {
+            "tp": 9,
+            "fp": 0,
+            "fn": 0,
+            "ignored_predictions": 1
+          },
+          "matched_gt_ids": [
+            2014,
+            2025,
+            2040,
+            2001,
+            2012,
+            2031,
+            2039,
+            2032,
+            2010
+          ],
+          "fn_gt_ids": [],
+          "targets": [
+            {
+              "gt_id": 2010,
+              "matched": true,
+              "matched_iou": 0.6142057176539936,
+              "best_at_conf025": {
+                "iou": 0.6142057176539936,
+                "prediction_index": 9,
+                "confidence": 0.4641808569431305
+              }
+            }
+          ],
+          "fp_overlap_diagnostics": []
+        },
+        {
+          "model": "YOLO11x-Seg",
+          "prediction_path": "YOLO_Large_Seg_MOTS20_Benchmark/predictions/benchmark-20260929T0520Z/accuracy/yolo11x-seg/predictions/MOTS20-11_000450.json.gz",
+          "prediction_sha256": "31a2072fa44e1399549e501636d6cf4b8629d449ca779fb4791a34330326ef1a",
+          "counts": {
+            "tp": 9,
+            "fp": 0,
+            "fn": 0,
+            "ignored_predictions": 1
+          },
+          "matched_gt_ids": [
+            2014,
+            2001,
+            2025,
+            2012,
+            2039,
+            2032,
+            2040,
+            2031,
+            2010
+          ],
+          "fn_gt_ids": [],
+          "targets": [
+            {
+              "gt_id": 2010,
+              "matched": true,
+              "matched_iou": 0.6380340603525545,
+              "best_at_conf025": {
+                "iou": 0.6380340603525545,
+                "prediction_index": 8,
+                "confidence": 0.5742793679237366
+              }
+            }
+          ],
+          "fp_overlap_diagnostics": []
+        },
+        {
+          "model": "YOLOv9e-Seg",
+          "prediction_path": "YOLO_Large_Seg_MOTS20_Benchmark/predictions/benchmark-20260929T0520Z/accuracy/yolov9e-seg/predictions/MOTS20-11_000450.json.gz",
+          "prediction_sha256": "126122c1111bc0bdb07e037601434ea23ca8f5d8fea61bca29a36e73d7797bd4",
+          "counts": {
+            "tp": 9,
+            "fp": 2,
+            "fn": 0,
+            "ignored_predictions": 2
+          },
+          "matched_gt_ids": [
+            2014,
+            2025,
+            2001,
+            2012,
+            2040,
+            2039,
+            2031,
+            2032,
+            2010
+          ],
+          "fn_gt_ids": [],
+          "targets": [
+            {
+              "gt_id": 2010,
+              "matched": true,
+              "matched_iou": 0.575554491782352,
+              "best_at_conf025": {
+                "iou": 0.648229752317277,
+                "prediction_index": 10,
+                "confidence": 0.3339996337890625
+              }
+            }
+          ],
+          "fp_overlap_diagnostics": [
+            {
+              "prediction_index": 10,
+              "best_valid_gt_id": 2010,
+              "iou": 0.648229752317277,
+              "gt_already_matched": true
+            },
+            {
+              "prediction_index": 11,
+              "best_valid_gt_id": null,
+              "iou": 0,
+              "gt_already_matched": false
+            }
+          ]
+        }
+      ],
+      "comparison_path": "outputs/visualizations/near_tie_26s_11x_v9e/v1/case_03_comparison.png",
+      "comparison_sha256": "8b80af598a40a00efce442c4258b2d2494cc6a3b8e478377aaeb8910502aaa6b",
+      "focus_path": "outputs/visualizations/near_tie_26s_11x_v9e/v1/case_03_focus.png",
+      "focus_sha256": "2be15768cb02aa8d30e3c733b8c316343a2be5eeff61b4c4edc3993b21f0d724"
+    },
+    {
+      "case": 4,
+      "sequence": "MOTS20-09",
+      "frame": 263,
+      "selection_reason": "counterexample and common failure",
+      "image_path": "datasets/MOTS/MOTS/train/MOTS20-09/img1/000263.jpg",
+      "image_sha256": "ca55a06d24fa0cbfd76b65c8ce9e3f98f842ee992c749a3b0db788ac8f6acf49",
+      "gt_path": "datasets/MOTS/MOTS/train/MOTS20-09/gt/gt.txt",
+      "gt_sha256": "73c59a3d52469d81084f99c7e2a0c711a99e9fb4152f6aa839fc26e5e03fa383",
+      "roi_xyxy": [
+        736,
+        236,
+        1530,
+        871
+      ],
+      "gt_ids": [
+        2007,
+        2011
+      ],
+      "models": [
+        {
+          "model": "YOLO26s-Seg",
+          "prediction_path": "YOLO_Small_Seg_MOTS20_Benchmark/predictions/benchmark-20261005T051531Z/accuracy/yolo26s-seg/predictions/MOTS20-09_000263.json.gz",
+          "prediction_sha256": "0b3b2141dc997aa3b8e2cc76b8444089debb202a2c77a17aad84a5fc3e87089f",
+          "counts": {
+            "tp": 9,
+            "fp": 2,
+            "fn": 4,
+            "ignored_predictions": 1
+          },
+          "matched_gt_ids": [
+            2008,
+            2013,
+            2029,
+            2012,
+            2021,
+            2010,
+            2022,
+            2018,
+            2001
+          ],
+          "fn_gt_ids": [
+            2002,
+            2007,
+            2011,
+            2023
+          ],
+          "targets": [
+            {
+              "gt_id": 2007,
+              "matched": false,
+              "matched_iou": null,
+              "best_at_conf025": {
+                "iou": 0.05391887160506177,
+                "prediction_index": 10,
+                "confidence": 0.283907413482666
+              },
+              "best_among_all_saved_predictions": {
+                "iou": 0.6933195527576811,
+                "prediction_index": 56,
+                "confidence": 0.0021310688462108374
+              }
+            },
+            {
+              "gt_id": 2011,
+              "matched": false,
+              "matched_iou": null,
+              "best_at_conf025": {
+                "iou": 0.40413125736616834,
+                "prediction_index": 8,
+                "confidence": 0.6404783725738525
+              },
+              "best_among_all_saved_predictions": {
+                "iou": 0.524177545691906,
+                "prediction_index": 38,
+                "confidence": 0.011723985895514488
+              }
+            }
+          ],
+          "fp_overlap_diagnostics": [
+            {
+              "prediction_index": 8,
+              "best_valid_gt_id": 2011,
+              "iou": 0.40413125736616834,
+              "gt_already_matched": false
+            },
+            {
+              "prediction_index": 10,
+              "best_valid_gt_id": 2011,
+              "iou": 0.3568184767094849,
+              "gt_already_matched": false
+            }
+          ]
+        },
+        {
+          "model": "YOLO11x-Seg",
+          "prediction_path": "YOLO_Large_Seg_MOTS20_Benchmark/predictions/benchmark-20260929T0520Z/accuracy/yolo11x-seg/predictions/MOTS20-09_000263.json.gz",
+          "prediction_sha256": "29f9535f891fb2b07d0a7f23f4d1b0d0cc5993414482161188133525b261a232",
+          "counts": {
+            "tp": 9,
+            "fp": 2,
+            "fn": 4,
+            "ignored_predictions": 1
+          },
+          "matched_gt_ids": [
+            2029,
+            2013,
+            2008,
+            2012,
+            2022,
+            2021,
+            2010,
+            2018,
+            2007
+          ],
+          "fn_gt_ids": [
+            2001,
+            2002,
+            2011,
+            2023
+          ],
+          "targets": [
+            {
+              "gt_id": 2007,
+              "matched": true,
+              "matched_iou": 0.6377783740273678,
+              "best_at_conf025": {
+                "iou": 0.6377783740273678,
+                "prediction_index": 10,
+                "confidence": 0.5432866811752319
+              }
+            },
+            {
+              "gt_id": 2011,
+              "matched": false,
+              "matched_iou": null,
+              "best_at_conf025": {
+                "iou": 0.3787602552415679,
+                "prediction_index": 8,
+                "confidence": 0.7637421488761902
+              },
+              "best_among_all_saved_predictions": {
+                "iou": 0.383912522468544,
+                "prediction_index": 39,
+                "confidence": 0.004556457512080669
+              }
+            }
+          ],
+          "fp_overlap_diagnostics": [
+            {
+              "prediction_index": 8,
+              "best_valid_gt_id": 2011,
+              "iou": 0.3787602552415679,
+              "gt_already_matched": false
+            },
+            {
+              "prediction_index": 11,
+              "best_valid_gt_id": 2023,
+              "iou": 0.28193236714975844,
+              "gt_already_matched": false
+            }
+          ]
+        },
+        {
+          "model": "YOLOv9e-Seg",
+          "prediction_path": "YOLO_Large_Seg_MOTS20_Benchmark/predictions/benchmark-20260929T0520Z/accuracy/yolov9e-seg/predictions/MOTS20-09_000263.json.gz",
+          "prediction_sha256": "47d31b9dffd04f35cc29207b2857c9928edc7d44b717736f277aead52e4e4d25",
+          "counts": {
+            "tp": 8,
+            "fp": 1,
+            "fn": 5,
+            "ignored_predictions": 2
+          },
+          "matched_gt_ids": [
+            2029,
+            2013,
+            2008,
+            2012,
+            2022,
+            2021,
+            2010,
+            2018
+          ],
+          "fn_gt_ids": [
+            2001,
+            2002,
+            2007,
+            2011,
+            2023
+          ],
+          "targets": [
+            {
+              "gt_id": 2007,
+              "matched": false,
+              "matched_iou": null,
+              "best_at_conf025": {
+                "iou": 0.03391660294183797,
+                "prediction_index": 9,
+                "confidence": 0.5359817743301392
+              },
+              "best_among_all_saved_predictions": {
+                "iou": 0.7067607928319305,
+                "prediction_index": 11,
+                "confidence": 0.24339956045150757
+              }
+            },
+            {
+              "gt_id": 2011,
+              "matched": false,
+              "matched_iou": null,
+              "best_at_conf025": {
+                "iou": 0.412186823383854,
+                "prediction_index": 9,
+                "confidence": 0.5359817743301392
+              },
+              "best_among_all_saved_predictions": {
+                "iou": 0.412186823383854,
+                "prediction_index": 9,
+                "confidence": 0.5359817743301392
+              }
+            }
+          ],
+          "fp_overlap_diagnostics": [
+            {
+              "prediction_index": 9,
+              "best_valid_gt_id": 2011,
+              "iou": 0.412186823383854,
+              "gt_already_matched": false
+            }
+          ]
+        }
+      ],
+      "comparison_path": "outputs/visualizations/near_tie_26s_11x_v9e/v1/case_04_comparison.png",
+      "comparison_sha256": "bac63c77a7ae7a47e226d11fa38ef886e6861c47522de959b2979e923cc66495",
+      "focus_path": "outputs/visualizations/near_tie_26s_11x_v9e/v1/case_04_focus.png",
+      "focus_sha256": "8edaccd1b510cd5c41edf1ecb54b1f7bb04ea0c0e5a996fd3e0b2712b1848f32"
+    }
+  ]
+}

@@ -1,0 +1,872 @@
+{
+  "scope": "Derived post-study report display claims; original synthesis claims remain archived in their original context",
+  "claims": [
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/SCALING_DELTAS.csv",
+      "keys": {
+        "family": "YOLO26",
+        "smaller_model": "YOLO26l-Seg",
+        "metric": "mask_map50_95"
+      },
+      "field": "delta_percentage_points",
+      "decimals": 3,
+      "scale": "1",
+      "signed": true,
+      "display": "-1.749"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/SCALING_DELTAS.csv",
+      "keys": {
+        "family": "YOLO26",
+        "smaller_model": "YOLO26l-Seg",
+        "metric": "inference_ms_mean"
+      },
+      "field": "delta_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "-49.95"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/SCALING_DELTAS.csv",
+      "keys": {
+        "family": "YOLO26",
+        "smaller_model": "YOLO26l-Seg",
+        "metric": "pipeline_ms_mean"
+      },
+      "field": "delta_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "-30.31"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/MASTER_17_MODELS.csv",
+      "keys": {
+        "model": "YOLO26x-Seg"
+      },
+      "field": "mask_map50_95",
+      "decimals": 6,
+      "scale": "1",
+      "signed": false,
+      "display": "0.603730"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/SCALING_DELTAS.csv",
+      "keys": {
+        "family": "YOLO26",
+        "smaller_model": "YOLO26l-Seg",
+        "metric": "mask_map50_95"
+      },
+      "field": "delta_percentage_points",
+      "decimals": 3,
+      "scale": "1",
+      "signed": true,
+      "display": "-1.749"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/SCALING_DELTAS.csv",
+      "keys": {
+        "family": "YOLO26",
+        "smaller_model": "YOLO26l-Seg",
+        "metric": "recall"
+      },
+      "field": "delta_percentage_points",
+      "decimals": 3,
+      "scale": "1",
+      "signed": true,
+      "display": "-1.190"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/SCALING_DELTAS.csv",
+      "keys": {
+        "family": "YOLO26",
+        "smaller_model": "YOLO26l-Seg",
+        "metric": "inference_ms_mean"
+      },
+      "field": "delta_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "-49.95"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/SCALING_DELTAS.csv",
+      "keys": {
+        "family": "YOLO26",
+        "smaller_model": "YOLO26l-Seg",
+        "metric": "pipeline_ms_mean"
+      },
+      "field": "delta_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "-30.31"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/SCALING_DELTAS.csv",
+      "keys": {
+        "family": "YOLO26",
+        "smaller_model": "YOLO26l-Seg",
+        "metric": "peak_allocated_vram_mib"
+      },
+      "field": "delta_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "-18.34"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/SCALING_DELTAS.csv",
+      "keys": {
+        "family": "YOLO26",
+        "smaller_model": "YOLO26l-Seg",
+        "metric": "parameters"
+      },
+      "field": "delta_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "-55.42"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/TIMING_COMPOSITION.csv",
+      "keys": {
+        "model": "YOLO26x-Seg"
+      },
+      "field": "inference_share_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": false,
+      "display": "66.09"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/TIMING_COMPOSITION.csv",
+      "keys": {
+        "model": "YOLO26x-Seg"
+      },
+      "field": "postprocess_share_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": false,
+      "display": "32.35"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/TIMING_COMPOSITION.csv",
+      "keys": {
+        "model": "YOLO26n-Seg"
+      },
+      "field": "postprocess_share_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": false,
+      "display": "82.08"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/TIMING_COMPOSITION.csv",
+      "keys": {
+        "model": "YOLOv8n-Seg"
+      },
+      "field": "postprocess_share_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": false,
+      "display": "88.74"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/MASTER_17_MODELS.csv",
+      "keys": {
+        "model": "YOLO26s-Seg"
+      },
+      "field": "mask_map50_95",
+      "decimals": 6,
+      "scale": "1",
+      "signed": false,
+      "display": "0.536640"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/MASTER_17_MODELS.csv",
+      "keys": {
+        "model": "YOLO26s-Seg"
+      },
+      "field": "recall",
+      "decimals": 6,
+      "scale": "1",
+      "signed": false,
+      "display": "0.789581"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/MASTER_17_MODELS.csv",
+      "keys": {
+        "model": "YOLO26s-Seg"
+      },
+      "field": "inference_ms_mean",
+      "decimals": 3,
+      "scale": "1",
+      "signed": false,
+      "display": "17.308"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/MASTER_17_MODELS.csv",
+      "keys": {
+        "model": "YOLO26s-Seg"
+      },
+      "field": "pipeline_ms_mean",
+      "decimals": 3,
+      "scale": "1",
+      "signed": false,
+      "display": "78.828"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/MASTER_17_MODELS.csv",
+      "keys": {
+        "model": "YOLO26s-Seg"
+      },
+      "field": "peak_allocated_vram_mib",
+      "decimals": 2,
+      "scale": "1",
+      "signed": false,
+      "display": "872.67"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/MASTER_17_MODELS.csv",
+      "keys": {
+        "model": "YOLO26s-Seg"
+      },
+      "field": "checkpoint_mb",
+      "decimals": 2,
+      "scale": "1",
+      "signed": false,
+      "display": "23.47"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/MASTER_17_MODELS.csv",
+      "keys": {
+        "model": "YOLO11x-Seg"
+      },
+      "field": "mask_map50_95",
+      "decimals": 6,
+      "scale": "1",
+      "signed": false,
+      "display": "0.536674"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/MASTER_17_MODELS.csv",
+      "keys": {
+        "model": "YOLO11x-Seg"
+      },
+      "field": "recall",
+      "decimals": 6,
+      "scale": "1",
+      "signed": false,
+      "display": "0.822228"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/MASTER_17_MODELS.csv",
+      "keys": {
+        "model": "YOLO11x-Seg"
+      },
+      "field": "inference_ms_mean",
+      "decimals": 3,
+      "scale": "1",
+      "signed": false,
+      "display": "69.406"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/MASTER_17_MODELS.csv",
+      "keys": {
+        "model": "YOLO11x-Seg"
+      },
+      "field": "pipeline_ms_mean",
+      "decimals": 3,
+      "scale": "1",
+      "signed": false,
+      "display": "105.885"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/MASTER_17_MODELS.csv",
+      "keys": {
+        "model": "YOLO11x-Seg"
+      },
+      "field": "peak_allocated_vram_mib",
+      "decimals": 2,
+      "scale": "1",
+      "signed": false,
+      "display": "942.48"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/MASTER_17_MODELS.csv",
+      "keys": {
+        "model": "YOLO11x-Seg"
+      },
+      "field": "checkpoint_mb",
+      "decimals": 2,
+      "scale": "1",
+      "signed": false,
+      "display": "125.09"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/MASTER_17_MODELS.csv",
+      "keys": {
+        "model": "YOLOv9e-Seg"
+      },
+      "field": "mask_map50_95",
+      "decimals": 6,
+      "scale": "1",
+      "signed": false,
+      "display": "0.536642"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/MASTER_17_MODELS.csv",
+      "keys": {
+        "model": "YOLOv9e-Seg"
+      },
+      "field": "recall",
+      "decimals": 6,
+      "scale": "1",
+      "signed": false,
+      "display": "0.826578"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/MASTER_17_MODELS.csv",
+      "keys": {
+        "model": "YOLOv9e-Seg"
+      },
+      "field": "inference_ms_mean",
+      "decimals": 3,
+      "scale": "1",
+      "signed": false,
+      "display": "65.888"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/MASTER_17_MODELS.csv",
+      "keys": {
+        "model": "YOLOv9e-Seg"
+      },
+      "field": "pipeline_ms_mean",
+      "decimals": 3,
+      "scale": "1",
+      "signed": false,
+      "display": "103.376"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/MASTER_17_MODELS.csv",
+      "keys": {
+        "model": "YOLOv9e-Seg"
+      },
+      "field": "peak_allocated_vram_mib",
+      "decimals": 2,
+      "scale": "1",
+      "signed": false,
+      "display": "855.41"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/MASTER_17_MODELS.csv",
+      "keys": {
+        "model": "YOLOv9e-Seg"
+      },
+      "field": "checkpoint_mb",
+      "decimals": 2,
+      "scale": "1",
+      "signed": false,
+      "display": "122.21"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/NEAR_TIE_RESOURCE_DELTAS.csv",
+      "keys": {
+        "model_a": "YOLO11x-Seg",
+        "model_b": "YOLO26s-Seg"
+      },
+      "field": "map_abs_gap_pp",
+      "decimals": 6,
+      "scale": "1",
+      "signed": false,
+      "display": "0.003391"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/NEAR_TIE_RESOURCE_DELTAS.csv",
+      "keys": {
+        "model_a": "YOLO11x-Seg",
+        "model_b": "YOLO26s-Seg"
+      },
+      "field": "inference_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "-75.06"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/NEAR_TIE_RESOURCE_DELTAS.csv",
+      "keys": {
+        "model_a": "YOLO11x-Seg",
+        "model_b": "YOLO26s-Seg"
+      },
+      "field": "pipeline_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "-25.55"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/NEAR_TIE_RESOURCE_DELTAS.csv",
+      "keys": {
+        "model_a": "YOLO11x-Seg",
+        "model_b": "YOLO26s-Seg"
+      },
+      "field": "parameters_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "-81.48"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/NEAR_TIE_RESOURCE_DELTAS.csv",
+      "keys": {
+        "model_a": "YOLOv9e-Seg",
+        "model_b": "YOLO26s-Seg"
+      },
+      "field": "vram_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "+2.02"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/NEAR_TIE_RESOURCE_DELTAS.csv",
+      "keys": {
+        "model_a": "YOLOv9c-Seg",
+        "model_b": "YOLO11m-Seg"
+      },
+      "field": "pipeline_delta_b_minus_a",
+      "decimals": 3,
+      "scale": "1",
+      "signed": true,
+      "display": "+0.051"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/SCALING_DELTAS.csv",
+      "keys": {
+        "family": "YOLO26",
+        "smaller_model": "YOLO26n-Seg",
+        "metric": "mask_map50_95"
+      },
+      "field": "delta_percentage_points",
+      "decimals": 3,
+      "scale": "1",
+      "signed": true,
+      "display": "-6.394"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/SCALING_DELTAS.csv",
+      "keys": {
+        "family": "YOLO26",
+        "smaller_model": "YOLO26n-Seg",
+        "metric": "inference_ms_mean"
+      },
+      "field": "delta_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "-24.65"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/SCALING_DELTAS.csv",
+      "keys": {
+        "family": "YOLO26",
+        "smaller_model": "YOLO26n-Seg",
+        "metric": "pipeline_ms_mean"
+      },
+      "field": "delta_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "+4.52"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/SCALING_DELTAS.csv",
+      "keys": {
+        "family": "YOLO26",
+        "smaller_model": "YOLO26n-Seg",
+        "metric": "peak_allocated_vram_mib"
+      },
+      "field": "delta_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "+19.53"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/SCALING_DELTAS.csv",
+      "keys": {
+        "family": "YOLO11",
+        "smaller_model": "YOLO11n-Seg",
+        "metric": "mask_map50_95"
+      },
+      "field": "delta_percentage_points",
+      "decimals": 3,
+      "scale": "1",
+      "signed": true,
+      "display": "-5.134"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/SCALING_DELTAS.csv",
+      "keys": {
+        "family": "YOLO11",
+        "smaller_model": "YOLO11n-Seg",
+        "metric": "inference_ms_mean"
+      },
+      "field": "delta_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "-25.16"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/SCALING_DELTAS.csv",
+      "keys": {
+        "family": "YOLO11",
+        "smaller_model": "YOLO11n-Seg",
+        "metric": "pipeline_ms_mean"
+      },
+      "field": "delta_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "+9.69"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/SCALING_DELTAS.csv",
+      "keys": {
+        "family": "YOLO11",
+        "smaller_model": "YOLO11n-Seg",
+        "metric": "peak_allocated_vram_mib"
+      },
+      "field": "delta_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "+2.23"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/SCALING_DELTAS.csv",
+      "keys": {
+        "family": "YOLOv8",
+        "smaller_model": "YOLOv8n-Seg",
+        "metric": "mask_map50_95"
+      },
+      "field": "delta_percentage_points",
+      "decimals": 3,
+      "scale": "1",
+      "signed": true,
+      "display": "-5.970"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/SCALING_DELTAS.csv",
+      "keys": {
+        "family": "YOLOv8",
+        "smaller_model": "YOLOv8n-Seg",
+        "metric": "inference_ms_mean"
+      },
+      "field": "delta_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "-40.57"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/SCALING_DELTAS.csv",
+      "keys": {
+        "family": "YOLOv8",
+        "smaller_model": "YOLOv8n-Seg",
+        "metric": "pipeline_ms_mean"
+      },
+      "field": "delta_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "+3.81"
+    },
+    {
+      "document": "RESEARCH_INSIGHTS_TH.md",
+      "source": "metrics/SCALING_DELTAS.csv",
+      "keys": {
+        "family": "YOLOv8",
+        "smaller_model": "YOLOv8n-Seg",
+        "metric": "peak_allocated_vram_mib"
+      },
+      "field": "delta_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "-1.92"
+    },
+    {
+      "document": "MEETING_SUMMARY_TH.md",
+      "source": "metrics/SCALING_DELTAS.csv",
+      "keys": {
+        "family": "YOLO26",
+        "smaller_model": "YOLO26l-Seg",
+        "metric": "mask_map50_95"
+      },
+      "field": "delta_percentage_points",
+      "decimals": 3,
+      "scale": "1",
+      "signed": true,
+      "display": "-1.749"
+    },
+    {
+      "document": "MEETING_SUMMARY_TH.md",
+      "source": "metrics/SCALING_DELTAS.csv",
+      "keys": {
+        "family": "YOLO26",
+        "smaller_model": "YOLO26l-Seg",
+        "metric": "inference_ms_mean"
+      },
+      "field": "delta_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "-49.95"
+    },
+    {
+      "document": "MEETING_SUMMARY_TH.md",
+      "source": "metrics/SCALING_DELTAS.csv",
+      "keys": {
+        "family": "YOLO26",
+        "smaller_model": "YOLO26l-Seg",
+        "metric": "pipeline_ms_mean"
+      },
+      "field": "delta_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "-30.31"
+    },
+    {
+      "document": "MEETING_SUMMARY_TH.md",
+      "source": "metrics/SCALING_DELTAS.csv",
+      "keys": {
+        "family": "YOLO26",
+        "smaller_model": "YOLO26l-Seg",
+        "metric": "peak_allocated_vram_mib"
+      },
+      "field": "delta_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "-18.34"
+    },
+    {
+      "document": "MEETING_SUMMARY_TH.md",
+      "source": "metrics/MASTER_17_MODELS.csv",
+      "keys": {
+        "model": "YOLOv8n-Seg"
+      },
+      "field": "inference_ms_mean",
+      "decimals": 3,
+      "scale": "1",
+      "signed": false,
+      "display": "9.045"
+    },
+    {
+      "document": "MEETING_SUMMARY_TH.md",
+      "source": "metrics/MASTER_17_MODELS.csv",
+      "keys": {
+        "model": "YOLOv8n-Seg"
+      },
+      "field": "pipeline_ms_mean",
+      "decimals": 3,
+      "scale": "1",
+      "signed": false,
+      "display": "95.683"
+    },
+    {
+      "document": "MEETING_SUMMARY_TH.md",
+      "source": "metrics/MASTER_17_MODELS.csv",
+      "keys": {
+        "model": "YOLO26l-Seg"
+      },
+      "field": "pipeline_ms_mean",
+      "decimals": 3,
+      "scale": "1",
+      "signed": false,
+      "display": "76.403"
+    },
+    {
+      "document": "MEETING_SUMMARY_TH.md",
+      "source": "metrics/NEAR_TIE_RESOURCE_DELTAS.csv",
+      "keys": {
+        "model_a": "YOLO11x-Seg",
+        "model_b": "YOLO26s-Seg"
+      },
+      "field": "inference_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "-75.06"
+    },
+    {
+      "document": "MEETING_SUMMARY_TH.md",
+      "source": "metrics/NEAR_TIE_RESOURCE_DELTAS.csv",
+      "keys": {
+        "model_a": "YOLO11x-Seg",
+        "model_b": "YOLO26s-Seg"
+      },
+      "field": "pipeline_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "-25.55"
+    },
+    {
+      "document": "MASTER_RESULTS.md",
+      "source": "metrics/TIMING_COMPOSITION.csv",
+      "keys": {
+        "model": "YOLO26x-Seg"
+      },
+      "field": "postprocess_share_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": false,
+      "display": "32.35"
+    },
+    {
+      "document": "MASTER_RESULTS.md",
+      "source": "metrics/TIMING_COMPOSITION.csv",
+      "keys": {
+        "model": "YOLO26n-Seg"
+      },
+      "field": "postprocess_share_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": false,
+      "display": "82.08"
+    },
+    {
+      "document": "MASTER_RESULTS.md",
+      "source": "metrics/TIMING_COMPOSITION.csv",
+      "keys": {
+        "model": "YOLOv8n-Seg"
+      },
+      "field": "postprocess_share_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": false,
+      "display": "88.74"
+    },
+    {
+      "document": "MASTER_RESULTS.md",
+      "source": "metrics/NEAR_TIE_RESOURCE_DELTAS.csv",
+      "keys": {
+        "model_a": "YOLO11x-Seg",
+        "model_b": "YOLO26s-Seg"
+      },
+      "field": "inference_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "-75.06"
+    },
+    {
+      "document": "MASTER_RESULTS.md",
+      "source": "metrics/NEAR_TIE_RESOURCE_DELTAS.csv",
+      "keys": {
+        "model_a": "YOLO11x-Seg",
+        "model_b": "YOLO26s-Seg"
+      },
+      "field": "pipeline_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "-25.55"
+    },
+    {
+      "document": "MASTER_RESULTS.md",
+      "source": "metrics/NEAR_TIE_RESOURCE_DELTAS.csv",
+      "keys": {
+        "model_a": "YOLO11x-Seg",
+        "model_b": "YOLO26s-Seg"
+      },
+      "field": "parameters_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "-81.48"
+    },
+    {
+      "document": "MASTER_RESULTS.md",
+      "source": "metrics/NEAR_TIE_RESOURCE_DELTAS.csv",
+      "keys": {
+        "model_a": "YOLO11x-Seg",
+        "model_b": "YOLO26s-Seg"
+      },
+      "field": "vram_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "-7.41"
+    },
+    {
+      "document": "MASTER_RESULTS.md",
+      "source": "metrics/NEAR_TIE_RESOURCE_DELTAS.csv",
+      "keys": {
+        "model_a": "YOLOv9e-Seg",
+        "model_b": "YOLO26s-Seg"
+      },
+      "field": "vram_relative_pct",
+      "decimals": 2,
+      "scale": "1",
+      "signed": true,
+      "display": "+2.02"
+    }
+  ]
+}

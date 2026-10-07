@@ -1,0 +1,206 @@
+{
+  "scope": "DERIVED FROM EXISTING CANONICAL RESULTS",
+  "inference_rerun": false,
+  "timing_rerun": false,
+  "measured_values_changed": false,
+  "pipeline_pareto": [
+    "YOLO26x-Seg",
+    "YOLO26l-Seg"
+  ],
+  "component_sum_tolerance_ms": "1e-10",
+  "postprocessing_over_half_pipeline_models": [
+    "YOLO26l-Seg",
+    "YOLO11l-Seg",
+    "YOLOv9c-Seg",
+    "YOLO26m-Seg",
+    "YOLO11m-Seg",
+    "YOLOv8m-Seg",
+    "YOLO26s-Seg",
+    "YOLO11s-Seg",
+    "YOLOv8s-Seg",
+    "YOLO26n-Seg",
+    "YOLO11n-Seg",
+    "YOLOv8n-Seg"
+  ],
+  "tier_sequence_winners": [
+    {
+      "tier": "largest",
+      "sequence": "MOTS20-02",
+      "model": "YOLO26x-Seg",
+      "mask_map50_95": "0.48631736489491567"
+    },
+    {
+      "tier": "largest",
+      "sequence": "MOTS20-05",
+      "model": "YOLO26x-Seg",
+      "mask_map50_95": "0.649731825113062"
+    },
+    {
+      "tier": "largest",
+      "sequence": "MOTS20-09",
+      "model": "YOLO26x-Seg",
+      "mask_map50_95": "0.6101132541358061"
+    },
+    {
+      "tier": "largest",
+      "sequence": "MOTS20-11",
+      "model": "YOLO26x-Seg",
+      "mask_map50_95": "0.656433015958394"
+    },
+    {
+      "tier": "second_largest",
+      "sequence": "MOTS20-02",
+      "model": "YOLO26l-Seg",
+      "mask_map50_95": "0.4690681351303202"
+    },
+    {
+      "tier": "second_largest",
+      "sequence": "MOTS20-05",
+      "model": "YOLO26l-Seg",
+      "mask_map50_95": "0.633303792407039"
+    },
+    {
+      "tier": "second_largest",
+      "sequence": "MOTS20-09",
+      "model": "YOLO26l-Seg",
+      "mask_map50_95": "0.5878953223893446"
+    },
+    {
+      "tier": "second_largest",
+      "sequence": "MOTS20-11",
+      "model": "YOLO26l-Seg",
+      "mask_map50_95": "0.6409909256750733"
+    },
+    {
+      "tier": "medium",
+      "sequence": "MOTS20-02",
+      "model": "YOLO26m-Seg",
+      "mask_map50_95": "0.4492104479372004"
+    },
+    {
+      "tier": "medium",
+      "sequence": "MOTS20-05",
+      "model": "YOLO26m-Seg",
+      "mask_map50_95": "0.6189945685241278"
+    },
+    {
+      "tier": "medium",
+      "sequence": "MOTS20-09",
+      "model": "YOLO26m-Seg",
+      "mask_map50_95": "0.5823107206035733"
+    },
+    {
+      "tier": "medium",
+      "sequence": "MOTS20-11",
+      "model": "YOLO26m-Seg",
+      "mask_map50_95": "0.6333698933604952"
+    },
+    {
+      "tier": "small",
+      "sequence": "MOTS20-02",
+      "model": "YOLO26s-Seg",
+      "mask_map50_95": "0.41965144637490925"
+    },
+    {
+      "tier": "small",
+      "sequence": "MOTS20-05",
+      "model": "YOLO26s-Seg",
+      "mask_map50_95": "0.5811367378143568"
+    },
+    {
+      "tier": "small",
+      "sequence": "MOTS20-09",
+      "model": "YOLO26s-Seg",
+      "mask_map50_95": "0.5442206965049603"
+    },
+    {
+      "tier": "small",
+      "sequence": "MOTS20-11",
+      "model": "YOLO26s-Seg",
+      "mask_map50_95": "0.5898926635345991"
+    },
+    {
+      "tier": "nano",
+      "sequence": "MOTS20-02",
+      "model": "YOLO26n-Seg",
+      "mask_map50_95": "0.3357522308180785"
+    },
+    {
+      "tier": "nano",
+      "sequence": "MOTS20-05",
+      "model": "YOLO26n-Seg",
+      "mask_map50_95": "0.5235443515301247"
+    },
+    {
+      "tier": "nano",
+      "sequence": "MOTS20-09",
+      "model": "YOLO26n-Seg",
+      "mask_map50_95": "0.4686905478860314"
+    },
+    {
+      "tier": "nano",
+      "sequence": "MOTS20-11",
+      "model": "YOLO26n-Seg",
+      "mask_map50_95": "0.5416286839530675"
+    }
+  ],
+  "rank_inversions": [
+    {
+      "tier": "largest",
+      "sequence": "MOTS20-02",
+      "model": "YOLO11x-Seg",
+      "within_tier_sequence_map_rank": 3,
+      "pooled_tier_map_rank": 2
+    },
+    {
+      "tier": "largest",
+      "sequence": "MOTS20-02",
+      "model": "YOLOv9e-Seg",
+      "within_tier_sequence_map_rank": 2,
+      "pooled_tier_map_rank": 3
+    },
+    {
+      "tier": "second_largest",
+      "sequence": "MOTS20-09",
+      "model": "YOLOv9c-Seg",
+      "within_tier_sequence_map_rank": 3,
+      "pooled_tier_map_rank": 4
+    },
+    {
+      "tier": "second_largest",
+      "sequence": "MOTS20-09",
+      "model": "YOLOv8l-Seg",
+      "within_tier_sequence_map_rank": 4,
+      "pooled_tier_map_rank": 3
+    },
+    {
+      "tier": "small",
+      "sequence": "MOTS20-02",
+      "model": "YOLO11s-Seg",
+      "within_tier_sequence_map_rank": 3,
+      "pooled_tier_map_rank": 2
+    },
+    {
+      "tier": "small",
+      "sequence": "MOTS20-11",
+      "model": "YOLO11s-Seg",
+      "within_tier_sequence_map_rank": 3,
+      "pooled_tier_map_rank": 2
+    },
+    {
+      "tier": "small",
+      "sequence": "MOTS20-02",
+      "model": "YOLOv8s-Seg",
+      "within_tier_sequence_map_rank": 2,
+      "pooled_tier_map_rank": 3
+    },
+    {
+      "tier": "small",
+      "sequence": "MOTS20-11",
+      "model": "YOLOv8s-Seg",
+      "within_tier_sequence_map_rank": 2,
+      "pooled_tier_map_rank": 3
+    }
+  ],
+  "near_tie_pairs": 5
+}

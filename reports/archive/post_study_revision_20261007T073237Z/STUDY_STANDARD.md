@@ -50,7 +50,7 @@ Schema and units: DATA_SCHEMA.md and schemas.json. Provenance includes study/sch
 
 ## Reports, rounding and plots
 
-Per-tier PRESENTATION_SUMMARY_TH.md is a full visual, qualitative and interpretive research report. Its scientific depth is intentional and must not be shortened merely for length. A speakable cross-study narrative belongs in MEETING_SUMMARY_TH.md.
+Per-tier PRESENTATION_SUMMARY_TH.md must remain a neutral, presentation-ready tier summary. Meeting-specific synthesis belongs only in `MEETING_SUMMARY_TH.md`.
 
 Use exact major section/table ordering in `templates/`. README is navigation; RESULTS_SUMMARY_TH concise Thai result; PRESENTATION_SUMMARY_TH visual + qualitative + interpretive Thai analysis; REPORT compact technical record. Avoid repeating methodology and generic definitions; common method is METHODOLOGY_REFERENCE.md. Full metric guide and final synthesis come later. Display order: YOLO26, YOLO11, YOLOv9 (only largest/second-largest), YOLOv8. Explicitly metric-sorted tables may differ. Machine tier labels: largest, second_largest, medium, small, nano. Human labels: Largest (X/E), Second-largest (L/C), Medium (M), Small (S), Nano (N).
 
@@ -58,23 +58,25 @@ Markdown AP/P/R/F1/IoU/Dice: 6 decimals; latency/FPS: 3; VRAM MiB: 2; parameters
 
 ## Documentation roles and qualitative evidence
 
-RESULTS_SUMMARY_TH.md is a short quantitative quick summary. Follow its template:
-5–8 bullets; ONE canonical results table; six-category winner table; 3–5 numerical
-findings; a compact model-role table (strength, trade-off, conditional use); short
-Accuracy vs Speed and Accuracy vs Memory sections; cautions and links. Replace
-long per-model essays with the role table. No visual case analysis, weighted score
-or universal balanced winner. This final post-study role supersedes the earlier
-per-model paragraph layout; historical copies remain archived.
+RESULTS_SUMMARY_TH.md is a compact quantitative result summary. Follow its template:
+5–8 bullets; one canonical results table; per-model table interpretation; six-category winner table; 3–5 directly measured findings;
+short Accuracy vs Speed and Accuracy vs Memory sections; cautions; cross-tier inputs/links.
+Include a concise per-model table interpretation section after the main table: one subsection per valid model
+in fixed family order, 1–2 short paragraphs explaining measured strengths, limitations, actual
+trade-offs and conditional candidates. Do not merely restate every table cell or assume a balanced
+winner. Cite canonical CSV/REPORT for AP50/TP-only metrics omitted from the compact table;
+TP-only quality is conditional on matching and can use different GT subsets across models.
+Keep tiny gaps descriptive and separate inference from pipeline. NOT_RUN tiers retain planned
+model headings and pending text without fabricated comparisons. No repeated result tables or
+visual cases; PRESENTATION retains the visual/qualitative role. This section implements the user's
+2026-10-05 revision of the earlier prohibition on per-model interpretation.
 
-PRESENTATION_SUMMARY_TH.md is the canonical FULL qualitative research report.
-Preserve full-frame/identical-ROI images, GT diagnostics, direct observations,
-analysis, metric connections, counterexamples, common failures, Failure Analysis,
-Near-tie visual check, Observation/Interpretation separation and evidence limits.
-Use a short overview/table and explain reading policy once. Approximately four
-active cases per completed tier remain diagnostic examples. Every case gives
-selection reason, image evidence, observations, interpretation, cautious metric
-connection and evidence limits. Detailed selection/hash/replacement audit may
-live in linked evidence ledgers. Length alone never justifies removing depth.
+PRESENTATION_SUMMARY_TH.md answers how predictions differ in actual frames. Follow its template:
+one short overview and small mAP/AP75/Recall context table linked to RESULTS; approximately 3–5
+same-frame cases; Failure Analysis; Near-tie visual check; 3–6 explicit observation/interpretation
+findings; quantitative/qualitative synthesis; priority/candidate/evidence table; limitations and links.
+Every case gives selection reason, actual relative image embed, direct observations, analysis,
+then connection to canonical metrics. No per-model ranking essay or mentor-specific section.
 
 Use only actual MOTS20 benchmark frames, original GT, saved predictions and canonical artifacts.
 Prefer existing comparisons, then reconstruct from saved predictions; if insufficient, report that
@@ -147,51 +149,4 @@ Follow [DOCUMENTATION_LANGUAGE_POLICY.md](DOCUMENTATION_LANGUAGE_POLICY.md): Eng
 
 Use scripts/build_master.py to validate source schemas, complete model membership, frozen protocol and provenance, then generate the 17-model table, seven winners per tier, 13 adjacent family scaling pairs and two strict Pareto fronts. Preserve source numerical strings. Compute deltas as smaller minus larger and relative changes against the larger checkpoint; fraction deltas may also be shown in percentage points. A descriptive near-tie screen of absolute mAP gap ≤0.001 is a reporting aid, not an equivalence or significance test. Keep inference-latency and allocated-VRAM Pareto objectives separate; do not compute a weighted score.
 
-MASTER_RESULTS.md, README.md, DATA_SCHEMA.md and METHODOLOGY_REFERENCE.md use English. RESEARCH_INSIGHTS_TH.md, EXECUTIVE_SUMMARY_TH.md, MEETING_SUMMARY_TH.md and METRIC_GUIDE_TH.md use Thai prose with canonical technical terms. The Master meeting summary is neutral and reusable. Original synthesis generated ten PNG plots under plots/. Those source-derived CSVs and plots remain immutable. Authorized post-study additions are separate derived artifacts; do not regenerate the completed benchmark or rewrite its historical methodology/completion state.
-
-## Final post-study derived-analysis contract
-
-Completed benchmark inference, accuracy evaluation, timing and maxDet are immutable.
-Post-study work uses existing canonical CSVs and saved evidence only: no model
-loading, inference, timing rerun, training, adaptation or checkpoint downloads.
-Record BEFORE hashes for canonical measured/merged CSVs, source provenance and
-prediction metadata; verify unchanged hashes after edits. Archive substantially
-changed active documents before replacement, including validators/standards when
-updated. POST_STUDY_REVISION.json records source revisions, before/after hashes,
-archive paths, reasons and explicit scientific invariants. Original synthesis
-SOURCE_MANIFEST.json and MASTER_VALIDATION.json remain historical evidence; a
-separate revision validation records the new document/derived-artifact checks.
-
-Additional derived artifacts are explicitly DERIVED FROM EXISTING CANONICAL RESULTS:
-accuracy/pipeline Pareto (maximize unrounded mAP, minimize mean pipeline latency),
-timing composition, per-sequence ranks/scaling, and descriptive near-tie resource
-deltas. Preserve existing Pareto CSVs and near-tie threshold <=0.001. Independent
-validation must reproduce math and membership. Direction for near-tie resources
-is B minus A, relative denominator A; family scaling remains smaller minus larger.
-
-Timing composition retains preprocessing, inference, postprocessing, pipeline,
-RLE preparation and ultralytics_postprocess_inclusive from TIMING_MASTER.csv.
-Only the first three component stages sum to pipeline; tolerate at most 1e-10 ms
-for source decimal rounding. RLE is separate; inclusive diagnostic is a subset,
-not an extra term. Stage trends support measured workload interpretation, not
-architecture causality or generalization to every deployment pipeline.
-
-Per-sequence interpretation preserves source AP/Recall and separates pooled AP
-from sequence AP. Rank changes and endpoint losses do not establish causes such
-as blur, lighting or occlusion. Explicitly distinguish percentage points from
-relative percentages. TP-only quality remains conditional on matching.
-
-Supplementary Master visual analyses use bounded saved-prediction reads only,
-original GT/frames, unchanged thresholds and identical regions/scales across
-models. Preserve full frames beside ROI, per-GT matching/count checks, prediction
-and original-image hashes, selection reasons and counterexamples. Cases are
-diagnostic, not representative, equivalent or independent statistical samples.
-If saved artifacts are insufficient, record NOT GENERATED; never rerun inference.
-Publish exact selected images and verify actual remote rendering after push.
-
-README is a landing page; MASTER_RESULTS is an English technical source of truth;
-RESEARCH_INSIGHTS_TH is organized by research questions; MEETING_SUMMARY_TH is a
-neutral speakable narrative; EXECUTIVE_SUMMARY_TH stays a short decision memo.
-Validation must check role separation and all active visual links. New post-study
-work does not authorize a CCTV benchmark or any later experiment. STOP after
-validated independent commits/pushes to the existing repositories/branches.
+MASTER_RESULTS.md, README.md, DATA_SCHEMA.md and METHODOLOGY_REFERENCE.md use English. RESEARCH_INSIGHTS_TH.md, EXECUTIVE_SUMMARY_TH.md, MEETING_SUMMARY_TH.md and METRIC_GUIDE_TH.md use Thai prose with canonical technical terms. The Master meeting summary is neutral and reusable. Existing tier summaries and qualitative evidence remain unchanged. Generate exactly the ten requested Master PNG plots under plots/, with source CSVs and units recorded. Update only the Master completion state after final validation.

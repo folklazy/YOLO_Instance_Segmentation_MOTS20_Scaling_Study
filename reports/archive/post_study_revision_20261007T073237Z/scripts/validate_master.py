@@ -1,13 +1,4 @@
 """Read-only final Master validation; no model runtime or raw prediction access."""
-from pathlib import Path
-import sys
-# The authorized final revision archives this validator and the original layouts.
-# Its successor checks unchanged sources, historical snapshots, active document
-# roles and independent derived math; without a revision the original gate remains.
-if __name__ == '__main__' and (Path(__file__).resolve().parents[1]/'provenance/POST_STUDY_REVISION.json').exists():
-    from validate_post_study import main as post_study_main
-    post_study_main()
-    sys.exit(0)
 from collections import Counter
 from decimal import Decimal as D
 import argparse
