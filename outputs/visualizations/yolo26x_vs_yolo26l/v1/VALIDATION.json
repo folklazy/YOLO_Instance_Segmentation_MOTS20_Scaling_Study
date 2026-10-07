@@ -1,0 +1,55 @@
+{
+  "status": "PASS",
+  "cases": 5,
+  "images": 10,
+  "same_frame_and_roi": "PASS",
+  "per_frame_counts": "PASS",
+  "per_gt_diagnostics": "PASS",
+  "source_hashes": "PASS",
+  "model_inference_rerun": false,
+  "canonical_measurements_changed": false,
+  "saved_prediction_artifacts_read": true,
+  "frame_count_screen": {
+    "frames": 2862,
+    "x_more_tp": 496,
+    "l_more_tp": 224,
+    "equal_tp_count": 2142,
+    "tp_difference_histogram": {
+      "-3": 3,
+      "-2": 24,
+      "-1": 197,
+      "0": 2142,
+      "1": 423,
+      "2": 68,
+      "3": 5
+    },
+    "equal_counts_do_not_imply_equal_gt_or_masks": true,
+    "selection_pool": "All 2862 per-frame count rows screened; six candidate frames inspected; five cases selected; no representative sampling or significance claimed",
+    "inspected_candidates": [
+      {
+        "sequence": "MOTS20-02",
+        "frame": 115
+      },
+      {
+        "sequence": "MOTS20-02",
+        "frame": 336
+      },
+      {
+        "sequence": "MOTS20-05",
+        "frame": 503
+      },
+      {
+        "sequence": "MOTS20-11",
+        "frame": 6
+      },
+      {
+        "sequence": "MOTS20-09",
+        "frame": 1
+      },
+      {
+        "sequence": "MOTS20-09",
+        "frame": 263
+      }
+    ]
+  }
+}

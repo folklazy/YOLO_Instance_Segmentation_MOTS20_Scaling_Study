@@ -429,23 +429,7 @@
     "scripts/report_master.py": "136fb8dc44fe94a13591301d96495ef287c2cd50418c3d9d5d79227ae85bc2ac",
     "scripts/validate_master.py": "274a4e48bdada32b9f90555d91cce9c1930af078ffcb878f6d0c7be17d063daf",
     "tests/test_master_math.py": "75212a777fe8b5189cdf2adcb1fdf010079135fee9a3500bb8811aa8a5444cdf",
-    "provenance/DOCUMENT_VALUE_CLAIMS.json": "f24b8b6569b7050672e8bf4cfd0bc8000d9ce6a2f4bc531d35195fafeb3b15e4",
-    "YOLO26X_VS_YOLO26L_VISUAL_TH.md": "7f3f0abdea00a98499f84b9fbfcaa099ccc327f201588361c2be8066028fc3a5",
-    "reports/yolo26x_vs_yolo26l.html": "3ad905d921add59e27465158127c61f7c510d327ed4abb0cb075479f2704dd92",
-    "src/compare_yolo26x_l.py": "1279df35a8b7a7f13a9ed5388ca238eebc268fcc652ab367839e0201f2679b1a",
-    "src/validate_yolo26x_l_visual.py": "13804250a2c41a6475e6b1264ff375cd9724841594d0390f3272873571b07ec7",
-    "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_02_comparison.png": "8a1d447db98944ec6e32932f8d839a92a1f523dbfa610a6ed1a11a5574212ae4",
-    "outputs/visualizations/yolo26x_vs_yolo26l/v1/VALIDATION.json": "ee27757ed599565d45f081b5c70a5ce34255de5ef76040ffa92bcf6107780b4d",
-    "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_05_comparison.png": "700586470bff296cb0e5b505e52788b1a5b8e81a20253519ee0c87337aee487d",
-    "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_04_focus.png": "397f0723be031678069b46f1aa0d915e053fb94f5a8ee595682912ca13d93510",
-    "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_03_comparison.png": "9177a1e37effbd94858a83797f98aa5f58adca9ffaa2e481cd5ab1e15ed6f671",
-    "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_02_focus.png": "880b7b8c16f73fb4e403467c786030781f68706e761b0407bf42b12c6bc64554",
-    "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_01_comparison.png": "a77fa5d9b2fc2d3f2e5f98c9e7dec825e2d1c6079da76ce8595737850566e920",
-    "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_05_focus.png": "8119a7c80a606f58afd2faabedf706b8fea1d4023d5c234f59471dc3df0f8a68",
-    "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_01_focus.png": "0597d955ec6a668fa80dcd5c520622308bbb24042f7c1c1e325dfe7ed06de693",
-    "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_03_focus.png": "dceabefdf02c1d194c4ee88a073376cacc8ec368b95b0885f43989a59f2c66ea",
-    "outputs/visualizations/yolo26x_vs_yolo26l/v1/EVIDENCE.json": "7b94bb3499e36a53d6850c29be138c0a138f88c57bb41048ac74ab82a27d1d0d",
-    "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_04_comparison.png": "0745969ab518e4bf31d3e901ab9120ca7f2bb33d705002852c5edcd5698d90e3"
+    "provenance/DOCUMENT_VALUE_CLAIMS.json": "f24b8b6569b7050672e8bf4cfd0bc8000d9ce6a2f4bc531d35195fafeb3b15e4"
   },
   "active_markdown": [
     {
@@ -715,10 +699,6 @@
     {
       "path": "YOLO_Instance_Segmentation_MOTS20_Scaling_Study/templates/TIER_RESULTS_SUMMARY_TH_TEMPLATE.md",
       "role": "thai_summary"
-    },
-    {
-      "path": "YOLO_Instance_Segmentation_MOTS20_Scaling_Study/YOLO26X_VS_YOLO26L_VISUAL_TH.md",
-      "role": "thai_summary"
     }
   ],
   "raw_predictions_opened": false,
@@ -738,37 +718,5 @@
     "scripts/validate_master.py",
     "scripts/validate_documentation_redesign.py --documents-only",
     "python -m unittest discover -s tests -v"
-  ],
-  "qualitative_extensions": [
-    {
-      "report": "YOLO26X_VS_YOLO26L_VISUAL_TH.md",
-      "evidence": "outputs/visualizations/yolo26x_vs_yolo26l/v1/EVIDENCE.json",
-      "validation": "outputs/visualizations/yolo26x_vs_yolo26l/v1/VALIDATION.json",
-      "timestamp_utc": "2026-10-07T05:02:35.332013+00:00",
-      "status": "PASS",
-      "model_pair": [
-        "yolo26x-seg.pt",
-        "yolo26l-seg.pt"
-      ],
-      "same_frame_cases": 5,
-      "images": 10,
-      "scope": "Separately authorized post-completion visual analysis using saved predictions. Completed Master synthesis and its measured values are unchanged.",
-      "saved_prediction_artifacts_read": true,
-      "model_inference_rerun": false,
-      "canonical_measurements_changed": false,
-      "archived_parent_provenance": [
-        {
-          "path": "provenance/SOURCE_MANIFEST.json",
-          "archive": "reports/archive/SOURCE_MANIFEST.json.before-x-l-visual-extension-20261007T050235Z",
-          "sha256": "00e7498800d57b131209897905f46f0b1f8bd8db65bab339eef904d615be6955"
-        },
-        {
-          "path": "provenance/MASTER_VALIDATION.json",
-          "archive": "reports/archive/MASTER_VALIDATION.json.before-x-l-visual-extension-20261007T050235Z",
-          "sha256": "c59a85bc72d4f90e89e10c044fc1f85b48e44210c26dd528bedf1d8f6b9d9e38"
-        }
-      ]
-    }
-  ],
-  "access_scope_note": "Top-level no-prediction-access fields describe the completed CSV-only Master synthesis. Qualitative extensions declare their own saved-prediction reads separately."
+  ]
 }

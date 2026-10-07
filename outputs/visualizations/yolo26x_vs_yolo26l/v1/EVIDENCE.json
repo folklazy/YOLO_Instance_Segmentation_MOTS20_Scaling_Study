@@ -1,0 +1,983 @@
+{
+  "timestamp_utc": "2026-10-07T04:54:45.966827+00:00",
+  "scope": "Post-completion pairwise visual diagnostics, not a new benchmark",
+  "inference_rerun": false,
+  "benchmark_values_changed": false,
+  "generator_sha256": "1279df35a8b7a7f13a9ed5388ca238eebc268fcc652ab367839e0201f2679b1a",
+  "source_master_manifest_sha256": "00e7498800d57b131209897905f46f0b1f8bd8db65bab339eef904d615be6955",
+  "confidence": 0.25,
+  "matching_iou": 0.5,
+  "ignore_prediction_ioa": 0.5,
+  "models": [
+    {
+      "size": "x",
+      "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
+      "run_id": "benchmark-20260929T0520Z",
+      "checkpoint": "yolo26x-seg.pt",
+      "canonical": {
+        "study_id": "yolo_instance_segmentation_mots20_scaling",
+        "schema_version": "1.0",
+        "experiment": "YOLO_Large_Seg_MOTS20_Benchmark",
+        "tier": "largest",
+        "family": "YOLO26",
+        "model": "YOLO26x-Seg",
+        "checkpoint": "yolo26x-seg.pt",
+        "status": "PASS_WITH_WARNINGS",
+        "frames": "2862",
+        "gt_instances": "26894",
+        "mask_map50_95": "0.6037298757352638",
+        "ap50": "0.9036869055768179",
+        "ap75": "0.6644261043391709",
+        "precision": "0.9460077309946382",
+        "recall": "0.8462854168215959",
+        "f1": "0.8933723235138264",
+        "tp": "22760",
+        "fp": "1299",
+        "fn": "4134",
+        "tp_iou_mean": "0.8288725823581055",
+        "tp_dice_mean": "0.9029185308385722",
+        "ignored_predictions": "5131",
+        "inference_ms_mean": "72.45824582952385",
+        "pipeline_ms_mean": "109.63863453788993",
+        "fps": "9.120872438943143",
+        "peak_allocated_vram_mib": "952.18408203125",
+        "parameters": "70693800",
+        "gflops": "338.2033408",
+        "checkpoint_mb": "142.129861",
+        "ap_maxdet": "200",
+        "fixed_confidence": "0.25",
+        "ap_confidence_floor": "0.001",
+        "nms_iou": "0.7",
+        "evaluation_iou": "0.5",
+        "imgsz": "640",
+        "precision_mode": "FP32",
+        "device": "CUDA:0",
+        "run_id": "benchmark-20260929T0520Z",
+        "source_artifact": "metrics/benchmark-20260929T0520Z/per_model.csv;timing/benchmark-20260929T0520Z/clean_repetition/summary.csv;reports/benchmark-20260929T0520Z/frozen_inputs/manifests/checkpoint_manifest.json"
+      },
+      "per_frame_path": "YOLO_Large_Seg_MOTS20_Benchmark/metrics/benchmark-20260929T0520Z/per_frame/yolo26x-seg.pt.csv",
+      "per_frame_sha256": "d9f7a76b3bb6203c0b0a1be425d762e2dd4bea3447a4d67ee310d491906a4cfe",
+      "metadata_sha256": "38fb262beec355bed5f79ddbe811a5fbd8c3db1eb94ff6fe0d4c139a9d9d135d"
+    },
+    {
+      "size": "l",
+      "repository": "YOLO_Second_Largest_Seg_MOTS20_Benchmark",
+      "run_id": "benchmark-20261001T0352Z",
+      "checkpoint": "yolo26l-seg.pt",
+      "canonical": {
+        "study_id": "yolo_instance_segmentation_mots20_scaling",
+        "schema_version": "1.0",
+        "experiment": "YOLO_Second_Largest_Seg_MOTS20_Benchmark",
+        "tier": "second_largest",
+        "family": "YOLO26",
+        "model": "YOLO26l-Seg",
+        "checkpoint": "yolo26l-seg.pt",
+        "status": "PASS_WITH_WARNINGS",
+        "frames": "2862",
+        "gt_instances": "26894",
+        "mask_map50_95": "0.5862366580892475",
+        "ap50": "0.889889991218281",
+        "ap75": "0.6435370937329495",
+        "precision": "0.9357017763322492",
+        "recall": "0.8343868520859671",
+        "f1": "0.8821448227061875",
+        "tp": "22440",
+        "fp": "1542",
+        "fn": "4454",
+        "tp_iou_mean": "0.8253403530644059",
+        "tp_dice_mean": "0.9007136074953418",
+        "ignored_predictions": "4291",
+        "inference_ms_mean": "36.26607983993987",
+        "pipeline_ms_mean": "76.40285129503657",
+        "fps": "13.088516764098356",
+        "peak_allocated_vram_mib": "777.52001953125",
+        "parameters": "31515528",
+        "gflops": "151.3039872",
+        "checkpoint_mb": "63.700037",
+        "ap_maxdet": "200",
+        "fixed_confidence": "0.25",
+        "ap_confidence_floor": "0.001",
+        "nms_iou": "0.7",
+        "evaluation_iou": "0.5",
+        "imgsz": "640",
+        "precision_mode": "FP32",
+        "device": "CUDA:0",
+        "run_id": "benchmark-20261001T0352Z",
+        "source_artifact": "metrics/benchmark-20261001T0352Z/per_model.csv;timing/benchmark-20261001T0352Z/clean_repetition/summary.csv;reports/benchmark-20261001T0352Z/frozen_inputs/manifests/checkpoint_manifest.json"
+      },
+      "per_frame_path": "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/benchmark-20261001T0352Z/per_frame/yolo26l-seg.pt.csv",
+      "per_frame_sha256": "80470eadbfda01b1a29a65289407c0931385b6d4d9df87cdd1e68edd3fcbd913",
+      "metadata_sha256": "87b5088e7496dd7cbaa0ca60443689ff3ab939f3153f9025db6a458bdcee2a40"
+    }
+  ],
+  "cases": [
+    {
+      "case": 1,
+      "sequence": "MOTS20-02",
+      "frame": 336,
+      "selection_reason": "x coverage advantage",
+      "image_path": "datasets/MOTS/MOTS/train/MOTS20-02/img1/000336.jpg",
+      "image_sha256": "06e095df2e236db3657acde078b9589b1bb5ddb935cc9f26090396a3f0682931",
+      "gt_sha256": "3442c764c43adc9667b025d030e62d54cff9d337ea7893b1fb6c60de296e76d0",
+      "regions": [
+        {
+          "gt_ids": [
+            2029
+          ],
+          "xyxy": [
+            342,
+            446,
+            527,
+            594
+          ]
+        },
+        {
+          "gt_ids": [
+            2036
+          ],
+          "xyxy": [
+            786,
+            409,
+            1029,
+            603
+          ]
+        }
+      ],
+      "models": [
+        {
+          "model": "YOLO26x-Seg",
+          "prediction_path": "YOLO_Large_Seg_MOTS20_Benchmark/predictions/benchmark-20260929T0520Z/accuracy/yolo26x-seg/predictions/MOTS20-02_000336.json.gz",
+          "prediction_sha256": "60c449c19914383e250e8e446d4b93768c98c5f59031829e0a65acc31ac03f41",
+          "counts": {
+            "tp": 11,
+            "fp": 0,
+            "fn": 1,
+            "ignored_predictions": 4
+          },
+          "matched_gt_ids": [
+            2033,
+            2019,
+            2032,
+            2023,
+            2026,
+            2039,
+            2027,
+            2037,
+            2036,
+            2003,
+            2029
+          ],
+          "fn_gt_ids": [
+            2028
+          ],
+          "targets": [
+            {
+              "gt_id": 2029,
+              "gt_area_px": 2139,
+              "matched": true,
+              "matched_iou": 0.6355402873204248,
+              "best_at_conf025": {
+                "iou": 0.6355402873204248,
+                "prediction_index": 13,
+                "confidence": 0.31058165431022644
+              }
+            },
+            {
+              "gt_id": 2036,
+              "gt_area_px": 4762,
+              "matched": true,
+              "matched_iou": 0.8690521507422916,
+              "best_at_conf025": {
+                "iou": 0.8690521507422916,
+                "prediction_index": 11,
+                "confidence": 0.40320560336112976
+              }
+            }
+          ]
+        },
+        {
+          "model": "YOLO26l-Seg",
+          "prediction_path": "YOLO_Second_Largest_Seg_MOTS20_Benchmark/predictions/benchmark-20261001T0352Z/accuracy/yolo26l-seg/predictions/MOTS20-02_000336.json.gz",
+          "prediction_sha256": "044c8160ffe0ddf3947801bd640865ca5df7f1615f95f13727cebd56148d8870",
+          "counts": {
+            "tp": 8,
+            "fp": 2,
+            "fn": 4,
+            "ignored_predictions": 4
+          },
+          "matched_gt_ids": [
+            2033,
+            2019,
+            2032,
+            2023,
+            2037,
+            2039,
+            2026,
+            2003
+          ],
+          "fn_gt_ids": [
+            2027,
+            2028,
+            2029,
+            2036
+          ],
+          "targets": [
+            {
+              "gt_id": 2029,
+              "gt_area_px": 2139,
+              "matched": false,
+              "matched_iou": null,
+              "best_at_conf025": {
+                "iou": 0.0,
+                "prediction_index": null,
+                "confidence": null
+              },
+              "best_among_all_saved_predictions": {
+                "iou": 0.6193890274314214,
+                "prediction_index": 27,
+                "confidence": 0.10036071389913559
+              }
+            },
+            {
+              "gt_id": 2036,
+              "gt_area_px": 4762,
+              "matched": false,
+              "matched_iou": null,
+              "best_at_conf025": {
+                "iou": 0.004854799379295056,
+                "prediction_index": 3,
+                "confidence": 0.8378968238830566
+              },
+              "best_among_all_saved_predictions": {
+                "iou": 0.8508079669297257,
+                "prediction_index": 14,
+                "confidence": 0.23258647322654724
+              }
+            }
+          ]
+        }
+      ],
+      "comparison_path": "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_01_comparison.png",
+      "comparison_sha256": "a77fa5d9b2fc2d3f2e5f98c9e7dec825e2d1c6079da76ce8595737850566e920",
+      "focus_path": "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_01_focus.png",
+      "focus_sha256": "0597d955ec6a668fa80dcd5c520622308bbb24042f7c1c1e325dfe7ed06de693"
+    },
+    {
+      "case": 2,
+      "sequence": "MOTS20-05",
+      "frame": 503,
+      "selection_reason": "same coverage, different mask quality",
+      "image_path": "datasets/MOTS/MOTS/train/MOTS20-05/img1/000503.jpg",
+      "image_sha256": "2e543c123c4932213a77baa3dbd414e8c676b17c65840770775d9dbfdc2a0f40",
+      "gt_sha256": "74bc32152484c4012a65a6f6e222e24dfbf3bf536aab91f77c4abaff4a93e2e7",
+      "regions": [
+        {
+          "gt_ids": [
+            2054
+          ],
+          "xyxy": [
+            185,
+            80,
+            578,
+            395
+          ]
+        },
+        {
+          "gt_ids": [
+            2128
+          ],
+          "xyxy": [
+            0,
+            0,
+            640,
+            480
+          ]
+        }
+      ],
+      "models": [
+        {
+          "model": "YOLO26x-Seg",
+          "prediction_path": "YOLO_Large_Seg_MOTS20_Benchmark/predictions/benchmark-20260929T0520Z/accuracy/yolo26x-seg/predictions/MOTS20-05_000503.json.gz",
+          "prediction_sha256": "25971a4d7f7d6ea571c0546ab6dd7ecc843fcb5a660befa88d16045661309f0e",
+          "counts": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "ignored_predictions": 0
+          },
+          "matched_gt_ids": [
+            2124,
+            2053,
+            2052,
+            2054,
+            2128,
+            2055
+          ],
+          "fn_gt_ids": [],
+          "targets": [
+            {
+              "gt_id": 2054,
+              "gt_area_px": 3699,
+              "matched": true,
+              "matched_iou": 0.8534201954397395,
+              "best_at_conf025": {
+                "iou": 0.8534201954397395,
+                "prediction_index": 3,
+                "confidence": 0.6951252818107605
+              }
+            },
+            {
+              "gt_id": 2128,
+              "gt_area_px": 6240,
+              "matched": true,
+              "matched_iou": 0.5910330202968798,
+              "best_at_conf025": {
+                "iou": 0.5910330202968798,
+                "prediction_index": 4,
+                "confidence": 0.660400390625
+              }
+            }
+          ]
+        },
+        {
+          "model": "YOLO26l-Seg",
+          "prediction_path": "YOLO_Second_Largest_Seg_MOTS20_Benchmark/predictions/benchmark-20261001T0352Z/accuracy/yolo26l-seg/predictions/MOTS20-05_000503.json.gz",
+          "prediction_sha256": "c158ab31f5dbd02b3df56e85c24d83d5383bbc75c7f676c4242327b3a1024e68",
+          "counts": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "ignored_predictions": 0
+          },
+          "matched_gt_ids": [
+            2052,
+            2124,
+            2053,
+            2128,
+            2054,
+            2055
+          ],
+          "fn_gt_ids": [],
+          "targets": [
+            {
+              "gt_id": 2054,
+              "gt_area_px": 3699,
+              "matched": true,
+              "matched_iou": 0.5930750771340418,
+              "best_at_conf025": {
+                "iou": 0.5930750771340418,
+                "prediction_index": 4,
+                "confidence": 0.6414151191711426
+              }
+            },
+            {
+              "gt_id": 2128,
+              "gt_area_px": 6240,
+              "matched": true,
+              "matched_iou": 0.6550231377817585,
+              "best_at_conf025": {
+                "iou": 0.6550231377817585,
+                "prediction_index": 3,
+                "confidence": 0.6537169218063354
+              }
+            }
+          ]
+        }
+      ],
+      "comparison_path": "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_02_comparison.png",
+      "comparison_sha256": "8a1d447db98944ec6e32932f8d839a92a1f523dbfa610a6ed1a11a5574212ae4",
+      "focus_path": "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_02_focus.png",
+      "focus_sha256": "880b7b8c16f73fb4e403467c786030781f68706e761b0407bf42b12c6bc64554"
+    },
+    {
+      "case": 3,
+      "sequence": "MOTS20-11",
+      "frame": 6,
+      "selection_reason": "l counterexample",
+      "image_path": "datasets/MOTS/MOTS/train/MOTS20-11/img1/000006.jpg",
+      "image_sha256": "22e28cdf1c63faec71a84af4713753da0f71118ef8b95a638e7e87d24ea53a45",
+      "gt_sha256": "aa4a6092a4297025191601a07bba4933d24d9989bd8fb2d01c1f285ad046cb70",
+      "regions": [
+        {
+          "gt_ids": [
+            2015,
+            2016
+          ],
+          "xyxy": [
+            1754,
+            306,
+            1919,
+            414
+          ]
+        },
+        {
+          "gt_ids": [
+            2029
+          ],
+          "xyxy": [
+            1248,
+            302,
+            1411,
+            410
+          ]
+        }
+      ],
+      "models": [
+        {
+          "model": "YOLO26x-Seg",
+          "prediction_path": "YOLO_Large_Seg_MOTS20_Benchmark/predictions/benchmark-20260929T0520Z/accuracy/yolo26x-seg/predictions/MOTS20-11_000006.json.gz",
+          "prediction_sha256": "f19babbd6d5488f9dc9048488a225c8743c4d4e1f933dd081c167e57fedf0ca2",
+          "counts": {
+            "tp": 10,
+            "fp": 0,
+            "fn": 4,
+            "ignored_predictions": 2
+          },
+          "matched_gt_ids": [
+            2002,
+            2001,
+            2003,
+            2004,
+            2014,
+            2025,
+            2028,
+            2006,
+            2005,
+            2013
+          ],
+          "fn_gt_ids": [
+            2015,
+            2016,
+            2029,
+            2079
+          ],
+          "targets": [
+            {
+              "gt_id": 2015,
+              "gt_area_px": 1022,
+              "matched": false,
+              "matched_iou": null,
+              "best_at_conf025": {
+                "iou": 0.0,
+                "prediction_index": null,
+                "confidence": null
+              },
+              "best_among_all_saved_predictions": {
+                "iou": 0.8217652099400171,
+                "prediction_index": 17,
+                "confidence": 0.12115996330976486
+              }
+            },
+            {
+              "gt_id": 2016,
+              "gt_area_px": 874,
+              "matched": false,
+              "matched_iou": null,
+              "best_at_conf025": {
+                "iou": 0.0,
+                "prediction_index": null,
+                "confidence": null
+              },
+              "best_among_all_saved_predictions": {
+                "iou": 0.6525821596244131,
+                "prediction_index": 15,
+                "confidence": 0.17053227126598358
+              }
+            },
+            {
+              "gt_id": 2029,
+              "gt_area_px": 651,
+              "matched": false,
+              "matched_iou": null,
+              "best_at_conf025": {
+                "iou": 0.0,
+                "prediction_index": null,
+                "confidence": null
+              },
+              "best_among_all_saved_predictions": {
+                "iou": 0.8267515923566879,
+                "prediction_index": 14,
+                "confidence": 0.20344005525112152
+              }
+            }
+          ]
+        },
+        {
+          "model": "YOLO26l-Seg",
+          "prediction_path": "YOLO_Second_Largest_Seg_MOTS20_Benchmark/predictions/benchmark-20261001T0352Z/accuracy/yolo26l-seg/predictions/MOTS20-11_000006.json.gz",
+          "prediction_sha256": "acb4d4473d1bcb46f1d2891eac5da12e5f555f8662b2e84402571352a44b632f",
+          "counts": {
+            "tp": 13,
+            "fp": 0,
+            "fn": 1,
+            "ignored_predictions": 2
+          },
+          "matched_gt_ids": [
+            2002,
+            2001,
+            2003,
+            2004,
+            2025,
+            2014,
+            2005,
+            2006,
+            2028,
+            2013,
+            2016,
+            2029,
+            2015
+          ],
+          "fn_gt_ids": [
+            2079
+          ],
+          "targets": [
+            {
+              "gt_id": 2015,
+              "gt_area_px": 1022,
+              "matched": true,
+              "matched_iou": 0.7750439367311072,
+              "best_at_conf025": {
+                "iou": 0.7750439367311072,
+                "prediction_index": 14,
+                "confidence": 0.25869303941726685
+              }
+            },
+            {
+              "gt_id": 2016,
+              "gt_area_px": 874,
+              "matched": true,
+              "matched_iou": 0.6862745098039216,
+              "best_at_conf025": {
+                "iou": 0.6862745098039216,
+                "prediction_index": 11,
+                "confidence": 0.37617117166519165
+              }
+            },
+            {
+              "gt_id": 2029,
+              "gt_area_px": 651,
+              "matched": true,
+              "matched_iou": 0.6832229580573952,
+              "best_at_conf025": {
+                "iou": 0.6832229580573952,
+                "prediction_index": 13,
+                "confidence": 0.272502601146698
+              }
+            }
+          ]
+        }
+      ],
+      "comparison_path": "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_03_comparison.png",
+      "comparison_sha256": "9177a1e37effbd94858a83797f98aa5f58adca9ffaa2e481cd5ab1e15ed6f671",
+      "focus_path": "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_03_focus.png",
+      "focus_sha256": "dceabefdf02c1d194c4ee88a073376cacc8ec368b95b0885f43989a59f2c66ea"
+    },
+    {
+      "case": 4,
+      "sequence": "MOTS20-09",
+      "frame": 1,
+      "selection_reason": "similar-output control",
+      "image_path": "datasets/MOTS/MOTS/train/MOTS20-09/img1/000001.jpg",
+      "image_sha256": "e4b1c40c44d53489f191e1099156ad57d3963d8c434615750fba0065a8a572af",
+      "gt_sha256": "73c59a3d52469d81084f99c7e2a0c711a99e9fb4152f6aa839fc26e5e03fa383",
+      "regions": [
+        {
+          "gt_ids": [
+            2001,
+            2019
+          ],
+          "xyxy": [
+            0,
+            0,
+            1920,
+            1080
+          ]
+        }
+      ],
+      "models": [
+        {
+          "model": "YOLO26x-Seg",
+          "prediction_path": "YOLO_Large_Seg_MOTS20_Benchmark/predictions/benchmark-20260929T0520Z/accuracy/yolo26x-seg/predictions/MOTS20-09_000001.json.gz",
+          "prediction_sha256": "13bcb91dac16f314add3aec9436d73f0223d47b4923a13435bb6c0bcaecdb907",
+          "counts": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "ignored_predictions": 2
+          },
+          "matched_gt_ids": [
+            2019,
+            2023,
+            2022,
+            2021,
+            2001,
+            2020
+          ],
+          "fn_gt_ids": [],
+          "targets": [
+            {
+              "gt_id": 2001,
+              "gt_area_px": 9977,
+              "matched": true,
+              "matched_iou": 0.7906050955414012,
+              "best_at_conf025": {
+                "iou": 0.7906050955414012,
+                "prediction_index": 4,
+                "confidence": 0.8000422716140747
+              }
+            },
+            {
+              "gt_id": 2019,
+              "gt_area_px": 28464,
+              "matched": true,
+              "matched_iou": 0.8954599568840697,
+              "best_at_conf025": {
+                "iou": 0.8954599568840697,
+                "prediction_index": 0,
+                "confidence": 0.9023867249488831
+              }
+            }
+          ]
+        },
+        {
+          "model": "YOLO26l-Seg",
+          "prediction_path": "YOLO_Second_Largest_Seg_MOTS20_Benchmark/predictions/benchmark-20261001T0352Z/accuracy/yolo26l-seg/predictions/MOTS20-09_000001.json.gz",
+          "prediction_sha256": "b1c1d77bef8f72d8fab19122abea5078cc6cf834324fc2f62a0d9f374b2443a7",
+          "counts": {
+            "tp": 6,
+            "fp": 0,
+            "fn": 0,
+            "ignored_predictions": 1
+          },
+          "matched_gt_ids": [
+            2019,
+            2023,
+            2001,
+            2022,
+            2021,
+            2020
+          ],
+          "fn_gt_ids": [],
+          "targets": [
+            {
+              "gt_id": 2001,
+              "gt_area_px": 9977,
+              "matched": true,
+              "matched_iou": 0.7841177396505588,
+              "best_at_conf025": {
+                "iou": 0.7841177396505588,
+                "prediction_index": 2,
+                "confidence": 0.822106122970581
+              }
+            },
+            {
+              "gt_id": 2019,
+              "gt_area_px": 28464,
+              "matched": true,
+              "matched_iou": 0.8796386950067903,
+              "best_at_conf025": {
+                "iou": 0.8796386950067903,
+                "prediction_index": 0,
+                "confidence": 0.9014233946800232
+              }
+            }
+          ]
+        }
+      ],
+      "comparison_path": "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_04_comparison.png",
+      "comparison_sha256": "0745969ab518e4bf31d3e901ab9120ca7f2bb33d705002852c5edcd5698d90e3",
+      "focus_path": "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_04_focus.png",
+      "focus_sha256": "397f0723be031678069b46f1aa0d915e053fb94f5a8ee595682912ca13d93510"
+    },
+    {
+      "case": 5,
+      "sequence": "MOTS20-09",
+      "frame": 263,
+      "selection_reason": "common failure",
+      "image_path": "datasets/MOTS/MOTS/train/MOTS20-09/img1/000263.jpg",
+      "image_sha256": "ca55a06d24fa0cbfd76b65c8ce9e3f98f842ee992c749a3b0db788ac8f6acf49",
+      "gt_sha256": "73c59a3d52469d81084f99c7e2a0c711a99e9fb4152f6aa839fc26e5e03fa383",
+      "regions": [
+        {
+          "gt_ids": [
+            2001,
+            2002,
+            2011
+          ],
+          "xyxy": [
+            787,
+            236,
+            1581,
+            871
+          ]
+        },
+        {
+          "gt_ids": [
+            2007
+          ],
+          "xyxy": [
+            909,
+            384,
+            1438,
+            807
+          ]
+        }
+      ],
+      "models": [
+        {
+          "model": "YOLO26x-Seg",
+          "prediction_path": "YOLO_Large_Seg_MOTS20_Benchmark/predictions/benchmark-20260929T0520Z/accuracy/yolo26x-seg/predictions/MOTS20-09_000263.json.gz",
+          "prediction_sha256": "87affca687d15adfb12773edf84ee3598e2303e7f6871aed612ec8a5cb708cd4",
+          "counts": {
+            "tp": 9,
+            "fp": 2,
+            "fn": 4,
+            "ignored_predictions": 4
+          },
+          "matched_gt_ids": [
+            2029,
+            2013,
+            2012,
+            2008,
+            2010,
+            2022,
+            2021,
+            2018,
+            2007
+          ],
+          "fn_gt_ids": [
+            2001,
+            2002,
+            2011,
+            2023
+          ],
+          "targets": [
+            {
+              "gt_id": 2001,
+              "gt_area_px": 4220,
+              "matched": false,
+              "matched_iou": null,
+              "best_at_conf025": {
+                "iou": 0.26879936284595474,
+                "prediction_index": 8,
+                "confidence": 0.7211183905601501
+              },
+              "best_among_all_saved_predictions": {
+                "iou": 0.5156794425087108,
+                "prediction_index": 21,
+                "confidence": 0.02477644383907318
+              }
+            },
+            {
+              "gt_id": 2002,
+              "gt_area_px": 902,
+              "matched": false,
+              "matched_iou": null,
+              "best_at_conf025": {
+                "iou": 0.009794089405739892,
+                "prediction_index": 0,
+                "confidence": 0.9142436385154724
+              },
+              "best_among_all_saved_predictions": {
+                "iou": 0.07826904985888994,
+                "prediction_index": 38,
+                "confidence": 0.0023616573307663202
+              }
+            },
+            {
+              "gt_id": 2007,
+              "gt_area_px": 8146,
+              "matched": true,
+              "matched_iou": 0.6832532277824899,
+              "best_at_conf025": {
+                "iou": 0.6832532277824899,
+                "prediction_index": 9,
+                "confidence": 0.6416237354278564
+              }
+            },
+            {
+              "gt_id": 2011,
+              "gt_area_px": 7989,
+              "matched": false,
+              "matched_iou": null,
+              "best_at_conf025": {
+                "iou": 0.39455243434281884,
+                "prediction_index": 8,
+                "confidence": 0.7211183905601501
+              },
+              "best_among_all_saved_predictions": {
+                "iou": 0.39455243434281884,
+                "prediction_index": 8,
+                "confidence": 0.7211183905601501
+              }
+            }
+          ]
+        },
+        {
+          "model": "YOLO26l-Seg",
+          "prediction_path": "YOLO_Second_Largest_Seg_MOTS20_Benchmark/predictions/benchmark-20261001T0352Z/accuracy/yolo26l-seg/predictions/MOTS20-09_000263.json.gz",
+          "prediction_sha256": "9a97c840c143d2b62528a297b3116a930af7dbd2e43c0f3599bc8e33c2594085",
+          "counts": {
+            "tp": 9,
+            "fp": 2,
+            "fn": 4,
+            "ignored_predictions": 3
+          },
+          "matched_gt_ids": [
+            2008,
+            2029,
+            2012,
+            2013,
+            2021,
+            2010,
+            2022,
+            2018,
+            2007
+          ],
+          "fn_gt_ids": [
+            2001,
+            2002,
+            2011,
+            2023
+          ],
+          "targets": [
+            {
+              "gt_id": 2001,
+              "gt_area_px": 4220,
+              "matched": false,
+              "matched_iou": null,
+              "best_at_conf025": {
+                "iou": 0.2430572180991142,
+                "prediction_index": 8,
+                "confidence": 0.6854444742202759
+              },
+              "best_among_all_saved_predictions": {
+                "iou": 0.5106719367588933,
+                "prediction_index": 60,
+                "confidence": 0.0024554268456995487
+              }
+            },
+            {
+              "gt_id": 2002,
+              "gt_area_px": 902,
+              "matched": false,
+              "matched_iou": null,
+              "best_at_conf025": {
+                "iou": 0.010376900849977853,
+                "prediction_index": 1,
+                "confidence": 0.8984219431877136
+              },
+              "best_among_all_saved_predictions": {
+                "iou": 0.17077175697865354,
+                "prediction_index": 64,
+                "confidence": 0.0018586479127407074
+              }
+            },
+            {
+              "gt_id": 2007,
+              "gt_area_px": 8146,
+              "matched": true,
+              "matched_iou": 0.6308318264014466,
+              "best_at_conf025": {
+                "iou": 0.6308318264014466,
+                "prediction_index": 9,
+                "confidence": 0.45436999201774597
+              }
+            },
+            {
+              "gt_id": 2011,
+              "gt_area_px": 7989,
+              "matched": false,
+              "matched_iou": null,
+              "best_at_conf025": {
+                "iou": 0.365802070577758,
+                "prediction_index": 8,
+                "confidence": 0.6854444742202759
+              },
+              "best_among_all_saved_predictions": {
+                "iou": 0.49200877467878407,
+                "prediction_index": 80,
+                "confidence": 0.0011282569030299783
+              }
+            }
+          ]
+        }
+      ],
+      "comparison_path": "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_05_comparison.png",
+      "comparison_sha256": "700586470bff296cb0e5b505e52788b1a5b8e81a20253519ee0c87337aee487d",
+      "focus_path": "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_05_focus.png",
+      "focus_sha256": "8119a7c80a606f58afd2faabedf706b8fea1d4023d5c234f59471dc3df0f8a68"
+    }
+  ],
+  "frame_count_screen": {
+    "frames": 2862,
+    "x_more_tp": 496,
+    "l_more_tp": 224,
+    "equal_tp_count": 2142,
+    "tp_difference_histogram": {
+      "-3": 3,
+      "-2": 24,
+      "-1": 197,
+      "0": 2142,
+      "1": 423,
+      "2": 68,
+      "3": 5
+    },
+    "equal_counts_do_not_imply_equal_gt_or_masks": true,
+    "selection_pool": "All 2862 per-frame count rows screened; six candidate frames inspected; five cases selected; no representative sampling or significance claimed",
+    "inspected_candidates": [
+      {
+        "sequence": "MOTS20-02",
+        "frame": 115
+      },
+      {
+        "sequence": "MOTS20-02",
+        "frame": 336
+      },
+      {
+        "sequence": "MOTS20-05",
+        "frame": 503
+      },
+      {
+        "sequence": "MOTS20-11",
+        "frame": 6
+      },
+      {
+        "sequence": "MOTS20-09",
+        "frame": 1
+      },
+      {
+        "sequence": "MOTS20-09",
+        "frame": 263
+      }
+    ]
+  },
+  "protected_measurement_sha256": {
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/comparison_summary.csv": "5986db7f575ed1ad21097ae51c3945cad7cc19de14fd50f26e12e53a18235d36",
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/MODEL_COMPLEXITY.csv": "f02f14e86b749066d346921dda54836abe9a46ac95eb3f4e53faef2264b26b6e",
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/per_sequence.csv": "062f2cdfd40200d953d4470e751cd2157b80f546edb8bc9e3111e3ce54f6a9e3",
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/PREFLIGHT_MAXDET.csv": "80afa34f4007df195b180ef9984537913ea976d634e4c1f412686d331b13fbc1",
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/preflight_maxdet.csv": "d418bd4c6e1da0b13d465f805c875319e4bacc147e8aad9b2145da5093b1b453",
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/PER_SEQUENCE_RESULTS.csv": "8035f8d778f3b288442936f9010413ef31e3a18feb2b97c3b77608261ac7a6ae",
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/TIMING_SUMMARY.csv": "654f1385efd7ed3715b4a7f745038fb6f2b4db7e73095c20d4be69e743d75e6b",
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/gt_frames.csv": "953d433368f104e5abd2e2e56fa903ebee7213eb5a35ad08ad0436d303e06c08",
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/gt_instances.csv": "7e172467bba7a38831932f840c6c5b25f862bbf70c60144645b9863cc77414f5",
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/per_model.csv": "23a1241af6bb7c53257dc7a9a98f99a03ed9d657f0d2713e5c5bf81bdd057fcc",
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/TIER_RESULTS.csv": "8d4d273ad11661eea7d5c36788c6a59b2085e481604bc6be4bef6359e1093093",
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/protocol_consistency.csv": "601d5e24edaf8f766a0a38218ed9ae051d75074b9dd9477e78957671f01af522",
+    "YOLO_Large_Seg_MOTS20_Benchmark/metrics/benchmark-20260929T0520Z/per_frame/yolo26x-seg.pt.csv": "d9f7a76b3bb6203c0b0a1be425d762e2dd4bea3447a4d67ee310d491906a4cfe",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/comparison_summary.csv": "768c483db9d70818500d4166b9bde41a4a1fb88da88fc94896507e8bcd0d1022",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/MODEL_COMPLEXITY.csv": "c5cb5074499e5602529bfaf91f784fb46c5880ad372fbe75c9e9a173366e4164",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/per_sequence.csv": "21b4e63c9c2efa825b85926282e9b31d11dfa777c478262253c913c714709806",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/PREFLIGHT_MAXDET.csv": "85b8e0e52152c20dd46d409f384047494fc8d7423159cd316ff1b1381f216142",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/preflight_maxdet.csv": "5b9c045aef70b71fb0ba5c97527aa65a87a0eef56474be375338fdd38e3a26bd",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/PER_SEQUENCE_RESULTS.csv": "55032e238afdc76c1ade8f638512947f40a7bf572f991447745b26eef625b3f5",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/TIMING_SUMMARY.csv": "a376d068508a074992ee8a98b6d6af66d97cb896b26a65f99a472100803ea74b",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/gt_frames.csv": "953d433368f104e5abd2e2e56fa903ebee7213eb5a35ad08ad0436d303e06c08",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/gt_instances.csv": "7e172467bba7a38831932f840c6c5b25f862bbf70c60144645b9863cc77414f5",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/per_model.csv": "75c7fb311a37f7b83e25e0b7721bdd70ebfb2ea37bb5f48d3b8811d8fb479b45",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/TIER_RESULTS.csv": "41d41b139038f3ce6d6c0cd1795be2839c102490bd9b18c7e2aaf936d99d1a01",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/protocol_consistency.csv": "c015b8cb541fbce3f40a3776b88cd44c827c39b3e0a5fe744ddc92e6c5ef5e55",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark/metrics/benchmark-20261001T0352Z/per_frame/yolo26l-seg.pt.csv": "80470eadbfda01b1a29a65289407c0931385b6d4d9df87cdd1e68edd3fcbd913"
+  }
+}

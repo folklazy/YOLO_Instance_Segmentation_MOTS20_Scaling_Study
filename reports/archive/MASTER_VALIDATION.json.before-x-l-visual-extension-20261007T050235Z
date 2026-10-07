@@ -46,8 +46,8 @@
   "timestamp_utc": "2026-10-06T08:38:41.482006+00:00",
   "unit_tests": "PASS (6 tests)",
   "tier_document_validation": "PASS (documents-only)",
-  "active_markdown_checked": 68,
-  "source_manifest_sha256": "2d82cf21e1fb082ad8c7535638b1bd20f79bb536706a67807017484ab9a4263e",
+  "active_markdown_checked": 67,
+  "source_manifest_sha256": "00e7498800d57b131209897905f46f0b1f8bd8db65bab339eef904d615be6955",
   "stop_gate": "17_MODEL_MASTER_STUDY_COMPLETE",
   "warnings": [
     "All five source tiers retain PASS_WITH_WARNINGS.",
@@ -56,15 +56,5 @@
     "E/X and C/L are available size categories, not equal capacities.",
     "VRAM and pipeline need not scale monotonically with parameter count.",
     "Raw predictions and prediction metadata were not opened; their declared hashes remain upstream evidence."
-  ],
-  "post_completion_visual_extension": {
-    "status": "PASS",
-    "cases": 5,
-    "images": 10,
-    "saved_prediction_artifacts_read": true,
-    "inference_rerun": false,
-    "measured_values_changed": false,
-    "validation": "outputs/visualizations/yolo26x_vs_yolo26l/v1/VALIDATION.json"
-  },
-  "provenance_extension_timestamp_utc": "2026-10-07T05:02:35.333795+00:00"
+  ]
 }
