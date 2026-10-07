@@ -73,5 +73,9 @@
       "Diagnostic visual cases are not representative sampling.",
       "Timing sessions vary; small latency differences remain descriptive."
     ]
-  }
+  },
+  "publication_status": "PASS",
+  "published_images_checked": 95,
+  "publication": "provenance/POST_STUDY_PUBLICATION.json",
+  "final_publication_verified_utc": "2026-10-07T08:07:34.728088+00:00"
 }

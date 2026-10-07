@@ -1,0 +1,626 @@
+{
+  "status": "PASS",
+  "timestamp_utc": "2026-10-07T08:06:16.524805+00:00",
+  "repositories": [
+    {
+      "repository": "YOLO_Large_Seg_MOTS20_Benchmark",
+      "branch": "main",
+      "revision": "172e21b9f2996bae74fb591cfdd1740e6e92dd46",
+      "remote_head_matches": true,
+      "images": [
+        {
+          "path": "outputs/plots/benchmark-20260929T0520Z/ap50_ap75.png",
+          "git_blob_sha": "64b8ddf2fedca78cf1b0636047631d81f6a43439",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/plots/benchmark-20260929T0520Z/fps.png",
+          "git_blob_sha": "1abad641f405e63f38055e15b274ccc123645a75",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/plots/benchmark-20260929T0520Z/inference_latency.png",
+          "git_blob_sha": "c11e32456feb874e243f550cfc084ea27c35f324",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/plots/benchmark-20260929T0520Z/mask_map.png",
+          "git_blob_sha": "abe57b78209ef837d4e14b0ba3b5a8794a00c500",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/plots/benchmark-20260929T0520Z/peak_vram.png",
+          "git_blob_sha": "5c85d6c47c0abc049b8a57a69e4fee91ee5639a0",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/plots/benchmark-20260929T0520Z/precision_recall_f1.png",
+          "git_blob_sha": "9230c6e275a0570422de3f81c4140973743fa048",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/plots/benchmark-20260929T0520Z/readable/accuracy_vs_latency.png",
+          "git_blob_sha": "f41dc5b71e19195afccbea13d9d104873d96ee37",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/case_02_comparison.png",
+          "git_blob_sha": "7048e932fe40d23a76b37bcdcbbaa6863d30c957",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/case_02_focus.png",
+          "git_blob_sha": "0fadb82c34deefec8bba026212a72ba979300309",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/case_03_comparison.png",
+          "git_blob_sha": "12886fb6abf70e9ef2087ab3f962e56387eab338",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/case_03_focus.png",
+          "git_blob_sha": "43cada1934f175842a7069ca9534bec4e4c8efec",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/selection_v2/case_01_comparison.png",
+          "git_blob_sha": "692e60ecb0d4bbbe3e27881d8368b92d1101ef6f",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/selection_v2/case_01_focus.png",
+          "git_blob_sha": "c882c70021458d6cd56578ecb42ba3b5cea89d9e",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/selection_v2/case_04_comparison.png",
+          "git_blob_sha": "4e66d1b4c3fe38552a8495ae6a342b1e568c4227",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/selection_v2/case_04_focus.png",
+          "git_blob_sha": "3f54a8aa457e803f62612f11451093ef51d9dba4",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        }
+      ]
+    },
+    {
+      "repository": "YOLO_Second_Largest_Seg_MOTS20_Benchmark",
+      "branch": "main",
+      "revision": "3c0bd7845166d23df1eb52d312e24fad930f9298",
+      "remote_head_matches": true,
+      "images": [
+        {
+          "path": "outputs/plots/benchmark-20261001T0352Z/ap50_ap75.png",
+          "git_blob_sha": "79785f6dbc1b12d9f9082f4238bbf4f7eaf354ad",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/plots/benchmark-20261001T0352Z/cross_tier_latency.png",
+          "git_blob_sha": "664152799e22dcdc8e8ff3d1f6efde492012efe0",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/plots/benchmark-20261001T0352Z/cross_tier_map.png",
+          "git_blob_sha": "515862d4e8ef76e3fbe29f49bdb6f002904fd918",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/plots/benchmark-20261001T0352Z/cross_tier_vram.png",
+          "git_blob_sha": "c5ebfa3390f68d08ab0bc3cd53c26d704139fff4",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/plots/benchmark-20261001T0352Z/delta_accuracy_vs_latency.png",
+          "git_blob_sha": "e8546d3a2b233aa5323b156f7c12cefccb2842c3",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/plots/benchmark-20261001T0352Z/delta_accuracy_vs_parameters.png",
+          "git_blob_sha": "e3bedc9086b05b7039bdc07e0686c9215fd5564e",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/plots/benchmark-20261001T0352Z/fps.png",
+          "git_blob_sha": "24df25321bc16973ed6eef73c644d3b713bf34c8",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/plots/benchmark-20261001T0352Z/inference_latency.png",
+          "git_blob_sha": "05d853ee830fdffd2dcb3d6bebbd787803d346cd",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/plots/benchmark-20261001T0352Z/mask_map.png",
+          "git_blob_sha": "b62dcdee5953b9b62be9caecce751d609bbeb1a5",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/plots/benchmark-20261001T0352Z/matched_mask_quality.png",
+          "git_blob_sha": "3e7d06e8246b654959a111d9c26f2af01d9bda01",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/plots/benchmark-20261001T0352Z/peak_vram.png",
+          "git_blob_sha": "b52c425e719940b7995b005d0463328fe4bd8e10",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/plots/benchmark-20261001T0352Z/pipeline_latency.png",
+          "git_blob_sha": "6c22256c52dadeab0a315544babd7a1a23dd2e10",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/plots/benchmark-20261001T0352Z/precision_recall_f1.png",
+          "git_blob_sha": "2266011b5d0f40392c4bd0b44631c82c7ffafb37",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/plots/benchmark-20261001T0352Z/readable/accuracy_vs_latency.png",
+          "git_blob_sha": "0d063d02fb178d2b3dcea9ed4bb61ba06cc4e2f2",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/plots/benchmark-20261001T0352Z/readable/accuracy_vs_parameters.png",
+          "git_blob_sha": "c780c7fcf446e5a3f18041e500254aad20fbd6bd",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/case_01_comparison.png",
+          "git_blob_sha": "9fd8fcc62eb12f7d988cf4f26bd3315b9a44d57a",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/case_01_focus.png",
+          "git_blob_sha": "c22455f7e4565582751537b95be980a6e5b0ffaa",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/case_02_comparison.png",
+          "git_blob_sha": "be365a5ea57f4fd5f7737a654adfb5f3c92cf3ea",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/case_02_focus.png",
+          "git_blob_sha": "4c4014fe7b0192ca38228246bc9ca212b5540c9e",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/case_03_comparison.png",
+          "git_blob_sha": "b0d5f508da8fb8cb4ae6590c15647fc073c5b884",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/case_03_focus.png",
+          "git_blob_sha": "146c070160d76ad3330c42c14eb5f2a93d58fd35",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/selection_v2/case_04_comparison.png",
+          "git_blob_sha": "2be6d5a390679549b24d5bf7ebaee6b986d3ca27",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/selection_v2/case_04_focus.png",
+          "git_blob_sha": "4a25a51f247c7ca91d9f8a6d8df817eb727ceb79",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        }
+      ]
+    },
+    {
+      "repository": "YOLO_Medium_Seg_MOTS20_Benchmark",
+      "branch": "main",
+      "revision": "40df395545754be0847f6aa144ffb59f63389af6",
+      "remote_head_matches": true,
+      "images": [
+        {
+          "path": "outputs/visualizations/qualitative/case_01_comparison.png",
+          "git_blob_sha": "86fa561883b487877507efe89c2a8079680c3dc5",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/case_01_focus.png",
+          "git_blob_sha": "d4c0c1e13b3c298c89dc7e8a8bea332848d34eca",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/case_02_comparison.png",
+          "git_blob_sha": "e1ee0f034214e921fcaef8fd06c4d8ef2272d1ec",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/case_02_focus.png",
+          "git_blob_sha": "83a51cc7dc69629f53803a88871719a6a64caea1",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/case_03_comparison.png",
+          "git_blob_sha": "a64adad580878e72bf8b4d8d6562d48252e11c54",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/case_03_focus.png",
+          "git_blob_sha": "d1c7b8203ff14a56c9801fc1463ff7fa47923bbc",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/selection_v2/case_04_comparison.png",
+          "git_blob_sha": "1e367649061d4372d352e570ccf8614a1cde5486",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/selection_v2/case_04_focus.png",
+          "git_blob_sha": "d6506042ed91680463f6cdf60fd10b26c027d61e",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        }
+      ]
+    },
+    {
+      "repository": "YOLO_Small_Seg_MOTS20_Benchmark",
+      "branch": "main",
+      "revision": "56adbc9f8dfcbbfe37c9a254cb04007650427617",
+      "remote_head_matches": true,
+      "images": [
+        {
+          "path": "outputs/visualizations/qualitative/case_01_comparison.png",
+          "git_blob_sha": "f6ea6ad2748ad521cf733f3b83a5f83ecf5ac48f",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/case_01_focus.png",
+          "git_blob_sha": "d8a1f5512a622e4fb13716d18fe0f2b28f4e7ab6",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/case_02_comparison.png",
+          "git_blob_sha": "55c512f741b0079af4a879dd032b9a245469bc7c",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/case_02_focus.png",
+          "git_blob_sha": "b49b3445d5e7a7c67bc28a5c1d9fb1c82c00d202",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/case_03_comparison.png",
+          "git_blob_sha": "1c3703eecc1fd03972e481b61618968e5d890d34",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/case_03_focus.png",
+          "git_blob_sha": "d8ab2675ed3064843583437528ba717f0c381811",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/selection_v2/case_04_comparison.png",
+          "git_blob_sha": "3ef99a057465f0e3a74850fd23d6ff94e353b6c5",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/selection_v2/case_04_focus.png",
+          "git_blob_sha": "a7445b937e418534d5ee19cffbe6adc0fdd8c9c1",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        }
+      ]
+    },
+    {
+      "repository": "YOLO_Nano_Seg_MOTS20_Benchmark",
+      "branch": "main",
+      "revision": "c4ceca0aaba1982d10cfa3fe9d4209baab0dba96",
+      "remote_head_matches": true,
+      "images": [
+        {
+          "path": "outputs/visualizations/qualitative/case_02_comparison.png",
+          "git_blob_sha": "488a3cf2d42673c53318a7663c504fbae7247f65",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/case_02_focus.png",
+          "git_blob_sha": "432083da55b3d5cb04f742a070c6bf81d7437f1e",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/case_03_comparison.png",
+          "git_blob_sha": "db78a51291b3fb4f6dbc54b3c460aea2f7eed98b",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/case_03_focus.png",
+          "git_blob_sha": "c38ca60ea2a69e559688296542090686215c5918",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/case_04_comparison.png",
+          "git_blob_sha": "d3794a5f413bf444c40673297ca614860af41e3d",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/case_04_focus.png",
+          "git_blob_sha": "6d08256bc5ab0118219d94a6a227839d19cb4f45",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/selection_v2/case_01_comparison.png",
+          "git_blob_sha": "fbf584e8d7afd8b6da2e97d6d5773fe2545c26b7",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/qualitative/selection_v2/case_01_focus.png",
+          "git_blob_sha": "625575551e3ea42e9dccdaafdb365398a41d7be2",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        }
+      ]
+    },
+    {
+      "repository": "YOLO_Instance_Segmentation_MOTS20_Scaling_Study",
+      "branch": "main",
+      "revision": "0ae413e1b6603432df9aa4195c84b36a1b01bee3",
+      "remote_head_matches": true,
+      "images": [
+        {
+          "path": "outputs/visualizations/near_tie_26s_11x_v9e/v1/case_01_comparison.png",
+          "git_blob_sha": "0be9612adb03459a97d4803909579ffdc9d53ff8",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/near_tie_26s_11x_v9e/v1/case_01_focus.png",
+          "git_blob_sha": "cc8a8c5c7cb0d67caf0ccf26395c296b227c49f8",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/near_tie_26s_11x_v9e/v1/case_02_comparison.png",
+          "git_blob_sha": "40f566bedd71cd0efad6869af11675a7bce9b116",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/near_tie_26s_11x_v9e/v1/case_02_focus.png",
+          "git_blob_sha": "10291e5a76f681746e08c7ecd93f9f991d31c132",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/near_tie_26s_11x_v9e/v1/case_03_comparison.png",
+          "git_blob_sha": "6468315a371f1b495143b6edbe6b2576b5e0ef65",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/near_tie_26s_11x_v9e/v1/case_03_focus.png",
+          "git_blob_sha": "af21a021dd895ea0ffe8b20d72a7504729782b4a",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/near_tie_26s_11x_v9e/v1/case_04_comparison.png",
+          "git_blob_sha": "a4f962b3f99c6e293b913bcb0bef6cc69632dbd8",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/near_tie_26s_11x_v9e/v1/case_04_focus.png",
+          "git_blob_sha": "05db04444694e0480c1eaa5ffb8cb370a20516de",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/yolo26_scaling_ladder/v1/case_01_comparison.png",
+          "git_blob_sha": "85f58fd691f1d6ae9b1f10e849f4de0c42207a4f",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/yolo26_scaling_ladder/v1/case_01_focus.png",
+          "git_blob_sha": "fe809504de1b979e596bac0cba9d032dfad0677b",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/yolo26_scaling_ladder/v1/case_02_comparison.png",
+          "git_blob_sha": "bfb849ccb8e30dcfd88922901445c825f8292dac",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/yolo26_scaling_ladder/v1/case_02_focus.png",
+          "git_blob_sha": "b02053eb0efb23e7cf8eba5e76e35b274513e3e1",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/yolo26_scaling_ladder/v1/case_03_comparison.png",
+          "git_blob_sha": "859a21e9e5fc3e0737cac1e26abcf4aaec735948",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/yolo26_scaling_ladder/v1/case_03_focus.png",
+          "git_blob_sha": "a9de63cb7a09c72f25d98af0ceff39962473818f",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_01_comparison.png",
+          "git_blob_sha": "5eaf9ddbd8259d600ae996b721376a36ad96a763",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_01_focus.png",
+          "git_blob_sha": "5bd3143f71dc4ecfc6530a3cdee6a3d73be25b42",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_02_comparison.png",
+          "git_blob_sha": "f4717b31e794d37871c7100d69bbfeacd5a3afaa",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_02_focus.png",
+          "git_blob_sha": "e015fa010022196c65c74d8dedc8d310b1d3c458",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_03_comparison.png",
+          "git_blob_sha": "79850ca0f2e66ea787091aadba2219bb01849a41",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_03_focus.png",
+          "git_blob_sha": "7b44f0e2f0ca0957fbb393df4aa0d3aef7b13290",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_04_comparison.png",
+          "git_blob_sha": "8ffe594bc6f99bf2d2dfcc95f711d7ea18eb568b",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_04_focus.png",
+          "git_blob_sha": "1aedea594c00fb4a3eb2b29022e98205837a4168",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_05_comparison.png",
+          "git_blob_sha": "f7ddef5f8901dab09a0b400f4fbe80077a7ab4d0",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "outputs/visualizations/yolo26x_vs_yolo26l/v1/case_05_focus.png",
+          "git_blob_sha": "9b3087cb5bff4b555bc2cea6a41ef4f44f51198d",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "plots/01_master_map_by_model.png",
+          "git_blob_sha": "c173cfbd551e7b8c2a8674379d73ec185e9dae86",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "plots/02_family_accuracy_scaling.png",
+          "git_blob_sha": "324ed7d24e28270ed1ac6991e4ec5321e3bd6f76",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "plots/03_family_inference_scaling.png",
+          "git_blob_sha": "b3d7d092ff92387463785d0ecfc3da967ec2dc31",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "plots/09_pareto_accuracy_latency.png",
+          "git_blob_sha": "562b720580f4038e47c329867fa0f20de07317e8",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "plots/10_adjacent_scaling_delta.png",
+          "git_blob_sha": "0a31df15253075fb1c09c438c20c970e782bcad1",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "plots/11_accuracy_vs_pipeline.png",
+          "git_blob_sha": "38f51ac82a43ec32df027049d1656c9f1718a510",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "plots/12_pareto_accuracy_pipeline.png",
+          "git_blob_sha": "f6841a3cfac0186f736dd54c678fd37bd1b4f6d6",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "plots/13_timing_stage_composition.png",
+          "git_blob_sha": "5bf1982c2f63e27e9f8715fc4ccdc9850fa1db2d",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        },
+        {
+          "path": "plots/14_per_sequence_map_heatmap.png",
+          "git_blob_sha": "c26a43a1bea575403034aa89ad2e9cb51af09d5d",
+          "remote_blob_matches": true,
+          "http_png": "PASS"
+        }
+      ]
+    }
+  ],
+  "images_checked": 95,
+  "scientific_status_independent_of_push_authentication": true
+}

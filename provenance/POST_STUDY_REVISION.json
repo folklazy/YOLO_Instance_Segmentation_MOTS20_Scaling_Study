@@ -1706,7 +1706,8 @@
     "YOLO_Second_Largest_Seg_MOTS20_Benchmark/provenance/POST_STUDY_REVISION.json",
     "YOLO_Medium_Seg_MOTS20_Benchmark/provenance/POST_STUDY_REVISION.json",
     "YOLO_Small_Seg_MOTS20_Benchmark/provenance/POST_STUDY_REVISION.json",
-    "YOLO_Nano_Seg_MOTS20_Benchmark/provenance/POST_STUDY_REVISION.json"
+    "YOLO_Nano_Seg_MOTS20_Benchmark/provenance/POST_STUDY_REVISION.json",
+    "YOLO_Instance_Segmentation_MOTS20_Scaling_Study/provenance/POST_STUDY_PUBLICATION.json"
   ],
   "unrelated_changes_preserved": true,
   "derived_plot_draft_archives": [
@@ -2070,7 +2071,7 @@
     "src/post_study_visuals.py": "d108a1823fa8c0c56fcb8584a40843b6be9e8cacd6905691bede38cb5fa633b5"
   },
   "validation": "provenance/POST_STUDY_VALIDATION.json",
-  "publication_status": "PENDING_PUSH_VERIFICATION",
+  "publication_status": "PASS",
   "final_local_validation_timestamp_utc": "2026-10-07T08:00:49.953172+00:00",
   "new_artifact_sha256": {
     "YOLO_Instance_Segmentation_MOTS20_Scaling_Study/POST_STUDY_DATA_SCHEMA.md": "4f818eca87dcef080156292c63c0285339a7b9e772fe2fedd332d78947659871",
@@ -2116,7 +2117,8 @@
     "YOLO_Second_Largest_Seg_MOTS20_Benchmark/provenance/POST_STUDY_REVISION.json": "84c0a5624fd97a7850f9f22ab58aabda9a9c32f5971435be83c230f8b03a4a5c",
     "YOLO_Medium_Seg_MOTS20_Benchmark/provenance/POST_STUDY_REVISION.json": "8e748490f20a6c8d18fd5c99aa0650c867fc54e0ebeabab5326e640d5f6bbb0a",
     "YOLO_Small_Seg_MOTS20_Benchmark/provenance/POST_STUDY_REVISION.json": "98e0bb339ad8108debf3d743a33ec7320db17dff5062ab4825a46364e3dd2164",
-    "YOLO_Nano_Seg_MOTS20_Benchmark/provenance/POST_STUDY_REVISION.json": "3b71239167aadc565fd8002a73e1f988a18a198aa30a6b002a2a34d187264e9e"
+    "YOLO_Nano_Seg_MOTS20_Benchmark/provenance/POST_STUDY_REVISION.json": "3b71239167aadc565fd8002a73e1f988a18a198aa30a6b002a2a34d187264e9e",
+    "YOLO_Instance_Segmentation_MOTS20_Scaling_Study/provenance/POST_STUDY_PUBLICATION.json": "64cbe9c3c6089d8d215d6cc10d7b4771d4b87f92d585f686bb14068ff76a19d9"
   },
   "tier_document_revisions": {
     "YOLO_Large_Seg_MOTS20_Benchmark": "172e21b9f2996bae74fb591cfdd1740e6e92dd46",
@@ -2125,5 +2127,16 @@
     "YOLO_Small_Seg_MOTS20_Benchmark": "56adbc9f8dfcbbfe37c9a254cb04007650427617",
     "YOLO_Nano_Seg_MOTS20_Benchmark": "c4ceca0aaba1982d10cfa3fe9d4209baab0dba96"
   },
-  "original_source_protocol_validation": "PASS (build_master.py --check-inputs and --validate)"
+  "original_source_protocol_validation": "PASS (build_master.py --check-inputs and --validate)",
+  "publication": "provenance/POST_STUDY_PUBLICATION.json",
+  "published_content_revisions": {
+    "YOLO_Large_Seg_MOTS20_Benchmark": "172e21b9f2996bae74fb591cfdd1740e6e92dd46",
+    "YOLO_Second_Largest_Seg_MOTS20_Benchmark": "3c0bd7845166d23df1eb52d312e24fad930f9298",
+    "YOLO_Medium_Seg_MOTS20_Benchmark": "40df395545754be0847f6aa144ffb59f63389af6",
+    "YOLO_Small_Seg_MOTS20_Benchmark": "56adbc9f8dfcbbfe37c9a254cb04007650427617",
+    "YOLO_Nano_Seg_MOTS20_Benchmark": "c4ceca0aaba1982d10cfa3fe9d4209baab0dba96",
+    "YOLO_Instance_Segmentation_MOTS20_Scaling_Study": "0ae413e1b6603432df9aa4195c84b36a1b01bee3"
+  },
+  "publication_note": "Verified substantive content commits. A follow-up metadata-only commit publishes this verification; images and scientific artifacts are unchanged.",
+  "push_authentication_note": "Initial transient authentication failures and one stalled credential prompt resolved by retrying existing credentials; remotes/configuration were not changed. Only the owned stalled push command was terminated."
 }
